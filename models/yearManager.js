@@ -1,6 +1,6 @@
 /**
- * 03.03.2024
- */
+* 03.03.2024
+*/
 
 // modules
 const statisticsGenerator = require('./statisticsGenerator.js');
@@ -15,49 +15,11 @@ const setStatMapEntry = statisticsGenerator.setStatMapEntry;
 const calcPercentsAndRatesStat = statisticsGenerator.calcPercentsAndRatesStat;
 const sortStat = statisticsGenerator.sortStat;
 
-///
-//console.log(getYearStat(SortStatMode.KEY_ASC))
-//console.log(composeDecadeStat(SortStatMode.KEY_DESC))
-//printYearStat()
-
 
 function getYearStat(sortMode) {
   return sortStat(composeFullStat(FilmStatMode.YEAR, initYearMap()), sortMode);
 }
 module.exports.getYearStat = getYearStat;
-
-function initYearMap() {
-  let yearInitArr = new Array(
-    new Date().getFullYear()+1 - 1895);
-  for (let i = 0; i < yearInitArr.length; i += 1) {
-    yearInitArr[i] = [String(i+1895),
-      {
-        quantity: 0,
-        percent: 0,
-        rating: 0
-      }];
-  }
-  return new Map(yearInitArr);
-}
-////
-function printYearStat() {
-  yearMap = getYearStat();
-  for (item of yearMap) {
-    console.log(item[0]+" "+item[1].quantity)
-  }
-}
-////
-function drawYearStat() {
-  yearMap = getYearStat();
-  let mark = '|';
-  for (item of yearMap) {
-    let bar = '';
-    for (let i = 1; i <= item[1].quantity; i += 1)
-      bar += mark;
-    console.log(item[0]+" "+bar)
-  }
-}
-
 ////
 function composeDecadeStat(sortMode) {
   yearArr = [...statisticsGenerator.composeFullStat(FilmStatMode.YEAR,
@@ -159,6 +121,39 @@ function composeDecadeStat(sortMode) {
   const resultMap = calcPercentsAndRatesStat(decadeMap, totalQuantity);
 
   return sortStat(resultMap, sortMode);
-  
+
 }
 module.exports.composeDecadeStat = composeDecadeStat;
+////
+
+function initYearMap() {
+  let yearInitArr = new Array(
+    new Date().getFullYear()+1 - 1895);
+  for (let i = 0; i < yearInitArr.length; i += 1) {
+    yearInitArr[i] = [String(i+1895),
+      {
+        quantity: 0,
+        percent: 0,
+        rating: 0
+      }];
+  }
+  return new Map(yearInitArr);
+}
+///
+function printYearStat() {
+  yearMap = getYearStat();
+  for (item of yearMap) {
+    console.log(item[0]+" "+item[1].quantity)
+  }
+}
+///
+function drawYearStat() {
+  yearMap = getYearStat();
+  let mark = '|';
+  for (item of yearMap) {
+    let bar = '';
+    for (let i = 1; i <= item[1].quantity; i += 1)
+      bar += mark;
+    console.log(item[0]+" "+bar)
+  }
+}

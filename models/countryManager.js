@@ -15,8 +15,6 @@ const setStatMapEntry = statisticsGenerator.setStatMapEntry;
 const calcPercentsAndRatesStat = statisticsGenerator.calcPercentsAndRatesStat;
 const sortStat = statisticsGenerator.sortStat;
 
-///
-//console.log(getCountryStat(SortStatMode.KEY_DESC))
 
 function getCountryStat(sortMode) {
   return sortStat(composeFullStat(FilmStatMode.COUNTRY), sortMode);

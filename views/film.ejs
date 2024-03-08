@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    
+  <h1>User's film statistics</h1>
+  <p><%= movieItem.imdbId %></p>
+  <h2><%= movieItem.favorite ? "(F) | " : "" %><%= movieItem.pRating %> (<%= movieItem.pDateTime %>)</h2>
+  <a href="<%= movieItem.imdbLink %>" target="blank"><h3><%= movieItem.commTitle %> (<%= movieItem.year %>)</h3></a>
+  <p><i><%= movieItem.origTitle %></i></p>
+      <br>
+<img alt="" src="<%= movieItem.sPoster %>">
+
+  <p> <%= movieItem.duration %> | <%= movieItem.parental %> | <%= movieItem.type
+  ? movieItem.type+"| " : "" %><%= movieItem.genres %></p>
+      <p> <%= movieItem.countriesOrig %></p>
+        <br>
+      <p> <%= movieItem.plot %></p>
+      <p><b>IMDB rating: <%= movieItem.imdbRating %> (<%= movieItem.imdbRatingNum %>)</b></p>
+      <p> </p>
+      
+      <p> <%= movieItem.director %></p>
+      <p> <%= movieItem.cast %></p>
+      <br>
+      <p>Budget: <%= movieItem.budget %></p>
+      <p>Gross World wide: <%= movieItem.grossWW %></p>
+
+    
+  </body>
+</html>

@@ -4,32 +4,7 @@
 
 const fs = require('fs');
 
-/*
-{
-    _id: db.length-i,
-    imdbLink: elem.imdbLink,
-    commTitle: elem.commTitle,
-    origTitle: elem.origTitle,
-    year: elem.year,
-    duration: elem.duration,
-    parental: elem.parental,
-    type: elem.type,
-    countriesOrig: elem.countriesOrig,
-    plot: elem.plot,
-    imdbRating: elem.imdbRating,
-    imdbRatingNum: elem.imdbRatingNum,
-    sPoster: elem.sPoster,
-    genres: elem.genres,
-    director: elem.director,
-    cast: elem.cast,
-    budget: elem.budget,
-    grossWW: elem.grossWW,
-    pRating: elem.pRating,
-    pDateTime: elem.pDateTime
-  }
-*/
-
-const DBpath = "./data/src/db.json";
+const DBpath = "./data/src/db-test.json";
 
 class JSONDataProvider {
   constructor() {
@@ -38,62 +13,65 @@ class JSONDataProvider {
     this.size = this.db.length;
   }
 
-  saveDB() {
-    fs.writeFile(DBpath, JSON.stringify(this.db, null, 2), err=> {
-      if(err) console.error(`${this.constructor.name}: Error: DB saving failure`);
-    })
+  async saveDB() {
+    await fs.writeFile(DBpath, JSON.stringify(this.db, null, 2), err=> {
+      if (err) console.error(`${this.constructor.name}: Error: DB saving
+        failure\n`);
+    });
   }
 
-  isUniqueId(_id) {
-    return !this.db.some(elem => elem._id == _id);
+  isUniqueId(id) {
+    return !this.db.some(elem => elem.imdbId == id);
   }
 
-  generateId() {
-    let newId = this.db.length+1;
-    while (!this.isUniqueId(newId)) newId =+ 1;
-    return newId;
+  async insert(item) {
+    if (this.isUniqueId(item.imdbId)) {
+      this.db.unshift(item);
+
+      await this.saveDB();
+      console.log(`${this.constructor.name}: [${item.imdbId} / ${item.commTitle}] inserted successfully\n`);
+    } else {
+      console.log(`${this.constructor.name}: [${item.imdbId} / ${item.commTitle}] already exists. Item will be updated\n`);
+
+      this.update(item);
+    }
   }
 
-  insert(item) {
-    item._id = generateId();
-    this.db.unshift(item);
-    console.log(`${this.constructor.name}: Inserted successfully ${item._id} ${item.commTitle}`);
-
-    saveDB();
-  }
-
-  update(item) {
-    let i = this.db.findIndex(elem => elem._id == item._id)
+  async update(item) {
+    let i = this.db.findIndex(elem => elem.imdbId == item.imdbId)
     if (i >= 0) {
+      const firstEvalTime = this.db[i].pDateTime; //
       this.db[i] = item;
-      console.log(`${this.constructor.name}: Updated successfully ${item._id} ${item.commTitle}`)
+      this.db[i].pDateTime = firstEvalTime; //
+
+      await this.saveDB();
+      console.log(`${this.constructor.name}: [${item.imdbId} / ${item.commTitle}] updated successfully\n`)
     } else {
       console.error(`${this.constructor.name}: Error: updating item is not
-        correct`);
+        correct\n`);
     }
-
-    saveDB();
   }
 
-  remove(_id) {
-    let i = this.db.findIndex(elem => elem._id == _id);
+  async remove(id) {
+    let i = this.db.findIndex(elem => elem.imdbId == id);
     if (i >= 0) {
       this.db.splice(i, 1);
-      console.log(`${this.constructor.name}: Removed successfully ${_id}`);
-    } else {
-      console.error(`${this.constructor.name}: Error: remove operation rejected`);
-    }
 
-    saveDB();
+      await this.saveDB();
+      console.log(`${this.constructor.name}: [${id}] removed successfully`);
+    } else {
+      console.error(`${this.constructor.name}: Error: remove operation
+        rejected\n`);
+    }
   }
 
-  extractOne(_id) {
-    let i = this.db.findIndex(elem => elem._id == _id);
+  extractOne(id) {
+    let i = this.db.findIndex(elem => elem.imdbId == id);
     if (i >= 0) {
-      console.log(`${this.constructor.name}: Item ${_id} found`);
+      console.log(`${this.constructor.name}: Item [${id}] found\n`);
       return this.db[i];
     } else {
-      console.error(`${this.constructor.name}: Error: item not found`);
+      console.error(`${this.constructor.name}: Error: item [${id}] not found\n`);
       return {};
     }
   }

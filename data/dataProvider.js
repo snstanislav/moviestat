@@ -9,14 +9,14 @@ module.exports.getGeneralUserMovieList = ()=> {
   return dbJson.extractAll();
 }
 
-module.exports.setUserMovieEval = (item)=> {
+module.exports.setUserMovieEval = async (item)=> {
   if (item instanceof MovieEntry) {
-    dbJson.insert(item);
+    await dbJson.insert(item);
   }
 }
 
-module.exports.updateUserMovieEval = (item)=> {
+module.exports.updateUserMovieEval = async (item)=> {
   if (item instanceof MovieEntry) {
-    dbJson.update(item);
+    await dbJson.update(item);
   }
 }

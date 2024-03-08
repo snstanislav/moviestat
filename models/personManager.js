@@ -21,12 +21,6 @@ const sortStat = statisticsGenerator.sortStat;
 const getSingleProperty = statisticsGenerator.getSingleProperty;
 const extractIdFromLinkIMDB = statisticsGenerator.extractIdFromLinkIMDB;
 
-//printPersonsRate(getActorStat(SortStatMode.KEY_ASC))
-//printPersonsRate(getDirectorStat())
-//console.log(getDirectorStat(SortStatMode.NAME_ASC))
-//console.log(getPerson("nm0005363"))
-//console.log(getPerson("nm0000154"))
-
 
 function getActorStat(sortMode) {
   return sortStat(composePersonsRate(7, FilmStatMode.CAST), sortMode);
@@ -103,10 +97,11 @@ function composePersonsRate(numFilmLimit, personMode) {
     elem.rating = (elem.rating/elem.quantity).toFixed(2);
   });
   console.log(personMode+" total: "+personsMap.size)
-
-  return new Map(([...personsMap.entries()].sort((a,
-    b)=>b[1].rating-a[1].rating).sort((a,
-    b)=>b[1].quantity-a[1].quantity)).filter(elem => elem[1].quantity >=
+//
+  return new Map(([...personsMap.entries()]
+  // check and remove def sort
+  .sort((a,b)=>b[1].rating-a[1].rating).sort((a,b)=>b[1].quantity-a[1].quantity))
+    .filter(elem => elem[1].quantity >=
     numFilmLimit));
 }
 ///
@@ -139,7 +134,7 @@ function printPersonsRate(personsMap) {
       elem.quantity]);
   });
   const result = JSON.stringify(personsList/*.sort((a, b)=>b[2]-a[2])*/);
-  fs.writeFileSync("./listtemp.txt",
+  fs.writeFileSync("./listtemp1.txt",
     result.trim().replaceAll("],[",
       "],\n["));
 }

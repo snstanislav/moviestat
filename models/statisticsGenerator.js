@@ -182,7 +182,7 @@ function normalizeYear(yearStr) {
 }
 //
 function formatDT(dtStr) {
-  if (dtStr.match(/\d{2}\.\d{2}\.\d{4}, \d{2}:\d{2}/gi)) {
+  if (dtStr && dtStr.match(/\d{2}\.\d{2}\.\d{4}, \d{2}:\d{2}/gi)) {
     let dateTime = dtStr.split(', ');
     let date = dateTime[0].split('.');
     let time = dateTime[1].split(':');
@@ -193,9 +193,10 @@ function formatDT(dtStr) {
     let mm = time[1];
     return new Date(`${yyyy}-${MM}-${dd}T${hh}:${mm}`);
   } else {
-    return "";
+    return dtStr;
   }
 }
+module.exports.formatDT = formatDT;
 //
 function formatNum(numStr) {
   const mark = numStr.includes('K') ? 'K': (numStr.includes('M') ? 'M': '');
