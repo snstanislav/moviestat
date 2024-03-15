@@ -5,10 +5,49 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <a href="/"><h2>Main page</h2></a>
     
   <h1>User's film statistics</h1>
   <p><%= movieItem.imdbId %></p>
-  <h2><%= movieItem.favorite ? "(F) | " : "" %><%= movieItem.pRating %> (<%= movieItem.pDateTime %>)</h2>
+  <h2><% if(movieItem.favorite==true){ %>
+  <b>(F)</b>
+  <% } %>
+  <!-- FAVORITE -->
+ <form action="/film/<%= movieItem.imdbId %>" method="POST" onsubmit="return confirm('Are you sure?');">
+     <input type="hidden" name="favorite" 
+     value="<%= movieItem.favorite==true ? false : true %>">
+   <button type="submit"><%=
+   movieItem.favorite==true ? "Not favorite any more" : "Add to favorite"
+   %></button>
+  </form></h2>
+  <br>
+  
+  <h2><%= movieItem.pRating %> (<%=
+  movieItem.pDateTime %>)
+  <!-- CHANGE RATING -->
+   <form action="/film/<%= movieItem.imdbId %>" method="POST" onsubmit="return confirm('Are you sure?');">
+  <select name="personalRating">
+    <option value="10">10</option>
+    <option value="9">9</option>
+    <option value="8">8</option>
+    <option value="7">7</option>
+    <option value="6">6</option>
+    <option value="5">5</option>
+    <option value="4">4</option>
+    <option value="3">3</option>
+    <option value="2">2</option>
+    <option value="1">1</option>
+  </select>
+   <button type="submit">Change your rating</button>
+  </form></h2>
+  <br>
+  
+  <br>
+  <!-- REMOVE RATING-->
+  <form action="/film/delete/<%= movieItem.imdbId %>" method="POST"
+  onsubmit="return confirm('Are you sure?');">
+  <button type="submit">Remove you rating</button></form>
+  
   <a href="<%= movieItem.imdbLink %>" target="blank"><h3><%= movieItem.commTitle %> (<%= movieItem.year %>)</h3></a>
   <p><i><%= movieItem.origTitle %></i></p>
       <br>

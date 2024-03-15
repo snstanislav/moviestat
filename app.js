@@ -26,4 +26,4 @@ app.use(personRouter)
 app.use(evalRouter)
 
 
-app.listen(3006);
+app.listen(3000);

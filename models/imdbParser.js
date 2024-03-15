@@ -103,6 +103,7 @@ module.exports.parseFilm =
   movieEntry.grossWW = grossWW;
   movieEntry.pRating = pRating;
   movieEntry.pDateTime = pDateTime;
+  movieEntry.favorite = false;
 
   return movieEntry;
 }

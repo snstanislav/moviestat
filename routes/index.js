@@ -15,42 +15,65 @@ const SortStatMode = statisticsGenerator.SortStatMode;
 
 const router = express.Router();
 
-let yearSortMode = SortStatMode.KEY_DESC;
-let decadeSortMode = SortStatMode.KEY_DESC;
-let genreSortMode = SortStatMode.QUANTITY_DESC;
-let countrySortMode = SortStatMode.QUANTITY_DESC;
-let actorSortMode = SortStatMode.RATING_DESC;
-let directorSortMode = SortStatMode.RATING_DESC;
-let movieSortMode = SortStatMode.EVAL_DATETIME_DESC;
+let paramsMap = new Map();
+/* Initial sorting parameters */
+paramsMap.set("sortyear", SortStatMode.KEY_DESC)
+paramsMap.set("sortdecade", SortStatMode.KEY_DESC)
+paramsMap.set("sortgenre", SortStatMode.QUANTITY_DESC)
+paramsMap.set("sortcountry", SortStatMode.QUANTITY_DESC)
+paramsMap.set("sortactor", SortStatMode.RATING_DESC)
+paramsMap.set("sortdirector", SortStatMode.RATING_DESC)
+paramsMap.set("sortmovie", SortStatMode.EVAL_DATETIME_DESC)
+
 
 router.get("/", (req, res)=> {
-  req.params['sortmode'] = SortStatMode.QUANTITY_DESC
 
-  console.log(req.params['sortmode'])
+  for (const [key, value] of Object.entries(req.query)) {
+    console.log(`${key}: ${value}`);
+    paramsMap.set(key, value);
+  }
+
   res.render('index', {
     title: "User's movie statistics",
     SortMode: SortStatMode,
-    yearStat: yearManager.getYearStat(yearSortMode),
-    decadeStat: yearManager.composeDecadeStat(decadeSortMode),
-    genreStat: genreManager.getGenreStat(genreSortMode),
-    countryStat: countryManager.getCountryStat(countrySortMode),
-    actorStat: personManager.getActorStat(actorSortMode),
-    directorStat: personManager.getDirectorStat(directorSortMode),
-    movieStat: movieManager.getMovieStat(movieSortMode)
+    FilmMode: FilmStatMode,
+    currentFilter: {
+      mode: paramsMap.get("filtermode"), 
+      value: paramsMap.get("filtervalue")
+    },
+    yearStat: yearManager.getYearStat(paramsMap.get("sortyear")),
+    sortyearmode: paramsMap.get("sortyear"),
+    decadeStat: yearManager.composeDecadeStat(paramsMap.get("sortdecade")),
+    sortdecademode: paramsMap.get("sortdecade"),
+    genreStat: genreManager.getGenreStat(paramsMap.get("sortgenre")),
+    sortgenremode: paramsMap.get("sortgenre"),
+    countryStat: countryManager.getCountryStat(paramsMap.get("sortcountry")),
+    sortcountrymode: paramsMap.get("sortcountry"),
+    actorStat: personManager.getActorStat(paramsMap.get("sortactor")),
+    sortactormode: paramsMap.get("sortactor"),
+    directorStat: personManager.getDirectorStat(paramsMap.get("sortdirector")),
+    sortdirectormode: paramsMap.get("sortdirector"),
+    movieStat: movieManager.getMovieStat(paramsMap.get("sortmovie"), paramsMap.get("filtermode"), paramsMap.get("filtervalue")),
+    sortmoviemode: paramsMap.get("sortmovie")
   });
   console.log("Router: index");
 });
 
-router.get("/index", (req, res)=> {
-  if (req.query.filmLink != undefined && req.query.personalRating != undefined) {
-    rateManager.rateMovie(req.query.filmLink, req.query.personalRating);
-    res.redirect('/');
-  }
-});
-/*
-router.update("/:id", (req, res)=> {});
-
-router.update("/index/:id", (req, res)=> {});
-*/
+router.post("/index/:id",
+  (req, res)=> {
+    let openedFilm = movieManager.getMovie(req.params['id']);
+    console.log(req.body)
+    console.log(openedFilm.commTitle)
+    if (req.params['id']) {
+      if (req.body.favorite && openedFilm.favorite != req.body.favorite) {
+        openedFilm.favorite = req.body.favorite == "true" ? true: false;
+      }
+      if (req.body.personalRating && openedFilm.pRating != req.body.personalRating) {
+        openedFilm.pRating = req.body.personalRating;
+      }
+      movieManager.changeUserEval(openedFilm);
+      res.redirect("/");
+    }
+  });
 
 module.exports = router;

@@ -1,3 +1,7 @@
+/**
+ * 07.03.2024
+ */
+ 
 const fs = require('fs')
 const path = require('path');
 
@@ -9,13 +13,6 @@ const dataProvider = require('../data/dataProvider.js');
 
 // functions
 const extractIdFromLinkIMDB = statisticsGenerator.extractIdFromLinkIMDB;
-
-
-//const render = (result)=> console.log(result)
-//performImdbSearch("matrix 4", render)
-//
-//rateMovie("https://m.imdb.com/title/tt0446068/", 3)
-
 
 
 function performImdbSearch(query, render) {
@@ -44,13 +41,9 @@ function rateMovie(filmLink, personalRating) {
   }).then(data => {
     const resObj = imdbParser.parseFilm(String(data),
       extractIdFromLinkIMDB(filmLink),
-      filmLink, personalRating, new Date().toLocaleString("uk-UA")); //
+      filmLink, personalRating, new Date().toLocaleString("uk-UA")); // !!
 
-    dataProvider.setUserMovieEval(resObj)
-
-    /* fs.writeFileSync("---test.json", JSON.stringify(resObj, null, 2)+",\n");
-
-    console.log(resObj.imdbId+" "+resObj.commTitle);*/
+    dataProvider.setUserMovieEval(resObj);
   });
 }
 module.exports.rateMovie = rateMovie;

@@ -3,75 +3,94 @@
 */
 
 const fs = require('fs');
+const path = require('path');
 
-const DBpath = "./data/src/db-test.json";
+const userLogin = "snstanislav";
+const DBpath = path.join(__dirname, "../../moviestat_db/users/", userLogin, "docs");
+//const DBpath = path.join(__dirname, "/jsonDB/users/", userLogin, "docs");
 
 class JSONDataProvider {
   constructor() {
-    this.db = JSON.parse(
-      fs.readFileSync(DBpath));
-    this.size = this.db.length;
+    this.initialize();
   }
 
-  async saveDB() {
-    await fs.writeFile(DBpath, JSON.stringify(this.db, null, 2), err=> {
-      if (err) console.error(`${this.constructor.name}: Error: DB saving
-        failure\n`);
+  initialize() {
+    this.db = [];
+
+    let list = fs.readdirSync(DBpath);
+    list.forEach(elem => {
+      this.db.push(JSON.parse(fs.readFileSync(path.join(DBpath, elem)), "utf-8"));
+    });
+    this.size = this.db.length;
+
+    console.log(`${this.constructor.name}: initialize 'db'. Current size - [${this.size}]`);
+  }
+
+  saveDB(item) {
+    const savingPath = path.join(DBpath, item.imdbId+".json");
+    fs.writeFile(savingPath, JSON.stringify(item, null, 2), err=> {
+      if (err) {
+        console.error(`${this.constructor.name}: DB save failure...`);
+      } else {
+        console.log(`${this.constructor.name}: [${item.imdbId} / ${item.commTitle}] saved successfully!`);
+      }
     });
   }
 
-  isUniqueId(id) {
-    return !this.db.some(elem => elem.imdbId == id);
+  isUniqueId(imdbId) {
+    return !this.db.some(elem => elem.imdbId == imdbId);
   }
 
-  async insert(item) {
-    if (this.isUniqueId(item.imdbId)) {
-      this.db.unshift(item);
-
-      await this.saveDB();
-      console.log(`${this.constructor.name}: [${item.imdbId} / ${item.commTitle}] inserted successfully\n`);
-    } else {
-      console.log(`${this.constructor.name}: [${item.imdbId} / ${item.commTitle}] already exists. Item will be updated\n`);
-
-      this.update(item);
+  insert(item) {
+    if (item) {
+      let i = this.db.findIndex(elem => elem.imdbId == item.imdbId);
+      if (i >= 0) {
+        this.update(item);
+        this.db[i] = item;
+      } else {
+        console.log(`${this.constructor.name}: [${item.imdbId} / ${item.commTitle}] insertion.`);
+        this.db.push(item);
+        this.saveDB(item);
+      }
     }
   }
 
-  async update(item) {
-    let i = this.db.findIndex(elem => elem.imdbId == item.imdbId)
-    if (i >= 0) {
-      const firstEvalTime = this.db[i].pDateTime; //
-      this.db[i] = item;
-      this.db[i].pDateTime = firstEvalTime; //
-
-      await this.saveDB();
-      console.log(`${this.constructor.name}: [${item.imdbId} / ${item.commTitle}] updated successfully\n`)
-    } else {
-      console.error(`${this.constructor.name}: Error: updating item is not
-        correct\n`);
+  update(item) {
+    if (item) {
+      let savedIds = fs.readdirSync(DBpath);
+      if (savedIds.includes(item.imdbId+".json")) {
+        console.log(`${this.constructor.name}: [${item.imdbId} / ${item.commTitle}] updation.`);
+        this.saveDB(item);
+      } else {
+        console.error(`${this.constructor.name}: updating item [${item.imdbId} / ${item.commTitle}] not found...`);
+      }
     }
   }
 
-  async remove(id) {
-    let i = this.db.findIndex(elem => elem.imdbId == id);
+  remove(imdbId) {
+    let i = this.db.findIndex(elem => elem.imdbId == imdbId);
     if (i >= 0) {
-      this.db.splice(i, 1);
-
-      await this.saveDB();
-      console.log(`${this.constructor.name}: [${id}] removed successfully`);
+      const removingPath = path.join(DBpath, imdbId+".json");
+      fs.unlink(removingPath, err=> {
+        if (err) {
+          console.log(`${this.constructor.name}: [${imdbId}] removing failure...`);
+        } else {
+          this.db.splice(i, 1);
+          console.log(`${this.constructor.name}: [${imdbId}] removed successfully!`);
+        }
+      });
     } else {
-      console.error(`${this.constructor.name}: Error: remove operation
-        rejected\n`);
+      console.error(`${this.constructor.name}: removing item [${imdbId}] not found...`);
     }
   }
 
-  extractOne(id) {
-    let i = this.db.findIndex(elem => elem.imdbId == id);
+  extractOne(imdbId) {
+    let i = this.db.findIndex(elem => elem.imdbId == imdbId);
     if (i >= 0) {
-      console.log(`${this.constructor.name}: Item [${id}] found\n`);
+      console.log(`${this.constructor.name}: item [${imdbId}] found!`);
       return this.db[i];
     } else {
-      console.error(`${this.constructor.name}: Error: item [${id}] not found\n`);
+      console.error(`${this.constructor.name}: item [${imdbId}] not found...`);
       return {};
     }
   }

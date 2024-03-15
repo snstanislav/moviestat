@@ -5,7 +5,10 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    
+    <h1>Find and rate a film</h1>
+    <%- include('partials/searchform') %>
+    <br>
+  
   <h1><%= title %></h1>
   <div id="selectedFilm" style="border:10px solid #777; background:lightblue" hidden>Rate this: <br></div>
   <div id="searchResult">
@@ -14,14 +17,14 @@
     <div onclick="selectResult(this)" /><p data-link="<%= elem.link %>" style='display:block; border:1px solid #444'><%= elem.ind %>. 
     <img alt="" src="<%= elem.poster %>">
     
-    <b><%= elem.title %> (<%= elem.year %>)</b><br>
+    <a href="<%= elem.link %>" target="_blank"><b><%= elem.title %> (<%= elem.year %>)</b></a><br>
     <i><%= elem.shortcast %></i></p></div>
     <% }); } %>
   </div>
   
   <script>
   let ratingSelect = `
-  <form action="/index" method="get">
+  <form action="/film/" method="POST">
   <b><label for="user-rating">Your rate:</label></b>
   <br>
   <input type="hidden" id="filmLink" name="filmLink" value="">

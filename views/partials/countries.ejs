@@ -1,0 +1,22 @@
+<h1>Country statistics</h1>
+Sort by:
+<a href="/?sortcountry=<%= SortMode.RATING_ASC %>">Rating up</a> |
+<a href="/?sortcountry=<%= SortMode.RATING_DESC %>">Rating down</a> |
+<a href="/?sortcountry=<%= SortMode.QUANTITY_ASC %>">Quantity up</a> |
+<a href="/?sortcountry=<%= SortMode.QUANTITY_DESC %>">Quantity down</a> |
+<a href="/?sortcountry=<%= SortMode.KEY_ASC %>">Name up</a> |
+<a href="/?sortcountry=<%= SortMode.KEY_DESC %>">Name down</a>
+
+<% countryStat.forEach((value, key, map)=> {
+  if (value.quantity > 5) {
+    %>
+    <p>
+      <a href="/?filtermode=<%= FilmMode.COUNTRY %>&filtervalue=<%= key %>">filter</a> <%= key %> | <%= value.quantity %> | <%= value.percent %>% | <%= value.rating %>
+    </p>
+    <%
+  }
+}) %>
+
+<script>
+  document.querySelector("a[href*='/?sortcountry=<%= sortcountrymode %>']").classList.add("sortselected");
+</script>

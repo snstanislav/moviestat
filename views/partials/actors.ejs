@@ -1,0 +1,27 @@
+<h1>Actor/actress statistics</h1>
+Sort by:
+<a href="/?sortactor=<%= SortMode.RATING_ASC %>">Rating up</a> |
+<a href="/?sortactor=<%= SortMode.RATING_DESC %>">Rating down</a> |
+<a href="/?sortactor=<%= SortMode.QUANTITY_ASC %>">Quantity up</a> |
+<a href="/?sortactor=<%= SortMode.QUANTITY_DESC %>">Quantity down</a> |
+<a href="/?sortactor=<%= SortMode.NAME_ASC %>">Name up</a> |
+<a href="/?sortactor=<%= SortMode.NAME_DESC %>">Name down</a>
+
+<div>
+  <% let j = 1;
+  actorStat.forEach((value, key, map)=> {
+
+      %>
+      <span style='display:inline-block; border:1px solid #444'> <%= j %>.
+        <a href="/?filtermode=<%= FilmMode.CAST %>&filtervalue=<%= key %>">filter</a> <a href="person/<%= key %>"><img alt="" src="<%= value.sPhoto %>"></a> <br>
+        <b><%= value.name %></b> <br>
+        < <%= value.rating %> > |
+          <%= value.quantity %></span>
+        <% j++;
+     
+    }); %>
+  </div>
+  
+<script>
+  document.querySelector("a[href*='/?sortactor=<%= sortactormode %>']").classList.add("sortselected");
+</script>

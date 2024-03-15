@@ -1,10 +1,9 @@
 /**
- * 04.03.2024
- */
+* 04.03.2024
+*/
 
 // modules
 const statisticsGenerator = require('./statisticsGenerator.js');
-
 const fs = require('fs')
 const dataProvider = require('../data/dataProvider.js');
 const db = dataProvider.getGeneralUserMovieList();
@@ -22,13 +21,13 @@ const getSingleProperty = statisticsGenerator.getSingleProperty;
 const extractIdFromLinkIMDB = statisticsGenerator.extractIdFromLinkIMDB;
 
 
-function getActorStat(sortMode) {
-  return sortStat(composePersonsRate(7, FilmStatMode.CAST), sortMode);
+function getActorStat(sortMode, thresholdQuantity = 7) {
+  return sortStat(composePersonsRate(thresholdQuantity, FilmStatMode.CAST), sortMode);
 }
 module.exports.getActorStat = getActorStat;
 
-function getDirectorStat(sortMode) {
-  return sortStat(composePersonsRate(5, FilmStatMode.DIRECTOR), sortMode);
+function getDirectorStat(sortMode, thresholdQuantity = 5) {
+  return sortStat(composePersonsRate(thresholdQuantity, FilmStatMode.DIRECTOR), sortMode);
 }
 module.exports.getDirectorStat = getDirectorStat;
 
@@ -38,7 +37,9 @@ function getPerson(imdbId) {
   const direcsColl = composePersonsRate(1, FilmStatMode.DIRECTOR);
 
   if (actorsColl.has(imdbId) || direcsColl.has(imdbId)) {
-    let profile = { occupation: [] };
+    let profile = {
+      occupation: []
+    };
 
     if (actorsColl.has(imdbId)) {
       personInfo = actorsColl.get(imdbId);
@@ -52,7 +53,7 @@ function getPerson(imdbId) {
     }
     return profile;
   } else {
-    console.error("Person not found")
+    console.error("Person manager: person not found")
     return undefined;
   }
 }
@@ -90,19 +91,17 @@ function composePersonsRate(numFilmLimit, personMode) {
         }));
       break;
     default:
-      console.log("Mode is not valid");
+      console.log("Person manager: mode is not valid");
       break;
   }
   personsMap.forEach(elem => {
     elem.rating = (elem.rating/elem.quantity).toFixed(2);
   });
-  console.log(personMode+" total: "+personsMap.size)
-//
-  return new Map(([...personsMap.entries()]
-  // check and remove def sort
-  .sort((a,b)=>b[1].rating-a[1].rating).sort((a,b)=>b[1].quantity-a[1].quantity))
+  console.log('Person manager: compose result total - %s', personsMap.size)
+  //
+  return sortStat(new Map([...personsMap.entries()]
     .filter(elem => elem[1].quantity >=
-    numFilmLimit));
+      numFilmLimit)), SortStatMode.EVAL_DATETIME_DESC);
 }
 ///
 function setPersonMapEntry(map, detailsItem, rating) {
@@ -123,7 +122,7 @@ function setPersonMapEntry(map, detailsItem, rating) {
   map.set(key, entry);
 }
 
-///
+/// temporary
 function printPersonsRate(personsMap) {
   let personsList = []
 

@@ -20,7 +20,7 @@ class MovieEntry {
     this.grossWW = ""
     this.pRating = 0
     this.pDateTime = ""
-    this.favorite = ""
+    this.favorite = false
   }
 
   copy(item) {

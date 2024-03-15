@@ -6,8 +6,63 @@
   </head>
   <body>
     
-    <h2><%= personItem.name %></h2>
+    <h2><%= personItem.name %><a href="<%= personItem.imdbLink %>" target="blank"> 🔗<%=
+    personItem.imdbId %></a></h2>
+    <div>Known for you as: 
+      <b><% personItem.occupation.forEach(elem=>{
+        if(elem=="cast"){ %>actor/actress, 
+      <% }
+        if(elem=="director"){ %>director
+      <% }
+    }) %></b>
+    </div>
+    <br><br>
     <img alt="" src="<%= personItem.sPhoto %>">
+    <br><br>
+
+    <% if(personItem.cast) {%>
+<!--ACTOR SECTION -->
+    <div style="border:2px solid #333; padding:10px">
+      <h3>Actor/actress</h3> 
+      You rated films: <b><%= personItem.cast.quantity%></b> | Average rating:
+      <b><%= personItem.cast.rating %></b>
+      <br><br>
+     
+    <% let i = 1;
+     let castFilmList = personItem.cast.filmList.sort((a, b)=>formatDT(b.pDateTime)-formatDT(a.pDateTime));
+    
+    castFilmList.forEach((value,i, self)=> { %>
+     <div style='margin:5px; padding:5px; border:1px solid #444'>
+      <%= i+1 %>.<span style='display:inline;'><i><%= value.favorite == true ? "(F)": "" %></i>
+        <b><a href="../film/<%= value.imdbId %>"><%= value.commTitle %> (<%= value.year %>)</a></b> | < <%=
+          value.pRating %> > | <%= value.pDateTime %></span>
+    </div>
+    <% i++;
+  }); %>
+  </div><br>
+    <% }
+
+     if(personItem.director){ %>
+<!-- DIRECTOR SECTION -->
+      <div style="border:2px solid #333; padding:10px">
+      <h3>Director</h3> 
+      You rated films: <b><%= personItem.director.quantity%></b> | Average rating:
+      <b><%= personItem.director.rating %></b>
+      <br><br>
+     
+    <% let i = 1;
+     let directorFilmList = personItem.director.filmList.sort((a, b)=>formatDT(b.pDateTime)-formatDT(a.pDateTime))
+    
+    directorFilmList.forEach((value,i, self)=> { %>
+     <div style='margin:5px; padding:5px; border:1px solid #444'>
+      <%= i+1 %>.<span style='display:inline;'><i><%= value.favorite == true ? "(F)": "" %></i>
+        <b><a href="../film/<%= value.imdbId %>"><%= value.commTitle %> (<%= value.year %>)</a></b> | < <%=
+          value.pRating %> > | <%= value.pDateTime %></span>
+    </div>
+    <% i++;
+  }); %>
+      </div>
+    <% } %>
     
   </body>
 </html>

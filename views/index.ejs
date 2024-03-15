@@ -1,77 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Find and rate a film</h1>
-  <form action="/eval" method="get">
-   <label for="search">Title and year:</label>
-    <input type="text" name="search">
-    <input type="submit">
-  </form>
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+  <h1>Find and rate a film</h1>
+  <%- include('partials/searchform') %>
   <br>
-
-    <h1>Director statistics</h1>
-    <% let k=1; 
-    directorStat.forEach((value,key,map)=>{ 
-    if(value.quantity > 0) { %>
-    <p style='margin:0; padding:3px; border:1px solid #444'> <%= k %>.
-    <b><a href="person/<%= key %>"><%= value.name %></b></a> < <%= value.rating %> > | 
-    <%= value.quantity %></p>
-    <%  k++; } }); %>
-    
-    
-    <h1>Actor/actress statistics</h1>
-    <div>
-    <% let j=1; 
-    actorStat.forEach((value,key,map)=>{ 
-    if(value.rating > 6) { %>
-    <span style='display:inline-block; border:1px solid #444'> <%= j %>. 
-    <a href="person/<%= key %>"><img alt="" src="<%= value.sPhoto %>"></a> <br>
-    <b><%= value.name %></b> <br>
-    < <%= value.rating %> > | 
-    <%= value.quantity %></span>
-    <%  j++; } }); %>
-    </div>
-    
-    <h1>Movie table</h1>
-    <% let i=1; 
-    movieStat.forEach((value,key,map)=>{ 
-    if(value.pRating > 0){ %>
-    <p> <%= i %>. <i><%= value.favorite ? "(F)" : "" %></i> 
-    <b><a href="film/<%= key %>"><%=
-    value.commTitle %> (<%= value.year %>)</a></b> | < <%=
-    value.pRating %> > | <%= value.pDateTime %></p>
-    <%  i++; } }); %>
-    
-    <h1>Genre statistics</h1>
-    <% genreStat.forEach((value,key,map)=>{ 
-        if(value.quantity>0) { %>
-    <p> <%= key %> | <%= value.quantity %> | <%= value.percent %>% | <%= value.rating %></p>
-    <%  }  }) %>
-    
-    <h1>Country statistics</h1>
-    <% countryStat.forEach((value,key,map)=>{ 
-        if(value.quantity>5) { %>
-    <p> <%= key %> | <%= value.quantity %> | <%= value.percent %>% | <%= value.rating %></p>
-    <%  }  }) %>
-    
-    <h1>Decade statistics</h1>
-    <%   decadeStat.forEach((value,key,map)=>{ 
-        if(value.quantity>0) {  %>
-    <p> <%= key %> | <%= value.quantity %> | <%= value.percent %>% | <%= value.rating %></p>
-    <%  }  }) %>
-    
-    <h1>Year statistics</h1>
-    <% let mark = '[]';
-       yearStat.forEach((value,key,map)=>{ 
-         if(value.quantity>0) {
-          let bar = '';
-          for (let i = 1; i <= value.quantity; i += 1) bar += mark;  %>
-    <p> <%= key %> | <%= value.quantity %> : <%= bar %></p>
-    <% } }) %>
-   
-  </body>
+  
+  <!-- DECADES -->
+  <%- include('partials/decades') 
+  %>
+  
+  <!-- YEARS -->
+  <%- include('partials/years') 
+  %>
+ 
+  <!-- DIRECTORS -->
+  <%- include('partials/directors') 
+  %>
+  
+  <!-- ACTORS/ACTRESSES -->
+  <%- include('partials/actors') 
+  %>
+  
+  <!-- GENRES -->
+  <%- include('partials/genres') 
+  %>
+  
+  <!-- COUNTRIES -->
+  <%- include('partials/countries') 
+  %>
+ 
+  <!-- MOVIE TABLE -->
+  <%- include('partials/movietable') 
+  %>
+  
+  
+</body>
 </html>

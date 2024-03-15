@@ -5,8 +5,6 @@
 const dataProvider = require('../data/dataProvider.js');
 
 const db = dataProvider.getGeneralUserMovieList();
-///
-console.log(db.length)
 
 const FilmStatMode = {
   CAST: "cast",
@@ -16,7 +14,8 @@ const FilmStatMode = {
   YEAR: "year",
   DECADE: "decade",
   USER_RATING: "pRating",
-  TYPE: "type"
+  TYPE: "type",
+  FAVORITE: "favorite"
 };
 module.exports.FilmStatMode = FilmStatMode;
 
@@ -45,7 +44,7 @@ const SortStatMode = {
 module.exports.SortStatMode = SortStatMode;
 
 module.exports.composeFullStat = (filmProperty, propertyMap = new Map()) => {
-  //console.log(propertyMap)
+
   let totalQuantity = 0;
   if (filmProperty == FilmStatMode.YEAR || filmProperty == FilmStatMode.GENRE || filmProperty == FilmStatMode.COUNTRY) {
 
@@ -60,7 +59,6 @@ module.exports.composeFullStat = (filmProperty, propertyMap = new Map()) => {
       case FilmStatMode.GENRE:
         db.forEach(item => {
           item[filmProperty].forEach(elem => {
-
             totalQuantity = setStatMapEntry(propertyMap, elem, totalQuantity, item.pRating, 1);
           });
         });
@@ -68,7 +66,6 @@ module.exports.composeFullStat = (filmProperty, propertyMap = new Map()) => {
       case FilmStatMode.COUNTRY:
         db.forEach(item => {
           item[filmProperty].forEach(elem => {
-
             totalQuantity = setStatMapEntry(propertyMap, elem, totalQuantity, item.pRating, 1);
           });
         });
@@ -93,27 +90,32 @@ function sortStat(map, sortMode) {
       return new Map([...map.entries()].sort().reverse());
       break;
     case SortStatMode.QUANTITY_ASC:
-      return new Map([...map.entries()].sort((a, b)=>a[1].quantity-b[1].quantity));
+      return new Map([...map.entries()]
+      .sort((a, b)=>a[1].rating-b[1].rating)
+      .sort((a, b)=>a[1].quantity-b[1].quantity));
       break;
     case SortStatMode.QUANTITY_DESC:
-      return new Map([...map.entries()].sort((a, b)=>b[1].quantity-a[1].quantity));
+      return new Map([...map.entries()]
+      .sort((a, b)=>b[1].rating-a[1].rating)
+      .sort((a, b)=>b[1].quantity-a[1].quantity));
       break;
     case SortStatMode.RATING_ASC:
-      return new Map([...map.entries()].sort((a, b)=>a[1].rating-b[1].rating));
+      return new Map([...map.entries()]
+      .sort((a, b)=>a[1].quantity-b[1].quantity)
+      .sort((a, b)=>a[1].rating-b[1].rating));
       break;
     case SortStatMode.RATING_DESC:
-      return new Map([...map.entries()].sort((a, b)=>b[1].rating-a[1].rating));
+      return new Map([...map.entries()]
+      .sort((a, b)=>b[1].quantity-a[1].quantity)
+      .sort((a, b)=>b[1].rating-a[1].rating));
       break;
     // for persons
     case SortStatMode.NAME_ASC:
       return new Map([...map.entries()]
-        .sort((a, b)=>
-          a[1].name.localeCompare(b[1].name)));
+        .sort((a, b)=> a[1].name.localeCompare(b[1].name)));
       break;
     case SortStatMode.NAME_DESC:
-      return new Map([...map.entries()]
-        .sort((a, b)=>
-          b[1].name.localeCompare(a[1].name)));
+      return new Map([...map.entries()].sort((a, b)=> b[1].name.localeCompare(a[1].name)));
       break;
     // for films
     case SortStatMode.YEAR_ASC:
@@ -162,8 +164,7 @@ function sortStat(map, sortMode) {
       break;
     case SortStatMode.EVAL_DATETIME_ASC:
       return new Map([...map.entries()]
-        .sort((a, b)=>formatDT(a[1].pDateTime)
-          -formatDT(b[1].pDateTime)));
+        .sort((a, b)=>formatDT(a[1].pDateTime)-formatDT(b[1].pDateTime)));
       break;
     case SortStatMode.EVAL_DATETIME_DESC:
       return new Map([...map.entries()]
@@ -175,56 +176,24 @@ function sortStat(map, sortMode) {
   }
 }
 module.exports.sortStat = sortStat;
-//
-function normalizeYear(yearStr) {
-  const result = Number(yearStr.substring(0, 4));
-  return result ? result: 0;
-}
-//
-function formatDT(dtStr) {
-  if (dtStr && dtStr.match(/\d{2}\.\d{2}\.\d{4}, \d{2}:\d{2}/gi)) {
-    let dateTime = dtStr.split(', ');
-    let date = dateTime[0].split('.');
-    let time = dateTime[1].split(':');
-    let dd = date[0];
-    let MM = date[1];
-    let yyyy = date[2];
-    let hh = time[0];
-    let mm = time[1];
-    return new Date(`${yyyy}-${MM}-${dd}T${hh}:${mm}`);
-  } else {
-    return dtStr;
-  }
-}
-module.exports.formatDT = formatDT;
-//
-function formatNum(numStr) {
-  const mark = numStr.includes('K') ? 'K': (numStr.includes('M') ? 'M': '');
-  const multiplier = numStr.includes('K') ? 1000: (numStr.includes('M') ?
-    1000000: 1);
-
-  const result = Number(numStr.substring(0, numStr.indexOf(mark) > 0 ?
-    numStr.indexOf(mark): numStr.length))*multiplier;
-  return result ? result: 0;
-}
 ////
 function filterMovieStat(map, filterMode, filterValue) {
   const mapEntries = [...map.entries()];
-  
+
   if (filterMode == FilmStatMode.CAST || filterMode == FilmStatMode.DIRECTOR) {
-    return new Map(mapEntries.filter(entry =>
-      entry[1][filterMode].some(elem => elem.imdbLink.includes(filterValue))))
+    return new Map(mapEntries.filter(entry => entry[1][filterMode].some(elem => elem.imdbLink.includes(filterValue))))
   } else if (filterMode == FilmStatMode.GENRE || filterMode == FilmStatMode.COUNTRY) {
     return new Map(mapEntries.filter(entry => entry[1][filterMode].includes(filterValue)))
   } else if (filterMode == FilmStatMode.USER_RATING || filterMode == FilmStatMode.TYPE || filterMode == FilmStatMode.YEAR) {
     return new Map(mapEntries.filter(entry => entry[1][filterMode] == filterValue))
   } else if (filterMode == FilmStatMode.DECADE) {
     const decade = filterValue.split('-')
-    return new Map(mapEntries.filter(entry => entry[1].year >= decade[0] &&
-    entry[1].year <= decade[1]))
+    return new Map(mapEntries.filter(entry => entry[1].year >= decade[0] && entry[1].year <= decade[1]))
+  } else if (filterMode == FilmStatMode.FAVORITE) {
+    return new Map(mapEntries.filter(entry => entry[1].favorite == true))
   } else {
-    console.error("Filter result is empty")
-    return new Map()
+    console.error("StatisticsGenerator: filter result is empty...")
+    return map;
   }
 }
 module.exports.filterMovieStat = filterMovieStat;
@@ -304,9 +273,40 @@ module.exports.getSingleProperty = (value, filmProperty) => {
       filmList: filmList
     }
   } else {
-    console.error("Non-valid property")
+    console.error("StatisticsGenerator: invalid single property...")
   }
+}
+///
+function normalizeYear(yearStr) {
+  const result = Number(yearStr.substring(0, 4));
+  return result ? result: 0;
+}
+//
+function formatDT(dtStr) {
+  if (dtStr && dtStr.match(/\d{2}\.\d{2}\.\d{4}, \d{2}:\d{2}/gi)) {
+    let dateTime = dtStr.split(', ');
+    let date = dateTime[0].split('.');
+    let time = dateTime[1].split(':');
+    let dd = date[0];
+    let MM = date[1];
+    let yyyy = date[2];
+    let hh = time[0];
+    let mm = time[1];
+    return new Date(`${yyyy}-${MM}-${dd}T${hh}:${mm}`);
+  } else {
+    return dtStr;
+  }
+}
+module.exports.formatDT = formatDT;
+//
+function formatNum(numStr) {
+  const mark = numStr.includes('K') ? 'K': (numStr.includes('M') ? 'M': '');
+  const multiplier = numStr.includes('K') ? 1000: (numStr.includes('M') ?
+    1000000: 1);
 
+  const result = Number(numStr.substring(0, numStr.indexOf(mark) > 0 ?
+    numStr.indexOf(mark): numStr.length))*multiplier;
+  return result ? result: 0;
 }
 ///
 function extractIdFromLinkIMDB (link) {
@@ -317,15 +317,7 @@ function extractIdFromLinkIMDB (link) {
     let indE = link.indexOf("/", indS);
     return link.substring(indS, indE);
   } else {
-    console.log("Non-valid link: "+link);
     return undefined;
   }
 }
 module.exports.extractIdFromLinkIMDB = extractIdFromLinkIMDB;
-//
-
-/*
-module.exports.getListedItems()
-module.exports.sort(options)
-module.exports.filter (options)
-*/

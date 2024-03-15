@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const pathSrc = "./data/src/db.json";
+const pathSrc = "../moviestat_db/src/db.json";
 const db = JSON.parse(fs.readFileSync(pathSrc, "utf-8"));
 
 const FilmProperties = {
@@ -18,10 +18,10 @@ console.time()
 
 // 5 - 428, 7 - 204, 10 - 77 / 14655
 //console.log(composeActorsRate(7))
-console.log(getSinglePropertyMovies(
-  "Mel Gibson", FilmProperties.DIRECTOR))
-console.log(getSinglePropertyMovies("Mel Gibson", FilmProperties.CAST))
-//console.log(composeFullStat(FilmProperties.DIRECTOR))
+//console.log(getSinglePropertyMovies("Mel Gibson", FilmProperties.DIRECTOR))
+//console.log(getSinglePropertyMovies("Mel Gibson", FilmProperties.CAST))
+//console.log(getSinglePropertyMovies("", FilmProperties.TYPE))
+console.log(composeFullStat(FilmProperties.TYPE))
 //printYearStat()
 //drawYearStat()
 
@@ -49,12 +49,15 @@ function setMapEntry(item, propertyMap, totalQuantity, rating) {
 function composeFullStat(filmProperty) {
   let propertyMap = new Map();
   let totalQuantity = 0;
-  if (filmProperty == FilmProperties.YEAR || filmProperty == FilmProperties.GENRES || filmProperty == FilmProperties.COUNTRIES) {
+  if (filmProperty == FilmProperties.YEAR || filmProperty == FilmProperties.TYPE || filmProperty == FilmProperties.GENRES || filmProperty == FilmProperties.COUNTRIES) {
 
     db.forEach(item => {
       switch (filmProperty) {
         case FilmProperties.YEAR:
           totalQuantity = setMapEntry(item.year.substring(0, 4), propertyMap, totalQuantity, item.pRating);
+          break;
+          case FilmProperties.TYPE:
+          totalQuantity = setMapEntry(item.type, propertyMap, totalQuantity, item.pRating);
           break;
         case FilmProperties.GENRES:
           item[filmProperty].forEach(elem => {
@@ -98,8 +101,8 @@ function getSinglePropertyMovies(value, filmProperty) {
   let filmList = [];
   db.forEach((film)=> {
 
-    if (filmProperty == FilmProperties.YEAR) {
-      if (film.year == value) {
+    if (filmProperty == FilmProperties.YEAR || filmProperty == FilmProperties.TYPE) {
+      if (film[filmProperty] == value) {
         count += 1;
         amount += Number(film.pRating);
         filmList.push([film.commTitle, film.year])

@@ -35,38 +35,38 @@ function composeDecadeStat(sortMode) {
     for (let i = 0; i < yearArr.length; i += 1) {
       if (yearArr[i][0]%10 == 0) {
         /* decade beginning detected */
-        //=====
+        //=== increase ===
         currGroupSum += yearArr[i][1].quantity;
         currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
         if (yearArr[i][0] == firstYearInGroup) {
           /* decade is currently
         represented by only its first year */
-          //------
+          //--- assign ---
           totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum);
         } else {
-          //------
+          //--- assign ---
           totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}-${firstYearInGroup}`, totalQuantity, currRateSum, currGroupSum)
         }
-        //===
+        //== reset ==
         currGroupSum = 0;
         currRateSum = 0;
         firstYearInGroup = yearArr[i+1][0];
       } else if (i == yearArr.length-1) {
         /* the very last year */
-        //=====
+        //=== increase ===
         currGroupSum += yearArr[i][1].quantity;
         currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
         if (yearArr[i][0] == firstYearInGroup) {
           /* the very last year
         represents the first one in its current group */
-          //------
+          //--- assign ---
           totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum)
         } else {
-          //------
+          //--- assign ---
           totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}-${firstYearInGroup}`, totalQuantity, currRateSum, currGroupSum)
         }
       } else {
-        //=====
+        //=== increase ===
         currGroupSum += yearArr[i][1].quantity;
         currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
       }
@@ -78,46 +78,45 @@ function composeDecadeStat(sortMode) {
         /* decade beginning detected*/
         if (yearArr[i-1][0] == firstYearInGroup) {
           /* the first decade is represented by only its last year */
-          //------
+          //--- assign ---
           totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i-1][0]}`,
             totalQuantity, currRateSum, currGroupSum)
         } else {
           /* and now save previous decade */
-          //------
+          //--- assign ---
           totalQuantity = setStatMapEntry(decadeMap,
             `${firstYearInGroup}-${yearArr[i-1][0]}`, totalQuantity,
             currRateSum, currGroupSum)
         }
-        //=====
+        //=== increase ===
         currGroupSum = yearArr[i][1].quantity;
         currRateSum = Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
         firstYearInGroup = yearArr[i][0];
         if (i == yearArr.length-1) {
           /* decade's first year appears to be the very last one */
-          //------
+          //--- assign ---
           totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum)
         }
       } else if (i == yearArr.length-1) {
         /* the very last year; processing the last decade */
-        //=====
+        //=== increase ===
         currGroupSum += yearArr[i][1].quantity;
         currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
         if (yearArr[i][0] == firstYearInGroup) {
-          //------
+          //--- assign ---
           totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum)
         } else {
-          //------
+          //--- assign ---
           totalQuantity = setStatMapEntry(decadeMap, `${firstYearInGroup}-${yearArr[i][0]}`,
             totalQuantity, currRateSum, currGroupSum)
         }
       } else {
-        //====
+        //=== increase ===
         currGroupSum += yearArr[i][1].quantity;
         currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
       }
     }
   }
-
   const resultMap = calcPercentsAndRatesStat(decadeMap, totalQuantity);
 
   return sortStat(resultMap, sortMode);

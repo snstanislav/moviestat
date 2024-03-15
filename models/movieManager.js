@@ -7,6 +7,7 @@ const statisticsGenerator = require('./statisticsGenerator.js');
 const fs = require('fs')
 const dataProvider = require('../data/dataProvider.js');
 const db = dataProvider.getGeneralUserMovieList();
+const MovieEntry = require('./movieItem.js').MovieEntry;
 
 // enumerators
 const FilmStatMode = statisticsGenerator.FilmStatMode;
@@ -20,25 +21,26 @@ const sortStat = statisticsGenerator.sortStat;
 const getSingleProperty = statisticsGenerator.getSingleProperty;
 const extractIdFromLinkIMDB = statisticsGenerator.extractIdFromLinkIMDB;
 const filterMovieStat = statisticsGenerator.filterMovieStat;
-//
 
 
-//console.log(getMovie('bkptt450'))
-//printFilmsRate(getMovieStat(SortStatMode.IMDB_EVALNUM_DESC))
-
-//let someMap = getMovieStat(SortStatMode.YEAR_DESC)
-//printFilmsRate(filterMovieStat(someMap, FilmStatMode.CAST, "nm0000154"))
-
-
-function getMovieStat(sortMode) {
-  return sortStat(composeFilmsRate(), sortMode);
+module.exports.getMovieStat = (sortMode, filterMode, filterValue) => {
+  return filterMovieStat(sortStat(composeFilmsRate(), sortMode), filterMode, filterValue);
 }
-module.exports.getMovieStat = getMovieStat;
-
-function getMovie(imdbId) {
+///
+module.exports.getMovie = (imdbId) => {
   return db.find(elem => elem.imdbId == imdbId);
 }
-module.exports.getMovie = getMovie;
+///
+module.exports.removeMovie = (imdbId) => {
+  dataProvider.removeUserMovieEval(imdbId);
+}
+///
+module.exports.changeUserEval = (item) => {
+  let currItem = new MovieEntry()
+  currItem.copy(item)
+  dataProvider.updateUserMovieEval(currItem);
+}
+///
 
 function composeFilmsRate() {
   let filmsMap = new Map();
@@ -47,7 +49,9 @@ function composeFilmsRate() {
   });
   return filmsMap;
 }
+module.exports.composeFilmsRate = composeFilmsRate;
 
+///
 function setFilmMapEntry(map, detailsItem) {
   const key = detailsItem.imdbId;
 
@@ -75,8 +79,8 @@ function setFilmMapEntry(map, detailsItem) {
   }
   map.set(key, entry)
 }
-///
 
+/// temporary
 function printFilmsRate(filmsMap) {
   let filmsList = []
 

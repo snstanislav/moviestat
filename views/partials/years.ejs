@@ -1,0 +1,23 @@
+<h1>Year statistics</h1>
+Sort by:
+<a href="/?sortyear=<%= SortMode.KEY_ASC %>">Year from past</a> |
+<a href="/?sortyear=<%= SortMode.KEY_DESC %>">Year from now</a> |
+<a href="/?sortyear=<%= SortMode.QUANTITY_ASC %>">Quantity up</a> |
+<a href="/?sortyear=<%= SortMode.QUANTITY_DESC %>">Quantity down</a>
+
+<% let mark = '[]';
+yearStat.forEach((value, key, map)=> {
+  if (value.quantity > 0) {
+    let bar = '';
+    for (let i = 1; i <= value.quantity; i += 1) bar += mark; %>
+    <p>
+      <a href="/?filtermode=<%= FilmMode.YEAR %>&filtervalue=<%= key %>">filter</a> <%= key %> | <%= value.quantity %> : <%= bar %>
+    </p>
+    <%
+  }
+}) 
+%>
+
+<script>
+  document.querySelector("a[href*='/?sortyear=<%= sortyearmode %>']").classList.add("sortselected");
+</script>

@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app",
-    "setenv": "export NODE_PATH=$(npm root -g)"
+    "start": "killall -9 node && node app",
+    "startd": "killall -9 node && nodemon app",
+    "mkbckp": "node data/jsonDB/backupJsDB.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

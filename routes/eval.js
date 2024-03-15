@@ -4,33 +4,27 @@ const rateManager = require('../models/rateManager.js');
 
 const router = express.Router();
 
-let sResultCache = []
-let currSearchQuery = ""
+let searchResultCache = new Map();
 
 router.get("/eval/", (req, res)=> {
-  currSearchQuery = req.query.search;
-  console.log("req.query.search >>"+req.query.search)
-  if(currSearchQuery != "" && currSearchQuery != req.query.search) {
-    sResultCache = [];
-  }
-  if (req.query.search != "") {
+  ///
+  console.log("CACHED QUERIES :: ", searchResultCache.keys())
 
-    if (sResultCache.length > 0) {
+  if(searchResultCache.has(req.query.search)) {
+    res.render('eval', {
+      title: "Search result", searchResultList: searchResultCache.get(req.query.search)
+    });
+    ///
+    console.log("Search result rendered from [cache]")
+  } else {
+    rateManager.performImdbSearch(req.query.search, (searchResultList)=> {
+      searchResultCache.set(req.query.search, searchResultList);
       res.render('eval', {
-        title: "Search result", searchResultList: sResultCache
+        title: "Search result", searchResultList: searchResultList
       });
-      ///
-      console.log("Eval. rendered from [cache]")
-    } else {
-      rateManager.performImdbSearch(req.query.search, (searchResultList)=> {
-        sResultCache = searchResultList;
-        res.render('eval', {
-          title: "Search result", searchResultList: searchResultList
-        });
-      });
-      ///
-      console.log("Eval. rendered from /web/")
-    }
+    });
+    ///
+    console.log("Search result rendered from /web/")
   }
 });
 

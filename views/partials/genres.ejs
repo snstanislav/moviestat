@@ -1,0 +1,22 @@
+<h1>Genre statistics</h1>
+Sort by:
+<a href="/?sortgenre=<%= SortMode.RATING_ASC %>">Rating up</a> |
+<a href="/?sortgenre=<%= SortMode.RATING_DESC %>">Rating down</a> |
+<a href="/?sortgenre=<%= SortMode.QUANTITY_ASC %>">Quantity up</a> |
+<a href="/?sortgenre=<%= SortMode.QUANTITY_DESC %>">Quantity down</a> |
+<a href="/?sortgenre=<%= SortMode.KEY_ASC %>">Name up</a> |
+<a href="/?sortgenre=<%= SortMode.KEY_DESC %>">Name down</a>
+
+<% genreStat.forEach((value, key, map)=> {
+  if (value.quantity > 0) {
+    %>
+    <p>
+      <a href="/?filtermode=<%= FilmMode.GENRE %>&filtervalue=<%= key %>">filter</a> <%= key %> | <%= value.quantity %> | <%= value.percent %>% | <%= value.rating %>
+    </p>
+    <%
+  }
+}) %>
+
+<script>
+  document.querySelector("a[href*='/?sortgenre=<%= sortgenremode %>']").classList.add("sortselected");
+</script>

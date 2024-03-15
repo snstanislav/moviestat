@@ -1,0 +1,16 @@
+$background: #c8dd9b;
+
+body {
+  padding: 20px;
+  margin: 0;
+  font: 24px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: $background;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.sortselected {
+  background: pink;
+}

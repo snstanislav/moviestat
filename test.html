@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+
+<form action="" method="GET" onsubmit="return validate(event)">
+<label for="search">Title and year:</label>
+<input type="text" name="search" required>
+<button type="submit">Let's try</button>
+</form>
+
+<script>
+function validate(event) {
+
+event.target.elements.search.value = event.target.elements.search.value.toLowerCase().trimEnd()
+
+let inputRGEX = /[a-zA-Z0-9-.]$/gi
+
+if (inputRGEX.test(event.target.elements.search.value)) return true;
+return false;
+
+}
+</script>
+
+</body>
+</html>
