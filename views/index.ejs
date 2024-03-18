@@ -4,39 +4,121 @@
   <title><%= title %></title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
-<body>
-  <h1>Find and rate a film</h1>
-  <%- include('partials/searchform') %>
-  <br>
+<body onload="checkState()">
+  <div class="main-container"> 
+    
+    <%- include('partials/searchform') %>
+    <br>
+    
+    <!-- DECADES -->
+    <div class="section-closed" id="decadeSect">
+      <h2 class="title-section">DECADES</h2>
+      <div class="handle-section" onclick="pressOpener(this)"></div>
+      <div class="content-section">
+        <%- include('partials/sortbar/sorttime', { sortquery: "/?sortdecade=" }) %>
+        <%- include('partials/decades') 
+        %>
+      </div>
+    </div>
+    
+    <!-- YEARS -->
+    <div class="section-closed" id="yearSect">
+      <h2 class="title-section">YEARS</h2>
+      <div class="handle-section" onclick="pressOpener(this)"></div>
+      <div class="content-section">
+        <%- include('partials/sortbar/sorttime', { sortquery: "/?sortyear=" }) %>
+        <%- include('partials/years') 
+        %>
+      </div>
+    </div>
+   
+    <!-- DIRECTORS -->
+    <div class="section-closed" id="directorSect">
+      <h2 class="title-section">DIRECTORS</h2>
+      <div class="handle-section" onclick="pressOpener(this)"></div>
+      <div class="content-section">
+        <%- include('partials/sortbar/sortperson', { sortquery:
+        "/?sortdirector=" }) %>
+        <%- include('partials/directors') 
+        %>
+      </div>
+    </div>
+    
+    <!-- ACTORS/ACTRESSES -->
+    <div class="section-closed" id="actorSect">
+      <h2 class="title-section">ACTORS / ACTRESSES</h2>
+      <div class="handle-section" onclick="pressOpener(this)"></div>
+      <div class="content-section">
+        <%- include('partials/sortbar/sortperson', { sortquery: "/?sortactor=" }) %>
+        <%- include('partials/actors') 
+        %>
+      </div>
+    </div>
+    
+    <!-- GENRES -->
+    <div class="section-closed" id="genreSect">
+      <h2 class="title-section">GENRES</h2>
+      <div class="handle-section" onclick="pressOpener(this)"></div>
+      <div class="content-section">
+        <%- include('partials/sortbar/sortworld', { sortquery: "/?sortgenre=" }) %>
+        <%- include('partials/genres') 
+        %>
+      </div>
+    </div>
+    
+    <!-- COUNTRIES -->
+    <div class="section-closed" id="countrySect">
+      <h2 class="title-section">COUNTRIES</h2>
+      <div class="handle-section" onclick="pressOpener(this)"></div>
+      <div class="content-section">
+        <%- include('partials/sortbar/sortworld', { sortquery: "/?sortcountry=" }) %>
+        <%- include('partials/countries') 
+        %>
+      </div>
+    </div>
+   
+    <!-- MOVIE TABLE -->
+    <div class="section-closed" id="movieSect">
+      <h2 class="title-section">MOVIE TABLE</h2>
+      <div class="handle-section" onclick="pressOpener(this)"></div>
+      <div class="content-section">
+        <%- include('partials/sortbar/sortmovie', { sortquery: "/?sortmovie=" }) %>
+        <%- //include('partials/movietable') 
+        %>
+      </div>
+    </div>
   
-  <!-- DECADES -->
-  <%- include('partials/decades') 
-  %>
-  
-  <!-- YEARS -->
-  <%- include('partials/years') 
-  %>
- 
-  <!-- DIRECTORS -->
-  <%- include('partials/directors') 
-  %>
-  
-  <!-- ACTORS/ACTRESSES -->
-  <%- include('partials/actors') 
-  %>
-  
-  <!-- GENRES -->
-  <%- include('partials/genres') 
-  %>
-  
-  <!-- COUNTRIES -->
-  <%- include('partials/countries') 
-  %>
- 
-  <!-- MOVIE TABLE -->
-  <%- include('partials/movietable') 
-  %>
+  </div>
   
   
+  <script>
+    function checkState() {
+      let sections = document.querySelectorAll("div[class^='section-']");
+     
+      Array.from(sections).forEach((sec) => {
+        if(sessionStorage.getItem(sec.id) != null) {
+          sec.className = sessionStorage.getItem(sec.id);
+        }
+      });
+    }
+  
+    const SECTION_OPENED = "section-opened";
+    const SECTION_CLOSED = "section-closed";
+    
+    function pressOpener(elem) {
+      
+      const section = elem.parentElement;
+      
+      if(section.className == SECTION_CLOSED) {
+        section.className = SECTION_OPENED;
+        //section.children[1].innerText = "Collapse"
+        sessionStorage.setItem(section.id, SECTION_OPENED);
+      } else if (section.className == SECTION_OPENED) {
+        section.className = SECTION_CLOSED;
+        //section.children[1].innerText = ""
+        sessionStorage.setItem(section.id, SECTION_CLOSED);
+      }
+    }
+  </script>
 </body>
 </html>

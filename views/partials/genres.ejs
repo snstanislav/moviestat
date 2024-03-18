@@ -1,22 +1,37 @@
-<h1>Genre statistics</h1>
-Sort by:
-<a href="/?sortgenre=<%= SortMode.RATING_ASC %>">Rating up</a> |
-<a href="/?sortgenre=<%= SortMode.RATING_DESC %>">Rating down</a> |
-<a href="/?sortgenre=<%= SortMode.QUANTITY_ASC %>">Quantity up</a> |
-<a href="/?sortgenre=<%= SortMode.QUANTITY_DESC %>">Quantity down</a> |
-<a href="/?sortgenre=<%= SortMode.KEY_ASC %>">Name up</a> |
-<a href="/?sortgenre=<%= SortMode.KEY_DESC %>">Name down</a>
-
 <% genreStat.forEach((value, key, map)=> {
   if (value.quantity > 0) {
+    let showData = "";
+    let bar = 0
+    let addData = "";
+
+    if (sortgenremode.includes("rating")) {
+      showData = value.rating;
+      bar = value.rating*8;
+      addData = value.quantity;
+    } else if(sortgenremode.includes("quantity")) {
+      showData = value.quantity;
+      for (let i = 1; i <= value.quantity; i += 1) bar += 0.1;
+      addData = value.percent+'%';
+    }  else {
+      showData = value.quantity;
+      for (let i = 1; i <= value.quantity; i += 1) bar += 0.1;
+      addData = '('+value.rating+')';
+    }
     %>
-    <p>
-      <a href="/?filtermode=<%= FilmMode.GENRE %>&filtervalue=<%= key %>">filter</a> <%= key %> | <%= value.quantity %> | <%= value.percent %>% | <%= value.rating %>
-    </p>
+    <div class="chart-line genre-chart">
+      <a href="/?filtermode=<%= FilmMode.GENRE %>&filtervalue=<%= key %>#movieSect">filter</a><span class="chart-key"><%= key %></span>&nbsp;&nbsp;
+      <span class='chart-bar' style='width:<%= bar %>%'><%= showData %></span>&nbsp;&nbsp;
+      <span class="chart-addition"><%= addData %></span>
+    </div>
     <%
   }
 }) %>
 
 <script>
   document.querySelector("a[href*='/?sortgenre=<%= sortgenremode %>']").classList.add("sortselected");
+
+  document.querySelectorAll(".genre-chart .chart-key").forEach((elem, i, self)=> {
+    if (elem.innerText.includes('Documentary'))
+      self[i].innerText = 'Docum.'
+  });
 </script>

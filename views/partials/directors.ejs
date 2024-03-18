@@ -1,23 +1,23 @@
-<h1>Director statistics</h1>
-Sort by:
-<a href="/?sortdirector=<%= SortMode.RATING_ASC %>">Rating up</a> |
-<a href="/?sortdirector=<%= SortMode.RATING_DESC %>">Rating down</a> |
-<a href="/?sortdirector=<%= SortMode.QUANTITY_ASC %>">Quantity up</a> |
-<a href="/?sortdirector=<%= SortMode.QUANTITY_DESC %>">Quantity down</a> |
-<a href="/?sortdirector=<%= SortMode.NAME_ASC %>">Name up</a> |
-<a href="/?sortdirector=<%= SortMode.NAME_DESC %>">Name down</a>
-
 <% let k = 1;
 directorStat.forEach((value, key, map)=> {
   %>
-  <p style='margin:0; padding:3px; border:1px solid #444'>
-    <%= k %>.
-    <a href="/?filtermode=<%= FilmMode.DIRECTOR %>&filtervalue=<%= key %>">filter</a> <b><a href="person/<%= key %>"><%= value.name %></b></a> < <%= value.rating %> > | <%= value.quantity %>
-    </p>
-    <% k++;
+  <div class="chart-line director-chart">
+    <a href="/?filtermode=<%= FilmMode.DIRECTOR %>&filtervalue=<%= key
+      %>#movieSect">filter</a>
+    <span class="ord"><%= k %>.</span>
+    <span class="chart-key">
+      <a href="person/<%= key %>"><%= value.name %></a></span>
+    <span class="person-data">
+      <span class="person-quant"><%= value.quantity %></span> | <span
+        class="person-rank"><%= value.rating
+        %></span>
+    </span>
 
-  }); %>
+  </div>
+  <% k++;
 
-  <script>
-    document.querySelector("a[href*='/?sortdirector=<%= sortdirectormode %>']").classList.add("sortselected");
-  </script>
+}); %>
+
+<script>
+  document.querySelector("a[href*='/?sortdirector=<%= sortdirectormode %>']").classList.add("sortselected");
+</script>

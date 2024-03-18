@@ -1,16 +1,427 @@
-$background: #c8dd9b;
+$light-1: #fff9b2;
+$light-2: #ffc684;
+$light-3: #d8e1f0;
+$light-4: #ffefcc;
 
-body {
-  padding: 20px;
-  margin: 0;
-  font: 24px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: $background;
+$dark-1: #249;
+$dark-2: #c34;
+$dark-3: #37d;
+$dark-4: #d55;
+$dark-5: #e17825;
+$dark-6: #2d1007;
+$dark-7: #46a;
+
+$link: purple;
+$active: #27f;
+
+
+img {
+  display: block;
 }
 
 a {
-  color: #00B7FF;
+  color: $dark-1;
+  & {
+    text-decoration: none;
+  }
+  & :hover {
+    color: $link;
+    text-decoration: underline;
+  }
+  & :active {
+    color: $active;
+    text-decoration: underline;
+  }
 }
 
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+h2 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.search-head {
+  display: block;
+  color: $dark-6;
+  opacity: 0.8;
+  margin: 0.5rem 0 2.5rem 0.5rem;
+  font-style: italic;
+}
+.search-bar {
+  display: flex;
+  align-items: stretch;
+  justify-content: left;
+  max-width: 80rem;
+  height: 3.5rem;
+  font-size: 2rem;
+  label {
+    display: inline;
+    align-items: center;
+    padding: 0.5rem 0 0 0.5rem;
+    text-align: right;
+    font-size: inherit;
+    width: 24%;
+    min-width: 15rem;
+  }
+  input {
+    display: inline;
+    width: 56%;
+    background: $light-3;
+    padding: 1rem 1rem;
+    margin: 0 25px;
+    font-size: inherit;
+    opacity: 0.7;
+    border: 0;
+    border-left: 2px solid $dark-1;
+    border-top: 2px solid $dark-1;
+    box-sizing: border-box;
+    outline: none;
+    &:focus {
+      border: 3px solid $active;
+      border-radius: 3px;
+    }
+  }
+  button {
+    display: inline;
+    width: 20%;
+    min-width: 10rem;
+    border: 0;
+    border-radius: 2px;
+    margin-right: 0.5rem;
+    background: $dark-1;
+    color: #fff;
+    opacity: 0.9;
+    font-size: 1.7rem;
+  }
+
+}
+
+.sort-bar {
+  line-height: 1.7;
+  font-size: 1.8rem;
+  padding: 0 0 1rem 0.1rem;
+  background: #fff;
+  opacity: 0.8;
+  border-bottom: 1px solid #444;
+  margin-bottom: 3.5rem;
+  a {
+    display: inline-block;
+    padding: 0 0.7rem;
+    margin-right: 0 1rem;
+  }
+}
 .sortselected {
-  background: pink;
+  font-weight: bold;
+  background: $light-3;
+}
+
+.chart-line {
+  display: flex;
+  align-items: center;
+  margin: 1.6rem 0;
+  .chart-key {
+    display: inline-block;
+    margin: 0 0.5rem;
+    opacity: 0.9;
+  }
+  .chart-bar {
+    display: inline-block;
+    min-width: fit-content;
+    height: 50%;
+    text-align: right;
+    color: #fff;
+    background: $dark-4;
+    border-radius: 3px;
+    opacity: 0.9;
+    padding: 0.2rem 0.4rem;
+  }
+  .chart-addition {
+    font-style: italic;
+    font-size: 1.9rem;
+    opacity: 0.7;
+  }
+}
+.decade-chart {
+  .chart-key {
+    line-height: 1;
+    min-width: 6rem;
+    width: 6rem;
+  }
+}
+.year-chart {
+  .chart-bar {
+    background: $dark-5;
+  }
+}
+.genre-chart {
+  .chart-key {
+    font-size: 1.9rem;
+    min-width: 10rem;
+    width: 10rem;
+    text-align: right;
+    margin-left: 0;
+  }
+  .chart-bar {
+    background: #949;
+  }
+}
+.country-chart {
+  .chart-key {
+    font-size: 1.8rem;
+    min-width: 10rem;
+    width: 10rem;
+    line-height: 1;
+    text-align: center;
+    margin-left: 0;
+  }
+  .chart-bar {
+    background: #484;
+  }
+}
+.director-chart {
+  .ord {
+    text-align: right;
+    min-width: 3.1rem;
+  }
+  .chart-key {
+    margin: 0 1rem;
+    min-width: 12rem;
+    width: 60%;
+    font-weight: bold;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid;
+  }
+}
+
+.person-data {
+  display: inline-block;
+  text-align: right;
+  font-weight: bold;
+  width: 20%;
+  min-width: 10rem;
+  .person-quant {
+    color: $dark-3;
+  }
+  .person-rank {
+    color: $dark-4;
+  }
+}
+
+a[href*="filtermode"] {
+  background: $dark-3;
+  color: #fff;
+  opacity: 0.8;
+  padding: 2px 15px;
+  margin: 0 20px 0 0px;
+  border-radius: 5px;
+  height: 50%;
+}
+
+.section {
+  display:block;
+  border: 2px solid $dark-2;
+  background: $light-1;
+  padding: 0.7rem 0.7rem 1.5rem;
+  margin: 1rem 0 1.5rem;
+}
+
+@mixin manage-section($is-opened: false, $display: none) {
+  @extend .section;
+  .title-section {
+    padding: inherit;
+  }
+  .handle-section {
+    font-weight: bold;
+    padding: 8px 0 12px 20px;
+    opacity: 0.9;
+    border-radius: 2px;
+    color: $light-1;
+    @if $is-opened {
+      &:before {
+        content: "\2329 \00a0 \00a0 Collapse";
+      }
+      background: $dark-2;
+    } @else {
+      &:before {
+        content: "\232A \00a0 \00a0 Expand";
+      }
+      background: $dark-1;
+    }
+  }
+  .content-section {
+    display: $display;
+    background: #fff;
+    margin: 20px 0 10px 0;
+    padding: 1.5rem;
+  }
+}
+
+.section-closed {
+  @include manage-section(false, none);
+}
+
+.section-opened {
+  @include manage-section(true, block);
+}
+
+@mixin set-body($bg-color, $font-size) {
+  body {
+    padding: 0;
+    margin: 0;
+    font-size: $font-size;
+    font-family: Impact, "Century Gothic", "Apple Gothic", Arial, sans-serif;
+    background: $bg-color;
+    align-items: center;
+  }
+}
+@mixin main-container($margin-vert, $margin-horiz, $padding-vert, $padding-horiz) {
+  .main-container {
+    background: #fff;
+    margin: $margin-vert $margin-horiz;
+    padding: $padding-vert $padding-horiz;
+    min-width: 37rem;
+  }
+}
+@mixin table-container() {
+  .table-container {
+    padding: 15px;
+    background: $dark-1;
+    border: 3px solid $dark-1;
+    min-width: 37em;
+    max-width: 55em;
+
+    .row {
+      display: flex;
+      border: 0;
+      background: $light-1;
+      margin: 15px 0;
+      padding: 10px;
+      color: $dark-2;
+      align-items: center;
+    }
+
+    .row-section {
+      display: inline-block;
+      border: 3px solid blue;
+      margin: 2px;
+    }
+
+    .row-subsection {
+      border: 2px solid red;
+      padding: 5px 5px;
+      margin: 5px;
+    }
+
+    .col-order-fav {
+      width: 10%;
+
+      div {}
+      div:nth-child(2) {
+        background: red;
+        height: 1.5em;
+      }
+    }
+
+    .col-poster-dur {
+      position: relative;
+      border: 3px solid purple;
+    }
+
+    .col-title {
+      width: 35%;
+    }
+
+    .col-imdbrating {
+      width: 15%;
+    }
+
+    .col-userrating {
+      width: 20%;
+    }
+
+    .row-pic {
+      height: 8em;
+    }
+
+    .row-duration {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.8);
+      opacity: 0.8;
+      color: yellow;
+      //font-size: 0.9em;
+      margin: 0;
+      padding: 4px 5px 2px 2px;
+      border-top: 2px solid #fff;
+      border-right: 2px solid #fff;
+    }
+  }
+}
+@mixin actor-wrapper() {
+  .actor-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    gap: 2rem;
+    margin: 0;
+    .actor-item {
+      display: flex;
+      flex-direction: column;
+      //border: 3px solid $dark-6;
+      background: $light-1;
+      box-shadow: 10px 10px 10px $dark-5;
+      text-align: center;
+      min-width: 16rem;
+      width: 16rem;
+      padding: 0.5rem 0.4rem;
+      .top-line {
+        padding: 0.3rem 0.2rem;
+        border-radius: 4px;
+        margin: 0.2rem 0.5rem 0.5rem;
+        background: #fff;
+      }
+      .mid-line {
+        overflow: hidden;
+        img {
+          display: block;
+          border-radius: 4px;
+          margin-left: auto;
+          margin-right: auto;
+          height: 15rem;
+        }
+        div {
+          margin: 0.4rem 0.2rem 0.7rem;
+          border-radius: 5px;
+          font-size: 1.9rem;
+          font-weight: bold;
+          //color: #fff;
+        }
+      }
+      .person-data {
+       margin: auto auto 0.2rem auto;
+       padding: 0.3rem 0.5rem;
+        text-align: center;
+        background: #fff;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 260px) {
+  @include set-body(#fff, 2rem);
+  @include main-container(1.5rem, 0, 2rem, 1rem);
+  @include table-container();
+  @include actor-wrapper();
+}
+
+@media screen and (min-width: 1080px) {
+  @include set-body($dark-7, 2.5rem);
+  @include main-container(2rem, 2rem, 2rem, 1.5rem);
+  @include table-container();
+  @include actor-wrapper();
 }

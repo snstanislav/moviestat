@@ -1,95 +1,140 @@
-<h1>Movie table [<%= movieStat.size %>]
-  <% if (currentFilter.value) {
+<div class="table-container">
+  <h2>Movie table [<%= movieStat.size %>]
+    <% if (currentFilter.value) {
+      %>
+      | Filtered by <%= currentFilter.mode %>:
+      <% if (currentFilter.value.includes('nm')) {
+        %>
+        <a href="person/<%= currentFilter.value %>" target="_blank"><%=
+          (actorStat.get(currentFilter.value) || directorStat.get(currentFilter.value)).name
+          %></a>
+        <%
+      } else {
+        %>
+        <%= currentFilter.value %>
+        <%
+      }
+    } %>
+  </h2>
+
+  <br><br>
+  <b>Filter by </b> <% if (currentFilter.value) {
     %>
-    | Filtered by <%= currentFilter.mode %>:
-    <% if (currentFilter.value.includes('nm')) {
-      %>
-      <a href="person/<%= currentFilter.value %>" target="_blank"><%=
-        (actorStat.get(currentFilter.value) || directorStat.get(currentFilter.value)).name
-        %></a>
-      <%
-    } else {
-      %>
-      <%= currentFilter.value %>
-      <%
-    }
+    <a href="/?filtermode=&filtervalue=">(Clear filter)</a>
+    <%
   } %>
-
-
-  <% %>
-</h1>
-
-Sort by:
-<a href="/?sortmovie=<%= SortMode.USER_RATING_ASC %>">Your rating up</a> |
-<a href="/?sortmovie=<%= SortMode.USER_RATING_DESC %>">You rating down</a> |
-<a href="/?sortmovie=<%= SortMode.EVAL_DATETIME_ASC %>">Early rated</a> |
-<a href="/?sortmovie=<%= SortMode.EVAL_DATETIME_DESC %>">Recently rated</a> |
-<a href="/?sortmovie=<%= SortMode.YEAR_ASC %>">From older</a> |
-<a href="/?sortmovie=<%= SortMode.YEAR_DESC %>">From newer</a> |
-<a href="/?sortmovie=<%= SortMode.IMDB_RATING_ASC %>">IMDB rating up</a> |
-<a href="/?sortmovie=<%= SortMode.IMDB_RATING_DESC %>">IMDB rating down</a> |
-<a href="/?sortmovie=<%= SortMode.IMDB_EVALNUM_ASC %>">IMDB num up</a> |
-<a href="/?sortmovie=<%= SortMode.IMDB_EVALNUM_DESC %>">IMDB num down</a>
-<br><br>
-<b>Filter by </b> <% if (currentFilter) {
-  %>
-  <a href="/?filtermode=&filtervalue=">(Clear filter)</a>
-  <%
-} %>
-<br><br>
-Your rating: |
-<% for (let i = 1; i <= 10; i += 1) {
-  %>
-  <a href="/?filtermode=<%= FilmMode.USER_RATING %>&filtervalue=<%= i %>"><b><%= i %></b></a> |
-  <%
-} %>
-<b> <a href="/?filtermode=<%= FilmMode.FAVORITE %>&filtervalue=<%= true
-  %>">Favorite movies</a></b>
-<br><br>
-
-<a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=TV Series">TV Series</a> |
-<a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=TV Mini Series">TV Mini Series</a> |
-<a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=TV Movie">TV Movie</a> |
-<a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=">Common movies</a>
-
-<br><br>
-<% let i = 1;
-movieStat.forEach((value, key, map)=> {
-  if (value.pRating > 0) {
+  <br><br>
+  Your rating: |
+  <% for (let i = 1; i <= 10; i += 1) {
     %>
-    <div style='margin:5px; padding:5px; border:1px solid #444'>
-      <%= i %>.
-      <!-- FAVORITE -->
-      <form style='display:inline;' action="/index/<%= key %>" method="POST" onsubmit="return confirm('Are you sure?');">
-        <input type="hidden" name="favorite"
-        value="<%= value.favorite == true ? false: true %>"><button type="submit"><%= value.favorite == true ? "Not favorite any more": "Add to favorite" %> </button>
-      </form>
-      <span style='display:inline;'><i><%= value.favorite == true ? "(F)": "" %></i>
-        <b><a href="film/<%= key %>"><%=
-          value.commTitle %> (<%= value.year %>)</a></b> | < <%=
-          value.pRating %> > | <%= value.pDateTime %></span>
+    <a href="/?filtermode=<%= FilmMode.USER_RATING %>&filtervalue=<%= i %>"><b><%= i %></b></a> |
+    <%
+  } %>
+  <b> <a href="/?filtermode=<%= FilmMode.FAVORITE %>&filtervalue=<%= true
+    %>">Favorite movies</a></b>
+  <br><br>
 
-        <!-- CHANGE RATING -->
-        <form action="/index/<%= key %>" method="POST" onsubmit="return confirm('Are you sure?');">
-          <select name="personalRating">
-            <option value="10">10</option>
-            <option value="9">9</option>
-            <option value="8">8</option>
-            <option value="7">7</option>
-            <option value="6">6</option>
-            <option value="5">5</option>
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="1">1</option>
-          </select>
-          <button type="submit">Change your rating</button>
-        </form>
+  <a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=TV Series">TV Series</a> |
+  <a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=TV Mini Series">TV Mini Series</a> |
+  <a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=TV Movie">TV Movie</a> |
+  <a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=">Common movies</a>
 
+  <br>
+  <div class="row">
+    <div></div>
+  </div>
+  <br>
+
+  <% let i = 1;
+  movieStat.forEach((value, key, map)=> {
+     if (value.pRating > 7) {
+    %>
+
+    <div class="row">
+      <div class="row-section col-order-fav">
+        <div class="row-subsection">
+          <%= i %>.
+        </div>
+        <div class="row-subsection">
+          <% if (value.favorite == true) {
+            %>
+            <div class="favor">
+              FAV
+            </div>
+            <%
+          } %>
+        </div>
+        <div class="row-subsection">
+          <!-- FAVORITE -->
+
+          <form style='display:inline;' action="/index/<%= key %>" method="POST" onsubmit="return confirm('Are you sure?');">
+            <input type="hidden" name="favorite"
+            value="<%= value.favorite == true ? false: true %>"><button type="submit"><%= value.favorite == true ? "Not any more": "Add to favorite" %> </button>
+          </form>
+        </div>
+      </div>
+      <div class="row-section col-poster-dur">
+        <img class="row-pic" src="<%= value.sPoster %>" alt="<%= value.commTitle %>">
+        <div class=" row-duration">
+          <%= value.duration.replace('hour',
+            'h').replace('minute', 'm').replaceAll('s', '') %>
+        </div>
+      </div>
+      <div class="row-section col-title">
+        <div class="row-subsection">
+          <p>
+            <a href="film/<%= key %>"><%=
+              value.commTitle %> (<%= value.year %>)</a>
+          </p>
+        </div>
+        <div class="row-subsection">
+          <%= value.origTitle %>
+        </div>
+      </div>
+      <div class="row-section col-imdbrating">
+        <div class="row-subsection">
+          <p>
+            <%= value.imdbRating %> (<%= value.imdbRatingNum%>)
+          </p>
+        </div>
+        <div class="row-subsection">
+          <%= value.type %>
+        </div>
+      </div>
+      <div class="row-section col-userrating">
+        <div class="row-subsection">
+          < <%=
+            value.pRating %> >
+          </div>
+          <div class="row-subsection">
+            <%= value.pDateTime %>
+          </div>
+
+          <div class="row-subsection">
+            <!-- CHANGE RATING -->
+            <form action="/index/<%= key %>" method="POST" onsubmit="return confirm('Are you sure?');">
+              <select name="personalRating">
+                <option value="10">10</option>
+                <option value="9">9</option>
+                <option value="8">8</option>
+                <option value="7">7</option>
+                <option value="6">6</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+              <button type="submit">Change your rating</button>
+            </form>
+          </div>
+        </div>
       </div>
       <% i++;
-    }
-  }); %>
+       }
+    }); %>
+
+  </div>
 
   <script>
     document.querySelector("a[href*='/?sortmovie=<%= sortmoviemode %>']").classList.add("sortselected");

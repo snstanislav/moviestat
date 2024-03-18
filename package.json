@@ -5,7 +5,8 @@
   "scripts": {
     "start": "killall -9 node && node app",
     "startd": "killall -9 node && nodemon app",
-    "mkbckp": "node data/jsonDB/backupJsDB.js"
+    "mkbckp": "node data/jsonDB/backupJsDB.js",
+    "sass": "sass -w public/stylesheets/style.scss public/stylesheets/style.css"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

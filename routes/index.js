@@ -27,6 +27,9 @@ paramsMap.set("sortmovie", SortStatMode.EVAL_DATETIME_DESC)
 
 
 router.get("/", (req, res)=> {
+  console.log("filter:")
+console.log(paramsMap.get("filtermode"))
+console.log(paramsMap.get("filtervalue"))
 
   for (const [key, value] of Object.entries(req.query)) {
     console.log(`${key}: ${value}`);

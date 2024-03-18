@@ -1,8 +1,12 @@
 <form action="/eval" method="GET" onsubmit="return validate(event)">
-  <label for="search">Title and year:</label>
-  <input type="text" name="search" required>
-  <button type="submit">Let's try</button>
+  <h1 class="search-head">Find and rate a film</h1>
+  <div class="search-bar">
+    <label for="search">Title and year:</label>
+    <input type="text" name="search" required>
+    <button type="submit">Let's try</button>
+  </div>
 </form>
+
 
 <script>
   function validate(event) {

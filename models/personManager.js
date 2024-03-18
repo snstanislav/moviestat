@@ -26,7 +26,7 @@ function getActorStat(sortMode, thresholdQuantity = 7) {
 }
 module.exports.getActorStat = getActorStat;
 
-function getDirectorStat(sortMode, thresholdQuantity = 5) {
+function getDirectorStat(sortMode, thresholdQuantity = 3) {
   return sortStat(composePersonsRate(thresholdQuantity, FilmStatMode.DIRECTOR), sortMode);
 }
 module.exports.getDirectorStat = getDirectorStat;

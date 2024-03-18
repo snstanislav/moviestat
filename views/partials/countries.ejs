@@ -1,18 +1,30 @@
-<h1>Country statistics</h1>
-Sort by:
-<a href="/?sortcountry=<%= SortMode.RATING_ASC %>">Rating up</a> |
-<a href="/?sortcountry=<%= SortMode.RATING_DESC %>">Rating down</a> |
-<a href="/?sortcountry=<%= SortMode.QUANTITY_ASC %>">Quantity up</a> |
-<a href="/?sortcountry=<%= SortMode.QUANTITY_DESC %>">Quantity down</a> |
-<a href="/?sortcountry=<%= SortMode.KEY_ASC %>">Name up</a> |
-<a href="/?sortcountry=<%= SortMode.KEY_DESC %>">Name down</a>
-
 <% countryStat.forEach((value, key, map)=> {
   if (value.quantity > 5) {
+    let showData = "";
+    let bar = 0
+    let addData = "";
+
+    if (sortcountrymode.includes("rating")) {
+      showData = value.rating;
+      bar = value.rating*8;
+      addData = value.quantity;
+    } else if(sortcountrymode.includes("quantity")) {
+      showData = value.quantity;
+      for (let i = 1; i <= value.quantity; i += 1) bar += 0.1;
+      addData = value.percent+'%';
+    }  else {
+      showData = value.quantity;
+      for (let i = 1; i <= value.quantity; i += 1) bar += 0.1;
+      addData = '('+value.rating+')';
+    }
     %>
-    <p>
-      <a href="/?filtermode=<%= FilmMode.COUNTRY %>&filtervalue=<%= key %>">filter</a> <%= key %> | <%= value.quantity %> | <%= value.percent %>% | <%= value.rating %>
-    </p>
+    <div class="chart-line country-chart">
+      <a href="/?filtermode=<%= FilmMode.COUNTRY %>&filtervalue=<%= key %>#movieSect">filter</a>
+      <span class="chart-key"><%= key %>
+      </span>&nbsp;&nbsp;
+      <span class='chart-bar' style='width:<%= bar %>%'><%= showData %></span>&nbsp;&nbsp;
+      <span class="chart-addition"><%= addData %></span>
+    </div>
     <%
   }
 }) %>

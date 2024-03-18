@@ -1,16 +1,14 @@
-<h1>Decade statistics</h1>
-Sort by:
-<a href="/?sortdecade=<%= SortMode.KEY_ASC %>">Decade from past</a> |
-<a href="/?sortdecade=<%= SortMode.KEY_DESC %>">Decade from now</a> |
-<a href="/?sortdecade=<%= SortMode.QUANTITY_ASC %>">Quantity up</a> |
-<a href="/?sortdecade=<%= SortMode.QUANTITY_DESC %>">Quantity down</a>
-
 <% decadeStat.forEach((value, key, map)=> {
   if (value.quantity > 0) {
+    let bar = 0;
+    for (let i = 1; i<=value.quantity; i += 1) bar += 0.15;
     %>
-    <p>
-      <a href="/?filtermode=<%= FilmMode.DECADE %>&filtervalue=<%= key %>">filter</a> <%= key %> | <%= value.quantity %> | <%= value.percent %>% | <%= value.rating %>
-    </p>
+    <div class="chart-line decade-chart">
+      <a href="/?filtermode=<%= FilmMode.DECADE %>&filtervalue=<%= key
+      %>#movieSect">filter</a><span class="chart-key"><%= key %></span>&nbsp;&nbsp;
+      <span class='chart-bar' style='width:<%= bar %>%'><%= value.quantity
+      %></span> &nbsp;&nbsp;<span class="chart-addition"><%= value.percent %>%</span>
+    </div>
     <%
   }
 }) %>

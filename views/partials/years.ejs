@@ -1,21 +1,16 @@
-<h1>Year statistics</h1>
-Sort by:
-<a href="/?sortyear=<%= SortMode.KEY_ASC %>">Year from past</a> |
-<a href="/?sortyear=<%= SortMode.KEY_DESC %>">Year from now</a> |
-<a href="/?sortyear=<%= SortMode.QUANTITY_ASC %>">Quantity up</a> |
-<a href="/?sortyear=<%= SortMode.QUANTITY_DESC %>">Quantity down</a>
-
-<% let mark = '[]';
-yearStat.forEach((value, key, map)=> {
+<% yearStat.forEach((value, key, map)=> {
   if (value.quantity > 0) {
-    let bar = '';
-    for (let i = 1; i <= value.quantity; i += 1) bar += mark; %>
-    <p>
-      <a href="/?filtermode=<%= FilmMode.YEAR %>&filtervalue=<%= key %>">filter</a> <%= key %> | <%= value.quantity %> : <%= bar %>
-    </p>
+    let bar = 0;
+    for (let i = 1; i <= value.quantity; i += 1) bar += 1.3;
+    %>
+    <div class="chart-line year-chart">
+      <a href="/?filtermode=<%= FilmMode.YEAR %>&filtervalue=<%= key
+      %>#movieSect">filter</a><span class="chart-key"><%= key %></span>&nbsp;&nbsp;
+      <span class='chart-bar' style='width:<%= bar %>%'><%= value.quantity %></span>
+    </div>
     <%
   }
-}) 
+})
 %>
 
 <script>
