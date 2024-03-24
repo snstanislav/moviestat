@@ -12,7 +12,7 @@
   function validate(event) {
     event.target.elements.search.value = event.target.elements.search.value.toLowerCase().trimEnd()
 
-    let inputRGEX = /[a-zA-Z0-9-.]$/gi
+    let inputRGEX = /[a-zA-Zа-яА-Я0-9-.\&]$/gi
     if (inputRGEX.test(event.target.elements.search.value)) return true;
     return false;
   }

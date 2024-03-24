@@ -49,13 +49,13 @@
   <a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=TV Mini Series#movieSect">TV Mini Series</a>
   <a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=TV Movie#movieSect">TV Movie</a>
   <a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=#movieSect">Common movies</a>
-  <a id="favor" href="/?filtermode=<%= FilmMode.FAVORITE %>&filtervalue=<%= true
+  <a id="favorFilter" href="/?filtermode=<%= FilmMode.FAVORITE %>&filtervalue=<%= true
     %>#movieSect">Favorite movies</a>
 </div>
 <div class="table-container">
   <% let i = 1;
   movieStat.forEach((value, key, map)=> {
-    if (value.pRating > 7) {
+   // if (value.pRating > 0) {
       %>
       <div class="row">
         <div class="row-section col-order-fav">
@@ -120,7 +120,8 @@
 
           <div class="row-subsection change-rating">
             <!-- CHANGE RATING -->
-            <form action="/index/<%= key %>" method="POST" onsubmit="return confirm('Are you sure?');">
+            <form action="/index/<%= key %>#movieSect" method="POST"
+            onsubmit="return validateChange(event)">
               <select name="personalRating">
                 <option value="10">10</option>
                 <option value="9">9</option>
@@ -143,7 +144,7 @@
         </div>
       </div>
       <% i++;
-    }
+    //}
   }); %>
 
 </div>
@@ -158,5 +159,13 @@
     } else {
       changeElem.style.display = "none";
     }
+  }
+  
+  function validateChange(event) {
+   let currValue = document.querySelector(".rating").innerText.trim()
+    let newValue = event.target.elements.personalRating.value;
+    if(currValue != newValue)
+      return confirm('Are you sure?');
+    return false;
   }
 </script>

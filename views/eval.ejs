@@ -4,29 +4,36 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
-    <h1>Find and rate a film</h1>
-    <%- include('partials/searchform') %>
-    <br>
+<body>
+<div class="eval-container">
+  <%- include('partials/navigate') %>
   
-  <h1><%= title %></h1>
-  <div id="selectedFilm" style="border:10px solid #777; background:lightblue" hidden>Rate this: <br></div>
-  <div id="searchResult">
-    <% if(searchResultList) { %>
-    <% searchResultList.forEach(elem=>{ %>
-    <div onclick="selectResult(this)" /><p data-link="<%= elem.link %>" style='display:block; border:1px solid #444'><%= elem.ind %>. 
-    <img alt="" src="<%= elem.poster %>">
-    
-    <a href="<%= elem.link %>" target="_blank"><b><%= elem.title %> (<%= elem.year %>)</b></a><br>
-    <i><%= elem.shortcast %></i></p></div>
-    <% }); } %>
-  </div>
+  <%- include('partials/searchform') %>
+  <br><br>
   
-  <script>
+  <div class="eval-film-item" id="selectedFilm"></div>
+  <div id="evalBar"></div>
+  
+ <% if(searchResultList) { %>
+  <% searchResultList.forEach(elem=>{ %>
+  <div class="eval-film-item" id="searchResult" onclick="selectResult(this)" />
+      <%= elem.ind %>. 
+      <img alt="" src="<%= elem.poster %>">
+      
+      <a href="<%= elem.link %>" target="_blank" data-link="<%= elem.link %>">
+        <%= elem.title %> (<%= elem.year %>)<sup class="external-mark">&#8680;</sup>
+      </a>
+      <i><%= elem.shortcast %></i>
+    </div>
+    <% }); } if(searchResultList.length == 0) { %>
+    <h3><i>No search results</i></h3>
+    <% } %>
+</div>
+
+<script>
   let ratingSelect = `
-  <form action="/film/" method="POST">
-  <b><label for="user-rating">Your rate:</label></b>
-  <br>
+  <form action="/film/" method="POST" onsubmit="return confirm('Are yot sure?')">
+  <label>Your rate:</label>
   <input type="hidden" id="filmLink" name="filmLink" value="">
   <select name="personalRating" id="personalRating">
     <option value="10">10</option>
@@ -40,21 +47,23 @@
     <option value="2">2</option>
     <option value="1">1</option>
   </select>
-  <button onclick="ratePerform()">Do it now!</button></form>`
+  <button onclick="ratePerform()">Perform</button></form>`
   
     function selectResult(src) {
-      let elem = document.getElementById("selectedFilm");
-      elem.hidden = false;
-      elem.innerHTML = src.innerHTML+ratingSelect;
+      let selectedFilm = document.getElementById("selectedFilm");
+      let evalBar = document.getElementById("evalBar");
+      selectedFilm.style.display = "flex";
+      selectedFilm.innerHTML = src.innerHTML;
+      
+      evalBar.style.display = "flex";
+      evalBar.innerHTML = ratingSelect;
     }
     
     function ratePerform() {
-      //let selElem = document.getElementById("user-rating")
-      //let personalRating = selElem.value;
-      let filmLink = document.querySelector("div#selectedFilm p").getAttribute("data-link");
+      let filmLink = document.querySelector("#selectedFilm a").getAttribute("data-link");
       document.getElementById("filmLink").value = filmLink;
     }
     
-  </script>
-  </body>
-  
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+  <div class="main-container">
+    <div class="success-wrapper">
+      <div>
+        <h1><%= sssHead %></h1>
+        <p><%= sssMsg %></p>
+        &#8592;&nbsp;<a href='/'>main page</a>
+        <% if(id) { %>
+          &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/film/<%= id %>'>film profile</a>&nbsp;&#8594;
+        <% } %>
+      </div>
+    </div>
+  </div>
+</body>
+</head>

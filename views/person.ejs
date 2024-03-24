@@ -4,65 +4,87 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
-    
-    <h2><%= personItem.name %><a href="<%= personItem.imdbLink %>" target="blank"> 🔗<%=
-    personItem.imdbId %></a></h2>
-    <div>Known for you as: 
-      <b><% personItem.occupation.forEach(elem=>{
-        if(elem=="cast"){ %>actor/actress, 
-      <% }
-        if(elem=="director"){ %>director
-      <% }
-    }) %></b>
-    </div>
-    <br><br>
-    <img alt="" src="<%= personItem.sPhoto %>">
-    <br><br>
-
-    <% if(personItem.cast) {%>
-<!--ACTOR SECTION -->
-    <div style="border:2px solid #333; padding:10px">
-      <h3>Actor/actress</h3> 
-      You rated films: <b><%= personItem.cast.quantity%></b> | Average rating:
-      <b><%= personItem.cast.rating %></b>
-      <br><br>
-     
-    <% let i = 1;
-     let castFilmList = personItem.cast.filmList.sort((a, b)=>formatDT(b.pDateTime)-formatDT(a.pDateTime));
-    
-    castFilmList.forEach((value,i, self)=> { %>
-     <div style='margin:5px; padding:5px; border:1px solid #444'>
-      <%= i+1 %>.<span style='display:inline;'><i><%= value.favorite == true ? "(F)": "" %></i>
-        <b><a href="../film/<%= value.imdbId %>"><%= value.commTitle %> (<%= value.year %>)</a></b> | < <%=
-          value.pRating %> > | <%= value.pDateTime %></span>
-    </div>
-    <% i++;
-  }); %>
-  </div><br>
-    <% }
-
-     if(personItem.director){ %>
-<!-- DIRECTOR SECTION -->
-      <div style="border:2px solid #333; padding:10px">
-      <h3>Director</h3> 
-      You rated films: <b><%= personItem.director.quantity%></b> | Average rating:
-      <b><%= personItem.director.rating %></b>
-      <br><br>
-     
-    <% let i = 1;
-     let directorFilmList = personItem.director.filmList.sort((a, b)=>formatDT(b.pDateTime)-formatDT(a.pDateTime))
-    
-    directorFilmList.forEach((value,i, self)=> { %>
-     <div style='margin:5px; padding:5px; border:1px solid #444'>
-      <%= i+1 %>.<span style='display:inline;'><i><%= value.favorite == true ? "(F)": "" %></i>
-        <b><a href="../film/<%= value.imdbId %>"><%= value.commTitle %> (<%= value.year %>)</a></b> | < <%=
-          value.pRating %> > | <%= value.pDateTime %></span>
-    </div>
-    <% i++;
-  }); %>
+<body>
+<div class="person-wrapper">
+  <%- include('partials/navigate') %>
+  
+  <div class="person-basic-info">
+    <div class="person-img-wrap"><!-- left -->
+      <img src="<%= personItem.sPhoto ? personItem.sPhoto: "/images/person-blank.png" %>" alt="<%= personItem.name %>">
+    </div><!-- /person-basic-info -->
+    <div class="person-descr"><!-- left -->
+      <div class="person-name">
+        <a href="<%= personItem.imdbLink %>" target="blank">
+          <%= personItem.name %><sup class="external-mark">&#8680;</sup>
+        </a>
       </div>
-    <% } %>
-    
-  </body>
+
+      <div class="person-occup"><!-- right -->
+        Known for you as: 
+        <b>
+        <% personItem.occupation.forEach(elem=>{
+          if(elem=="cast"){ %>
+            actor/actress
+        <% }
+          if(elem=="director"){ %>
+            , director
+        <% }
+        }) %>
+        </b>
+      </div><!-- /person-occup -->
+    </div><!-- /person-descr -->
+  </div><!-- /person-basic-info -->
+
+  <% if(personItem.cast) { %>
+  <!--ACTOR SECTION -->
+  <h1>Played:&nbsp;</h1>
+  <p class="summary">You rated films: <b><%= personItem.cast.quantity%></b>&nbsp;&nbsp;|&nbsp;&nbsp;Average rating: <b><%= personItem.cast.rating %></b>
+  </p>
+  
+  <table class="person-table-played">
+  <% let castFilmList = personItem.cast.filmList.sort((a, b)=>formatDT(b.pDateTime)-formatDT(a.pDateTime));
+    castFilmList.forEach((value,i, self)=>{ %>
+    <tr>
+      <td>
+        <%= i+1 %>.
+      </td>
+      <td>
+        <b><sup><%= value.favorite ? "(Fav) ": "" %></sup>
+        <a href="../film/<%= value.imdbId %>"><%= value.commTitle %> (<%= value.year %>)</a></b>
+      </td>
+      <td><%= value.pDateTime.replace(',', '') %></td>
+      <td><%= value.pRating %></td>
+    </tr>
+   <% }); %>
+  </table>
+ <% }
+
+  if(personItem.director) { %>
+  <!-- DIRECTOR SECTION -->
+  <h1>Directed:&nbsp;</h1>
+  <p class="summary">You rated films: <b><%= personItem.director.quantity %></b>&nbsp;&nbsp;|&nbsp;&nbsp;Average rating: <b><%= personItem.director.rating %></b>
+  </p>
+  
+  <table class="person-table-directed">
+  <% let directorFilmList = personItem.director.filmList.sort((a, b)=>formatDT(b.pDateTime)-formatDT(a.pDateTime));
+   directorFilmList.forEach((value,i, self)=>{ %>
+    <tr>
+      <td>
+        <%= i+1 %>.
+      </td>
+      <td>
+        <b><sup><%= value.favorite ? "(Fav) ": "" %></sup>
+        <a href="../film/<%= value.imdbId %>"><%= value.commTitle %> (<%= value.year %>)</a></b>
+      </td>
+      <td><%= value.pDateTime.replace(',', '') %></td>
+      <td><%= value.pRating %></td>
+    </tr>
+   <% }); %>
+  </table>
+  <% } %>
+
+<br><br>
+</div><!-- /person-wrapper -->
+
+</body>
 </html>

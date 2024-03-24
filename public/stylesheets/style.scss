@@ -1,31 +1,13 @@
-$light-1: #fff9b2;
-$light-2: #ffc684;
-$light-3: #d8e1f0;
-$light-4: #ffefcc;
-$light-5: #ffdc2f;
-$light-6: #efcfff;
-
-$dark-1: #249;
-$dark-2: #c34;
-$dark-3: #37d;
-$dark-4: #d55;
-$dark-5: #f17825;
-$dark-6: #2d1007;
-$dark-7: #46a;
-
-$active: #2f7fff;
-$hover: $active;
-$visited: $dark-1;
-
 @use 'sass:math';
+@import "colors";
 
 @mixin general-page-parts($bg-color, $scale) {
   body {
     padding: 0;
     margin: 0;
-    font-size: 2rem*$scale;
+    font-size: math.min(2rem, 2rem*$scale);
     font-family: Impact, "Century Gothic", "Apple Gothic", Arial, sans-serif;
-    background: $bg-color;
+    background: #fff;
     align-items: center;
   }
   img {
@@ -33,8 +15,8 @@ $visited: $dark-1;
   }
   a {
     color: $dark-1;
-      text-decoration: none;
-      background: transparent;
+    text-decoration: none;
+    background: transparent;
     & :hover {
       color: $hover;
       background: transparent;
@@ -55,15 +37,15 @@ $visited: $dark-1;
   }
   h1 {
     margin: 0;
-    font-size: 2.5rem*$scale;
+    font-size: math.min(2.5rem, 2.5rem*$scale);
   }
   h2 {
+    font-size: math.min(2.3rem, 2.3rem*$scale);
     margin: 0;
-    font-size: 2.2rem*$scale;
   }
   h3 {
-    margin-bottom: 2.5rem;
-    font-size: 2.2rem*$scale;
+    margin-bottom: 2rem;
+    font-size: math.min(2.2rem, 2.2rem*$scale);
     opacity: 0.9;
   }
 
@@ -86,6 +68,8 @@ $visited: $dark-1;
       padding: 0.5rem 0 0 0.5rem;
       text-align: right;
       font-size: math.min(2rem, 2rem*$scale);
+      opacity: 0.7;
+      font-weight: 500;
       width: 24%;
       min-width: 15rem;
     }
@@ -95,8 +79,8 @@ $visited: $dark-1;
       background: $light-3;
       padding: 1rem 1rem;
       margin: 0 math.min(2rem, 2rem*$scale);
-      font-size: math.min(2rem, 2rem*$scale);
-      opacity: 0.7;
+      font-size: math.min(2.1rem, 2.1rem*$scale);
+      opacity: 0.8;
       border: 0;
       border-left: 2px solid $dark-1;
       border-top: 2px solid $dark-1;
@@ -116,15 +100,16 @@ $visited: $dark-1;
       margin-right: 0.5rem;
       background: $dark-1;
       color: #fff;
-      opacity: 0.9;
-      font-size: math.min(1.7rem, 1.7rem*$scale);
+      opacity: 0.8;
+      font-size: math.min(1.8rem, 1.8rem*$scale);
+      font-weight: 500;
     }
 
   }
 
   .sort-bar {
     line-height: 1.7;
-    font-size: 1.8rem*$scale;
+    font-size: math.min(1.8rem, 1.8rem*$scale);
     padding: 0 0 1rem 0.1rem;
     background: #fff;
     opacity: 0.8;
@@ -272,7 +257,7 @@ $visited: $dark-1;
       padding-top: 0.4rem;
       padding-bottom: 0.4rem;
     }
-    #favor {
+    #favorFilter {
       margin-left: auto;
       font-weight: bold;
     }
@@ -286,6 +271,43 @@ $visited: $dark-1;
     margin: 1rem 0 1.5rem;
     overflow: hidden;
   }
+}
+
+@mixin result-msg-page($bg-color: #555) {
+  margin: 5rem auto;
+  padding: 3rem;
+  width: 45rem;
+  height: fit-content;
+  background: $bg-color;
+  text-align: center;
+  align-items: center;
+  div {
+    padding: 3rem;
+    border: 10px solid #fff;
+    color: #fff;
+    h1 {
+      font-size: 3.5rem;
+      margin: 0;
+      padding: 0rem;
+    }
+    p {
+      font-size: 2.5rem;
+      font-weight: 500;
+    }
+    a {
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: #fff;
+      border-bottom: 4px solid;
+    }
+  }
+}
+
+.error-wrapper {
+  @include result-msg-page($error);
+}
+.success-wrapper {
+  @include result-msg-page($success);
 }
 
 @mixin manage-section($is-opened: false, $display: none) {
@@ -332,8 +354,80 @@ $visited: $dark-1;
     background: #fff;
     margin: $margin-vert $margin-horiz;
     padding: $padding-vert $padding-horiz;
-    min-width: 37rem;
+    min-width: 30rem;
     max-width: 90rem;
+
+  }
+  nav {
+    font-weight: 500;
+    opacity: 0.9;
+    margin: 0 auto 3rem -1rem;
+    a {
+      font-size: 2rem;
+      border-bottom: 2px solid;
+      padding-bottom: 0.2rem;
+    }
+  }
+}
+
+@mixin fav-button($scale: 1) {
+  button {
+    display: block;
+    font-size: 1.7rem*$scale;
+    border: 0;
+    border-radius: 50%;
+    margin: 0 auto auto;
+    width: 4rem*$scale;
+    height: 4rem*$scale;
+  }
+  .fav-button {
+    font-weight: bold;
+    background: $light-5;
+  }
+  .add-fav-button {
+    font-size: 1.6rem*$scale;
+    line-height: 0.8;
+    border: 1px solid #fff;
+    background: inherit;
+    color: #ddd;
+    padding-bottom: 0.6rem;
+  }
+}
+@mixin rating($scale: 1) {
+  .rating {
+    text-align: center;
+    font-size: 2.2rem*$scale;
+    font-weight: bold;
+    padding: 0.3rem 2rem;
+
+    min-width: fit-content;
+    width: 3rem*$scale;
+    background: $light-5;
+    color: #000;
+    border-radius: 7px;
+  }
+
+  .change-rating {
+    display: none;
+    text-align: right;
+    margin-bottom: auto;
+    select {
+      padding: 0.1rem 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+      font-size: 1.6rem*$scale;
+      background: #fff;
+    }
+    button {
+      padding: 0.3rem 0.7rem;
+      font-size: 1.7rem*$scale;
+      font-weight: bold;
+      opacity: 0.9;
+      border: 0;
+      border-radius: 4px;
+      background: $light-2;
+      box-shadow: 3px 2px 5px $dark-4;
+    }
   }
 }
 @mixin table-container($scale: 1) {
@@ -368,27 +462,7 @@ $visited: $dark-1;
       .ord {
         margin-bottom: auto;
       }
-      button {
-        display: block;
-        font-size: 1.7rem*$scale;
-        border: 0;
-        border-radius: 50%;
-        margin: 0 auto auto;
-        width: 4rem*$scale;
-        height: 4rem*$scale;
-      }
-      .fav-button {
-        font-weight: bold;
-        background: $light-5;
-      }
-      .add-fav-button {
-        font-size: 1.6rem*$scale;
-        line-height: 0.8;
-        border: 1px solid #fff;
-        background: inherit;
-        color: #ddd;
-        padding-bottom: 0.6rem;
-      }
+      @include fav-button($scale);
     }
 
     .col-poster-dur {
@@ -452,18 +526,7 @@ $visited: $dark-1;
       div {
         margin: 0.5rem 0.7rem 0 auto;
       }
-      .rating {
-        text-align: center;
-        font-size: 2.2rem*$scale;
-        font-weight: bold;
-        padding: 0.3rem 2rem;
 
-        min-width: fit-content;
-        width: 3rem*$scale;
-        background: $light-5;
-        color: #000;
-        border-radius: 7px;
-      }
       .datetime {
         font-size: 1.5rem*$scale;
         text-align: right;
@@ -471,28 +534,7 @@ $visited: $dark-1;
         padding: 0.4rem 0 0 0;
         border-top: 1px solid $light-1;
       }
-      .change-rating {
-        display: none;
-        text-align: right;
-        margin-bottom: auto;
-        select {
-          padding: 0.1rem 1.5rem;
-          margin-bottom: 1rem;
-          border-radius: 4px;
-          font-size: 1.6rem*$scale;
-          background: #fff;
-        }
-        button {
-          padding: 0.3rem 0.7rem;
-          font-size: 1.7rem*$scale;
-          font-weight: bold;
-          opacity: 0.9;
-          border: 0;
-          border-radius: 4px;
-          background: $light-2;
-          box-shadow: 3px 2px 5px $dark-4;
-        }
-      }
+      @include rating($scale);
     }
   }
 }
@@ -503,6 +545,7 @@ $visited: $dark-1;
     flex-flow: wrap;
     gap: 2rem*$scale;
     margin: 0;
+    padding: -1+$scale;
     .actor-item {
       display: flex;
       flex-direction: column;
@@ -543,13 +586,409 @@ $visited: $dark-1;
     }
   }
 }
+.external-mark {
+  display: inline-block;
+  margin-top: -1rem;
+  font-size: 2rem;
+}
+@mixin film-page($scale: 1) {
+  .film-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem auto 4rem;
+    padding: 1rem*$scale 2rem*$scale 2rem*$scale;
+    max-width: 80rem;
+    .film-headline {
+      display: flex;
+      flex-direction: row;
+      gap: 0;
+      align-items: center;
+      padding: 0.4rem 1rem 0.4rem 1.5rem;
+      background: $dark-8;
+      color: $light-1;
+      border:2px solid $dark-8;
+      .film-imdb {
+        width: 35%;
+        text-align: left;
+        margin-right: 3rem;
+      }
+      .film-cert {
+        text-align: left;
+        margin-right: 3rem;
+      }
+      .favor {
+        margin-left: auto;
+        @include fav-button($scale*1.1);
+      }
+    }
+    .film-basic-info {
+      display: flex;
+      flex-direction: row;
+      .film-img-eval-wrap {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        height: fit-content;
+        margin: 0;
+        padding: 0 1.5rem 1rem;
+        background: $dark-8;
+        color: #fff;
+        border:2px solid $dark-8;
+        img {
+          width: 100%;
+          max-width: 40rem;
+          margin-bottom: auto;
+        }
+        .eval-wrapper {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          margin: 1.5rem 0 auto;
+        }
+        @include rating($scale*1.2);
+        .rating {
+          font-weight: 600;
+          font-size: 3rem;
+          margin: 0 auto auto auto;
+          padding: 0rem 1rem 0.2rem;
+        }
 
+        .change-wrap {
+          display: none;
+          flex-direction: column;
+          margin: 1.5rem auto 0;
+          padding: 1.5rem 1rem;
+          border: 2px dashed #ccc;
+          text-align: center;
+          font-size: 2rem;
+
+          select {
+            text-align: center;
+            font-size: 2.3rem;
+            padding: 0.3rem 2.5rem;
+            font-weight: bold;
+            margin: 0;
+          }
+          button {
+            margin: 0 auto;
+            opacity: 1;
+          }
+          button.change {
+            background: $dark-4;
+            color: #fff;
+            box-shadow: none;
+            padding: 0.7rem 0.5rem;
+            margin-top: 1.5rem;
+          }
+          button.remove {
+            background: #fff;
+            color: red;
+            box-shadow: none;
+            border: 3px solid red;
+            padding: 0.2rem 0.5rem 0.3rem;
+            margin-top: 5rem;
+          }
+        }
+      }
+      .date {
+        margin: 2rem auto 0;
+        padding: 1rem 0 0.1rem;
+        border-top: 2px solid #ccc;
+        font-weight: 400;
+      }
+    }
+    .film-descr {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem 0 1rem 1.7rem;
+      width: 60%;
+      font-size: 2rem;
+      font-weight: 400;
+      opacity: 0.9;
+      .film-comm-title {
+        text-indent: 2;
+        font-size: 2.3rem;
+        font-weight: bold;
+        padding: 0 0 1rem;
+        a {
+          color: $dark-3;
+        }
+      }
+      .film-orig-title {
+        font-size: 2.2rem;
+        font-weight: bold;
+        background: $medium-1;
+        padding: 0.5rem 1rem;
+        margin: -1rem 0 1.5rem;
+      }
+      .world {
+        padding: 0.3rem 0 0.3rem 0.7rem;
+        font-weight: 500;
+        opacity: 0.8;
+      }
+      .film-genre {
+        border-left: 7px solid purple;
+      }
+      .film-country {
+        border-left: 7px solid green;
+      }
+      .film-plot {
+        padding: 1rem 0;
+        font-style: italic;
+      }
+      .film-budget {
+        padding: 0.3rem 0 0.3rem 0.7rem;
+        border-left: 7px solid $dark-4;
+      }
+      .film-grossww {
+        padding: 0.3rem 0 0.3rem 0.7rem;
+        border-left: 7px solid $dark-7;
+      }
+    }
+    h1 {
+      margin: 3.5rem 0 0.5rem;
+      opacity: 0.8;
+    }
+    .film-director {
+      display: flex;
+      flex-flow: wrap;
+      gap:2rem;
+      font-size: 2.2rem;
+      font-weight: 500;
+      padding: 1.5rem;
+      background: $medium-1;
+      a {
+        display: inline-block;
+        background: #fff;
+        box-shadow: 5px 5px 7px #888;
+        padding: 1rem 1.5rem;
+      }
+    }
+    .film-cast {
+      display: flex;
+      flex-flow: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      padding: 1.5rem;
+      background: $medium-1;
+      .role-item {
+        display: flex;
+        flex-flow: column;
+        gap:0.5rem;
+        background: #fff;
+        box-shadow: 7px 7px 7px #888;
+        padding: 1rem;
+        width: 15rem;
+        text-align: center;
+        img {
+          display: block;
+          margin: 0 auto auto;
+          border-radius: 50%;
+          width: 90%;
+        }
+        .cast-name {
+          font-weight: bold;
+          margin: auto auto 0;
+          .cast-character {
+            font-size: 1.8rem;
+            font-weight: bold;
+            opacity: 0.6;
+            margin: auto auto 0;
+            padding: 0.7rem 0 0;
+          }
+        }
+      }
+    }
+  }
+}
+@mixin person-page($scale: 1) {
+  .person-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem auto 4rem;
+    padding: 1rem*$scale 2rem*$scale 2rem*$scale;
+    max-width: 80rem;
+    width: 100%;
+    background: #fff;
+    .person-basic-info {
+      display: flex;
+      flex-flow: row;
+      border: 1.5rem solid $medium-1;
+      padding: 1.5rem;
+      background: #fff;
+      .person-img-wrap {
+        display: flex;
+        flex-direction: column;
+        img {
+          box-shadow: 5px 5px 10px #666;
+          width: 40rem;
+          max-width: 15rem;
+          margin: auto;
+        }
+      }
+      .person-descr {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0.5rem 0 1rem 2rem;
+        width: 60%;
+        font-size: math.min(2rem, 2rem*$scale);
+        font-weight: 400;
+        opacity: 0.9;
+        .person-name {
+          text-indent: 2;
+          font-size: math.min(2.4rem, 2.4rem*$scale);
+          font-weight: bold;
+          padding: 0 0 1rem;
+          a {
+            color: $dark-3;
+          }
+        }
+        .person-occup {
+          font-size: math.min(2.3rem, 2.3rem*$scale);
+          opacity: 0.8;
+        }
+      }
+    }
+    h1 {
+      margin: 3.5rem 0 0.5rem;
+      opacity: 0.8;
+    }
+    .summary {
+      margin: 0;
+      padding: 1.5rem;
+      font-size: math.min(2.2rem, 2.2rem*$scale);
+      background: $medium-1;
+    }
+    table {
+      text-align: center;
+      vertical-align: center;
+      td {
+        padding: 0.2rem 0.5rem;
+      }
+      tr:nth-child(even) {
+        background-color: #eee;
+      }
+      td:first-child {
+        width: 8%;
+      }
+      td:nth-child(2) {
+        text-align: left;
+        width: 57%;
+        font-size: math.min(2.1rem, 2.1rem*$scale);
+      }
+      td:nth-child(3) {
+        width: 25%;
+      }
+      td:last-child {
+        width: 10%;
+        font-size:math.min(2.4rem, 2.4rem*$scale);
+        font-weight: 500;
+      }
+    }
+    .person-table-played {}
+    .person-table-director {}
+  }
+}
+@mixin eval-page($scale: 1) {
+  .eval-container {
+    max-width: 80rem;
+    margin: 1rem auto;
+    padding: 1rem*$scale 2rem*$scale;
+    text-align: left;
+    vertical-align: center;
+    .eval-film-item {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      padding: 1rem;
+      margin: 0 auto;
+      max-width: 70rem;
+      height: 12rem;
+      max-height: fit-content;
+      align-items: center;
+      border: 2px solid #555;
+      border-radius: 20px;
+      img {
+       // width: 18%;
+        max-width: 10rem;
+        height: 100%;
+        margin: 0 auto;
+      }
+      a {
+        width: 50%;
+        margin-right: auto;
+        padding: 0 0 1rem;
+        font-size: math.min(2.1rem, 2.1rem*$scale);
+        font-weight: bold;
+        opacity: 0.9;
+      }
+      i {
+        width: 30%;
+        margin-left: auto;
+      }
+    }
+    #searchResult {
+      margin: 0 auto 1.5rem;
+      background: #eee;
+    }
+    #selectedFilm {
+      display: none;
+      background: $light-1;
+      border-color: #d21;
+    }
+    #searchResult:hover {
+      background: $light-1;
+    }
+    #evalBar {
+      display: none;
+      flex-direction: row;
+      gap: 1rem;
+      padding: 1rem 0 1.5rem;
+      margin: 0 auto 4rem;
+      width: fit-content;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 3px solid #999;
+      label {
+        font-size: math.min(2.1rem, 2.1rem*$scale);
+        font-style: normal;
+        border-radius: 5px;
+        font-weight: 500;
+      }
+      select {
+        text-align: center;
+        font-size: math.min(2.1rem, 2.1rem*$scale);
+        padding: 0.3rem 2.5rem 0.4rem;
+        margin: 0 1.5rem 0 1rem;
+        background: #fff;
+        border-radius: 5px;
+        font-weight: 500;
+      }
+      button {
+        opacity: 1;
+        border: 0;
+        font-size: math.min(2rem, 2rem*$scale);
+        background: $dark-4;
+        color: #fff;
+        padding: 0.6rem 1.5rem;
+        height:100%;
+        border-radius: 5px;
+        font-weight: 600;
+      }
+    }
+  }
+}
 @media screen and (min-width: 260px) {
-  $scale: 0.7;
+  $scale: 0.6;
   @include general-page-parts(#fff, $scale);
   @include main-container(1.2rem, auto, 1.3rem, 0.6rem);
   @include table-container($scale);
   @include actor-wrapper($scale);
+  @include film-page($scale);
+  @include person-page($scale);
+  @include eval-page($scale);
 }
 
 @media screen and (min-width: 960px) {
@@ -558,20 +997,29 @@ $visited: $dark-1;
   @include main-container(1.5rem, auto, 2rem, 1rem);
   @include table-container($scale);
   @include actor-wrapper($scale);
+  @include film-page($scale);
+  @include person-page($scale);
+  @include eval-page($scale);
 }
 
 @media screen and (min-width: 1080px) {
-  $scale: 1.3;
+  $scale: 1.2;
   @include general-page-parts($dark-7, $scale);
-  @include main-container(1.7rem, auto, 1.7rem, 1.2rem);
+  @include main-container(1.7rem, auto, 3rem, 1.5rem);
   @include table-container($scale);
   @include actor-wrapper($scale);
+  @include film-page($scale);
+  @include person-page($scale);
+  @include eval-page($scale);
 }
 
 @media screen and (min-width: 2400px) {
-  $scale: 1.6;
+  $scale: 1.4;
   @include general-page-parts($dark-7, $scale);
-  @include main-container(2rem, auto, 2rem, 1.5rem);
+  @include main-container(2rem, auto, 4rem, 3rem);
   @include table-container($scale);
   @include actor-wrapper($scale);
+  @include film-page($scale);
+  @include person-page($scale);
+  @include eval-page($scale);
 }

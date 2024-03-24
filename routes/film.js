@@ -14,11 +14,16 @@ router.get("/film/:id", (req, res)=> {
   if (openedFilm) {
     res.render('film', {
       title: "Film's user statistics",
-      movieItem: openedFilm
+      movieItem: openedFilm,
+      extractId: statisticsGenerator.extractIdFromLinkIMDB
     });
     console.log("Router: film profile page loaded");
   } else {
-    res.send("<h1>404 Page not found</h1><br><a href='/'><< Back</a>")
+    res.render('error', {
+      title: "404 Page not found",
+      errHead: "404 Page not found",
+      errMsg: "This movie does not exist in database"
+    });
   }
 });
 
@@ -44,14 +49,24 @@ router.post("/film/", (req, res)=> {
 
     const id = statisticsGenerator.extractIdFromLinkIMDB(req.body.filmLink)
 
-    res.send(`<h1>!!! Movie added successfully !!!</h1><br><a href='/'><< Main
-      page</a> | <a href='/film/${id}'>Film profile >></a>`)
+    res.render('success', {
+      title: "Success",
+      sssHead: "Done",
+      sssMsg: "Movie added successfully!",
+      id: id
+    });
   }
 });
 
 router.post("/film/delete/:id", (req, res)=> {
   movieManager.removeMovie(req.params['id'])
-  res.send("<h1>Success!!!</h1><br><a href='/'><< Back</a>")
+  //res.send("<h1>Success!!!</h1><br><a href='/'><< Back</a>")
+  res.render('success', {
+      title: "Ok",
+      sssHead: "Done",
+      sssMsg: "Movie removed from database...",
+      id: undefined
+    });
 });
 
 module.exports = router;

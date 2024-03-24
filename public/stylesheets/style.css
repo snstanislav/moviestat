@@ -1,4 +1,64 @@
 @charset "UTF-8";
+.error-wrapper {
+  margin: 5rem auto;
+  padding: 3rem;
+  width: 45rem;
+  height: fit-content;
+  background: #992222;
+  text-align: center;
+  align-items: center;
+}
+.error-wrapper div {
+  padding: 3rem;
+  border: 10px solid #fff;
+  color: #fff;
+}
+.error-wrapper div h1 {
+  font-size: 3.5rem;
+  margin: 0;
+  padding: 0rem;
+}
+.error-wrapper div p {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+.error-wrapper div a {
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: #fff;
+  border-bottom: 4px solid;
+}
+
+.success-wrapper {
+  margin: 5rem auto;
+  padding: 3rem;
+  width: 45rem;
+  height: fit-content;
+  background: #226633;
+  text-align: center;
+  align-items: center;
+}
+.success-wrapper div {
+  padding: 3rem;
+  border: 10px solid #fff;
+  color: #fff;
+}
+.success-wrapper div h1 {
+  font-size: 3.5rem;
+  margin: 0;
+  padding: 0rem;
+}
+.success-wrapper div p {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+.success-wrapper div a {
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: #fff;
+  border-bottom: 4px solid;
+}
+
 .section-closed .title-section {
   padding: inherit;
 }
@@ -41,11 +101,17 @@
   padding: 1.5rem;
 }
 
+.external-mark {
+  display: inline-block;
+  margin-top: -1rem;
+  font-size: 2rem;
+}
+
 @media screen and (min-width: 260px) {
   body {
     padding: 0;
     margin: 0;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-family: Impact, "Century Gothic", "Apple Gothic", Arial, sans-serif;
     background: #fff;
     align-items: center;
@@ -77,15 +143,15 @@
   }
   h1 {
     margin: 0;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
   h2 {
+    font-size: 1.38rem;
     margin: 0;
-    font-size: 1.54rem;
   }
   h3 {
-    margin-bottom: 2.5rem;
-    font-size: 1.54rem;
+    margin-bottom: 2rem;
+    font-size: 1.32rem;
     opacity: 0.9;
   }
   .search-head {
@@ -100,14 +166,16 @@
     align-items: stretch;
     justify-content: left;
     max-width: 80rem;
-    height: 2.45rem;
+    height: 2.1rem;
   }
   .search-bar label {
     display: inline;
     align-items: center;
     padding: 0.5rem 0 0 0.5rem;
     text-align: right;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    opacity: 0.7;
+    font-weight: 500;
     width: 24%;
     min-width: 15rem;
   }
@@ -116,9 +184,9 @@
     width: 56%;
     background: #d8e1f0;
     padding: 1rem 1rem;
-    margin: 0 1.4rem;
-    font-size: 1.4rem;
-    opacity: 0.7;
+    margin: 0 1.2rem;
+    font-size: 1.26rem;
+    opacity: 0.8;
     border: 0;
     border-left: 2px solid #249;
     border-top: 2px solid #249;
@@ -138,12 +206,13 @@
     margin-right: 0.5rem;
     background: #249;
     color: #fff;
-    opacity: 0.9;
-    font-size: 1.19rem;
+    opacity: 0.8;
+    font-size: 1.08rem;
+    font-weight: 500;
   }
   .sort-bar {
     line-height: 1.7;
-    font-size: 1.26rem;
+    font-size: 1.08rem;
     padding: 0 0 1rem 0.1rem;
     background: #fff;
     opacity: 0.8;
@@ -174,7 +243,7 @@
   .chart-line .chart-bar {
     display: inline-block;
     min-width: fit-content;
-    font-size: 1.12rem;
+    font-size: 0.96rem;
     text-align: right;
     font-weight: bold;
     color: #fff;
@@ -185,15 +254,15 @@
   }
   .chart-line .chart-addition {
     font-style: italic;
-    font-size: 1.26rem;
+    font-size: 1.08rem;
     opacity: 0.7;
     margin: 0;
     padding: 0 0.5rem 0 1rem;
   }
   .decade-chart .chart-key {
-    font-size: 1.4rem;
-    min-width: 4.2rem;
-    width: 4.2rem;
+    font-size: 1.2rem;
+    min-width: 3.6rem;
+    width: 3.6rem;
     text-align: center;
   }
   .year-chart .chart-key {
@@ -203,16 +272,16 @@
     background: #d55;
   }
   .genre-chart .chart-key {
-    font-size: 1.33rem;
-    min-width: 7rem;
-    width: 7rem;
+    font-size: 1.14rem;
+    min-width: 6rem;
+    width: 6rem;
     text-align: right;
   }
   .genre-chart .chart-bar {
     background: #949;
   }
   .country-chart .chart-key {
-    font-size: 1.26rem;
+    font-size: 1.08rem;
     min-width: 9rem;
     width: 9rem;
     text-align: center;
@@ -222,7 +291,7 @@
   }
   .director-chart {
     max-width: 65rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
   .director-chart .ord {
     text-align: right;
@@ -250,7 +319,7 @@
     color: #d55;
   }
   a[href*=filtermode] {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     background: #37d;
     color: #fff;
     opacity: 0.7;
@@ -259,7 +328,7 @@
   }
   .current-filter {
     margin: 2rem 0 3rem;
-    font-size: 1.54rem;
+    font-size: 1.32rem;
   }
   .current-filter a {
     background: #d55;
@@ -270,16 +339,16 @@
     display: flex;
     flex-direction: row;
     row-gap: 1.5rem;
-    column-gap: 1.19rem;
+    column-gap: 1.02rem;
     flex-flow: wrap;
     margin: 1rem -0.5rem 2rem;
-    font-size: 1.33rem;
+    font-size: 1.14rem;
   }
   .fitler-table-wrapper a {
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
   }
-  .fitler-table-wrapper #favor {
+  .fitler-table-wrapper #favorFilter {
     margin-left: auto;
     font-weight: bold;
   }
@@ -295,8 +364,18 @@
     background: #fff;
     margin: 1.2rem auto;
     padding: 1.3rem 0.6rem;
-    min-width: 37rem;
+    min-width: 30rem;
     max-width: 90rem;
+  }
+  nav {
+    font-weight: 500;
+    opacity: 0.9;
+    margin: 0 auto 3rem -1rem;
+  }
+  nav a {
+    font-size: 2rem;
+    border-bottom: 2px solid;
+    padding-bottom: 0.2rem;
   }
   .table-container {
     background: #fff;
@@ -307,7 +386,7 @@
   .table-container .row {
     display: flex;
     flex-direction: row;
-    font-size: 1.19rem;
+    font-size: 1.02rem;
     background: #111;
     color: #fff;
     border: 0;
@@ -332,19 +411,19 @@
   }
   .table-container .col-order-fav button {
     display: block;
-    font-size: 1.19rem;
+    font-size: 1.02rem;
     border: 0;
     border-radius: 50%;
     margin: 0 auto auto;
-    width: 2.8rem;
-    height: 2.8rem;
+    width: 2.4rem;
+    height: 2.4rem;
   }
   .table-container .col-order-fav .fav-button {
     font-weight: bold;
     background: #ffdc2f;
   }
   .table-container .col-order-fav .add-fav-button {
-    font-size: 1.12rem;
+    font-size: 0.96rem;
     line-height: 0.8;
     border: 1px solid #fff;
     background: inherit;
@@ -367,7 +446,7 @@
     background: rgba(0, 0, 0, 0.8);
     opacity: 0.8;
     color: yellow;
-    font-size: 1.26rem;
+    font-size: 1.08rem;
     margin: 0;
     padding: 0 0.7rem 0.2rem;
   }
@@ -377,11 +456,11 @@
   .table-container .col-title div {
     padding-left: 1.4rem;
     padding-right: 1rem;
-    font-size: 1.54rem;
+    font-size: 1.32rem;
     color: #fff9b2;
   }
   .table-container .col-title .orig-title {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #fff;
   }
   .table-container .col-year-imdb {
@@ -399,7 +478,7 @@
     margin-bottom: auto;
     color: cyan;
     opacity: 0.9;
-    font-size: 1.54rem;
+    font-size: 1.32rem;
   }
   .table-container .col-year-imdb .type {
     margin-top: auto;
@@ -410,23 +489,23 @@
   .table-container .col-user-rating div {
     margin: 0.5rem 0.7rem 0 auto;
   }
-  .table-container .col-user-rating .rating {
-    text-align: center;
-    font-size: 1.54rem;
-    font-weight: bold;
-    padding: 0.3rem 2rem;
-    min-width: fit-content;
-    width: 2.1rem;
-    background: #ffdc2f;
-    color: #000;
-    border-radius: 7px;
-  }
   .table-container .col-user-rating .datetime {
-    font-size: 1.05rem;
+    font-size: 0.9rem;
     text-align: right;
     margin-top: 1rem;
     padding: 0.4rem 0 0 0;
     border-top: 1px solid #fff9b2;
+  }
+  .table-container .col-user-rating .rating {
+    text-align: center;
+    font-size: 1.32rem;
+    font-weight: bold;
+    padding: 0.3rem 2rem;
+    min-width: fit-content;
+    width: 1.8rem;
+    background: #ffdc2f;
+    color: #000;
+    border-radius: 7px;
   }
   .table-container .col-user-rating .change-rating {
     display: none;
@@ -437,12 +516,12 @@
     padding: 0.1rem 1.5rem;
     margin-bottom: 1rem;
     border-radius: 4px;
-    font-size: 1.12rem;
+    font-size: 0.96rem;
     background: #fff;
   }
   .table-container .col-user-rating .change-rating button {
     padding: 0.3rem 0.7rem;
-    font-size: 1.19rem;
+    font-size: 1.02rem;
     font-weight: bold;
     opacity: 0.9;
     border: 0;
@@ -454,8 +533,9 @@
     display: flex;
     justify-content: center;
     flex-flow: wrap;
-    gap: 1.4rem;
+    gap: 1.2rem;
     margin: 0;
+    padding: -0.4;
   }
   .actor-wrapper .actor-item {
     display: flex;
@@ -483,7 +563,7 @@
   .actor-wrapper .actor-item .mid-line div {
     margin: 0.4rem 0.2rem 0.7rem;
     border-radius: 5px;
-    font-size: 1.33rem;
+    font-size: 1.14rem;
     font-weight: bold;
   }
   .actor-wrapper .actor-item .person-data {
@@ -492,6 +572,436 @@
     text-align: center;
     background: #fff;
     border-radius: 4px;
+  }
+  .film-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem auto 4rem;
+    padding: 0.6rem 1.2rem 1.2rem;
+    max-width: 80rem;
+  }
+  .film-wrapper .film-headline {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    align-items: center;
+    padding: 0.4rem 1rem 0.4rem 1.5rem;
+    background: #111;
+    color: #fff9b2;
+    border: 2px solid #111;
+  }
+  .film-wrapper .film-headline .film-imdb {
+    width: 35%;
+    text-align: left;
+    margin-right: 3rem;
+  }
+  .film-wrapper .film-headline .film-cert {
+    text-align: left;
+    margin-right: 3rem;
+  }
+  .film-wrapper .film-headline .favor {
+    margin-left: auto;
+  }
+  .film-wrapper .film-headline .favor button {
+    display: block;
+    font-size: 1.122rem;
+    border: 0;
+    border-radius: 50%;
+    margin: 0 auto auto;
+    width: 2.64rem;
+    height: 2.64rem;
+  }
+  .film-wrapper .film-headline .favor .fav-button {
+    font-weight: bold;
+    background: #ffdc2f;
+  }
+  .film-wrapper .film-headline .favor .add-fav-button {
+    font-size: 1.056rem;
+    line-height: 0.8;
+    border: 1px solid #fff;
+    background: inherit;
+    color: #ddd;
+    padding-bottom: 0.6rem;
+  }
+  .film-wrapper .film-basic-info {
+    display: flex;
+    flex-direction: row;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: fit-content;
+    margin: 0;
+    padding: 0 1.5rem 1rem;
+    background: #111;
+    color: #fff;
+    border: 2px solid #111;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap img {
+    width: 100%;
+    max-width: 40rem;
+    margin-bottom: auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .eval-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 1.5rem 0 auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .rating {
+    text-align: center;
+    font-size: 1.584rem;
+    font-weight: bold;
+    padding: 0.3rem 2rem;
+    min-width: fit-content;
+    width: 2.16rem;
+    background: #ffdc2f;
+    color: #000;
+    border-radius: 7px;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating {
+    display: none;
+    text-align: right;
+    margin-bottom: auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating select {
+    padding: 0.1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-size: 1.152rem;
+    background: #fff;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating button {
+    padding: 0.3rem 0.7rem;
+    font-size: 1.224rem;
+    font-weight: bold;
+    opacity: 0.9;
+    border: 0;
+    border-radius: 4px;
+    background: #ffc684;
+    box-shadow: 3px 2px 5px #d55;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .rating {
+    font-weight: 600;
+    font-size: 3rem;
+    margin: 0 auto auto auto;
+    padding: 0rem 1rem 0.2rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap {
+    display: none;
+    flex-direction: column;
+    margin: 1.5rem auto 0;
+    padding: 1.5rem 1rem;
+    border: 2px dashed #ccc;
+    text-align: center;
+    font-size: 2rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap select {
+    text-align: center;
+    font-size: 2.3rem;
+    padding: 0.3rem 2.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button {
+    margin: 0 auto;
+    opacity: 1;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button.change {
+    background: #d55;
+    color: #fff;
+    box-shadow: none;
+    padding: 0.7rem 0.5rem;
+    margin-top: 1.5rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button.remove {
+    background: #fff;
+    color: red;
+    box-shadow: none;
+    border: 3px solid red;
+    padding: 0.2rem 0.5rem 0.3rem;
+    margin-top: 5rem;
+  }
+  .film-wrapper .film-basic-info .date {
+    margin: 2rem auto 0;
+    padding: 1rem 0 0.1rem;
+    border-top: 2px solid #ccc;
+    font-weight: 400;
+  }
+  .film-wrapper .film-descr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 0 1rem 1.7rem;
+    width: 60%;
+    font-size: 2rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  .film-wrapper .film-descr .film-comm-title {
+    text-indent: 2;
+    font-size: 2.3rem;
+    font-weight: bold;
+    padding: 0 0 1rem;
+  }
+  .film-wrapper .film-descr .film-comm-title a {
+    color: #37d;
+  }
+  .film-wrapper .film-descr .film-orig-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    background: #ccc;
+    padding: 0.5rem 1rem;
+    margin: -1rem 0 1.5rem;
+  }
+  .film-wrapper .film-descr .world {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  .film-wrapper .film-descr .film-genre {
+    border-left: 7px solid purple;
+  }
+  .film-wrapper .film-descr .film-country {
+    border-left: 7px solid green;
+  }
+  .film-wrapper .film-descr .film-plot {
+    padding: 1rem 0;
+    font-style: italic;
+  }
+  .film-wrapper .film-descr .film-budget {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    border-left: 7px solid #d55;
+  }
+  .film-wrapper .film-descr .film-grossww {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    border-left: 7px solid #46a;
+  }
+  .film-wrapper h1 {
+    margin: 3.5rem 0 0.5rem;
+    opacity: 0.8;
+  }
+  .film-wrapper .film-director {
+    display: flex;
+    flex-flow: wrap;
+    gap: 2rem;
+    font-size: 2.2rem;
+    font-weight: 500;
+    padding: 1.5rem;
+    background: #ccc;
+  }
+  .film-wrapper .film-director a {
+    display: inline-block;
+    background: #fff;
+    box-shadow: 5px 5px 7px #888;
+    padding: 1rem 1.5rem;
+  }
+  .film-wrapper .film-cast {
+    display: flex;
+    flex-flow: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 1.5rem;
+    background: #ccc;
+  }
+  .film-wrapper .film-cast .role-item {
+    display: flex;
+    flex-flow: column;
+    gap: 0.5rem;
+    background: #fff;
+    box-shadow: 7px 7px 7px #888;
+    padding: 1rem;
+    width: 15rem;
+    text-align: center;
+  }
+  .film-wrapper .film-cast .role-item img {
+    display: block;
+    margin: 0 auto auto;
+    border-radius: 50%;
+    width: 90%;
+  }
+  .film-wrapper .film-cast .role-item .cast-name {
+    font-weight: bold;
+    margin: auto auto 0;
+  }
+  .film-wrapper .film-cast .role-item .cast-name .cast-character {
+    font-size: 1.8rem;
+    font-weight: bold;
+    opacity: 0.6;
+    margin: auto auto 0;
+    padding: 0.7rem 0 0;
+  }
+  .person-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem auto 4rem;
+    padding: 0.6rem 1.2rem 1.2rem;
+    max-width: 80rem;
+    width: 100%;
+    background: #fff;
+  }
+  .person-wrapper .person-basic-info {
+    display: flex;
+    flex-flow: row;
+    border: 1.5rem solid #ccc;
+    padding: 1.5rem;
+    background: #fff;
+  }
+  .person-wrapper .person-basic-info .person-img-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .person-wrapper .person-basic-info .person-img-wrap img {
+    box-shadow: 5px 5px 10px #666;
+    width: 40rem;
+    max-width: 15rem;
+    margin: auto;
+  }
+  .person-wrapper .person-basic-info .person-descr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 0 1rem 2rem;
+    width: 60%;
+    font-size: 1.2rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-name {
+    text-indent: 2;
+    font-size: 1.44rem;
+    font-weight: bold;
+    padding: 0 0 1rem;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-name a {
+    color: #37d;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-occup {
+    font-size: 1.38rem;
+    opacity: 0.8;
+  }
+  .person-wrapper h1 {
+    margin: 3.5rem 0 0.5rem;
+    opacity: 0.8;
+  }
+  .person-wrapper .summary {
+    margin: 0;
+    padding: 1.5rem;
+    font-size: 1.32rem;
+    background: #ccc;
+  }
+  .person-wrapper table {
+    text-align: center;
+    vertical-align: center;
+  }
+  .person-wrapper table td {
+    padding: 0.2rem 0.5rem;
+  }
+  .person-wrapper table tr:nth-child(even) {
+    background-color: #eee;
+  }
+  .person-wrapper table td:first-child {
+    width: 8%;
+  }
+  .person-wrapper table td:nth-child(2) {
+    text-align: left;
+    width: 57%;
+    font-size: 1.26rem;
+  }
+  .person-wrapper table td:nth-child(3) {
+    width: 25%;
+  }
+  .person-wrapper table td:last-child {
+    width: 10%;
+    font-size: 1.44rem;
+    font-weight: 500;
+  }
+  .eval-container {
+    max-width: 80rem;
+    margin: 1rem auto;
+    padding: 0.6rem 1.2rem;
+    text-align: left;
+    vertical-align: center;
+  }
+  .eval-container .eval-film-item {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 70rem;
+    height: 12rem;
+    max-height: fit-content;
+    align-items: center;
+    border: 2px solid #555;
+    border-radius: 20px;
+  }
+  .eval-container .eval-film-item img {
+    max-width: 10rem;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .eval-container .eval-film-item a {
+    width: 50%;
+    margin-right: auto;
+    padding: 0 0 1rem;
+    font-size: 1.26rem;
+    font-weight: bold;
+    opacity: 0.9;
+  }
+  .eval-container .eval-film-item i {
+    width: 30%;
+    margin-left: auto;
+  }
+  .eval-container #searchResult {
+    margin: 0 auto 1.5rem;
+    background: #eee;
+  }
+  .eval-container #selectedFilm {
+    display: none;
+    background: #fff9b2;
+    border-color: #d21;
+  }
+  .eval-container #searchResult:hover {
+    background: #fff9b2;
+  }
+  .eval-container #evalBar {
+    display: none;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem 0 1.5rem;
+    margin: 0 auto 4rem;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid #999;
+  }
+  .eval-container #evalBar label {
+    font-size: 1.26rem;
+    font-style: normal;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .eval-container #evalBar select {
+    text-align: center;
+    font-size: 1.26rem;
+    padding: 0.3rem 2.5rem 0.4rem;
+    margin: 0 1.5rem 0 1rem;
+    background: #fff;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .eval-container #evalBar button {
+    opacity: 1;
+    border: 0;
+    font-size: 1.2rem;
+    background: #d55;
+    color: #fff;
+    padding: 0.6rem 1.5rem;
+    height: 100%;
+    border-radius: 5px;
+    font-weight: 600;
   }
 }
 @media screen and (min-width: 960px) {
@@ -533,11 +1043,11 @@
     font-size: 2.5rem;
   }
   h2 {
+    font-size: 2.3rem;
     margin: 0;
-    font-size: 2.2rem;
   }
   h3 {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     font-size: 2.2rem;
     opacity: 0.9;
   }
@@ -561,6 +1071,8 @@
     padding: 0.5rem 0 0 0.5rem;
     text-align: right;
     font-size: 2rem;
+    opacity: 0.7;
+    font-weight: 500;
     width: 24%;
     min-width: 15rem;
   }
@@ -570,8 +1082,8 @@
     background: #d8e1f0;
     padding: 1rem 1rem;
     margin: 0 2rem;
-    font-size: 2rem;
-    opacity: 0.7;
+    font-size: 2.1rem;
+    opacity: 0.8;
     border: 0;
     border-left: 2px solid #249;
     border-top: 2px solid #249;
@@ -591,8 +1103,9 @@
     margin-right: 0.5rem;
     background: #249;
     color: #fff;
-    opacity: 0.9;
-    font-size: 1.7rem;
+    opacity: 0.8;
+    font-size: 1.8rem;
+    font-weight: 500;
   }
   .sort-bar {
     line-height: 1.7;
@@ -732,7 +1245,7 @@
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
   }
-  .fitler-table-wrapper #favor {
+  .fitler-table-wrapper #favorFilter {
     margin-left: auto;
     font-weight: bold;
   }
@@ -748,8 +1261,18 @@
     background: #fff;
     margin: 1.5rem auto;
     padding: 2rem 1rem;
-    min-width: 37rem;
+    min-width: 30rem;
     max-width: 90rem;
+  }
+  nav {
+    font-weight: 500;
+    opacity: 0.9;
+    margin: 0 auto 3rem -1rem;
+  }
+  nav a {
+    font-size: 2rem;
+    border-bottom: 2px solid;
+    padding-bottom: 0.2rem;
   }
   .table-container {
     background: #fff;
@@ -863,6 +1386,13 @@
   .table-container .col-user-rating div {
     margin: 0.5rem 0.7rem 0 auto;
   }
+  .table-container .col-user-rating .datetime {
+    font-size: 1.5rem;
+    text-align: right;
+    margin-top: 1rem;
+    padding: 0.4rem 0 0 0;
+    border-top: 1px solid #fff9b2;
+  }
   .table-container .col-user-rating .rating {
     text-align: center;
     font-size: 2.2rem;
@@ -873,13 +1403,6 @@
     background: #ffdc2f;
     color: #000;
     border-radius: 7px;
-  }
-  .table-container .col-user-rating .datetime {
-    font-size: 1.5rem;
-    text-align: right;
-    margin-top: 1rem;
-    padding: 0.4rem 0 0 0;
-    border-top: 1px solid #fff9b2;
   }
   .table-container .col-user-rating .change-rating {
     display: none;
@@ -909,6 +1432,7 @@
     flex-flow: wrap;
     gap: 2rem;
     margin: 0;
+    padding: 0;
   }
   .actor-wrapper .actor-item {
     display: flex;
@@ -946,14 +1470,444 @@
     background: #fff;
     border-radius: 4px;
   }
+  .film-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem auto 4rem;
+    padding: 1rem 2rem 2rem;
+    max-width: 80rem;
+  }
+  .film-wrapper .film-headline {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    align-items: center;
+    padding: 0.4rem 1rem 0.4rem 1.5rem;
+    background: #111;
+    color: #fff9b2;
+    border: 2px solid #111;
+  }
+  .film-wrapper .film-headline .film-imdb {
+    width: 35%;
+    text-align: left;
+    margin-right: 3rem;
+  }
+  .film-wrapper .film-headline .film-cert {
+    text-align: left;
+    margin-right: 3rem;
+  }
+  .film-wrapper .film-headline .favor {
+    margin-left: auto;
+  }
+  .film-wrapper .film-headline .favor button {
+    display: block;
+    font-size: 1.87rem;
+    border: 0;
+    border-radius: 50%;
+    margin: 0 auto auto;
+    width: 4.4rem;
+    height: 4.4rem;
+  }
+  .film-wrapper .film-headline .favor .fav-button {
+    font-weight: bold;
+    background: #ffdc2f;
+  }
+  .film-wrapper .film-headline .favor .add-fav-button {
+    font-size: 1.76rem;
+    line-height: 0.8;
+    border: 1px solid #fff;
+    background: inherit;
+    color: #ddd;
+    padding-bottom: 0.6rem;
+  }
+  .film-wrapper .film-basic-info {
+    display: flex;
+    flex-direction: row;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: fit-content;
+    margin: 0;
+    padding: 0 1.5rem 1rem;
+    background: #111;
+    color: #fff;
+    border: 2px solid #111;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap img {
+    width: 100%;
+    max-width: 40rem;
+    margin-bottom: auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .eval-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 1.5rem 0 auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .rating {
+    text-align: center;
+    font-size: 2.64rem;
+    font-weight: bold;
+    padding: 0.3rem 2rem;
+    min-width: fit-content;
+    width: 3.6rem;
+    background: #ffdc2f;
+    color: #000;
+    border-radius: 7px;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating {
+    display: none;
+    text-align: right;
+    margin-bottom: auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating select {
+    padding: 0.1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-size: 1.92rem;
+    background: #fff;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating button {
+    padding: 0.3rem 0.7rem;
+    font-size: 2.04rem;
+    font-weight: bold;
+    opacity: 0.9;
+    border: 0;
+    border-radius: 4px;
+    background: #ffc684;
+    box-shadow: 3px 2px 5px #d55;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .rating {
+    font-weight: 600;
+    font-size: 3rem;
+    margin: 0 auto auto auto;
+    padding: 0rem 1rem 0.2rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap {
+    display: none;
+    flex-direction: column;
+    margin: 1.5rem auto 0;
+    padding: 1.5rem 1rem;
+    border: 2px dashed #ccc;
+    text-align: center;
+    font-size: 2rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap select {
+    text-align: center;
+    font-size: 2.3rem;
+    padding: 0.3rem 2.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button {
+    margin: 0 auto;
+    opacity: 1;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button.change {
+    background: #d55;
+    color: #fff;
+    box-shadow: none;
+    padding: 0.7rem 0.5rem;
+    margin-top: 1.5rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button.remove {
+    background: #fff;
+    color: red;
+    box-shadow: none;
+    border: 3px solid red;
+    padding: 0.2rem 0.5rem 0.3rem;
+    margin-top: 5rem;
+  }
+  .film-wrapper .film-basic-info .date {
+    margin: 2rem auto 0;
+    padding: 1rem 0 0.1rem;
+    border-top: 2px solid #ccc;
+    font-weight: 400;
+  }
+  .film-wrapper .film-descr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 0 1rem 1.7rem;
+    width: 60%;
+    font-size: 2rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  .film-wrapper .film-descr .film-comm-title {
+    text-indent: 2;
+    font-size: 2.3rem;
+    font-weight: bold;
+    padding: 0 0 1rem;
+  }
+  .film-wrapper .film-descr .film-comm-title a {
+    color: #37d;
+  }
+  .film-wrapper .film-descr .film-orig-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    background: #ccc;
+    padding: 0.5rem 1rem;
+    margin: -1rem 0 1.5rem;
+  }
+  .film-wrapper .film-descr .world {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  .film-wrapper .film-descr .film-genre {
+    border-left: 7px solid purple;
+  }
+  .film-wrapper .film-descr .film-country {
+    border-left: 7px solid green;
+  }
+  .film-wrapper .film-descr .film-plot {
+    padding: 1rem 0;
+    font-style: italic;
+  }
+  .film-wrapper .film-descr .film-budget {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    border-left: 7px solid #d55;
+  }
+  .film-wrapper .film-descr .film-grossww {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    border-left: 7px solid #46a;
+  }
+  .film-wrapper h1 {
+    margin: 3.5rem 0 0.5rem;
+    opacity: 0.8;
+  }
+  .film-wrapper .film-director {
+    display: flex;
+    flex-flow: wrap;
+    gap: 2rem;
+    font-size: 2.2rem;
+    font-weight: 500;
+    padding: 1.5rem;
+    background: #ccc;
+  }
+  .film-wrapper .film-director a {
+    display: inline-block;
+    background: #fff;
+    box-shadow: 5px 5px 7px #888;
+    padding: 1rem 1.5rem;
+  }
+  .film-wrapper .film-cast {
+    display: flex;
+    flex-flow: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 1.5rem;
+    background: #ccc;
+  }
+  .film-wrapper .film-cast .role-item {
+    display: flex;
+    flex-flow: column;
+    gap: 0.5rem;
+    background: #fff;
+    box-shadow: 7px 7px 7px #888;
+    padding: 1rem;
+    width: 15rem;
+    text-align: center;
+  }
+  .film-wrapper .film-cast .role-item img {
+    display: block;
+    margin: 0 auto auto;
+    border-radius: 50%;
+    width: 90%;
+  }
+  .film-wrapper .film-cast .role-item .cast-name {
+    font-weight: bold;
+    margin: auto auto 0;
+  }
+  .film-wrapper .film-cast .role-item .cast-name .cast-character {
+    font-size: 1.8rem;
+    font-weight: bold;
+    opacity: 0.6;
+    margin: auto auto 0;
+    padding: 0.7rem 0 0;
+  }
+  .person-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem auto 4rem;
+    padding: 1rem 2rem 2rem;
+    max-width: 80rem;
+    width: 100%;
+    background: #fff;
+  }
+  .person-wrapper .person-basic-info {
+    display: flex;
+    flex-flow: row;
+    border: 1.5rem solid #ccc;
+    padding: 1.5rem;
+    background: #fff;
+  }
+  .person-wrapper .person-basic-info .person-img-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .person-wrapper .person-basic-info .person-img-wrap img {
+    box-shadow: 5px 5px 10px #666;
+    width: 40rem;
+    max-width: 15rem;
+    margin: auto;
+  }
+  .person-wrapper .person-basic-info .person-descr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 0 1rem 2rem;
+    width: 60%;
+    font-size: 2rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-name {
+    text-indent: 2;
+    font-size: 2.4rem;
+    font-weight: bold;
+    padding: 0 0 1rem;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-name a {
+    color: #37d;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-occup {
+    font-size: 2.3rem;
+    opacity: 0.8;
+  }
+  .person-wrapper h1 {
+    margin: 3.5rem 0 0.5rem;
+    opacity: 0.8;
+  }
+  .person-wrapper .summary {
+    margin: 0;
+    padding: 1.5rem;
+    font-size: 2.2rem;
+    background: #ccc;
+  }
+  .person-wrapper table {
+    text-align: center;
+    vertical-align: center;
+  }
+  .person-wrapper table td {
+    padding: 0.2rem 0.5rem;
+  }
+  .person-wrapper table tr:nth-child(even) {
+    background-color: #eee;
+  }
+  .person-wrapper table td:first-child {
+    width: 8%;
+  }
+  .person-wrapper table td:nth-child(2) {
+    text-align: left;
+    width: 57%;
+    font-size: 2.1rem;
+  }
+  .person-wrapper table td:nth-child(3) {
+    width: 25%;
+  }
+  .person-wrapper table td:last-child {
+    width: 10%;
+    font-size: 2.4rem;
+    font-weight: 500;
+  }
+  .eval-container {
+    max-width: 80rem;
+    margin: 1rem auto;
+    padding: 1rem 2rem;
+    text-align: left;
+    vertical-align: center;
+  }
+  .eval-container .eval-film-item {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 70rem;
+    height: 12rem;
+    max-height: fit-content;
+    align-items: center;
+    border: 2px solid #555;
+    border-radius: 20px;
+  }
+  .eval-container .eval-film-item img {
+    max-width: 10rem;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .eval-container .eval-film-item a {
+    width: 50%;
+    margin-right: auto;
+    padding: 0 0 1rem;
+    font-size: 2.1rem;
+    font-weight: bold;
+    opacity: 0.9;
+  }
+  .eval-container .eval-film-item i {
+    width: 30%;
+    margin-left: auto;
+  }
+  .eval-container #searchResult {
+    margin: 0 auto 1.5rem;
+    background: #eee;
+  }
+  .eval-container #selectedFilm {
+    display: none;
+    background: #fff9b2;
+    border-color: #d21;
+  }
+  .eval-container #searchResult:hover {
+    background: #fff9b2;
+  }
+  .eval-container #evalBar {
+    display: none;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem 0 1.5rem;
+    margin: 0 auto 4rem;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid #999;
+  }
+  .eval-container #evalBar label {
+    font-size: 2.1rem;
+    font-style: normal;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .eval-container #evalBar select {
+    text-align: center;
+    font-size: 2.1rem;
+    padding: 0.3rem 2.5rem 0.4rem;
+    margin: 0 1.5rem 0 1rem;
+    background: #fff;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .eval-container #evalBar button {
+    opacity: 1;
+    border: 0;
+    font-size: 2rem;
+    background: #d55;
+    color: #fff;
+    padding: 0.6rem 1.5rem;
+    height: 100%;
+    border-radius: 5px;
+    font-weight: 600;
+  }
 }
 @media screen and (min-width: 1080px) {
   body {
     padding: 0;
     margin: 0;
-    font-size: 2.6rem;
+    font-size: 2rem;
     font-family: Impact, "Century Gothic", "Apple Gothic", Arial, sans-serif;
-    background: #46a;
+    background: #fff;
     align-items: center;
   }
   img {
@@ -983,15 +1937,15 @@
   }
   h1 {
     margin: 0;
-    font-size: 3.25rem;
+    font-size: 2.5rem;
   }
   h2 {
+    font-size: 2.3rem;
     margin: 0;
-    font-size: 2.86rem;
   }
   h3 {
-    margin-bottom: 2.5rem;
-    font-size: 2.86rem;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
     opacity: 0.9;
   }
   .search-head {
@@ -1014,6 +1968,8 @@
     padding: 0.5rem 0 0 0.5rem;
     text-align: right;
     font-size: 2rem;
+    opacity: 0.7;
+    font-weight: 500;
     width: 24%;
     min-width: 15rem;
   }
@@ -1023,8 +1979,8 @@
     background: #d8e1f0;
     padding: 1rem 1rem;
     margin: 0 2rem;
-    font-size: 2rem;
-    opacity: 0.7;
+    font-size: 2.1rem;
+    opacity: 0.8;
     border: 0;
     border-left: 2px solid #249;
     border-top: 2px solid #249;
@@ -1044,12 +2000,13 @@
     margin-right: 0.5rem;
     background: #249;
     color: #fff;
-    opacity: 0.9;
-    font-size: 1.7rem;
+    opacity: 0.8;
+    font-size: 1.8rem;
+    font-weight: 500;
   }
   .sort-bar {
     line-height: 1.7;
-    font-size: 2.34rem;
+    font-size: 1.8rem;
     padding: 0 0 1rem 0.1rem;
     background: #fff;
     opacity: 0.8;
@@ -1080,7 +2037,7 @@
   .chart-line .chart-bar {
     display: inline-block;
     min-width: fit-content;
-    font-size: 2.08rem;
+    font-size: 1.92rem;
     text-align: right;
     font-weight: bold;
     color: #fff;
@@ -1091,15 +2048,15 @@
   }
   .chart-line .chart-addition {
     font-style: italic;
-    font-size: 2.34rem;
+    font-size: 2.16rem;
     opacity: 0.7;
     margin: 0;
     padding: 0 0.5rem 0 1rem;
   }
   .decade-chart .chart-key {
     font-size: 2rem;
-    min-width: 7.8rem;
-    width: 7.8rem;
+    min-width: 7.2rem;
+    width: 7.2rem;
     text-align: center;
   }
   .year-chart .chart-key {
@@ -1110,8 +2067,8 @@
   }
   .genre-chart .chart-key {
     font-size: 1.9rem;
-    min-width: 13rem;
-    width: 13rem;
+    min-width: 12rem;
+    width: 12rem;
     text-align: right;
   }
   .genre-chart .chart-bar {
@@ -1119,8 +2076,8 @@
   }
   .country-chart .chart-key {
     font-size: 1.8rem;
-    min-width: 11.7rem;
-    width: 11.7rem;
+    min-width: 10.8rem;
+    width: 10.8rem;
     text-align: center;
   }
   .country-chart .chart-bar {
@@ -1132,8 +2089,8 @@
   }
   .director-chart .ord {
     text-align: right;
-    min-width: 4.03rem;
-    padding-left: 1.95rem;
+    min-width: 3.72rem;
+    padding-left: 1.8rem;
   }
   .director-chart .chart-key {
     min-width: 12rem;
@@ -1165,7 +2122,7 @@
   }
   .current-filter {
     margin: 2rem 0 3rem;
-    font-size: 2.86rem;
+    font-size: 2.64rem;
   }
   .current-filter a {
     background: #d55;
@@ -1176,16 +2133,16 @@
     display: flex;
     flex-direction: row;
     row-gap: 1.5rem;
-    column-gap: 2.21rem;
+    column-gap: 2.04rem;
     flex-flow: wrap;
     margin: 1rem -0.5rem 2rem;
-    font-size: 2.47rem;
+    font-size: 2.28rem;
   }
   .fitler-table-wrapper a {
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
   }
-  .fitler-table-wrapper #favor {
+  .fitler-table-wrapper #favorFilter {
     margin-left: auto;
     font-weight: bold;
   }
@@ -1200,9 +2157,19 @@
   .main-container {
     background: #fff;
     margin: 1.7rem auto;
-    padding: 1.7rem 1.2rem;
-    min-width: 37rem;
+    padding: 3rem 1.5rem;
+    min-width: 30rem;
     max-width: 90rem;
+  }
+  nav {
+    font-weight: 500;
+    opacity: 0.9;
+    margin: 0 auto 3rem -1rem;
+  }
+  nav a {
+    font-size: 2rem;
+    border-bottom: 2px solid;
+    padding-bottom: 0.2rem;
   }
   .table-container {
     background: #fff;
@@ -1213,7 +2180,7 @@
   .table-container .row {
     display: flex;
     flex-direction: row;
-    font-size: 2.21rem;
+    font-size: 2.04rem;
     background: #111;
     color: #fff;
     border: 0;
@@ -1238,19 +2205,19 @@
   }
   .table-container .col-order-fav button {
     display: block;
-    font-size: 2.21rem;
+    font-size: 2.04rem;
     border: 0;
     border-radius: 50%;
     margin: 0 auto auto;
-    width: 5.2rem;
-    height: 5.2rem;
+    width: 4.8rem;
+    height: 4.8rem;
   }
   .table-container .col-order-fav .fav-button {
     font-weight: bold;
     background: #ffdc2f;
   }
   .table-container .col-order-fav .add-fav-button {
-    font-size: 2.08rem;
+    font-size: 1.92rem;
     line-height: 0.8;
     border: 1px solid #fff;
     background: inherit;
@@ -1273,7 +2240,7 @@
     background: rgba(0, 0, 0, 0.8);
     opacity: 0.8;
     color: yellow;
-    font-size: 2.34rem;
+    font-size: 2.16rem;
     margin: 0;
     padding: 0 0.7rem 0.2rem;
   }
@@ -1283,11 +2250,11 @@
   .table-container .col-title div {
     padding-left: 1.4rem;
     padding-right: 1rem;
-    font-size: 2.86rem;
+    font-size: 2.64rem;
     color: #fff9b2;
   }
   .table-container .col-title .orig-title {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     color: #fff;
   }
   .table-container .col-year-imdb {
@@ -1305,7 +2272,7 @@
     margin-bottom: auto;
     color: cyan;
     opacity: 0.9;
-    font-size: 2.86rem;
+    font-size: 2.64rem;
   }
   .table-container .col-year-imdb .type {
     margin-top: auto;
@@ -1316,23 +2283,23 @@
   .table-container .col-user-rating div {
     margin: 0.5rem 0.7rem 0 auto;
   }
-  .table-container .col-user-rating .rating {
-    text-align: center;
-    font-size: 2.86rem;
-    font-weight: bold;
-    padding: 0.3rem 2rem;
-    min-width: fit-content;
-    width: 3.9rem;
-    background: #ffdc2f;
-    color: #000;
-    border-radius: 7px;
-  }
   .table-container .col-user-rating .datetime {
-    font-size: 1.95rem;
+    font-size: 1.8rem;
     text-align: right;
     margin-top: 1rem;
     padding: 0.4rem 0 0 0;
     border-top: 1px solid #fff9b2;
+  }
+  .table-container .col-user-rating .rating {
+    text-align: center;
+    font-size: 2.64rem;
+    font-weight: bold;
+    padding: 0.3rem 2rem;
+    min-width: fit-content;
+    width: 3.6rem;
+    background: #ffdc2f;
+    color: #000;
+    border-radius: 7px;
   }
   .table-container .col-user-rating .change-rating {
     display: none;
@@ -1343,12 +2310,12 @@
     padding: 0.1rem 1.5rem;
     margin-bottom: 1rem;
     border-radius: 4px;
-    font-size: 2.08rem;
+    font-size: 1.92rem;
     background: #fff;
   }
   .table-container .col-user-rating .change-rating button {
     padding: 0.3rem 0.7rem;
-    font-size: 2.21rem;
+    font-size: 2.04rem;
     font-weight: bold;
     opacity: 0.9;
     border: 0;
@@ -1360,8 +2327,9 @@
     display: flex;
     justify-content: center;
     flex-flow: wrap;
-    gap: 2.6rem;
+    gap: 2.4rem;
     margin: 0;
+    padding: 0.2;
   }
   .actor-wrapper .actor-item {
     display: flex;
@@ -1389,7 +2357,7 @@
   .actor-wrapper .actor-item .mid-line div {
     margin: 0.4rem 0.2rem 0.7rem;
     border-radius: 5px;
-    font-size: 2.47rem;
+    font-size: 2.28rem;
     font-weight: bold;
   }
   .actor-wrapper .actor-item .person-data {
@@ -1399,14 +2367,444 @@
     background: #fff;
     border-radius: 4px;
   }
+  .film-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem auto 4rem;
+    padding: 1.2rem 2.4rem 2.4rem;
+    max-width: 80rem;
+  }
+  .film-wrapper .film-headline {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    align-items: center;
+    padding: 0.4rem 1rem 0.4rem 1.5rem;
+    background: #111;
+    color: #fff9b2;
+    border: 2px solid #111;
+  }
+  .film-wrapper .film-headline .film-imdb {
+    width: 35%;
+    text-align: left;
+    margin-right: 3rem;
+  }
+  .film-wrapper .film-headline .film-cert {
+    text-align: left;
+    margin-right: 3rem;
+  }
+  .film-wrapper .film-headline .favor {
+    margin-left: auto;
+  }
+  .film-wrapper .film-headline .favor button {
+    display: block;
+    font-size: 2.244rem;
+    border: 0;
+    border-radius: 50%;
+    margin: 0 auto auto;
+    width: 5.28rem;
+    height: 5.28rem;
+  }
+  .film-wrapper .film-headline .favor .fav-button {
+    font-weight: bold;
+    background: #ffdc2f;
+  }
+  .film-wrapper .film-headline .favor .add-fav-button {
+    font-size: 2.112rem;
+    line-height: 0.8;
+    border: 1px solid #fff;
+    background: inherit;
+    color: #ddd;
+    padding-bottom: 0.6rem;
+  }
+  .film-wrapper .film-basic-info {
+    display: flex;
+    flex-direction: row;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: fit-content;
+    margin: 0;
+    padding: 0 1.5rem 1rem;
+    background: #111;
+    color: #fff;
+    border: 2px solid #111;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap img {
+    width: 100%;
+    max-width: 40rem;
+    margin-bottom: auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .eval-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 1.5rem 0 auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .rating {
+    text-align: center;
+    font-size: 3.168rem;
+    font-weight: bold;
+    padding: 0.3rem 2rem;
+    min-width: fit-content;
+    width: 4.32rem;
+    background: #ffdc2f;
+    color: #000;
+    border-radius: 7px;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating {
+    display: none;
+    text-align: right;
+    margin-bottom: auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating select {
+    padding: 0.1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-size: 2.304rem;
+    background: #fff;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating button {
+    padding: 0.3rem 0.7rem;
+    font-size: 2.448rem;
+    font-weight: bold;
+    opacity: 0.9;
+    border: 0;
+    border-radius: 4px;
+    background: #ffc684;
+    box-shadow: 3px 2px 5px #d55;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .rating {
+    font-weight: 600;
+    font-size: 3rem;
+    margin: 0 auto auto auto;
+    padding: 0rem 1rem 0.2rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap {
+    display: none;
+    flex-direction: column;
+    margin: 1.5rem auto 0;
+    padding: 1.5rem 1rem;
+    border: 2px dashed #ccc;
+    text-align: center;
+    font-size: 2rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap select {
+    text-align: center;
+    font-size: 2.3rem;
+    padding: 0.3rem 2.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button {
+    margin: 0 auto;
+    opacity: 1;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button.change {
+    background: #d55;
+    color: #fff;
+    box-shadow: none;
+    padding: 0.7rem 0.5rem;
+    margin-top: 1.5rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button.remove {
+    background: #fff;
+    color: red;
+    box-shadow: none;
+    border: 3px solid red;
+    padding: 0.2rem 0.5rem 0.3rem;
+    margin-top: 5rem;
+  }
+  .film-wrapper .film-basic-info .date {
+    margin: 2rem auto 0;
+    padding: 1rem 0 0.1rem;
+    border-top: 2px solid #ccc;
+    font-weight: 400;
+  }
+  .film-wrapper .film-descr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 0 1rem 1.7rem;
+    width: 60%;
+    font-size: 2rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  .film-wrapper .film-descr .film-comm-title {
+    text-indent: 2;
+    font-size: 2.3rem;
+    font-weight: bold;
+    padding: 0 0 1rem;
+  }
+  .film-wrapper .film-descr .film-comm-title a {
+    color: #37d;
+  }
+  .film-wrapper .film-descr .film-orig-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    background: #ccc;
+    padding: 0.5rem 1rem;
+    margin: -1rem 0 1.5rem;
+  }
+  .film-wrapper .film-descr .world {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  .film-wrapper .film-descr .film-genre {
+    border-left: 7px solid purple;
+  }
+  .film-wrapper .film-descr .film-country {
+    border-left: 7px solid green;
+  }
+  .film-wrapper .film-descr .film-plot {
+    padding: 1rem 0;
+    font-style: italic;
+  }
+  .film-wrapper .film-descr .film-budget {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    border-left: 7px solid #d55;
+  }
+  .film-wrapper .film-descr .film-grossww {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    border-left: 7px solid #46a;
+  }
+  .film-wrapper h1 {
+    margin: 3.5rem 0 0.5rem;
+    opacity: 0.8;
+  }
+  .film-wrapper .film-director {
+    display: flex;
+    flex-flow: wrap;
+    gap: 2rem;
+    font-size: 2.2rem;
+    font-weight: 500;
+    padding: 1.5rem;
+    background: #ccc;
+  }
+  .film-wrapper .film-director a {
+    display: inline-block;
+    background: #fff;
+    box-shadow: 5px 5px 7px #888;
+    padding: 1rem 1.5rem;
+  }
+  .film-wrapper .film-cast {
+    display: flex;
+    flex-flow: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 1.5rem;
+    background: #ccc;
+  }
+  .film-wrapper .film-cast .role-item {
+    display: flex;
+    flex-flow: column;
+    gap: 0.5rem;
+    background: #fff;
+    box-shadow: 7px 7px 7px #888;
+    padding: 1rem;
+    width: 15rem;
+    text-align: center;
+  }
+  .film-wrapper .film-cast .role-item img {
+    display: block;
+    margin: 0 auto auto;
+    border-radius: 50%;
+    width: 90%;
+  }
+  .film-wrapper .film-cast .role-item .cast-name {
+    font-weight: bold;
+    margin: auto auto 0;
+  }
+  .film-wrapper .film-cast .role-item .cast-name .cast-character {
+    font-size: 1.8rem;
+    font-weight: bold;
+    opacity: 0.6;
+    margin: auto auto 0;
+    padding: 0.7rem 0 0;
+  }
+  .person-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem auto 4rem;
+    padding: 1.2rem 2.4rem 2.4rem;
+    max-width: 80rem;
+    width: 100%;
+    background: #fff;
+  }
+  .person-wrapper .person-basic-info {
+    display: flex;
+    flex-flow: row;
+    border: 1.5rem solid #ccc;
+    padding: 1.5rem;
+    background: #fff;
+  }
+  .person-wrapper .person-basic-info .person-img-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .person-wrapper .person-basic-info .person-img-wrap img {
+    box-shadow: 5px 5px 10px #666;
+    width: 40rem;
+    max-width: 15rem;
+    margin: auto;
+  }
+  .person-wrapper .person-basic-info .person-descr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 0 1rem 2rem;
+    width: 60%;
+    font-size: 2rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-name {
+    text-indent: 2;
+    font-size: 2.4rem;
+    font-weight: bold;
+    padding: 0 0 1rem;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-name a {
+    color: #37d;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-occup {
+    font-size: 2.3rem;
+    opacity: 0.8;
+  }
+  .person-wrapper h1 {
+    margin: 3.5rem 0 0.5rem;
+    opacity: 0.8;
+  }
+  .person-wrapper .summary {
+    margin: 0;
+    padding: 1.5rem;
+    font-size: 2.2rem;
+    background: #ccc;
+  }
+  .person-wrapper table {
+    text-align: center;
+    vertical-align: center;
+  }
+  .person-wrapper table td {
+    padding: 0.2rem 0.5rem;
+  }
+  .person-wrapper table tr:nth-child(even) {
+    background-color: #eee;
+  }
+  .person-wrapper table td:first-child {
+    width: 8%;
+  }
+  .person-wrapper table td:nth-child(2) {
+    text-align: left;
+    width: 57%;
+    font-size: 2.1rem;
+  }
+  .person-wrapper table td:nth-child(3) {
+    width: 25%;
+  }
+  .person-wrapper table td:last-child {
+    width: 10%;
+    font-size: 2.4rem;
+    font-weight: 500;
+  }
+  .eval-container {
+    max-width: 80rem;
+    margin: 1rem auto;
+    padding: 1.2rem 2.4rem;
+    text-align: left;
+    vertical-align: center;
+  }
+  .eval-container .eval-film-item {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 70rem;
+    height: 12rem;
+    max-height: fit-content;
+    align-items: center;
+    border: 2px solid #555;
+    border-radius: 20px;
+  }
+  .eval-container .eval-film-item img {
+    max-width: 10rem;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .eval-container .eval-film-item a {
+    width: 50%;
+    margin-right: auto;
+    padding: 0 0 1rem;
+    font-size: 2.1rem;
+    font-weight: bold;
+    opacity: 0.9;
+  }
+  .eval-container .eval-film-item i {
+    width: 30%;
+    margin-left: auto;
+  }
+  .eval-container #searchResult {
+    margin: 0 auto 1.5rem;
+    background: #eee;
+  }
+  .eval-container #selectedFilm {
+    display: none;
+    background: #fff9b2;
+    border-color: #d21;
+  }
+  .eval-container #searchResult:hover {
+    background: #fff9b2;
+  }
+  .eval-container #evalBar {
+    display: none;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem 0 1.5rem;
+    margin: 0 auto 4rem;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid #999;
+  }
+  .eval-container #evalBar label {
+    font-size: 2.1rem;
+    font-style: normal;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .eval-container #evalBar select {
+    text-align: center;
+    font-size: 2.1rem;
+    padding: 0.3rem 2.5rem 0.4rem;
+    margin: 0 1.5rem 0 1rem;
+    background: #fff;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .eval-container #evalBar button {
+    opacity: 1;
+    border: 0;
+    font-size: 2rem;
+    background: #d55;
+    color: #fff;
+    padding: 0.6rem 1.5rem;
+    height: 100%;
+    border-radius: 5px;
+    font-weight: 600;
+  }
 }
 @media screen and (min-width: 2400px) {
   body {
     padding: 0;
     margin: 0;
-    font-size: 3.2rem;
+    font-size: 2rem;
     font-family: Impact, "Century Gothic", "Apple Gothic", Arial, sans-serif;
-    background: #46a;
+    background: #fff;
     align-items: center;
   }
   img {
@@ -1436,15 +2834,15 @@
   }
   h1 {
     margin: 0;
-    font-size: 4rem;
+    font-size: 2.5rem;
   }
   h2 {
+    font-size: 2.3rem;
     margin: 0;
-    font-size: 3.52rem;
   }
   h3 {
-    margin-bottom: 2.5rem;
-    font-size: 3.52rem;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
     opacity: 0.9;
   }
   .search-head {
@@ -1467,6 +2865,8 @@
     padding: 0.5rem 0 0 0.5rem;
     text-align: right;
     font-size: 2rem;
+    opacity: 0.7;
+    font-weight: 500;
     width: 24%;
     min-width: 15rem;
   }
@@ -1476,8 +2876,8 @@
     background: #d8e1f0;
     padding: 1rem 1rem;
     margin: 0 2rem;
-    font-size: 2rem;
-    opacity: 0.7;
+    font-size: 2.1rem;
+    opacity: 0.8;
     border: 0;
     border-left: 2px solid #249;
     border-top: 2px solid #249;
@@ -1497,12 +2897,13 @@
     margin-right: 0.5rem;
     background: #249;
     color: #fff;
-    opacity: 0.9;
-    font-size: 1.7rem;
+    opacity: 0.8;
+    font-size: 1.8rem;
+    font-weight: 500;
   }
   .sort-bar {
     line-height: 1.7;
-    font-size: 2.88rem;
+    font-size: 1.8rem;
     padding: 0 0 1rem 0.1rem;
     background: #fff;
     opacity: 0.8;
@@ -1533,7 +2934,7 @@
   .chart-line .chart-bar {
     display: inline-block;
     min-width: fit-content;
-    font-size: 2.56rem;
+    font-size: 2.24rem;
     text-align: right;
     font-weight: bold;
     color: #fff;
@@ -1544,15 +2945,15 @@
   }
   .chart-line .chart-addition {
     font-style: italic;
-    font-size: 2.88rem;
+    font-size: 2.52rem;
     opacity: 0.7;
     margin: 0;
     padding: 0 0.5rem 0 1rem;
   }
   .decade-chart .chart-key {
     font-size: 2rem;
-    min-width: 9.6rem;
-    width: 9.6rem;
+    min-width: 8.4rem;
+    width: 8.4rem;
     text-align: center;
   }
   .year-chart .chart-key {
@@ -1563,8 +2964,8 @@
   }
   .genre-chart .chart-key {
     font-size: 1.9rem;
-    min-width: 16rem;
-    width: 16rem;
+    min-width: 14rem;
+    width: 14rem;
     text-align: right;
   }
   .genre-chart .chart-bar {
@@ -1572,8 +2973,8 @@
   }
   .country-chart .chart-key {
     font-size: 1.8rem;
-    min-width: 14.4rem;
-    width: 14.4rem;
+    min-width: 12.6rem;
+    width: 12.6rem;
     text-align: center;
   }
   .country-chart .chart-bar {
@@ -1585,8 +2986,8 @@
   }
   .director-chart .ord {
     text-align: right;
-    min-width: 4.96rem;
-    padding-left: 2.4rem;
+    min-width: 4.34rem;
+    padding-left: 2.1rem;
   }
   .director-chart .chart-key {
     min-width: 12rem;
@@ -1618,7 +3019,7 @@
   }
   .current-filter {
     margin: 2rem 0 3rem;
-    font-size: 3.52rem;
+    font-size: 3.08rem;
   }
   .current-filter a {
     background: #d55;
@@ -1629,16 +3030,16 @@
     display: flex;
     flex-direction: row;
     row-gap: 1.5rem;
-    column-gap: 2.72rem;
+    column-gap: 2.38rem;
     flex-flow: wrap;
     margin: 1rem -0.5rem 2rem;
-    font-size: 3.04rem;
+    font-size: 2.66rem;
   }
   .fitler-table-wrapper a {
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
   }
-  .fitler-table-wrapper #favor {
+  .fitler-table-wrapper #favorFilter {
     margin-left: auto;
     font-weight: bold;
   }
@@ -1653,9 +3054,19 @@
   .main-container {
     background: #fff;
     margin: 2rem auto;
-    padding: 2rem 1.5rem;
-    min-width: 37rem;
+    padding: 4rem 3rem;
+    min-width: 30rem;
     max-width: 90rem;
+  }
+  nav {
+    font-weight: 500;
+    opacity: 0.9;
+    margin: 0 auto 3rem -1rem;
+  }
+  nav a {
+    font-size: 2rem;
+    border-bottom: 2px solid;
+    padding-bottom: 0.2rem;
   }
   .table-container {
     background: #fff;
@@ -1666,7 +3077,7 @@
   .table-container .row {
     display: flex;
     flex-direction: row;
-    font-size: 2.72rem;
+    font-size: 2.38rem;
     background: #111;
     color: #fff;
     border: 0;
@@ -1691,19 +3102,19 @@
   }
   .table-container .col-order-fav button {
     display: block;
-    font-size: 2.72rem;
+    font-size: 2.38rem;
     border: 0;
     border-radius: 50%;
     margin: 0 auto auto;
-    width: 6.4rem;
-    height: 6.4rem;
+    width: 5.6rem;
+    height: 5.6rem;
   }
   .table-container .col-order-fav .fav-button {
     font-weight: bold;
     background: #ffdc2f;
   }
   .table-container .col-order-fav .add-fav-button {
-    font-size: 2.56rem;
+    font-size: 2.24rem;
     line-height: 0.8;
     border: 1px solid #fff;
     background: inherit;
@@ -1726,7 +3137,7 @@
     background: rgba(0, 0, 0, 0.8);
     opacity: 0.8;
     color: yellow;
-    font-size: 2.88rem;
+    font-size: 2.52rem;
     margin: 0;
     padding: 0 0.7rem 0.2rem;
   }
@@ -1736,11 +3147,11 @@
   .table-container .col-title div {
     padding-left: 1.4rem;
     padding-right: 1rem;
-    font-size: 3.52rem;
+    font-size: 3.08rem;
     color: #fff9b2;
   }
   .table-container .col-title .orig-title {
-    font-size: 3.2rem;
+    font-size: 2.8rem;
     color: #fff;
   }
   .table-container .col-year-imdb {
@@ -1758,7 +3169,7 @@
     margin-bottom: auto;
     color: cyan;
     opacity: 0.9;
-    font-size: 3.52rem;
+    font-size: 3.08rem;
   }
   .table-container .col-year-imdb .type {
     margin-top: auto;
@@ -1769,23 +3180,23 @@
   .table-container .col-user-rating div {
     margin: 0.5rem 0.7rem 0 auto;
   }
-  .table-container .col-user-rating .rating {
-    text-align: center;
-    font-size: 3.52rem;
-    font-weight: bold;
-    padding: 0.3rem 2rem;
-    min-width: fit-content;
-    width: 4.8rem;
-    background: #ffdc2f;
-    color: #000;
-    border-radius: 7px;
-  }
   .table-container .col-user-rating .datetime {
-    font-size: 2.4rem;
+    font-size: 2.1rem;
     text-align: right;
     margin-top: 1rem;
     padding: 0.4rem 0 0 0;
     border-top: 1px solid #fff9b2;
+  }
+  .table-container .col-user-rating .rating {
+    text-align: center;
+    font-size: 3.08rem;
+    font-weight: bold;
+    padding: 0.3rem 2rem;
+    min-width: fit-content;
+    width: 4.2rem;
+    background: #ffdc2f;
+    color: #000;
+    border-radius: 7px;
   }
   .table-container .col-user-rating .change-rating {
     display: none;
@@ -1796,12 +3207,12 @@
     padding: 0.1rem 1.5rem;
     margin-bottom: 1rem;
     border-radius: 4px;
-    font-size: 2.56rem;
+    font-size: 2.24rem;
     background: #fff;
   }
   .table-container .col-user-rating .change-rating button {
     padding: 0.3rem 0.7rem;
-    font-size: 2.72rem;
+    font-size: 2.38rem;
     font-weight: bold;
     opacity: 0.9;
     border: 0;
@@ -1813,8 +3224,9 @@
     display: flex;
     justify-content: center;
     flex-flow: wrap;
-    gap: 3.2rem;
+    gap: 2.8rem;
     margin: 0;
+    padding: 0.4;
   }
   .actor-wrapper .actor-item {
     display: flex;
@@ -1842,7 +3254,7 @@
   .actor-wrapper .actor-item .mid-line div {
     margin: 0.4rem 0.2rem 0.7rem;
     border-radius: 5px;
-    font-size: 3.04rem;
+    font-size: 2.66rem;
     font-weight: bold;
   }
   .actor-wrapper .actor-item .person-data {
@@ -1851,6 +3263,436 @@
     text-align: center;
     background: #fff;
     border-radius: 4px;
+  }
+  .film-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem auto 4rem;
+    padding: 1.4rem 2.8rem 2.8rem;
+    max-width: 80rem;
+  }
+  .film-wrapper .film-headline {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    align-items: center;
+    padding: 0.4rem 1rem 0.4rem 1.5rem;
+    background: #111;
+    color: #fff9b2;
+    border: 2px solid #111;
+  }
+  .film-wrapper .film-headline .film-imdb {
+    width: 35%;
+    text-align: left;
+    margin-right: 3rem;
+  }
+  .film-wrapper .film-headline .film-cert {
+    text-align: left;
+    margin-right: 3rem;
+  }
+  .film-wrapper .film-headline .favor {
+    margin-left: auto;
+  }
+  .film-wrapper .film-headline .favor button {
+    display: block;
+    font-size: 2.618rem;
+    border: 0;
+    border-radius: 50%;
+    margin: 0 auto auto;
+    width: 6.16rem;
+    height: 6.16rem;
+  }
+  .film-wrapper .film-headline .favor .fav-button {
+    font-weight: bold;
+    background: #ffdc2f;
+  }
+  .film-wrapper .film-headline .favor .add-fav-button {
+    font-size: 2.464rem;
+    line-height: 0.8;
+    border: 1px solid #fff;
+    background: inherit;
+    color: #ddd;
+    padding-bottom: 0.6rem;
+  }
+  .film-wrapper .film-basic-info {
+    display: flex;
+    flex-direction: row;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: fit-content;
+    margin: 0;
+    padding: 0 1.5rem 1rem;
+    background: #111;
+    color: #fff;
+    border: 2px solid #111;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap img {
+    width: 100%;
+    max-width: 40rem;
+    margin-bottom: auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .eval-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 1.5rem 0 auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .rating {
+    text-align: center;
+    font-size: 3.696rem;
+    font-weight: bold;
+    padding: 0.3rem 2rem;
+    min-width: fit-content;
+    width: 5.04rem;
+    background: #ffdc2f;
+    color: #000;
+    border-radius: 7px;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating {
+    display: none;
+    text-align: right;
+    margin-bottom: auto;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating select {
+    padding: 0.1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-size: 2.688rem;
+    background: #fff;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-rating button {
+    padding: 0.3rem 0.7rem;
+    font-size: 2.856rem;
+    font-weight: bold;
+    opacity: 0.9;
+    border: 0;
+    border-radius: 4px;
+    background: #ffc684;
+    box-shadow: 3px 2px 5px #d55;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .rating {
+    font-weight: 600;
+    font-size: 3rem;
+    margin: 0 auto auto auto;
+    padding: 0rem 1rem 0.2rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap {
+    display: none;
+    flex-direction: column;
+    margin: 1.5rem auto 0;
+    padding: 1.5rem 1rem;
+    border: 2px dashed #ccc;
+    text-align: center;
+    font-size: 2rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap select {
+    text-align: center;
+    font-size: 2.3rem;
+    padding: 0.3rem 2.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button {
+    margin: 0 auto;
+    opacity: 1;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button.change {
+    background: #d55;
+    color: #fff;
+    box-shadow: none;
+    padding: 0.7rem 0.5rem;
+    margin-top: 1.5rem;
+  }
+  .film-wrapper .film-basic-info .film-img-eval-wrap .change-wrap button.remove {
+    background: #fff;
+    color: red;
+    box-shadow: none;
+    border: 3px solid red;
+    padding: 0.2rem 0.5rem 0.3rem;
+    margin-top: 5rem;
+  }
+  .film-wrapper .film-basic-info .date {
+    margin: 2rem auto 0;
+    padding: 1rem 0 0.1rem;
+    border-top: 2px solid #ccc;
+    font-weight: 400;
+  }
+  .film-wrapper .film-descr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 0 1rem 1.7rem;
+    width: 60%;
+    font-size: 2rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  .film-wrapper .film-descr .film-comm-title {
+    text-indent: 2;
+    font-size: 2.3rem;
+    font-weight: bold;
+    padding: 0 0 1rem;
+  }
+  .film-wrapper .film-descr .film-comm-title a {
+    color: #37d;
+  }
+  .film-wrapper .film-descr .film-orig-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    background: #ccc;
+    padding: 0.5rem 1rem;
+    margin: -1rem 0 1.5rem;
+  }
+  .film-wrapper .film-descr .world {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  .film-wrapper .film-descr .film-genre {
+    border-left: 7px solid purple;
+  }
+  .film-wrapper .film-descr .film-country {
+    border-left: 7px solid green;
+  }
+  .film-wrapper .film-descr .film-plot {
+    padding: 1rem 0;
+    font-style: italic;
+  }
+  .film-wrapper .film-descr .film-budget {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    border-left: 7px solid #d55;
+  }
+  .film-wrapper .film-descr .film-grossww {
+    padding: 0.3rem 0 0.3rem 0.7rem;
+    border-left: 7px solid #46a;
+  }
+  .film-wrapper h1 {
+    margin: 3.5rem 0 0.5rem;
+    opacity: 0.8;
+  }
+  .film-wrapper .film-director {
+    display: flex;
+    flex-flow: wrap;
+    gap: 2rem;
+    font-size: 2.2rem;
+    font-weight: 500;
+    padding: 1.5rem;
+    background: #ccc;
+  }
+  .film-wrapper .film-director a {
+    display: inline-block;
+    background: #fff;
+    box-shadow: 5px 5px 7px #888;
+    padding: 1rem 1.5rem;
+  }
+  .film-wrapper .film-cast {
+    display: flex;
+    flex-flow: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 1.5rem;
+    background: #ccc;
+  }
+  .film-wrapper .film-cast .role-item {
+    display: flex;
+    flex-flow: column;
+    gap: 0.5rem;
+    background: #fff;
+    box-shadow: 7px 7px 7px #888;
+    padding: 1rem;
+    width: 15rem;
+    text-align: center;
+  }
+  .film-wrapper .film-cast .role-item img {
+    display: block;
+    margin: 0 auto auto;
+    border-radius: 50%;
+    width: 90%;
+  }
+  .film-wrapper .film-cast .role-item .cast-name {
+    font-weight: bold;
+    margin: auto auto 0;
+  }
+  .film-wrapper .film-cast .role-item .cast-name .cast-character {
+    font-size: 1.8rem;
+    font-weight: bold;
+    opacity: 0.6;
+    margin: auto auto 0;
+    padding: 0.7rem 0 0;
+  }
+  .person-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem auto 4rem;
+    padding: 1.4rem 2.8rem 2.8rem;
+    max-width: 80rem;
+    width: 100%;
+    background: #fff;
+  }
+  .person-wrapper .person-basic-info {
+    display: flex;
+    flex-flow: row;
+    border: 1.5rem solid #ccc;
+    padding: 1.5rem;
+    background: #fff;
+  }
+  .person-wrapper .person-basic-info .person-img-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .person-wrapper .person-basic-info .person-img-wrap img {
+    box-shadow: 5px 5px 10px #666;
+    width: 40rem;
+    max-width: 15rem;
+    margin: auto;
+  }
+  .person-wrapper .person-basic-info .person-descr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 0 1rem 2rem;
+    width: 60%;
+    font-size: 2rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-name {
+    text-indent: 2;
+    font-size: 2.4rem;
+    font-weight: bold;
+    padding: 0 0 1rem;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-name a {
+    color: #37d;
+  }
+  .person-wrapper .person-basic-info .person-descr .person-occup {
+    font-size: 2.3rem;
+    opacity: 0.8;
+  }
+  .person-wrapper h1 {
+    margin: 3.5rem 0 0.5rem;
+    opacity: 0.8;
+  }
+  .person-wrapper .summary {
+    margin: 0;
+    padding: 1.5rem;
+    font-size: 2.2rem;
+    background: #ccc;
+  }
+  .person-wrapper table {
+    text-align: center;
+    vertical-align: center;
+  }
+  .person-wrapper table td {
+    padding: 0.2rem 0.5rem;
+  }
+  .person-wrapper table tr:nth-child(even) {
+    background-color: #eee;
+  }
+  .person-wrapper table td:first-child {
+    width: 8%;
+  }
+  .person-wrapper table td:nth-child(2) {
+    text-align: left;
+    width: 57%;
+    font-size: 2.1rem;
+  }
+  .person-wrapper table td:nth-child(3) {
+    width: 25%;
+  }
+  .person-wrapper table td:last-child {
+    width: 10%;
+    font-size: 2.4rem;
+    font-weight: 500;
+  }
+  .eval-container {
+    max-width: 80rem;
+    margin: 1rem auto;
+    padding: 1.4rem 2.8rem;
+    text-align: left;
+    vertical-align: center;
+  }
+  .eval-container .eval-film-item {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 70rem;
+    height: 12rem;
+    max-height: fit-content;
+    align-items: center;
+    border: 2px solid #555;
+    border-radius: 20px;
+  }
+  .eval-container .eval-film-item img {
+    max-width: 10rem;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .eval-container .eval-film-item a {
+    width: 50%;
+    margin-right: auto;
+    padding: 0 0 1rem;
+    font-size: 2.1rem;
+    font-weight: bold;
+    opacity: 0.9;
+  }
+  .eval-container .eval-film-item i {
+    width: 30%;
+    margin-left: auto;
+  }
+  .eval-container #searchResult {
+    margin: 0 auto 1.5rem;
+    background: #eee;
+  }
+  .eval-container #selectedFilm {
+    display: none;
+    background: #fff9b2;
+    border-color: #d21;
+  }
+  .eval-container #searchResult:hover {
+    background: #fff9b2;
+  }
+  .eval-container #evalBar {
+    display: none;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem 0 1.5rem;
+    margin: 0 auto 4rem;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid #999;
+  }
+  .eval-container #evalBar label {
+    font-size: 2.1rem;
+    font-style: normal;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .eval-container #evalBar select {
+    text-align: center;
+    font-size: 2.1rem;
+    padding: 0.3rem 2.5rem 0.4rem;
+    margin: 0 1.5rem 0 1rem;
+    background: #fff;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .eval-container #evalBar button {
+    opacity: 1;
+    border: 0;
+    font-size: 2rem;
+    background: #d55;
+    color: #fff;
+    padding: 0.6rem 1.5rem;
+    height: 100%;
+    border-radius: 5px;
+    font-weight: 600;
   }
 }
 

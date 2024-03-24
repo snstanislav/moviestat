@@ -4,69 +4,159 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
-    <a href="/"><h2>Main page</h2></a>
-    
-  <h1>User's film statistics</h1>
-  <p><%= movieItem.imdbId %></p>
-  <h2><% if(movieItem.favorite==true){ %>
-  <b>(F)</b>
-  <% } %>
-  <!-- FAVORITE -->
- <form action="/film/<%= movieItem.imdbId %>" method="POST" onsubmit="return confirm('Are you sure?');">
-     <input type="hidden" name="favorite" 
-     value="<%= movieItem.favorite==true ? false : true %>">
-   <button type="submit"><%=
-   movieItem.favorite==true ? "Not favorite any more" : "Add to favorite"
-   %></button>
-  </form></h2>
-  <br>
-  
-  <h2><%= movieItem.pRating %> (<%=
-  movieItem.pDateTime %>)
-  <!-- CHANGE RATING -->
-   <form action="/film/<%= movieItem.imdbId %>" method="POST" onsubmit="return confirm('Are you sure?');">
-  <select name="personalRating">
-    <option value="10">10</option>
-    <option value="9">9</option>
-    <option value="8">8</option>
-    <option value="7">7</option>
-    <option value="6">6</option>
-    <option value="5">5</option>
-    <option value="4">4</option>
-    <option value="3">3</option>
-    <option value="2">2</option>
-    <option value="1">1</option>
-  </select>
-   <button type="submit">Change your rating</button>
-  </form></h2>
-  <br>
-  
-  <br>
-  <!-- REMOVE RATING-->
-  <form action="/film/delete/<%= movieItem.imdbId %>" method="POST"
-  onsubmit="return confirm('Are you sure?');">
-  <button type="submit">Remove you rating</button></form>
-  
-  <a href="<%= movieItem.imdbLink %>" target="blank"><h3><%= movieItem.commTitle %> (<%= movieItem.year %>)</h3></a>
-  <p><i><%= movieItem.origTitle %></i></p>
-      <br>
-<img alt="" src="<%= movieItem.sPoster %>">
+<body>
 
-  <p> <%= movieItem.duration %> | <%= movieItem.parental %> | <%= movieItem.type
-  ? movieItem.type+"| " : "" %><%= movieItem.genres %></p>
-      <p> <%= movieItem.countriesOrig %></p>
-        <br>
-      <p> <%= movieItem.plot %></p>
-      <p><b>IMDB rating: <%= movieItem.imdbRating %> (<%= movieItem.imdbRatingNum %>)</b></p>
-      <p> </p>
+<div class="film-wrapper">
+  <%- include('partials/navigate') %>
+
+  <div class="film-headline">
+    <div class="film-imdb"><!-- left -->
+      <%= movieItem.imdbRating ? `IMDB: ${movieItem.imdbRating} (${movieItem.imdbRatingNum})`: "" %>
+    </div>
+    
+    <div class="film-cert"><!-- center -->
+          
+      <%= movieItem.duration ? movieItem.duration.replace(' hour', 'h').replace(' minute', 'm').replaceAll('s', ''): "" %>
+         
+      <%= movieItem.parental ? " | "+(movieItem.parental==18 || movieItem.parental==16 ? movieItem.parental+"+": movieItem.parental): "" %>
+          
+      <%= movieItem.type ? " | "+movieItem.type: "" %>
+    </div><!-- /film-cert -->
+    
+    <!-- FAVORITE -->
+    <div class=favor>
+    <% let question = movieItem.favorite == true ? "Not favorite any more?": "Wanna add to favorites?"; %>
+      <form action="/film/<%= movieItem.imdbId %>" method="POST" onsubmit="return confirm('\n>> <%= question %>\n');">
+        <input type="hidden" name="favorite" value="<%= movieItem.favorite == true ? false: true %>">
+      <% if (movieItem.favorite == true) { %>
+        <button class="fav-button" type="submit">Fav</button>
+      <% } else { %>
+        <button class="add-fav-button" type="submit">+<br>Fav</button>
+      <% } %>
+      </form>
+    </div><!-- /favor -->
+  </div><!-- /film-headline -->
+ 
+  <div class="film-basic-info">
+    <div class="film-img-eval-wrap"><!-- left -->
+    <div>
+      <img alt="<%= movieItem.origTitle ? movieItem.origTitle: movieItem.commTitle %>" src="<%= movieItem.sPoster %>">
+    </div>
+      <div class="eval-wrapper">
+        <div class="rating"
+        onclick="openChange(this)">&#8593;&nbsp;&nbsp;<span><%=
+        movieItem.pRating %></span>&nbsp;&nbsp;&#8595;
+        </div>
+          
+        <div class="change-wrap change-rating">
+          <!-- CHANGE RATING -->
+          <form action="/film/<%= movieItem.imdbId %>" method="POST" onsubmit="return validateChange(event)">
+            <select name="personalRating">
+              <option value="10">10</option>
+              <option value="9">9</option>
+              <option value="8">8</option>
+              <option value="7">7</option>
+              <option value="6">6</option>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+            </select>
+            <button class="change" type="submit">Change your rating</button>
+          </form>
+          <!-- REMOVE RATING-->
+          <form action="/film/delete/<%= movieItem.imdbId %>" method="POST" onsubmit="return confirm('Are you sure?');">
+            <button class="remove" type="submit">Remove you rating</button>
+          </form>
+        </div> <!-- change-wrap -->
+        <div class="date">
+          <%= movieItem.pDateTime.replace(',', ' ') %>
+        </div>
+      </div><!-- /eval-wrap -->
+    </div><!-- /film-img-eval-wrap -->
       
-      <p> <%= movieItem.director %></p>
-      <p> <%= movieItem.cast %></p>
-      <br>
-      <p>Budget: <%= movieItem.budget %></p>
-      <p>Gross World wide: <%= movieItem.grossWW %></p>
+    <div class="film-descr"><!-- right -->
+      <div class="film-comm-title"> 
+        <a href="<%= movieItem.imdbLink %>" target="blank"><%=
+        movieItem.commTitle %><sup class="external-mark">&#8680;</sup><br><%= movieItem.year ? `(${movieItem.year})`: "" %>
+        </a>
+      </div>
+    <% if(movieItem.origTitle) { %>
+      <div class="film-orig-title"><%= movieItem.origTitle %>
+      </div>
+    <% } if(movieItem.genres) { %>
+      <div class="world film-genre">
+        <%= movieItem.genres %>
+      </div>
+    <% } if(movieItem.countriesOrig) { %>
+      <div class="world film-country"> 
+        <%= movieItem.countriesOrig %>
+      </div>
+    <% } if(movieItem.plot) { %>
+      <div class="film-plot"><b>Plot:&nbsp;</b>
+      <%= movieItem.plot %>
+      </div>
+    <% } if(movieItem.budget) { %>
+      <div class="film-budget">
+        <b>Budget: </b>
+        <%= movieItem.budget %>
+      </div>
+    <% } if(movieItem.grossWW) { %>
+      <div class="film-grossww">
+        <b>Gross WW: </b>
+        <%= movieItem.grossWW %>
+      </div>
+    <% } %>
+    </div><!-- /film-descr-->
+  </div><!-- /film-basic-info -->
 
+  <h1>Director:&nbsp;</h1>
+  <div class="film-director">
+    <% movieItem.director.forEach(elem => { %>
+     <a href="/person/<%= extractId(elem.imdbLink) %>"><%= elem.name %></a>
+    <% }) %>
+  </div>
     
-  </body>
+  <h1>Cast:&nbsp;</h1>
+  <div class="film-cast">
+    <% movieItem.cast.forEach(elem => { %>
+    <div class="role-item">
+      <a href="/person/<%= extractId(elem.imdbLink) %>">
+        <img src="<%= elem.sPhoto ? elem.sPhoto: "/images/person-blank.png" %>" alt="<%= elem.name %>">
+      </a>
+      <div class="cast-name">
+        <%= elem.name %>
+        <div class="cast-character">
+          <%= elem.character %>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+  </div><!-- /film-cast -->
+</div>
+  
+<script>
+  function openChange(target) {
+    let changeElem = target.parentElement.querySelector(".change-rating");
+    if (changeElem.style.display != "flex") {
+      changeElem.style.display = "flex";
+    } else {
+      changeElem.style.display = "none";
+    }
+  }
+  
+  function validateChange(event) {
+   let currValue = document.querySelector(".rating span").innerText.trim()
+    let newValue = event.target.elements.personalRating.value;
+    if(currValue != newValue)
+      return confirm('Are you sure?');
+    return false;
+  }
+  
+  let items = document.querySelectorAll(".world");
+  items[0].innerText = items[0].innerText.replaceAll(',', ', ');
+  items[1].innerText = items[1].innerText.replaceAll(',', ', ');
+</script>
+</body>
 </html>

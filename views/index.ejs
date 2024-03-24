@@ -9,6 +9,40 @@
     
     <%- include('partials/searchform') %>
     <br>
+      
+    <!-- MOVIE TABLE -->
+    <div class="section-closed" id="movieSect">
+      <h2 class="title-section">MOVIE TABLE</h2>
+      <div class="handle-section" onclick="pressOpener(this)"></div>
+      <div class="content-section">
+        <%- include('partials/sortbar/sortmovie', { sortquery: "/?sortmovie=" }) %>
+        <%- include('partials/movietable') 
+        %>
+      </div>
+    </div>
+    
+    <!-- ACTORS/ACTRESSES -->
+    <div class="section-closed" id="actorSect">
+      <h2 class="title-section">ACTORS / ACTRESSES</h2>
+      <div class="handle-section" onclick="pressOpener(this)"></div>
+      <div class="content-section">
+        <%- include('partials/sortbar/sortperson', { sortquery: "/?sortactor=" }) %>
+        <%- include('partials/actors') 
+        %>
+      </div>
+    </div>
+    
+    <!-- DIRECTORS -->
+    <div class="section-closed" id="directorSect">
+      <h2 class="title-section">DIRECTORS</h2>
+      <div class="handle-section" onclick="pressOpener(this)"></div>
+      <div class="content-section">
+        <%- include('partials/sortbar/sortperson', { sortquery:
+        "/?sortdirector=" }) %>
+        <%- include('partials/directors') 
+        %>
+      </div>
+    </div>
     
     <!-- DECADES -->
     <div class="section-closed" id="decadeSect">
@@ -32,30 +66,7 @@
       </div>
     </div>
    
-    <!-- DIRECTORS -->
-    <div class="section-closed" id="directorSect">
-      <h2 class="title-section">DIRECTORS</h2>
-      <div class="handle-section" onclick="pressOpener(this)"></div>
-      <div class="content-section">
-        <%- include('partials/sortbar/sortperson', { sortquery:
-        "/?sortdirector=" }) %>
-        <%- include('partials/directors') 
-        %>
-      </div>
-    </div>
-    
-    <!-- ACTORS/ACTRESSES -->
-    <div class="section-closed" id="actorSect">
-      <h2 class="title-section">ACTORS / ACTRESSES</h2>
-      <div class="handle-section" onclick="pressOpener(this)"></div>
-      <div class="content-section">
-        <%- include('partials/sortbar/sortperson', { sortquery: "/?sortactor=" }) %>
-        <%- include('partials/actors') 
-        %>
-      </div>
-    </div>
-    
-    <!-- GENRES -->
+   <!-- GENRES -->
     <div class="section-closed" id="genreSect">
       <h2 class="title-section">GENRES</h2>
       <div class="handle-section" onclick="pressOpener(this)"></div>
@@ -76,17 +87,7 @@
         %>
       </div>
     </div>
-   
-    <!-- MOVIE TABLE -->
-    <div class="section-closed" id="movieSect">
-      <h2 class="title-section">MOVIE TABLE</h2>
-      <div class="handle-section" onclick="pressOpener(this)"></div>
-      <div class="content-section">
-        <%- include('partials/sortbar/sortmovie', { sortquery: "/?sortmovie=" }) %>
-        <%- include('partials/movietable') 
-        %>
-      </div>
-    </div>
+ 
   
   </div>
   
