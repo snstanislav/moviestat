@@ -3,22 +3,22 @@
 */
 
 // modules
-const statisticsGenerator = require('./statisticsGenerator.js');
+const sg = require('./statisticsGenerator.js');
 const fs = require('fs')
 const dataProvider = require('../data/dataProvider.js');
-const db = dataProvider.getGeneralUserMovieList();
+let db = dataProvider.getGeneralUserMovieList();
 
 // enumerators
-const FilmStatMode = statisticsGenerator.FilmStatMode;
-const SortStatMode = statisticsGenerator.SortStatMode;
+const FilmStatMode = sg.FilmStatMode;
+const SortStatMode = sg.SortStatMode;
 
 // functions
-const composeFullStat = statisticsGenerator.composeFullStat;
-const setStatMapEntry = statisticsGenerator.setStatMapEntry;
-const calcPercentsAndRatesStat = statisticsGenerator.calcPercentsAndRatesStat;
-const sortStat = statisticsGenerator.sortStat;
-const getSingleProperty = statisticsGenerator.getSingleProperty;
-const extractIdFromLinkIMDB = statisticsGenerator.extractIdFromLinkIMDB;
+const composeFullStat = sg.composeFullStat;
+const setStatMapEntry = sg.setStatMapEntry;
+const calcPercentsAndRatesStat = sg.calcPercentsAndRatesStat;
+const sortStat = sg.sortStat;
+const getSingleProperty = sg.getSingleProperty;
+const extractIdFromLinkIMDB = sg.extractIdFromLinkIMDB;
 
 
 function getActorStat(sortMode, thresholdQuantity = 7) {
@@ -77,10 +77,13 @@ function setProfileOccupSection(profile, imdbId, personInfo, personMode) {
 ////
 function composePersonsRate(numFilmLimit, personMode) {
   let personsMap = new Map();
+  db.sort((a, b)=>sg.formatDT(a.pDateTime)-sg.formatDT(b.pDateTime));
   switch (personMode) {
     case FilmStatMode.CAST:
       db.forEach(film =>
         film.cast.forEach(elem => {
+          if(elem.name == "Kathy Bates")
+          console.log(elem.sPhoto+"\n\n")
           setPersonMapEntry(personsMap, elem, film.pRating);
         }));
       break;

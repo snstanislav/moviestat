@@ -2,10 +2,10 @@ const fs = require('fs')
 const path = require('path')
 
 const userLogin = "snstanislav";
-const backupSrcPath = path.join(__dirname,
-  "../../../moviestat_db/src/db.json");
+//const backupSrcPath = path.join(__dirname, "../../../moviestat_db/src/db.json");
 const userPath = path.join(__dirname, "../../../moviestat_db/users/" + userLogin);
 const userDataPath = path.join(userPath, "docs1");
+const backupSrcPath = path.join(userPath, "backup/moviestat-db-backup-2024-Mar-24 9h0m0s.json");
 
 /**
 * RESTORE BACKUP
@@ -34,4 +34,4 @@ function restoreBackupToUserDataDir() {
   });
 }
 
-//restoreBackupToUserDataDir()
+restoreBackupToUserDataDir()
