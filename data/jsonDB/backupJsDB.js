@@ -21,6 +21,7 @@ function loadAllFromUserDataDir() {
   console.log(db.length);
   return db.sort((a,b) => b.pRating-a.pRating);
 }
+module.exports.loadAllFromUserDataDir = loadAllFromUserDataDir;
 
 function createBackup() {
   fs.writeFileSync(newBackupPath, JSON.stringify(loadAllFromUserDataDir(),null,2));

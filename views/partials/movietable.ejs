@@ -6,21 +6,21 @@
       <% if (currentFilter.mode == "pRating") {
         %>
         your rating:&nbsp;
-        <%= currentFilter.value %>
+        <%= currentFilter.value %></b>
         <%
       } else if (currentFilter.value.includes('nm')) {
         %>
         <a href="person/<%= currentFilter.value %>" target="_blank"><%=
           (actorStat.get(currentFilter.value) || directorStat.get(currentFilter.value)).name
-          %></a>
+          %></a></b>
         <%
       } else if (currentFilter.value == "" && currentFilter.mode == "type") {
         %>
-        Common
+        Common</b>
         <%
       } else if (currentFilter.mode == "favorite") {
         %>
-        Favorites
+        Favorites</b>
         <%
       } else {
         %>

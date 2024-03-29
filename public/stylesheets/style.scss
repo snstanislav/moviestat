@@ -239,9 +239,12 @@
   .current-filter {
     margin: 2rem 0 3rem;
     font-size: 2.2rem*$scale;
-    & a {
+    a {
+      margin: 0 0.5rem 0;
+    }
+    a[href*="filter"] {
       background: $dark-4;
-      margin-left: 1rem;
+      margin-left: 0.5rem;
       padding: 0.3rem 0.8rem;
     }
   }
@@ -326,11 +329,21 @@
         content: "\2329 \00a0 \00a0 Collapse";
       }
       background: $dark-2;
+      border: 2px solid $dark-2;
+      &:active {
+        color: $dark-2;
+        background: #fff;
+      }
     } @else {
       &:before {
         content: "\232A \00a0 \00a0 Expand";
       }
       background: $dark-1;
+      border: 2px solid $dark-1;
+      &:active {
+        color: $dark-1;
+        background: #fff;
+      }
     }
   }
   .content-section {
@@ -543,7 +556,7 @@
     display: flex;
     justify-content: center;
     flex-flow: wrap;
-    gap: 2rem*$scale;
+    gap: 1.5rem*$scale;
     margin: 0;
     padding: -1+$scale;
     .actor-item {
@@ -552,14 +565,15 @@
       background: $light-1;
       box-shadow: 8px 10px 14px $dark-5;
       text-align: center;
-      min-width: 14rem;
-      width: 14rem;
+      min-width: 11.5rem;
+      width: 11.5rem;
       padding: 0.5rem 0.4rem;
       .top-line {
         padding: 0.3rem 0.2rem;
         border-radius: 4px;
         margin: 0.2rem 0.5rem 0.5rem;
         background: #fff;
+        font-size: 1.6rem;
       }
       .mid-line {
         img {
@@ -570,15 +584,16 @@
           width: 90%
         }
         div {
-          margin: 0.4rem 0.2rem 0.7rem;
+          margin: 0.4rem 0.2rem 0.5rem;
           border-radius: 5px;
-          font-size: 1.9rem*$scale;
+          font-size: 1.7rem;
           font-weight: bold;
+          opacity: 0.8;
         }
       }
       .person-data {
         margin: auto auto 0.2rem auto;
-        padding: 0.3rem 0.5rem;
+        padding: 0.3rem auto;
         text-align: center;
         background: #fff;
         border-radius: 4px;
@@ -911,7 +926,7 @@
       border: 2px solid #555;
       border-radius: 20px;
       img {
-       // width: 18%;
+        // width: 18%;
         max-width: 10rem;
         height: 100%;
         margin: 0 auto;

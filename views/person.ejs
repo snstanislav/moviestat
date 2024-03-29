@@ -20,14 +20,12 @@
       </div>
 
       <div class="person-occup"><!-- right -->
-        Known for you as: 
+        Known for you as: <br>
         <b>
         <% personItem.occupation.forEach(elem=>{
           if(elem=="cast"){ %>
-            actor/actress
-        <% }
-          if(elem=="director"){ %>
-            , director
+            actor/actress<% }
+          if(elem=="director"){ %>, director
         <% }
         }) %>
         </b>
