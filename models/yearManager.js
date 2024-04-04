@@ -16,111 +16,115 @@ const calcPercentsAndRatesStat = statisticsGenerator.calcPercentsAndRatesStat;
 const sortStat = statisticsGenerator.sortStat;
 
 
-function getYearStat(sortMode) {
-  return sortStat(composeFullStat(FilmStatMode.YEAR, initYearMap()), sortMode);
+function getYearStat(db, sortMode) {
+  return sortStat(composeFullStat(db, FilmStatMode.YEAR, initYearMap()), sortMode);
 }
 module.exports.getYearStat = getYearStat;
 ////
-function composeDecadeStat(sortMode) {
-  yearArr = [...statisticsGenerator.composeFullStat(FilmStatMode.YEAR,
-    initYearMap()).entries()];
-  let decadeMap = new Map();
-  let currGroupSum = 0;
-  let currRateSum = 0;
-  let totalQuantity = 0;
-  let firstYearInGroup = yearArr[0][0];
+function composeDecadeStat(db, sortMode) {
+  let yearFullStat = statisticsGenerator.composeFullStat(db, FilmStatMode.YEAR,
+    initYearMap());
+  if (yearFullStat) {
+    yearArr = [...yearFullStat.entries()];
+    let decadeMap = new Map();
+    let currGroupSum = 0;
+    let currRateSum = 0;
+    let totalQuantity = 0;
+    let firstYearInGroup = yearArr[0][0];
 
-  if (yearArr[0][0] > yearArr[yearArr.length-1][0]) {
-    /* from future to past */
-    for (let i = 0; i < yearArr.length; i += 1) {
-      if (yearArr[i][0]%10 == 0) {
-        /* decade beginning detected */
-        //=== increase ===
-        currGroupSum += yearArr[i][1].quantity;
-        currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
-        if (yearArr[i][0] == firstYearInGroup) {
-          /* decade is currently
+    if (yearArr[0][0] > yearArr[yearArr.length-1][0]) {
+      /* from future to past */
+      for (let i = 0; i < yearArr.length; i += 1) {
+        if (yearArr[i][0]%10 == 0) {
+          /* decade beginning detected */
+          //=== increase ===
+          currGroupSum += yearArr[i][1].quantity;
+          currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
+          if (yearArr[i][0] == firstYearInGroup) {
+            /* decade is currently
         represented by only its first year */
-          //--- assign ---
-          totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum);
-        } else {
-          //--- assign ---
-          totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}-${firstYearInGroup}`, totalQuantity, currRateSum, currGroupSum)
-        }
-        //== reset ==
-        currGroupSum = 0;
-        currRateSum = 0;
-        firstYearInGroup = yearArr[i+1][0];
-      } else if (i == yearArr.length-1) {
-        /* the very last year */
-        //=== increase ===
-        currGroupSum += yearArr[i][1].quantity;
-        currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
-        if (yearArr[i][0] == firstYearInGroup) {
-          /* the very last year
+            //--- assign ---
+            totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum);
+          } else {
+            //--- assign ---
+            totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}-${firstYearInGroup}`, totalQuantity, currRateSum, currGroupSum)
+          }
+          //== reset ==
+          currGroupSum = 0;
+          currRateSum = 0;
+          firstYearInGroup = yearArr[i+1][0];
+        } else if (i == yearArr.length-1) {
+          /* the very last year */
+          //=== increase ===
+          currGroupSum += yearArr[i][1].quantity;
+          currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
+          if (yearArr[i][0] == firstYearInGroup) {
+            /* the very last year
         represents the first one in its current group */
-          //--- assign ---
-          totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum)
+            //--- assign ---
+            totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum)
+          } else {
+            //--- assign ---
+            totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}-${firstYearInGroup}`, totalQuantity, currRateSum, currGroupSum)
+          }
         } else {
-          //--- assign ---
-          totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}-${firstYearInGroup}`, totalQuantity, currRateSum, currGroupSum)
+          //=== increase ===
+          currGroupSum += yearArr[i][1].quantity;
+          currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
         }
-      } else {
-        //=== increase ===
-        currGroupSum += yearArr[i][1].quantity;
-        currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
+      }
+    } else if (yearArr[0][0] < yearArr[yearArr.length-1][0]) {
+      /* from past to future */
+      for (let i = 0; i < yearArr.length; i += 1) {
+        if (yearArr[i][0]%10 == 0) {
+          /* decade beginning detected*/
+          if (yearArr[i-1][0] == firstYearInGroup) {
+            /* the first decade is represented by only its last year */
+            //--- assign ---
+            totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i-1][0]}`,
+              totalQuantity, currRateSum, currGroupSum)
+          } else {
+            /* and now save previous decade */
+            //--- assign ---
+            totalQuantity = setStatMapEntry(decadeMap,
+              `${firstYearInGroup}-${yearArr[i-1][0]}`, totalQuantity,
+              currRateSum, currGroupSum)
+          }
+          //=== increase ===
+          currGroupSum = yearArr[i][1].quantity;
+          currRateSum = Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
+          firstYearInGroup = yearArr[i][0];
+          if (i == yearArr.length-1) {
+            /* decade's first year appears to be the very last one */
+            //--- assign ---
+            totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum)
+          }
+        } else if (i == yearArr.length-1) {
+          /* the very last year; processing the last decade */
+          //=== increase ===
+          currGroupSum += yearArr[i][1].quantity;
+          currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
+          if (yearArr[i][0] == firstYearInGroup) {
+            //--- assign ---
+            totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum)
+          } else {
+            //--- assign ---
+            totalQuantity = setStatMapEntry(decadeMap, `${firstYearInGroup}-${yearArr[i][0]}`,
+              totalQuantity, currRateSum, currGroupSum)
+          }
+        } else {
+          //=== increase ===
+          currGroupSum += yearArr[i][1].quantity;
+          currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
+        }
       }
     }
-  } else if (yearArr[0][0] < yearArr[yearArr.length-1][0]) {
-    /* from past to future */
-    for (let i = 0; i < yearArr.length; i += 1) {
-      if (yearArr[i][0]%10 == 0) {
-        /* decade beginning detected*/
-        if (yearArr[i-1][0] == firstYearInGroup) {
-          /* the first decade is represented by only its last year */
-          //--- assign ---
-          totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i-1][0]}`,
-            totalQuantity, currRateSum, currGroupSum)
-        } else {
-          /* and now save previous decade */
-          //--- assign ---
-          totalQuantity = setStatMapEntry(decadeMap,
-            `${firstYearInGroup}-${yearArr[i-1][0]}`, totalQuantity,
-            currRateSum, currGroupSum)
-        }
-        //=== increase ===
-        currGroupSum = yearArr[i][1].quantity;
-        currRateSum = Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
-        firstYearInGroup = yearArr[i][0];
-        if (i == yearArr.length-1) {
-          /* decade's first year appears to be the very last one */
-          //--- assign ---
-          totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum)
-        }
-      } else if (i == yearArr.length-1) {
-        /* the very last year; processing the last decade */
-        //=== increase ===
-        currGroupSum += yearArr[i][1].quantity;
-        currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
-        if (yearArr[i][0] == firstYearInGroup) {
-          //--- assign ---
-          totalQuantity = setStatMapEntry(decadeMap, `${yearArr[i][0]}`, totalQuantity, currRateSum, currGroupSum)
-        } else {
-          //--- assign ---
-          totalQuantity = setStatMapEntry(decadeMap, `${firstYearInGroup}-${yearArr[i][0]}`,
-            totalQuantity, currRateSum, currGroupSum)
-        }
-      } else {
-        //=== increase ===
-        currGroupSum += yearArr[i][1].quantity;
-        currRateSum += Number(yearArr[i][1].rating)*yearArr[i][1].quantity;
-      }
-    }
+    const resultMap = calcPercentsAndRatesStat(decadeMap, totalQuantity);
+
+    return sortStat(resultMap, sortMode);
+  } else {
+    return new Map();
   }
-  const resultMap = calcPercentsAndRatesStat(decadeMap, totalQuantity);
-
-  return sortStat(resultMap, sortMode);
-
 }
 module.exports.composeDecadeStat = composeDecadeStat;
 ////

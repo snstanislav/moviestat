@@ -84,7 +84,7 @@
           </div>
         </div>
         <div class="row-section col-poster-dur">
-          <a href="film/<%= key %>"><img src="<%= value.sPoster %>" alt="<%=
+          <a href="film/<%= key %>" target="_blank"><img src="<%= value.sPoster %>" alt="<%=
             value.commTitle %>"></a>
           <div class="duration">
             <%= value.duration.replace(' hour', 'h').replace(' minute', 'm').replaceAll('s', '') %>
@@ -162,7 +162,7 @@
   }
   
   function validateChange(event) {
-   let currValue = document.querySelector(".rating").innerText.trim()
+   let currValue = event.target.parentElement.parentElement.querySelector(".rating").innerText.trim();
     let newValue = event.target.elements.personalRating.value;
     if(currValue != newValue)
       return confirm('Are you sure?');

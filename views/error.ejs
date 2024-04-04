@@ -10,7 +10,10 @@
       <div>
         <h1><%= errHead %></h1>
         <p><%= errMsg %></p>
-        &#8592;&nbsp;<a href='/'>back to main page</a>
+        &#8592;&nbsp;<a href='/'>main page</a>
+        <% if(id) { %>
+          &nbsp;&nbsp;|&nbsp;&nbsp;<a href='/film/<%= id %>'>film profile</a>&nbsp;&#8594;
+        <% } %>
       </div>
     </div>
   </div>

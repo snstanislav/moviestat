@@ -22,12 +22,9 @@
       <div class="person-occup"><!-- right -->
         Known for you as: <br>
         <b>
-        <% personItem.occupation.forEach(elem=>{
-          if(elem=="cast"){ %>
-            actor/actress<% }
-          if(elem=="director"){ %>, director
-        <% }
-        }) %>
+        <%= String(personItem.occupation)
+        .replace("cast", "actor/actress")
+        .replace(",", ", ") %>
         </b>
       </div><!-- /person-occup -->
     </div><!-- /person-descr -->

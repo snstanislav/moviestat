@@ -16,7 +16,7 @@ const calcPercentsAndRatesStat = statisticsGenerator.calcPercentsAndRatesStat;
 const sortStat = statisticsGenerator.sortStat;
 
 
-function getCountryStat(sortMode) {
-  return sortStat(composeFullStat(FilmStatMode.COUNTRY), sortMode);
+function getCountryStat(db, sortMode) {
+  return sortStat(composeFullStat(db, FilmStatMode.COUNTRY), sortMode);
 }
 module.exports.getCountryStat = getCountryStat;

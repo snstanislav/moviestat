@@ -7,7 +7,7 @@ const countryManager = require('../models/countryManager.js');
 const personManager = require('../models/personManager.js');
 const movieManager = require('../models/movieManager.js');
 const rateManager = require('../models/rateManager.js');
-
+const dp = require('../data/dataProvider.js');
 
 // enumerators
 const FilmStatMode = statisticsGenerator.FilmStatMode;
@@ -25,58 +25,82 @@ paramsMap.set("sortactor", SortStatMode.RATING_DESC)
 paramsMap.set("sortdirector", SortStatMode.RATING_DESC)
 paramsMap.set("sortmovie", SortStatMode.EVAL_DATETIME_DESC)
 
-
+// load main page
 router.get("/", (req, res)=> {
-  console.log("filter:")
-console.log(paramsMap.get("filtermode"))
-console.log(paramsMap.get("filtervalue"))
-
   for (const [key, value] of Object.entries(req.query)) {
     console.log(`${key}: ${value}`);
     paramsMap.set(key, value);
   }
-
-  res.render('index', {
-    title: "User's movie statistics",
-    SortMode: SortStatMode,
-    FilmMode: FilmStatMode,
-    currentFilter: {
-      mode: paramsMap.get("filtermode"), 
-      value: paramsMap.get("filtervalue")
-    },
-    yearStat: yearManager.getYearStat(paramsMap.get("sortyear")),
-    sortyearmode: paramsMap.get("sortyear"),
-    decadeStat: yearManager.composeDecadeStat(paramsMap.get("sortdecade")),
-    sortdecademode: paramsMap.get("sortdecade"),
-    genreStat: genreManager.getGenreStat(paramsMap.get("sortgenre")),
-    sortgenremode: paramsMap.get("sortgenre"),
-    countryStat: countryManager.getCountryStat(paramsMap.get("sortcountry")),
-    sortcountrymode: paramsMap.get("sortcountry"),
-    actorStat: personManager.getActorStat(paramsMap.get("sortactor")),
-    sortactormode: paramsMap.get("sortactor"),
-    directorStat: personManager.getDirectorStat(paramsMap.get("sortdirector")),
-    sortdirectormode: paramsMap.get("sortdirector"),
-    movieStat: movieManager.getMovieStat(paramsMap.get("sortmovie"), paramsMap.get("filtermode"), paramsMap.get("filtervalue")),
-    sortmoviemode: paramsMap.get("sortmovie")
-  });
-  console.log("Router: index");
+  if (dp.dbCache) {
+    console.log("\nindex >> loaded from [dbCache] - %s\n", dp.dbCache.length);
+    render(req, res, dp.dbCache);
+  } else {
+    dp.initGeneralUserMovieList((db)=> {
+      render(req, res, db);
+      console.log("\nindex >> extracted from database - %s\n", db.length);
+      dp.dbCache = db;
+    });
+  }
 });
 
-router.post("/index/:id",
-  (req, res)=> {
-    let openedFilm = movieManager.getMovie(req.params['id']);
-    console.log(req.body)
-    console.log(openedFilm.commTitle)
-    if (req.params['id']) {
-      if (req.body.favorite && openedFilm.favorite != req.body.favorite) {
-        openedFilm.favorite = req.body.favorite == "true" ? true: false;
-      }
-      if (req.body.personalRating && openedFilm.pRating != req.body.personalRating) {
-        openedFilm.pRating = req.body.personalRating;
-      }
-      movieManager.changeUserEval(openedFilm);
-      res.redirect("/");
+function render(req, res, db) {
+  res.render('index',
+    {
+      title: "User's movie statistics",
+      SortMode: SortStatMode,
+      FilmMode: FilmStatMode,
+      currentFilter: {
+        mode: paramsMap.get("filtermode"),
+        value: paramsMap.get("filtervalue")
+      },
+      yearStat: yearManager.getYearStat(db,
+        paramsMap.get("sortyear")),
+      decadeStat: yearManager.composeDecadeStat(db,
+        paramsMap.get("sortdecade")),
+      genreStat: genreManager.getGenreStat(db,
+        paramsMap.get("sortgenre")),
+      countryStat: countryManager.getCountryStat(db,
+        paramsMap.get("sortcountry")),
+      actorStat: personManager.getActorStat(db,
+        paramsMap.get("sortactor")),
+      directorStat: personManager.getDirectorStat(db,
+        paramsMap.get("sortdirector")),
+      movieStat: movieManager.getMovieStat(db,
+        paramsMap.get("sortmovie"),
+        paramsMap.get("filtermode"),
+        paramsMap.get("filtervalue")),
+      /*new Map([...(movieManager.getMovieStat(db, paramsMap.get("sortmovie"),
+        paramsMap.get("filtermode"),
+        paramsMap.get("filtervalue")))
+        .entries()].filter(elem => statisticsGenerator.formatDT(elem[1].pDateTime) >
+        statisticsGenerator.formatDT("01.02.2024, 00:00"))),*/
+      ////
+      sortyearmode: paramsMap.get("sortyear"),
+      sortdecademode: paramsMap.get("sortdecade"),
+      sortgenremode: paramsMap.get("sortgenre"),
+      sortcountrymode: paramsMap.get("sortcountry"),
+      sortactormode: paramsMap.get("sortactor"),
+      sortdirectormode: paramsMap.get("sortdirector"),
+      sortmoviemode: paramsMap.get("sortmovie")
+    });
+  console.log("Router: index");
+}
+
+// change
+router.post("/index/:id", (req, res)=> {
+  let currentFilm = movieManager.getMovie(dp.dbCache, req.params['id']);
+  console.log(req.body)
+  if (currentFilm && req.params['id']) {
+    if (req.body.favorite && currentFilm.favorite != req.body.favorite) {
+      currentFilm.favorite = req.body.favorite == "true" ? true: false;
     }
-  });
+    if (req.body.personalRating && currentFilm.pRating != req.body.personalRating) {
+      currentFilm.pRating = req.body.personalRating;
+    }
+    movieManager.changeUserEval(currentFilm, () => {
+      res.redirect("/");
+    });
+  }
+});
 
 module.exports = router;

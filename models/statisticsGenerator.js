@@ -2,10 +2,6 @@
 * 04.03.2024
 */
 
-const dataProvider = require('../data/dataProvider.js');
-
-const db = dataProvider.getGeneralUserMovieList();
-
 const FilmStatMode = {
   CAST: "cast",
   DIRECTOR: "director",
@@ -43,136 +39,144 @@ const SortStatMode = {
 };
 module.exports.SortStatMode = SortStatMode;
 
-module.exports.composeFullStat = (filmProperty, propertyMap = new Map()) => {
+module.exports.composeFullStat = (db, filmProperty, propertyMap = new Map()) => {
+  if (db) {
+    let totalQuantity = 0;
+    if (filmProperty == FilmStatMode.YEAR || filmProperty == FilmStatMode.GENRE || filmProperty == FilmStatMode.COUNTRY) {
 
-  let totalQuantity = 0;
-  if (filmProperty == FilmStatMode.YEAR || filmProperty == FilmStatMode.GENRE || filmProperty == FilmStatMode.COUNTRY) {
-
-    switch (filmProperty) {
-      case FilmStatMode.YEAR:
-        db.forEach(item => {
-          totalQuantity = setStatMapEntry(propertyMap, item.year.substring(0, 4), totalQuantity, item.pRating, 1);
-        });
-        /* do not change initial sort order */
-        propertyMap = new Map([...propertyMap.entries()].sort((a, b)=>b[0]-a[0]));
-        break;
-      case FilmStatMode.GENRE:
-        db.forEach(item => {
-          item[filmProperty].forEach(elem => {
-            totalQuantity = setStatMapEntry(propertyMap, elem, totalQuantity, item.pRating, 1);
+      switch (filmProperty) {
+        case FilmStatMode.YEAR:
+          db.forEach(item => {
+            totalQuantity = setStatMapEntry(propertyMap, item.year.substring(0, 4), totalQuantity, item.pRating, 1);
           });
-        });
-        break;
-      case FilmStatMode.COUNTRY:
-        db.forEach(item => {
-          item[filmProperty].forEach(elem => {
-            totalQuantity = setStatMapEntry(propertyMap, elem, totalQuantity, item.pRating, 1);
+          /* do not change initial sort order */
+          propertyMap = new Map([...propertyMap.entries()].sort((a, b)=>b[0]-a[0]));
+          break;
+        case FilmStatMode.GENRE:
+          db.forEach(item => {
+            item[filmProperty].forEach(elem => {
+              totalQuantity = setStatMapEntry(propertyMap, elem, totalQuantity, item.pRating, 1);
+            });
           });
-        });
-        break;
-      default:
-        console.error(`Mode error`);
-        break;
+          break;
+        case FilmStatMode.COUNTRY:
+          db.forEach(item => {
+            item[filmProperty].forEach(elem => {
+              totalQuantity = setStatMapEntry(propertyMap, elem, totalQuantity, item.pRating, 1);
+            });
+          });
+          break;
+        default:
+          console.error(`StatisticsGenerator: compose mode error`);
+          break;
+      }
+    } else {
+      console.error(`StatisticsGenerator: compose mode is not valid`)
     }
-  } else {
-    console.error(`Mode is not valid`)
-  }
 
-  return calcPercentsAndRatesStat(propertyMap, totalQuantity);
+    return calcPercentsAndRatesStat(propertyMap, totalQuantity);
+  } else {
+    console.log("composeFullStat: 'db' is invalid");
+  }
 }
 
 function sortStat(map, sortMode) {
-  switch (sortMode) {
-    case SortStatMode.KEY_ASC:
-      return new Map([...map.entries()].sort());
-      break;
-    case SortStatMode.KEY_DESC:
-      return new Map([...map.entries()].sort().reverse());
-      break;
-    case SortStatMode.QUANTITY_ASC:
-      return new Map([...map.entries()]
-      .sort((a, b)=>a[1].rating-b[1].rating)
-      .sort((a, b)=>a[1].quantity-b[1].quantity));
-      break;
-    case SortStatMode.QUANTITY_DESC:
-      return new Map([...map.entries()]
-      .sort((a, b)=>b[1].rating-a[1].rating)
-      .sort((a, b)=>b[1].quantity-a[1].quantity));
-      break;
-    case SortStatMode.RATING_ASC:
-      return new Map([...map.entries()]
-      .sort((a, b)=>a[1].quantity-b[1].quantity)
-      .sort((a, b)=>a[1].rating-b[1].rating));
-      break;
-    case SortStatMode.RATING_DESC:
-      return new Map([...map.entries()]
-      .sort((a, b)=>b[1].quantity-a[1].quantity)
-      .sort((a, b)=>b[1].rating-a[1].rating));
-      break;
-    // for persons
-    case SortStatMode.NAME_ASC:
-      return new Map([...map.entries()]
-        .sort((a, b)=> a[1].name.localeCompare(b[1].name)));
-      break;
-    case SortStatMode.NAME_DESC:
-      return new Map([...map.entries()].sort((a, b)=> b[1].name.localeCompare(a[1].name)));
-      break;
-    // for films
-    case SortStatMode.YEAR_ASC:
-      return new Map([...map.entries()]
-        .sort((a, b)=>formatDT(a[1].pDateTime)
-          -formatDT(b[1].pDateTime))
-        .sort((a, b)=>normalizeYear(a[1].year)-normalizeYear(b[1].year)));
-      break;
-    case SortStatMode.YEAR_DESC:
-      return new Map([...map.entries()]
-        .sort((a, b)=>formatDT(b[1].pDateTime)
-          -formatDT(a[1].pDateTime))
-        .sort((a, b)=>normalizeYear(b[1].year)-normalizeYear(a[1].year)));
-      break;
-    case SortStatMode.USER_RATING_ASC:
-      return new Map([...map.entries()]
-        .sort((a, b)=>formatDT(b[1].pDateTime)
-          -formatDT(a[1].pDateTime))
-        .sort((a, b)=>a[1].pRating-b[1].pRating));
-      break;
-    case SortStatMode.USER_RATING_DESC:
-      return new Map([...map.entries()]
-        .sort((a, b)=>formatDT(b[1].pDateTime)
-          -formatDT(a[1].pDateTime))
-        .sort((a, b)=>b[1].pRating-a[1].pRating));
-      break;
-    case SortStatMode.IMDB_RATING_ASC:
-      return new Map([...map.entries()]
-        .sort((a, b)=>formatNum(a[1].imdbRatingNum)-formatNum(b[1].imdbRatingNum))
-        .sort((a, b)=>a[1].imdbRating-b[1].imdbRating));
-      break;
-    case SortStatMode.IMDB_RATING_DESC:
-      return new Map([...map.entries()]
-        .sort((a, b)=>formatNum(b[1].imdbRatingNum)-formatNum(a[1].imdbRatingNum))
-        .sort((a, b)=>b[1].imdbRating-a[1].imdbRating));
-      break;
-    case SortStatMode.IMDB_EVALNUM_ASC:
-      return new Map([...map.entries()]
-        .sort((a, b)=>a[1].imdbRating-b[1].imdbRating)
-        .sort((a, b)=>formatNum(a[1].imdbRatingNum)-formatNum(b[1].imdbRatingNum)));
-      break;
-    case SortStatMode.IMDB_EVALNUM_DESC:
-      return new Map([...map.entries()]
-        .sort((a, b)=>b[1].imdbRating-a[1].imdbRating)
-        .sort((a, b)=>formatNum(b[1].imdbRatingNum)-formatNum(a[1].imdbRatingNum)));
-      break;
-    case SortStatMode.EVAL_DATETIME_ASC:
-      return new Map([...map.entries()]
-        .sort((a, b)=>formatDT(a[1].pDateTime)-formatDT(b[1].pDateTime)));
-      break;
-    case SortStatMode.EVAL_DATETIME_DESC:
-      return new Map([...map.entries()]
-        .sort((a, b)=>formatDT(b[1].pDateTime)-formatDT(a[1].pDateTime)));
-      break;
-    default:
-      return map;
-      break;
+  if (map) {
+    switch (sortMode) {
+      case SortStatMode.KEY_ASC:
+        return new Map([...map.entries()].sort());
+        break;
+      case SortStatMode.KEY_DESC:
+        return new Map([...map.entries()].sort().reverse());
+        break;
+      case SortStatMode.QUANTITY_ASC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>a[1].rating-b[1].rating)
+          .sort((a, b)=>a[1].quantity-b[1].quantity));
+        break;
+      case SortStatMode.QUANTITY_DESC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>b[1].rating-a[1].rating)
+          .sort((a, b)=>b[1].quantity-a[1].quantity));
+        break;
+      case SortStatMode.RATING_ASC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>a[1].quantity-b[1].quantity)
+          .sort((a, b)=>a[1].rating-b[1].rating));
+        break;
+      case SortStatMode.RATING_DESC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>b[1].quantity-a[1].quantity)
+          .sort((a, b)=>b[1].rating-a[1].rating));
+        break;
+      // for persons
+      case SortStatMode.NAME_ASC:
+        return new Map([...map.entries()]
+          .sort((a, b)=> a[1].name.localeCompare(b[1].name)));
+        break;
+      case SortStatMode.NAME_DESC:
+        return new Map([...map.entries()].sort((a, b)=> b[1].name.localeCompare(a[1].name)));
+        break;
+      // for films
+      case SortStatMode.YEAR_ASC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>formatDT(a[1].pDateTime)
+            -formatDT(b[1].pDateTime))
+          .sort((a, b)=>normalizeYear(a[1].year)-normalizeYear(b[1].year)));
+        break;
+      case SortStatMode.YEAR_DESC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>formatDT(b[1].pDateTime)
+            -formatDT(a[1].pDateTime))
+          .sort((a, b)=>normalizeYear(b[1].year)-normalizeYear(a[1].year)));
+        break;
+      case SortStatMode.USER_RATING_ASC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>formatDT(b[1].pDateTime)
+            -formatDT(a[1].pDateTime))
+          .sort((a, b)=>a[1].pRating-b[1].pRating));
+        break;
+      case SortStatMode.USER_RATING_DESC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>formatDT(b[1].pDateTime)
+            -formatDT(a[1].pDateTime))
+          .sort((a, b)=>b[1].pRating-a[1].pRating));
+        break;
+      case SortStatMode.IMDB_RATING_ASC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>formatNum(a[1].imdbRatingNum)-formatNum(b[1].imdbRatingNum))
+          .sort((a, b)=>a[1].imdbRating-b[1].imdbRating));
+        break;
+      case SortStatMode.IMDB_RATING_DESC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>formatNum(b[1].imdbRatingNum)-formatNum(a[1].imdbRatingNum))
+          .sort((a, b)=>b[1].imdbRating-a[1].imdbRating));
+        break;
+      case SortStatMode.IMDB_EVALNUM_ASC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>a[1].imdbRating-b[1].imdbRating)
+          .sort((a, b)=>formatNum(a[1].imdbRatingNum)-formatNum(b[1].imdbRatingNum)));
+        break;
+      case SortStatMode.IMDB_EVALNUM_DESC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>b[1].imdbRating-a[1].imdbRating)
+          .sort((a, b)=>formatNum(b[1].imdbRatingNum)-formatNum(a[1].imdbRatingNum)));
+        break;
+      case SortStatMode.EVAL_DATETIME_ASC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>formatDT(a[1].pDateTime)-formatDT(b[1].pDateTime)));
+        break;
+      case SortStatMode.EVAL_DATETIME_DESC:
+        return new Map([...map.entries()]
+          .sort((a, b)=>formatDT(b[1].pDateTime)-formatDT(a[1].pDateTime)));
+        break;
+      default:
+        return map;
+        break;
+    }
+  } else {
+    console.error("sortStat: src map was empty...")
+    return new Map();
   }
 }
 module.exports.sortStat = sortStat;
@@ -233,8 +237,8 @@ function setStatMapEntry(propertyMap, key, totalQuantity, rating, incrValue) {
 }
 module.exports.setStatMapEntry = setStatMapEntry;
 ///
-module.exports.getSingleProperty = (value, filmProperty) => {
-  if (filmProperty) {
+module.exports.getSingleProperty = (db, value, filmProperty) => {
+  if (filmProperty && db) {
     let count = 0;
     let amount = 0;
     let filmList = [];

@@ -6,7 +6,6 @@
 const statisticsGenerator = require('./statisticsGenerator.js');
 const fs = require('fs')
 const dataProvider = require('../data/dataProvider.js');
-const db = dataProvider.getGeneralUserMovieList();
 const MovieEntry = require('./movieItem.js').MovieEntry;
 
 // enumerators
@@ -23,30 +22,33 @@ const extractIdFromLinkIMDB = statisticsGenerator.extractIdFromLinkIMDB;
 const filterMovieStat = statisticsGenerator.filterMovieStat;
 
 
-module.exports.getMovieStat = (sortMode, filterMode, filterValue) => {
-  return filterMovieStat(sortStat(composeFilmsRate(), sortMode), filterMode, filterValue);
+module.exports.getMovieStat = (db, sortMode, filterMode, filterValue) => {
+  return filterMovieStat(sortStat(composeFilmsRate(db), sortMode), filterMode, filterValue);
 }
 ///
-module.exports.getMovie = (imdbId) => {
-  return db.find(elem => elem.imdbId == imdbId);
+module.exports.getMovie = (db, imdbId) => {
+  if (db) {
+    return db.find(elem => elem.imdbId == imdbId);
+  }
 }
 ///
-module.exports.removeMovie = (imdbId) => {
-  dataProvider.removeUserMovieEval(imdbId);
+module.exports.removeMovie = (imdbId, renderOk, renderErr) => {
+  dataProvider.removeUserMovieEval(imdbId, renderOk, renderErr);
 }
 ///
-module.exports.changeUserEval = (item) => {
+module.exports.changeUserEval = (item, render) => {
   let currItem = new MovieEntry()
   currItem.copy(item)
-  dataProvider.updateUserMovieEval(currItem);
+  dataProvider.updateUserMovieEval(currItem, render);
 }
 ///
-
-function composeFilmsRate() {
+function composeFilmsRate(db) {
   let filmsMap = new Map();
-  db.forEach(elem => {
-    setFilmMapEntry(filmsMap, elem);
-  });
+  if (db) {
+    db.forEach(elem => {
+      setFilmMapEntry(filmsMap, elem);
+    });
+  }
   return filmsMap;
 }
 module.exports.composeFilmsRate = composeFilmsRate;
@@ -61,37 +63,21 @@ function setFilmMapEntry(map, detailsItem) {
     origTitle: detailsItem.origTitle,
     year: detailsItem.year,
     duration: detailsItem.duration,
-    parental: detailsItem.parental,
+    //parental: detailsItem.parental,
     type: detailsItem.type,
-    countriesOrig: detailsItem.countriesOrig,
-    plot: detailsItem.plot,
+   //countriesOrig: detailsItem.countriesOrig,
+    //plot: detailsItem.plot,
     imdbRating: detailsItem.imdbRating,
     imdbRatingNum: detailsItem.imdbRatingNum,
     sPoster: detailsItem.sPoster,
-    genres: detailsItem.genres,
-    director: detailsItem.director,
-    cast: detailsItem.cast,
-    budget: detailsItem.budget,
-    grossWW: detailsItem.grossWW,
+    //genres: detailsItem.genres,
+    //director: detailsItem.director,
+    //cast: detailsItem.cast,
+    //budget: detailsItem.budget,
+    //grossWW: detailsItem.grossWW,
     pRating: detailsItem.pRating,
     pDateTime: detailsItem.pDateTime,
     favorite: detailsItem.favorite
   }
   map.set(key, entry)
-}
-
-/// temporary
-function printFilmsRate(filmsMap) {
-  let filmsList = []
-
-  console.log("films to be printed: "+filmsMap.size)
-  filmsMap.forEach(elem => {
-    filmsList.push([elem.commTitle,
-      elem.year,
-      elem.pRating]);
-  });
-  const result = JSON.stringify(filmsList/*.sort((a, b)=>b[2]-a[2])*/);
-  fs.writeFileSync("./listtemp3.txt",
-    result.trim().replaceAll("],[",
-      "],\n["));
 }

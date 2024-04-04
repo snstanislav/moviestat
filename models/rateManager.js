@@ -32,7 +32,7 @@ function performImdbSearch(query, render) {
 }
 module.exports.performImdbSearch = performImdbSearch;
 ///
-function rateMovie(filmLink, personalRating) {
+function rateMovie(filmLink, personalRating, renderOk, renderErr) {
   fetch(filmLink).then(response => {
     if (response.ok) {
       console.log("2nd fetch success"); //
@@ -43,7 +43,7 @@ function rateMovie(filmLink, personalRating) {
       extractIdFromLinkIMDB(filmLink),
       filmLink, personalRating, new Date().toLocaleString("uk-UA")); // !!
 
-    dataProvider.setUserMovieEval(resObj);
+    dataProvider.setUserMovieEval(resObj, renderOk, renderErr);
   });
 }
 module.exports.rateMovie = rateMovie;

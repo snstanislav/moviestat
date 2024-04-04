@@ -66,7 +66,8 @@
             <button class="change" type="submit">Change your rating</button>
           </form>
           <!-- REMOVE RATING-->
-          <form action="/film/delete/<%= movieItem.imdbId %>" method="POST" onsubmit="return confirm('Are you sure?');">
+          <form action="/film/delete/<%= movieItem.imdbId %>" method="POST"
+          onsubmit="return confirm('>> Do you really want to remove this one?');">
             <button class="remove" type="submit">Remove you rating</button>
           </form>
         </div> <!-- change-wrap -->
@@ -147,7 +148,7 @@
   }
   
   function validateChange(event) {
-   let currValue = document.querySelector(".rating span").innerText.trim()
+   let currValue = document.querySelector(".rating span").innerText.trim();
     let newValue = event.target.elements.personalRating.value;
     if(currValue != newValue)
       return confirm('Are you sure?');

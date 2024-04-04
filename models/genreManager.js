@@ -16,7 +16,7 @@ const calcPercentsAndRatesStat = statisticsGenerator.calcPercentsAndRatesStat;
 const sortStat = statisticsGenerator.sortStat;
 
 
-function getGenreStat(sortMode) {
-  return sortStat(composeFullStat(FilmStatMode.GENRE), sortMode);
+function getGenreStat(db, sortMode) {
+  return sortStat(composeFullStat(db, FilmStatMode.GENRE), sortMode);
 }
 module.exports.getGenreStat = getGenreStat;
