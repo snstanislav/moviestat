@@ -65,11 +65,11 @@ function render(req, res, db) {
         paramsMap.get("sortactor")),
       directorStat: personManager.getDirectorStat(db,
         paramsMap.get("sortdirector")),
-      movieStat: movieManager.getMovieStat(db,
+     movieStat: movieManager.getMovieStat(db,
         paramsMap.get("sortmovie"),
         paramsMap.get("filtermode"),
         paramsMap.get("filtervalue")),
-      /*new Map([...(movieManager.getMovieStat(db, paramsMap.get("sortmovie"),
+     /* new Map([...(movieManager.getMovieStat(db, paramsMap.get("sortmovie"),
         paramsMap.get("filtermode"),
         paramsMap.get("filtervalue")))
         .entries()].filter(elem => statisticsGenerator.formatDT(elem[1].pDateTime) >

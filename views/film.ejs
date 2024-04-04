@@ -40,12 +40,11 @@
   <div class="film-basic-info">
     <div class="film-img-eval-wrap"><!-- left -->
     <div>
-      <img alt="<%= movieItem.origTitle ? movieItem.origTitle: movieItem.commTitle %>" src="<%= movieItem.sPoster %>">
+      <img alt="<%= movieItem.origTitle ? movieItem.origTitle: movieItem.commTitle %>" src="<%= movieItem.sPoster ? movieItem.sPoster: "/images/movie-blank.png" %>">
     </div>
       <div class="eval-wrapper">
         <div class="rating"
-        onclick="openChange(this)">&#8593;&nbsp;&nbsp;<span><%=
-        movieItem.pRating %></span>&nbsp;&nbsp;&#8595;
+        onclick="openChange(this)">&#8593;&nbsp;&nbsp;<span><%= movieItem.pRating %></span>&nbsp;&nbsp;&#8595;
         </div>
           
         <div class="change-wrap change-rating">
@@ -79,9 +78,15 @@
       
     <div class="film-descr"><!-- right -->
       <div class="film-comm-title"> 
+      <% if(movieItem.imdbLink.includes("imdb.com/")) { %>
         <a href="<%= movieItem.imdbLink %>" target="blank"><%=
-        movieItem.commTitle %><sup class="external-mark">&#8680;</sup><br><%= movieItem.year ? `(${movieItem.year})`: "" %>
-        </a>
+        movieItem.commTitle %><sup class="external-mark">&#8680;</sup>
+        </a><br>
+        <%= movieItem.year ? `(${movieItem.year})`: "" %>
+
+        <% } else { %>
+          <%= movieItem.commTitle %>&nbsp;<%= movieItem.year ? `(${movieItem.year})`: "" %>
+        <% } %>
       </div>
     <% if(movieItem.origTitle) { %>
       <div class="film-orig-title"><%= movieItem.origTitle %>
@@ -114,18 +119,26 @@
 
   <h1>Director:&nbsp;</h1>
   <div class="film-director">
-    <% movieItem.director.forEach(elem => { %>
-     <a href="/person/<%= extractId(elem.imdbLink) %>"><%= elem.name %></a>
-    <% }) %>
+    <% movieItem.director.forEach(elem => {
+     if(elem.imdbLink.includes("imdb.com/")) {  %>
+      <span><a href="/person/<%= extractId(elem.imdbLink) %>"><%= elem.name %></a></span>
+    <% } else { %>
+      <span><%= elem.name %></span>
+    <% } }) %>
   </div>
     
   <h1>Cast:&nbsp;</h1>
   <div class="film-cast">
     <% movieItem.cast.forEach(elem => { %>
     <div class="role-item">
-      <a href="/person/<%= extractId(elem.imdbLink) %>">
-        <img src="<%= elem.sPhoto ? elem.sPhoto: "/images/person-blank.png" %>" alt="<%= elem.name %>">
-      </a>
+      
+      <% if(elem.imdbLink.includes("imdb.com/")) { %>
+        <a href="/person/<%= extractId(elem.imdbLink) %>">
+          <img src="<%= elem.sPhoto ? elem.sPhoto: "/images/person-blank.png" %>" alt="<%= elem.name %>">
+        </a>
+      <% } else { %>
+        <img class="disabled" src="<%= elem.sPhoto ? elem.sPhoto: "/images/person-blank.png" %>" alt="<%= elem.name %>">
+      <% } %>
       <div class="cast-name">
         <%= elem.name %>
         <div class="cast-character">

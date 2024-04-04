@@ -22,6 +22,10 @@
         %>
         Favorites</b>
         <%
+      } else if (currentFilter.mode == "countriesOrig") {
+        %>
+        &nbsp;<%= currentFilter.value %></b>
+        <%
       } else {
         %>
         <%= currentFilter.mode %>:&nbsp;
@@ -51,6 +55,10 @@
   <a href="/?filtermode=<%= FilmMode.TYPE %>&filtervalue=#movieSect">Common movies</a>
   <a id="favorFilter" href="/?filtermode=<%= FilmMode.FAVORITE %>&filtervalue=<%= true
     %>#movieSect">Favorite movies</a>
+</div>
+<div id="tableSarchBar">
+  <label>Search:</label>
+    <input type="text" placeholder="Type a title here..." oninput="tableSearch()">
 </div>
 <div class="table-container">
   <% let i = 1;
@@ -84,8 +92,7 @@
           </div>
         </div>
         <div class="row-section col-poster-dur">
-          <a href="film/<%= key %>" target="_blank"><img src="<%= value.sPoster %>" alt="<%=
-            value.commTitle %>"></a>
+          <a href="film/<%= key %>" target="_blank"><img src="<%= value.sPoster ? value.sPoster: "/images/movie-blank.png" %>" alt="<%= value.commTitle %>"></a>
           <div class="duration">
             <%= value.duration.replace(' hour', 'h').replace(' minute', 'm').replaceAll('s', '') %>
           </div>
@@ -151,6 +158,20 @@
 
 <script>
   document.querySelector("a[href*='/?sortmovie=<%= sortmoviemode %>']").classList.add("sortselected");
+
+  function tableSearch() {
+    let srchInput = document.querySelector("#tableSarchBar input");
+    let tableRows = document.querySelectorAll(".table-container .row");
+    tableRows.forEach(elem => {
+      if(srchInput.value!="" &&
+      !elem.querySelectorAll(".col-title")[0].innerText.toLowerCase().includes(srchInput.value.toLowerCase()))
+      {
+       elem.style.display = "none";
+      } else {
+        elem.style.display = "flex";
+      }
+    });
+  }
 
   function openChange(target) {
     let changeElem = target.parentElement.querySelector(".change-rating");

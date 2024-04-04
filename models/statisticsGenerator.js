@@ -185,9 +185,9 @@ function filterMovieStat(map, filterMode, filterValue) {
   const mapEntries = [...map.entries()];
 
   if (filterMode == FilmStatMode.CAST || filterMode == FilmStatMode.DIRECTOR) {
-    return new Map(mapEntries.filter(entry => entry[1][filterMode].some(elem => elem.imdbLink.includes(filterValue))))
+    return new Map(mapEntries.filter(entry => entry[1][filterMode].some(elem => elem.imdbLink.includes(filterValue))));
   } else if (filterMode == FilmStatMode.GENRE || filterMode == FilmStatMode.COUNTRY) {
-    return new Map(mapEntries.filter(entry => entry[1][filterMode].includes(filterValue)))
+    return new Map(mapEntries.filter(entry =>  entry[1][filterMode].includes(filterValue)));
   } else if (filterMode == FilmStatMode.USER_RATING || filterMode == FilmStatMode.TYPE || filterMode == FilmStatMode.YEAR) {
     return new Map(mapEntries.filter(entry => entry[1][filterMode] == filterValue))
   } else if (filterMode == FilmStatMode.DECADE) {
