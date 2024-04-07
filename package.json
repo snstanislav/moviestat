@@ -3,9 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "killall -9 node && node app",
-    "startd": "killall -9 node && nodemon app",
-    "mkbckp": "node data/jsonDB/backupJsDB.js",
+    "start": "node app",
+    "restart": "killall -9 node && node app",
+    "startd": "nodemon app",
+    "restartd": "killall -9 node && nodemon app",
+    "jsdbbackup": "node data/jsondb/backup.js",
+    "jsdbrestore": "node data/jsondb/restore.js",
+    "mongorestore": "node data/mongo/restore.js",
     "sass": "sass -w public/stylesheets/style.scss public/stylesheets/style.css"
   },
   "dependencies": {
