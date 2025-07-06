@@ -1,0 +1,125 @@
+@use "../decor" as decor;
+
+.section {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 60rem;
+  border: 2px solid decor.$dark-2;
+  background: decor.$light-1;
+  padding: 0.5rem 0.5rem 1rem;
+  margin: 1rem auto 1.5rem;
+  overflow: hidden;
+}
+
+@mixin manage-section($is-opened: false, $display: none) {
+  @extend .section;
+
+  .title-section {
+    padding: inherit;
+  }
+
+  .handle-section {
+    font-size: decor.$font-size-medium;
+    font-weight: bold;
+    padding: 8px 0 8px 15px;
+    margin: auto;
+    opacity: 0.9;
+    border-radius: 2px;
+    color: decor.$light-1;
+
+    @if $is-opened {
+      &:before {
+        content: "\2329 \00a0 \00a0 Collapse";
+      }
+
+      background: decor.$dark-2;
+      border: 2px solid decor.$dark-2;
+
+      &:active {
+        color: decor.$dark-2;
+        background: #fff;
+      }
+    }
+
+    @else {
+      &:before {
+        content: "\232A \00a0 \00a0 Expand";
+      }
+
+      background: decor.$dark-1;
+      border: 2px solid decor.$dark-1;
+
+      &:active {
+        color: decor.$dark-1;
+        background: #fff;
+      }
+    }
+  }
+
+  .content-section {
+    display: $display;
+    background: #fff;
+    margin: 20px 0 10px 0;
+    padding: 1rem;
+
+    // Quick search
+    #tableSarchBar {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      font-size: decor.$font-size-base;
+      justify-content: center;
+      align-items: bottom;
+      padding: 1rem 0 0;
+      margin: 0 auto;
+      width: 60%;
+
+      label {
+        display: inline-block;
+        padding: 0.3rem 0rem;
+        font-size: decor.$font-size-medium;
+        font-weight: bold;
+        font-style: italic;
+        opacity: 0.7;
+      }
+
+      input {
+        display: inline-block;
+        padding: 0.3rem 0.5rem;
+        font-size: inherit;
+        background: decor.$light-7;
+        opacity: 0.8;
+        border: 0;
+        border-radius: 10px;
+        border-left: 2px solid decor.$dark-8;
+        border-top: 2px solid decor.$dark-8;
+        box-sizing: border-box;
+        outline: none;
+        width: 60%;
+
+        &:focus {
+          border: 3px solid decor.$active;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 660px) {
+    #tableSarchBar {
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+  }
+}
+
+.section-closed {
+  @include manage-section(false, none);
+}
+
+.section-opened {
+  @include manage-section(true, block);
+}

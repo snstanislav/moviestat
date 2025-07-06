@@ -1,0 +1,109 @@
+@use 'sass:math';
+@use "../decor" as decor;
+
+@mixin person-page($scale: 1) {
+  .person-wrapper {
+    display: flex;
+    flex-flow: column;
+    box-sizing: border-box;
+    max-width: 60rem;
+    margin: 1rem auto 2rem;
+    padding: 1rem;
+    width: 100%;
+    background: #ffffff;
+
+    .person-basic-info {
+      display: flex;
+      flex-flow: row;
+      border: 1rem solid decor.$medium-1;
+      padding: 1.5rem;
+      background: #fff;
+
+      .person-img-wrap {
+        display: flex;
+        flex-direction: column;
+
+        img {
+          box-shadow: 5px 5px 10px #666;
+          width: 8rem*$scale;
+          max-width: 10rem;
+          margin: auto;
+        }
+      }
+
+      .person-descr {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0.5rem 0 1rem 2rem;
+        width: 60%;
+        font-size: decor.$font-size-medium*$scale;
+        font-weight: 400;
+        opacity: 0.9;
+
+        .person-name {
+          text-indent: 2;
+          font-size: decor.$font-size-large*$scale;
+          font-weight: bold;
+          padding: 0 0 1rem;
+
+          a {
+            color: decor.$dark-3;
+          }
+        }
+
+        .person-occup {
+          font-size: decor.$font-size-medium*$scale;
+          opacity: 0.8;
+        }
+      }
+    }
+
+    h1 {
+      margin: 2rem 0 0;
+      opacity: 0.8;
+      font-size: decor.$font-size-large*$scale;
+    }
+
+    .summary {
+      padding: 0.9rem;
+      font-size: decor.$font-size-medium*$scale;
+      background: decor.$medium-1;
+    }
+
+    table {
+      table-layout: fixed;
+      width: 100%;
+      text-align: center;
+      font-size: decor.$font-size-base*$scale;
+      vertical-align: middle;
+
+      td {
+        padding: 0.5rem 0.5rem;
+      }
+
+      tr:nth-child(odd) {
+        background-color: #eee;
+      }
+
+      td:first-child {
+        width: 8%;
+      }
+
+      td:nth-child(2) {
+        text-align: left;
+        width: 57%;
+      }
+
+      td:nth-child(3) {
+        width: 25%;
+      }
+
+      td:last-child {
+        width: 10%;
+        font-size: decor.$font-size-large*$scale;
+        font-weight: bold;
+      }
+    }
+  }
+}

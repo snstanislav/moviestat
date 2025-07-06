@@ -80,16 +80,16 @@
       <div class="film-comm-title"> 
       <% if(movieItem.imdbLink.includes("imdb.com/")) { %>
         <a href="<%= movieItem.imdbLink %>" target="blank"><%=
-        movieItem.commTitle %><sup class="external-mark">&#8680;</sup>
-        </a><br>
-        <%= movieItem.year ? `(${movieItem.year})`: "" %>
+        movieItem.commTitle %><sup class="external-mark">&nbsp;[imdb]</sup>
+        </a>
 
         <% } else { %>
           <%= movieItem.commTitle %>&nbsp;<%= movieItem.year ? `(${movieItem.year})`: "" %>
         <% } %>
       </div>
     <% if(movieItem.origTitle) { %>
-      <div class="film-orig-title"><%= movieItem.origTitle %>
+      <div class="film-orig-title"><%= movieItem.origTitle %>&nbsp;
+        <%= movieItem.year ? `(${movieItem.year})`: "" %>
       </div>
     <% } if(movieItem.genres) { %>
       <div class="world film-genre">

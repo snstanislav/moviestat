@@ -1,6 +1,6 @@
 const path = require('path');
-const express = require(
-  path.join(process.env.NODE_PATH, 'express'));
+//const express = require(path.join(process.env.NODE_PATH, 'express'));
+const express = require('express');
 
 const indexRouter = require('./routes/index.js');
 const filmRouter = require('./routes/film.js');

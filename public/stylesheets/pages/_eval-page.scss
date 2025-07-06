@@ -1,0 +1,92 @@
+@use 'sass:math';
+@use "../decor" as decor;
+
+@mixin eval-page($scale: 1) {
+  .eval-container {
+    max-width: 50rem;
+    margin: 0.5rem auto;
+    padding: 1rem*$scale 2rem*$scale;
+    text-align: left;
+    vertical-align: center;
+    .eval-film-item {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      padding: 0.2rem 1rem;
+      margin: 0 auto;
+      height: 10rem;
+      max-height: fit-content;
+      align-items: center;
+      justify-content: left;
+      border: 2px solid #555;
+      border-radius: 20px;
+      img {
+        width: fit-content;
+        max-width: 10rem;
+        height: 100%;
+        margin: 0 auto;
+      }
+      a {
+        width: 50%;
+        margin: 0 0 0 auto;
+        padding: 0 1.5rem;
+        font-size: decor.$font-size-large*$scale;
+        font-weight: bold;
+        opacity: 0.9;
+      }
+      i {
+        width: 30%;
+        margin: 0 0 0 auto;
+      }
+    }
+    #searchResult {
+      margin: 0 auto 1.5rem;
+      background: #eee;
+    }
+    #selectedFilm {
+      display: none;
+      background: decor.$light-1;
+      border-color: #d21;
+    }
+    #searchResult:hover {
+      background: decor.$light-1;
+    }
+    #evalBar {
+      display: none;
+      flex-direction: row;
+      gap: 1rem;
+      padding: 1rem 0 1.5rem;
+      margin: 0 auto 4rem;
+      width: fit-content;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 3px solid #999;
+      label {
+        font-size: decor.$font-size-base*$scale;
+        font-style: normal;
+        border-radius: 5px;
+        font-weight: 500;
+      }
+      select {
+        text-align: center;
+        font-size: decor.$font-size-large*$scale;
+        padding: 0.3rem 2.5rem 0.4rem;
+        margin: 0 1.5rem 0 1rem;
+        background: #fff;
+        border-radius: 5px;
+        font-weight: 500;
+      }
+      button {
+        opacity: 1;
+        border: 0;
+        font-size: decor.$font-size-large*$scale;
+        background: decor.$dark-4;
+        color: #fff;
+        padding: 0.6rem 1.5rem;
+        height:100%;
+        border-radius: 5px;
+        font-weight: 600;
+      }
+    }
+  }
+}

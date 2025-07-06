@@ -1,0 +1,109 @@
+@use "../decor" as decor;
+
+@mixin rating($scale: 1) {
+
+  // Main page controls
+  .rating {
+    text-align: center;
+    font-size: decor.$font-size-medium*$scale;
+    font-weight: bold;
+    padding: 0.3rem 1.6rem;
+
+    min-width: fit-content;
+    width: 2rem*$scale;
+    background: decor.$light-5;
+    color: #000;
+    border-radius: 7px;
+  }
+
+  .change-rating {
+    display: none;
+    text-align: right;
+    margin-bottom: auto;
+
+    select {
+      width: 5rem*$scale;
+      max-width: 7rem;
+      padding: 0.1rem 0.3rem;
+      margin-bottom: 0.3rem;
+      border-radius: 4px;
+      font-size: decor.$font-size-medium*$scale;
+      font-weight: bold;
+      text-align: center;
+      background: #fff;
+      color: #000;
+    }
+
+    button {
+      padding: 0.3rem 0.7rem;
+      font-size: decor.$font-size-base*$scale;
+      font-weight: bold;
+      opacity: 0.9;
+      border: 0;
+      border-radius: 4px;
+      background: decor.$light-2;
+      box-shadow: 3px 2px 5px decor.$dark-4;
+    }
+  }
+
+  // Film page controls
+  .eval-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0 auto;
+
+    .rating {
+      margin: 0 auto;
+      width: 3rem;
+      padding: 0.4rem 2rem;
+      border-radius: 17px;
+      font-weight: bold;
+      font-size: decor.$font-size-large;
+    }
+  }
+
+  .change-wrap {
+    flex-direction: column;
+    margin: 1rem auto 0;
+    padding: 1rem 1rem;
+    border: 2px dashed #ccc;
+    text-align: center;
+
+    select {
+      display: block;
+      margin: auto;
+      width: 100%;
+      text-align: center;
+      padding: 0.3rem 2rem;
+      font-weight: bold;
+      font-size: decor.$font-size-large;
+    }
+
+    button {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      opacity: 1;
+      border-radius: 20px;
+      font-size: decor.$font-size-base*$scale;
+    }
+
+    button.change {
+      background: decor.$dark-4;
+      color: #fff;
+      box-shadow: none;
+      padding: 0.5rem 0.5rem;
+      margin-top: 1rem;
+
+    }
+
+    button.remove {
+      background: #fff;
+      color: red;
+      box-shadow: none;
+      border: 2px solid red;
+      padding: 0.2rem 0.5rem 0.3rem;
+      margin-top: 3rem;
+    }
+  }
+}

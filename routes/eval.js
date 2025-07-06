@@ -1,5 +1,6 @@
 //modules
-const express = require(process.env.NODE_PATH+'/express');
+//const express = require(process.env.NODE_PATH+'/express');
+const express = require('express');
 const rateManager = require('../models/rateManager.js');
 
 const router = express.Router();

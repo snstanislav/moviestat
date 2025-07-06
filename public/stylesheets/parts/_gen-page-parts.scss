@@ -1,0 +1,338 @@
+@use "sass:math";
+@use "../decor" as decor;
+
+@mixin general-page-parts($bg-color, $scale) {
+  body {
+    padding: 0;
+    margin: 0;
+    font-size: decor.$font-size-base*$scale;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    align-items: center;
+  }
+
+  img {
+    display: block;
+  }
+
+  .disabled {
+    opacity: 0.4;
+  }
+
+  a {
+    color: decor.$dark-1;
+    text-decoration: none;
+    background: transparent;
+
+    & :hover {
+      color: decor.$hover;
+      background: transparent;
+    }
+
+    & :focus {
+      color: decor.$hover;
+      background: transparent;
+    }
+
+    & :active {
+      color: decor.$active;
+      text-decoration: underline;
+      background: transparent;
+    }
+
+    & :visited {
+      color: decor.$visited;
+      background: transparent;
+    }
+  }
+
+  h1 {
+    margin: 0;
+    font-size: decor.$font-size-large*$scale;
+  }
+
+  h2 {
+    font-size: decor.$font-size-medium*$scale;
+    margin: 0;
+  }
+
+  h3 {
+    margin-bottom: 2rem;
+    font-size: decor.$font-size-base*$scale;
+    opacity: 0.9;
+  }
+
+  .search-head {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    color: decor.$dark-6;
+    opacity: 0.8;
+    font-style: italic;
+  }
+
+  .search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    max-width: 60rem;
+    margin: 0 auto;
+    height: 2rem*$scale;
+
+    label {
+      display: inline-block;
+      padding: 0.5rem 0;
+      margin-bottom: 0.5rem;
+      text-align: right;
+      font-size: decor.$font-size-medium*$scale;
+      opacity: 0.7;
+      font-weight: 500;
+      width: 24%;
+    }
+
+    input {
+      display: inline-block;
+      width: 56%;
+      background: decor.$light-3;
+      padding: 0.5rem;
+      margin: 0 1.5rem*$scale;
+      font-size: decor.$font-size-base*$scale;
+      opacity: 0.8;
+      border: 0;
+      border-left: 2px solid decor.$dark-1;
+      border-top: 2px solid decor.$dark-1;
+      box-sizing: border-box; 
+      border-radius: 3px;
+      outline: none;
+
+      &:focus {
+        border: 3px solid decor.$active;
+        border-radius: 3px;
+      }
+    }
+
+    button {
+      display: inline-block;
+      width: 20%;
+      border: 0;
+      border-radius: 30px;
+      margin-right: 0.5rem;
+      background: decor.$dark-1;
+      color: #fff;
+      opacity: 0.8;
+      font-size: decor.$font-size-medium*$scale;
+      font-weight: 500;
+    }
+
+  }
+
+  .sort-bar {
+    line-height: 1.5rem;
+    font-size: decor.$font-size-medium*$scale;
+    padding: 0 0 1rem 0.1rem;
+    background: #fff;
+    opacity: 0.8;
+    border-bottom: 1px solid #444;
+    margin-bottom: 2rem;
+
+    a {
+      display: inline-block;
+      padding: 0 0.7rem;
+      margin-right: 0 1rem;
+    }
+  }
+
+  .sortselected {
+    font-weight: bold;
+    background: decor.$light-3;
+    border-radius: 4px;
+  }
+
+  .chart-line {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    margin: 0.8rem 0;
+    box-sizing: border-box;
+
+    .chart-key {
+      display: inline-block;
+      box-sizing: border-box;
+      line-height: 0.9;
+      padding: 0 0.5rem;
+      opacity: 0.8;
+    }
+
+    .chart-bar {
+      display: inline-block;
+      font-size: decor.$font-size-base*$scale;
+      text-align: right;
+      font-weight: bold;
+      color: #fff;
+      background: decor.$dark-5;
+      border-radius: 3px;
+      box-sizing: border-box;
+      opacity: 0.8;
+      padding: 0.1rem 0.2rem;
+      min-width: fit-content;
+    }
+
+    .chart-addition {
+      display: inline-block;
+      min-width: auto;
+      font-style: italic;
+      font-size: decor.$font-size-base*$scale;
+      opacity: 0.7;
+      margin: 0;
+      padding: 0 0.5rem;
+      min-width: 4rem*$scale;
+      text-align: left;
+      box-sizing: border-box;
+    }
+  }
+
+  .decade-chart {
+    .chart-key {
+      font-size: decor.$font-size-medium*$scale;
+      min-width: 6rem*$scale;
+      width: 6rem*$scale;
+      text-align: center;
+    }
+  }
+
+  .year-chart {
+    .chart-key {
+      padding: 0 1.5rem;
+    }
+
+    .chart-bar {
+      background: decor.$dark-4;
+    }
+  }
+
+  .genre-chart {
+    .chart-key {
+      font-size: decor.$font-size-medium*$scale;
+      min-width: 8rem*$scale;
+      width: 8rem*$scale;
+      text-align: right;
+    }
+
+    .chart-bar {
+      background: #949;
+      
+    }
+  }
+
+  .country-chart {
+    .chart-key {
+      font-size: decor.$font-size-medium*$scale;
+      min-width: math.max(9rem, 9rem*$scale);
+      width: math.max(9rem, 9rem*$scale);
+      text-align: center;
+    }
+
+    .chart-bar {
+      background: #484;
+    }
+  }
+
+  .director-chart {
+    max-width: 40rem;
+    font-size: decor.$font-size-medium*$scale;
+    margin: 0 auto;
+
+    .ord {
+      width: 2rem;
+      text-align: right;
+      min-width: fit-content;
+      padding-left: math.max(1.5rem, 1.5rem*$scale);
+    }
+
+    .chart-key {
+      min-width: 12rem;
+      width: 60%;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid;
+    }
+  }
+
+  .person-data {
+    display: inline-block;
+    text-align: right;
+    font-weight: bold;
+    width: 15%;
+    min-width: 4rem*$scale;
+
+    .person-quant {
+      color: decor.$dark-3;
+    }
+
+    .person-rank {
+      color: decor.$dark-4;
+    }
+  }
+
+  a[href*="filtermode"] {
+    font-size: decor.$font-size-medium*$scale;
+    background: decor.$dark-3;
+    color: #fff;
+    opacity: 0.7;
+    padding: 0.1rem 1rem;
+    border-radius: 15px;
+  }
+
+  .current-filter {
+    margin: 1rem 0 3rem;
+    font-size: decor.$font-size-medium*$scale;
+
+    a {
+      margin: 0 0.5rem 0;
+    }
+
+    a[href*="filter"] {
+      background: decor.$dark-4;
+      margin-left: 0.5rem;
+      padding: 0.3rem 0.8rem;
+    }
+  }
+
+  .fitler-table-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
+    row-gap: 0.5rem*$scale;
+    column-gap: 1rem*$scale;
+    flex-flow: wrap;
+    margin: -1rem 1rem 2rem;
+    padding: 0 1rem;
+    font-size: decor.$font-size-base*$scale;
+
+    a {
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+
+      & :hover {
+        color: #fff;
+      }
+    }
+
+    #favorFilter {
+      margin: 0 1rem 0 auto;
+      font-weight: bold;
+    }
+  }
+
+  @media screen and (max-width: 660px) {
+  
+    .search-head {
+      padding-left: 0.5rem;
+    }
+  }
+}

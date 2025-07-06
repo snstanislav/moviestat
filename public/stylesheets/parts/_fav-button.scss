@@ -1,0 +1,25 @@
+@use "../decor" as decor;
+
+@mixin fav-button($scale: 1) {
+  button {
+    display: block;
+    font-size: 1.7rem*$scale;
+    border: 0;
+    border-radius: 50%;
+    margin: 0 auto auto;
+    width: 4rem*$scale;
+    height: 4rem*$scale;
+  }
+  .fav-button {
+    font-weight: bold;
+    background: decor.$light-5;
+  }
+  .add-fav-button {
+    font-size: 1.6rem*$scale;
+    line-height: 0.8;
+    border: 1px solid #fff;
+    background: inherit;
+    color: #ddd;
+    padding-bottom: 0.6rem;
+  }
+}

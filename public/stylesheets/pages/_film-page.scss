@@ -1,0 +1,234 @@
+@use "sass:math";
+@use "../decor" as decor;
+@use "../parts/fav-button" as fav;
+@use "../parts/rating" as rating;
+
+@mixin film-page($scale: 1) {
+  .film-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem auto 4rem;
+    padding: 1rem;
+    max-width: 60rem;
+
+    .film-headline {
+      display: flex;
+      flex-direction: row;
+      gap: 0;
+      align-items: center;
+      padding: 0.4rem 1rem 0.4rem 1.5rem;
+      background: decor.$dark-8;
+      color: decor.$light-1;
+      border: 2px solid decor.$dark-8;
+      font-size: decor.$font-size-base*$scale;
+
+      .film-imdb {
+        width: 35%;
+        text-align: left;
+        margin-right: 3rem;
+      }
+
+      .film-cert {
+        text-align: left;
+        margin-right: 3rem;
+      }
+
+      .favor {
+        margin-left: auto;
+        @include fav.fav-button(0.5);
+      }
+    }
+
+    .film-basic-info {
+      display: flex;
+      flex-direction: row;
+
+      .film-img-eval-wrap {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        height: fit-content;
+        margin: 0;
+        padding: 0 1.5rem 1rem;
+        background: decor.$dark-8;
+        color: #fff;
+        border: 2px solid decor.$dark-8;
+
+        img {
+          width: 12rem;
+          margin: auto;
+        }
+
+        @include rating.rating($scale*1);
+
+      }
+
+      .date {
+        margin: 1.5rem auto 0;
+        padding: 0.5rem 0 0.1rem;
+        border-top: 2px solid #ccc;
+        font-weight: 400;
+        font-size: decor.$font-size-base*$scale;
+      }
+    }
+
+    .film-descr {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      padding: 1.2rem 0 1rem 1rem;
+      //width: 80%;
+      font-size: decor.$font-size-base*$scale;
+      font-weight: 400;
+      opacity: 0.9;
+
+      .film-comm-title {
+        font-size: decor.$font-size-large*$scale;
+        font-weight: bold;
+        padding: 0 0 0.5rem;
+        margin-bottom: 0.7rem;
+
+        a {
+          display: inline-block;
+          color: decor.$dark-3;
+
+        }
+      }
+
+      .film-orig-title {
+        font-size: decor.$font-size-large*$scale;
+        font-weight: bold;
+        background: decor.$medium-1;
+        padding: 0.5rem 0.5rem;
+        margin: -1rem 0 1rem;
+      }
+
+      .world {
+        padding: 0.3rem 0 0.3rem 0.7rem;
+        font-weight: 500;
+        opacity: 0.8;
+      }
+
+      .film-genre {
+        border-left: 7px solid purple;
+      }
+
+      .film-country {
+        border-left: 7px solid green;
+      }
+
+      .film-plot {
+        padding: 0.5rem 0;
+        font-style: italic;
+      }
+
+      .film-budget {
+        padding: 0.3rem 0 0.3rem 0.7rem;
+        border-left: 7px solid decor.$dark-4;
+      }
+
+      .film-grossww {
+        padding: 0.3rem 0 0.3rem 0.7rem;
+        border-left: 7px solid decor.$dark-7;
+      }
+    }
+
+    h1 {
+      margin: 2rem 0 0.5rem;
+      opacity: 0.8;
+      font-size: decor.$font-size-large*$scale;
+    }
+
+    .film-director {
+      display: flex;
+      flex-flow: wrap;
+      gap: 1rem;
+      font-size: decor.$font-size-medium*$scale;
+      font-weight: bold;
+      padding: 1rem;
+      background: decor.$medium-1;
+
+      span {
+        display: inline-block;
+        background: #fff;
+        box-shadow: 5px 5px 7px #888;
+        padding: 0.6rem 1rem;
+      }
+    }
+
+    .film-cast {
+      display: flex;
+      flex-flow: wrap;
+      gap: 1rem;
+      justify-content: center;
+      padding: 1rem;
+      background: decor.$medium-1;
+
+      .role-item {
+        display: flex;
+        flex-flow: column;
+        gap: 0.5rem;
+        background: #fff;
+        box-shadow: 7px 7px 7px #888;
+        padding: 0.5rem 0.7rem;
+        width: 7rem*$scale;
+        text-align: center;
+
+        font-size: decor.$font-size-base*$scale;
+
+        img {
+          display: block;
+          margin: 0 auto auto;
+          border-radius: 50%;
+          width: 90%;
+        }
+
+        .cast-name {
+          font-weight: bold;
+          margin: auto auto 0;
+
+          .cast-character {
+            font-weight: bold;
+            opacity: 0.6;
+            margin: auto auto 0;
+            padding: 0.7rem 0 0;
+          }
+        }
+      }
+    }
+  }
+
+
+  @media screen and (max-width: 660px) {
+    .film-wrapper {
+      .film-headline {
+        display: flex;
+        width: 100%;
+        box-sizing: border-box;
+        margin: auto;
+      }
+
+      .film-basic-info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+        align-items: center;
+
+        .film-img-eval-wrap {
+          width: 100%;
+          box-sizing: border-box;
+
+        }
+      }
+    }
+
+    .film-wrapper .film-descr {
+      display: flex;
+      width: 95%;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+  }
+}

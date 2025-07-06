@@ -10,14 +10,21 @@
     "jsdbbackup": "node data/jsondb/backup.js",
     "jsdbrestore": "node data/jsondb/restore.js",
     "mongorestore": "node data/mongo/restore.js",
-    "sass": "sass -w public/stylesheets/style.scss public/stylesheets/style.css"
+    "sass": "sass -w public/stylesheets/style.scss public/stylesheets/style.css",
+    "dev": "concurrently \"npm run startd\" \"npm run sass\""
   },
   "dependencies": {
+    "cheerio": "^1.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "nodemon": "^3.1.10",
+    "sass": "^1.89.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
   }
 }

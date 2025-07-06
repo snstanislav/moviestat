@@ -1,5 +1,6 @@
 //modules
-const express = require(process.env.NODE_PATH+'/express');
+//const express = require(process.env.NODE_PATH+'/express');
+const express = require('express');
 const statisticsGenerator = require('../models/statisticsGenerator.js');
 const movieManager = require('../models/movieManager.js');
 const rateManager = require('../models/rateManager.js');

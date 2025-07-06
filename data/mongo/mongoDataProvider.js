@@ -6,7 +6,8 @@
 const dbName = "moviestat";
 const login = "snstanislav";
 
-const { MongoClient } = require(process.env.NODE_PATH+'/mongodb');
+//const { MongoClient } = require(process.env.NODE_PATH+'/mongodb');
+const { MongoClient } = require('mongodb');
 const connectURI = process.env.MONGO_CONNECT;
 
 class MongoDataProvider {
