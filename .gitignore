@@ -1,0 +1,60 @@
+# ───────────────────────────────
+# Dependencies
+# ───────────────────────────────
+node_modules/
+server/node_modules/
+
+.pnp/
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ───────────────────────────────
+# Build Outputs
+# ───────────────────────────────
+build/
+dist/
+client/
+server/build/
+server/dist/
+
+# ───────────────────────────────
+# Testing & Coverage
+# ───────────────────────────────
+**/coverage/
+
+# ───────────────────────────────
+# Environment & Secrets
+# ───────────────────────────────
+**/.env
+**/.env.local
+**/.env.*.local
+*.pem
+
+# ───────────────────────────────
+# Logs
+# ───────────────────────────────
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ───────────────────────────────
+# Miscellaneous
+# ───────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ───────────────────────────────
+# Jest Config & Output
+# ───────────────────────────────
+jest.config.js
+server/coverage/
+
+# ───────────────────────────────
+# Deployment
+# ───────────────────────────────
+.vercel

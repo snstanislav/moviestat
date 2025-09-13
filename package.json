@@ -1,0 +1,17 @@
+{
+  "name": "moviestat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test:server": "npm --prefix server run test",
+    "test:server:w": "npm --prefix server run test:watch",
+    "test:server:c": "npm --prefix server run test:cover"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  }
+}

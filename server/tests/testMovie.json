@@ -1,0 +1,241 @@
+{
+	"type": "movie",
+	"tmdbID": 49047,
+	"imdbID": "tt1454468",
+	"imdbRating": "7.7",
+	"imdbVotes": "885,612",
+	"commTitle": "Gravity",
+	"origTitle": "Gravity",
+	"year": "2013",
+	"duration": "91 min",
+	"parental": "PG-13",
+	"plot": "Dr. Ryan Stone, a brilliant medical engineer, is on her first Shuttle mission, with veteran astronaut Matt Kowalsky in command of his last flight before retiring. But on a seemingly routine spacewalk, disaster strikes. The Shuttle is destroyed, leaving Stone and Kowalsky completely alone-tethered to nothing but each other and spiraling out into the blackness of space. The deafening silence tells them they have lost any link to Earth and any chance for rescue. As fear turns to panic, every gulp of air eats away at what little oxygen is left. But the only way home may be to go further out into the terrifying expanse of space.",
+	"poster": "https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg",
+	"budget": 105000000,
+	"boxOffice": 723192705,
+	"countries": [
+		"United Kingdom",
+		"United States of America"
+	],
+	"languages": [
+		"English"
+	],
+	"genres": [
+		"Science Fiction",
+		"Thriller",
+		"Drama"
+	],
+	"directors": [
+		{
+			"person": {
+				"tmdbID": 11218,
+				"imdbID": "nm0190859",
+				"name": "Alfonso Cuarón",
+				"birthday": "1961-11-28",
+				"placeOfBirth": "Mexico City, Mexico",
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/eoCHiXaQzGgx9RiwXnt3k239FLc.jpg",
+				"biography": "Alfonso Cuarón Orozco (US: /kwɑːˈroʊn/kwar-OHN; Spanish: [alˈfonso kwaˈɾon]; born 28 November 1961) is a Mexican filmmaker. His accolades include four Academy Awards, seven BAFTA Awards, and three Golden Globe Awards.\n\nCuarón made his feature film debut with the romantic comedy Sólo con tu pareja (1991) and directed the film adaptations A Little Princess (1995) and Great Expectations (1998). His breakthrough came with the coming-of-age film Y tu mamá también (2001), which earned him a nomination for the Academy Award for Best Original Screenplay. He gained greater prominence for directing the fantasy film Harry Potter and the Prisoner of Azkaban (2004), the dystopian drama Children of Men (2006), the science fiction drama Gravity (2013), and the semi-autobiographical drama Roma (2018). The latter two won him Academy Awards for Best Director. He also won Best Film Editing for Gravity and Best Cinematography for Roma.\n\nDescription above from the Wikipedia article Alfonso Cuarón, licensed under CC-BY-SA, full list of contributors on Wikipedia."
+			}
+		}
+	],
+	"writers": [
+		{
+			"person": {
+				"tmdbID": 1003190,
+				"imdbID": "nm0190861",
+				"name": "Jonás Cuarón",
+				"birthday": "1981-01-01",
+				"placeOfBirth": "Mexico City, Mexico",
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/xaUVbPyTdcX4K5PvCCNtipuGIXK.jpg",
+				"biography": "Jonás Cuarón Elizondo (born 1981) is a Mexican film director, screenwriter, producer, editor and cinematographer. He is the son of the Academy Award-winner Alfonso Cuarón with whom he co-wrote the movie Gravity. He studied film at Vassar College."
+			}
+		},
+		{
+			"person": {
+				"tmdbID": 11218,
+				"imdbID": "nm0190859",
+				"name": "Alfonso Cuarón",
+				"birthday": "1961-11-28",
+				"placeOfBirth": "Mexico City, Mexico",
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/eoCHiXaQzGgx9RiwXnt3k239FLc.jpg",
+				"biography": "Alfonso Cuarón Orozco (US: /kwɑːˈroʊn/kwar-OHN; Spanish: [alˈfonso kwaˈɾon]; born 28 November 1961) is a Mexican filmmaker. His accolades include four Academy Awards, seven BAFTA Awards, and three Golden Globe Awards.\n\nCuarón made his feature film debut with the romantic comedy Sólo con tu pareja (1991) and directed the film adaptations A Little Princess (1995) and Great Expectations (1998). His breakthrough came with the coming-of-age film Y tu mamá también (2001), which earned him a nomination for the Academy Award for Best Original Screenplay. He gained greater prominence for directing the fantasy film Harry Potter and the Prisoner of Azkaban (2004), the dystopian drama Children of Men (2006), the science fiction drama Gravity (2013), and the semi-autobiographical drama Roma (2018). The latter two won him Academy Awards for Best Director. He also won Best Film Editing for Gravity and Best Cinematography for Roma.\n\nDescription above from the Wikipedia article Alfonso Cuarón, licensed under CC-BY-SA, full list of contributors on Wikipedia."
+			}
+		}
+	],
+	"producers": [
+		{
+			"person": {
+				"tmdbID": 1121617,
+				"imdbID": "nm0002331",
+				"name": "Stephen Jones",
+				"birthday": null,
+				"placeOfBirth": null,
+				"gender": 0,
+				"photo": null,
+				"biography": ""
+			}
+		},
+		{
+			"person": {
+				"tmdbID": 11218,
+				"imdbID": "nm0190859",
+				"name": "Alfonso Cuarón",
+				"birthday": "1961-11-28",
+				"placeOfBirth": "Mexico City, Mexico",
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/eoCHiXaQzGgx9RiwXnt3k239FLc.jpg",
+				"biography": "Alfonso Cuarón Orozco (US: /kwɑːˈroʊn/kwar-OHN; Spanish: [alˈfonso kwaˈɾon]; born 28 November 1961) is a Mexican filmmaker. His accolades include four Academy Awards, seven BAFTA Awards, and three Golden Globe Awards.\n\nCuarón made his feature film debut with the romantic comedy Sólo con tu pareja (1991) and directed the film adaptations A Little Princess (1995) and Great Expectations (1998). His breakthrough came with the coming-of-age film Y tu mamá también (2001), which earned him a nomination for the Academy Award for Best Original Screenplay. He gained greater prominence for directing the fantasy film Harry Potter and the Prisoner of Azkaban (2004), the dystopian drama Children of Men (2006), the science fiction drama Gravity (2013), and the semi-autobiographical drama Roma (2018). The latter two won him Academy Awards for Best Director. He also won Best Film Editing for Gravity and Best Cinematography for Roma.\n\nDescription above from the Wikipedia article Alfonso Cuarón, licensed under CC-BY-SA, full list of contributors on Wikipedia."
+			}
+		},
+		{
+			"person": {
+				"tmdbID": 1290901,
+				"imdbID": "nm0672248",
+				"name": "Nikki Penny",
+				"birthday": null,
+				"placeOfBirth": null,
+				"gender": 0,
+				"photo": "https://image.tmdb.org/t/p/original/emcguH7mI0GAjxQwzR3tTfsMYKn.jpg",
+				"biography": ""
+			}
+		},
+		{
+			"person": {
+				"tmdbID": 10968,
+				"imdbID": "nm0382268",
+				"name": "David Heyman",
+				"birthday": "1961-07-26",
+				"placeOfBirth": "London, England, UK",
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/m39R6xbVfHfCEO4H0s2Fhwh9mkt.jpg",
+				"biography": "David Jonathan Heyman (born 26 July 1961) is a British film producer and the founder of Heyday Films. Heyman is best known as the producer of all eight instalments of the Harry Potter film series, which are based on a series of popular fantasy novels of the same name by author J. K. Rowling. He then produced all three instalments of its spin-off prequel series, Fantastic Beasts. His work makes him the second-most commercially successful producer of all time.\n\nDescription above from the Wikipedia article David Heyman, licensed under CC-BY-SA, full list of contributors on Wikipedia."
+			}
+		},
+		{
+			"person": {
+				"tmdbID": 66897,
+				"imdbID": "nm0002211",
+				"name": "Christopher DeFaria",
+				"birthday": "1959-05-20",
+				"placeOfBirth": "San Francisco, California, USA",
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/e7sPWVvfV9UfVNPegDlcf1z73su.jpg",
+				"biography": "Christopher \"Chris\" DeFaria born San Francisco, California is an American film producer and production manager of such films as Mad Max: Fury Road (2015), Gravity (2013) and Happy Feet Two (2011).\n\nAs a child, he was a voice actor playing the part of Peppermint Patty in five Peanuts specials: It Was a Short Summer, Charlie Brown (1969), Play It Again, Charlie Brown (1971), There's No Time for Love, Charlie Brown (1973), and A Charlie Brown Thanksgiving (1973). He voiced Peppermint Patty in the second Peanuts film, Snoopy, Come Home (1972). He voiced Pig-Pen in A Boy Named Charlie Brown (1969).\n\nHe is a graduate of UCLA, a member of the AMPAS and WGA and a founding member of FilmAid International."
+			}
+		}
+	],
+	"composers": [
+		{
+			"person": {
+				"tmdbID": 16368,
+				"imdbID": "nm1888527",
+				"name": "Steven Price",
+				"birthday": "1977-04-22",
+				"placeOfBirth": "Nottingham, England, UK",
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/zN3dW6BKJwVkxuBwtvyfoHLAWqA.jpg",
+				"biography": "Steven Price (born 22 April 1977) is a British film composer best known for scoring Gravity, which won him the Academy Award for Best Original Score. Before making his debut as a composer with Attack the Block, he worked in the music department for various notable films, such as The Lord of the Rings: The Two Towers, The Lord of the Rings: The Return of the King, Batman Begins, and Scott Pilgrim vs. the World."
+			}
+		}
+	],
+	"cast": [
+		{
+			"person": {
+				"tmdbID": 18277,
+				"imdbID": "nm0000113",
+				"name": "Sandra Bullock",
+				"birthday": "1964-07-26",
+				"placeOfBirth": "Arlington County, Virginia, USA",
+				"gender": 1,
+				"photo": "https://image.tmdb.org/t/p/original/hPHGKPAWZ8gArYXMk225rrYPoyJ.jpg",
+				"biography": "Sandra Annette Bullock (/ˈbʊlək/; born July 26, 1964) is an American actress and film producer. The highest-paid actress of 2010 and 2014, Bullock's filmography spans both comedy and drama, and her accolades include an Academy Award and a Golden Globe Award. She was named one of Time's 100 Most Influential People in the world in 2010.\n\nAfter making her acting debut with a minor role in the thriller Hangmen (1987), Bullock received early attention for her supporting role in the action film Demolition Man (1993). Her breakthrough in the action thriller Speed (1994) led to leading roles in the romantic comedy While You Were Sleeping (1995), as well as the dramas A Time to Kill (1996) and Hope Floats (1998). She achieved further success in the following decades with the comedies Miss Congeniality (2000), Two Weeks Notice (2002), The Proposal (2009), The Heat (2013), Ocean's 8 (2018), and The Lost City (2022); the dramas Crash(2004) and The Unforgivable (2021); and the thrillers Premonition (2007) and Bird Box(2018). For her portrayal of Leigh Anne Tuohy in the biographical drama The Blind Side(2009), Bullock won the Academy Award for Best Actress. She was nominated for the same award for playing an astronaut stranded in space in the science fiction thriller Gravity (2013), her highest-grossing live-action film.\n\nIn addition to acting, Bullock founded the production company Fortis Films. She has produced some of the films in which she has starred, including Miss Congeniality 2: Armed and Fabulous (2005) and All About Steve (2009), and served as an executive producer on the ABC sitcom George Lopez (2002–2007), on which she made numerous appearances. Dubbed \"America's sweetheart\" by the media, Bullock was named the Most Beautiful Woman by People magazine in 2015.\n\nDescription above from the Wikipedia article Sandra Bullock, licensed under CC-BY-SA, full list of contributors on Wikipedia."
+			},
+			"character": "Ryan Stone"
+		},
+		{
+			"person": {
+				"tmdbID": 1461,
+				"imdbID": "nm0000123",
+				"name": "George Clooney",
+				"birthday": "1961-05-06",
+				"placeOfBirth": "Lexington, Kentucky, USA",
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/dt0a7DT0SQeHb7NpURD6ifyEzsN.jpg",
+				"biography": "George Timothy Clooney is an American actor and filmmaker. Known for his work in blockbusters and independent films, he has received numerous accolades, including two Academy Awards, a British Academy Film Award and four Golden Globe Awards. His honors include the Cecil B. DeMille Award, the Honorary César, the AFI Life Achievement Award, and the Kennedy Center Honor.\n\nClooney started acting in television in the late 1970s and later gained wide recognition as Dr. Doug Ross on the NBC medical drama ER (1994–1999), for which he received two Primetime Emmy Award nominations. He expanded to leading roles in films, with his breakthrough role in From Dusk Till Dawn (1996), followed by Batman & Robin (1997), Out of Sight (1998), Three Kings (1999), The Perfect Storm (2000) and O Brother, Where Art Thou? (2000). Greater stardom came from his starring role in Soderbergh's Ocean's film series from 2001 to 2007. Clooney won the Academy Award for Best Supporting Actor for the thriller Syriana(2005) and earned Best Actor nominations for the legal thriller Michael Clayton (2007) and the comedy-dramas Up in the Air (2009) and The Descendants (2011). He has also starred in Burn After Reading (2008), The American (2010), Gravity (2013), Hail, Caesar! (2016) and Ticket to Paradise (2022).\n\nClooney made his directorial debut with the spy drama Confessions of a Dangerous Mind (2002) and has since directed the historical drama Good Night and Good Luck (2005), the political drama The Ides of March (2011), the war film The Monuments Men (2014), the science fiction film The Midnight Sky (2020) and the biographical sports drama The Boys in the Boat (2023). He received the Academy Award for Best Picture for co-producing the political thriller Argo (2012). As of 2023, he is one of four people to have been nominated for Academy Awards in six different categories.\n\nClooney was included on Time's annual Time 100 list, which identifies the most influential people in the world, every year from 2006 to 2009. He is also noted for his political and economic activism. He has been one of the United Nations Messengers of Peace since 2008. Clooney is also a member of the Council on Foreign Relations."
+			},
+			"character": "Matt Kowalski"
+		},
+		{
+			"person": {
+				"tmdbID": 228,
+				"imdbID": "nm0000438",
+				"name": "Ed Harris",
+				"birthday": "1950-11-28",
+				"placeOfBirth": "Englewood, New Jersey, USA",
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/aAu9lJ02jlg0GAvv2vVnpJSDV1Y.jpg",
+				"biography": "Edward Allen Harris (born November 28, 1950) is an American actor and filmmaker. His performances in Apollo 13 (1995), The Truman Show (1998), Pollock (2000), and The Hours (2002) earned him critical acclaim and Academy Award nominations.\n\nHarris has appeared in numerous leading and supporting roles, including in Creepshow (1982), The Right Stuff (1983), Under Fire (1983), Places in the Heart (1984), The Abyss (1989), Glengarry Glen Ross (1992), The Firm (1993), Nixon (1995), The Rock (1996), Stepmom (1998), A Beautiful Mind (2001), Enemy at the Gates (2001), Radio (2003), A History of Violence (2005), Gone Baby Gone (2007), National Treasure: Book of Secrets (2007), Snowpiercer (2013), Mother! (2017), The Lost Daughter (2021), and Top Gun: Maverick (2022). In addition to directing Pollock, Harris directed the Western film Appaloosa (2008).\n\nIn television, Harris is notable for his roles as Miles Roby in the miniseries Empire Falls (2005) and as United States Senator John McCain in the television movie Game Change (2012); the latter earned him the Golden Globe Award for Best Supporting Actor – Series, Miniseries or Television Film. He starred as the Man in Black in the HBO science fiction-Western series Westworld (2016–2022), for which he earned a nomination for the Primetime Emmy Award for Outstanding Lead Actor in a Drama Series.\n\nDescription above from the Wikipedia article Ed Harris, licensed under CC-BY-SA, full list of contributors on Wikipedia."
+			},
+			"character": "Mission Control (voice)"
+		},
+		{
+			"person": {
+				"tmdbID": 1223440,
+				"imdbID": "nm1241511",
+				"name": "Orto Ignatiussen",
+				"birthday": null,
+				"placeOfBirth": null,
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/jpbMzoXaPjgZGjNOtGAxnZSO3Pz.jpg",
+				"biography": ""
+			},
+			"character": "Aningaaq (voice)"
+		},
+		{
+			"person": {
+				"tmdbID": 58587,
+				"imdbID": "nm2060857",
+				"name": "Phaldut Sharma",
+				"birthday": null,
+				"placeOfBirth": "London, England, UK",
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/iJKcwRJXEcZngnvseylidVHCg6j.jpg",
+				"biography": "Phaldut \"Paul\" Sharma, also known as Paul Sharma, is a UK-based actor and dancer. He is known for his roles in Gavin and Stacey as Achmed and Eastenders as AJ Ahmed ."
+			},
+			"character": "Shariff (voice)"
+		},
+		{
+			"person": {
+				"tmdbID": 1223442,
+				"imdbID": "nm1741430",
+				"name": "Amy Warren",
+				"birthday": "1968-02-24",
+				"placeOfBirth": null,
+				"gender": 1,
+				"photo": "https://image.tmdb.org/t/p/original/6HVjs4uho7gGEfRobKrwbqFeF37.jpg",
+				"biography": ""
+			},
+			"character": "Explorer Captain (voice)"
+		},
+		{
+			"person": {
+				"tmdbID": 1027852,
+				"imdbID": "nm3390180",
+				"name": "Basher Savage",
+				"birthday": null,
+				"placeOfBirth": null,
+				"gender": 2,
+				"photo": "https://image.tmdb.org/t/p/original/xv1ZQEOOshYhFv764unwbb9Zsl6.jpg",
+				"biography": ""
+			},
+			"character": "Russian Space Station Captain (voice)"
+		}
+	],
+	"userRating": 8,
+	"userEvalDate": "Sat Sep 06 2025 21:49:27 GMT+0200 (Mitteleuropäische Sommerzeit)",
+	"userChangeEvalDate": "",
+	"isFavorite": false
+}
