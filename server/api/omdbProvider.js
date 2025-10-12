@@ -1,6 +1,5 @@
-const { fetchWithRetry } = require("./utils");
-
 require("dotenv").config();
+const { fetchWithRetry } = require("./utils");
 
 async function extractMovie(imdbMovieID) {
     const urlMovie = `https://www.omdbapi.com/?i=${imdbMovieID}&apikey=${process.env.OMDB_API_KEY}`;

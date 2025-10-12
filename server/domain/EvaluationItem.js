@@ -1,10 +1,10 @@
 class EvaluationItem {
-    constructor(movie, userRating, userEvalDate, userChangeEvalDate, isFavorite){
-        this.movie = movie;
-        this.userRating = userRating;
-        this.userEvalDate = userEvalDate;
-        this.userChangeEvalDate = userChangeEvalDate;
-        this.isFavorite = isFavorite;
+    constructor(data = {}) {
+        this.movie = data.movie;
+        this.userRating = data.userRating;
+        this.userEvalDate = data.userEvalDate;
+        this.userChangeEvalDate = data.userChangeEvalDate;
+        this.isFavorite = data.isFavorite;
     }
 }
-module.exports.EvaluationItem = EvaluationItem;
+module.exports = EvaluationItem;

@@ -1,11 +1,11 @@
 class SearchItem {
-    constructor(tmdbID, title, type, year, poster, overview) {
-        this.tmdbID = tmdbID;
-        this.title = title;
-        this.type = type;
-        this.year = year;
-        this.poster = poster;
-        this.overview = overview;
+    constructor(data = {}) {
+        this.tmdbID = data.tmdbID || "";
+        this.title = data.title || "";
+        this.type = data.type || "";
+        this.year = data.year || "";
+        this.poster = data.poster || "";
+        this.overview = data.overview || "";
     }
 }
-module.exports.SearchItem = SearchItem;
+module.exports = SearchItem;

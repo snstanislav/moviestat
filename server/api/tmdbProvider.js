@@ -1,6 +1,5 @@
-const { fetchWithRetry } = require("./utils");
-
 require("dotenv").config();
+const { fetchWithRetry } = require("./utils");
 
 const LABELS = {
     DIRECTOR: ["Director"],

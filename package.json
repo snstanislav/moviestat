@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev": "concurrently --names \"SERVER,CLIENT,SASS\" --prefix-colors \"cyan,red,magenta\" \"npm run dev:server\" \"npm run dev:client\" \"npm --prefix client run sass:w\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
     "test:server": "npm --prefix server run test",
     "test:server:w": "npm --prefix server run test:watch",
     "test:server:c": "npm --prefix server run test:cover"

@@ -1,11 +1,10 @@
+require("dotenv").config();
 const tmdb = require("./tmdbProvider");
 const { LABELS } = tmdb;
 const omdb = require("./omdbProvider");
-const { MovieItem } = require("../domain/MovieItem");
-const { PersonItem } = require("../domain/PersonItem");
-const { SearchItem } = require("../domain/SearchItem");
-
-require("dotenv").config();
+const MovieItem = require("../domain/MovieItem");
+const PersonItem = require("../domain/PersonItem");
+const SearchItem = require("../domain/SearchItem");
 
 /**
  * Cache is used to avoid additional API requests for multiple occasions of the same person
@@ -13,25 +12,39 @@ require("dotenv").config();
 const CAST_CREW_CACHE = new Map();
 
 async function getMovieSearchResult(query, page) {
-    const searchResult = await tmdb.extractSearchResults(query, page)
+    const searchResult = await tmdb.extractSearchResults(query, page);
+    searchResult.results.sort((a, b) => b.popularity - a.popularity);
+
     const resultObj = {
         totalResults: searchResult.total_results,
         totalPages: searchResult.total_pages,
         currentPage: searchResult.page,
         results: []
     }
+
     for (let i = 0; i < searchResult.results.length; i++) {
-        resultObj.results.push(new SearchItem(
-            searchResult.results[i].id,
-            searchResult.results[i].title || searchResult.results[i].name,
-            searchResult.results[i].media_type,
-            searchResult.results[i].release_date || searchResult.results[i].first_air_date,
-            searchResult.results[i].backdrop_path || searchResult.results[i].poster_path,
-            searchResult.results[i].overview
-        ));
-        resultObj.results[i].poster ? resultObj.results[i].poster = "https://image.tmdb.org/t/p/original" + resultObj.results[i].poster
-            : resultObj.results[i].poster = "https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg";
-        resultObj.results[i].year ? resultObj.results[i].year = resultObj.results[i].year.slice(0, 4) : "";
+        if (searchResult.results[i].media_type === "movie"
+            || searchResult.results[i].media_type === "tv") {
+            let searchObj = new SearchItem({
+                tmdbID: searchResult.results[i].id,
+                title: searchResult.results[i].title || searchResult.results[i].name,
+                type: searchResult.results[i].media_type,
+                year: searchResult.results[i].release_date || searchResult.results[i].first_air_date || "",
+                poster: searchResult.results[i].poster_path || searchResult.results[i].backdrop_path || "",
+                overview: searchResult.results[i].overview
+            });
+
+            resultObj.results.push(searchObj);
+            var lastIndex = resultObj.results.length - 1;
+            var lastElem = resultObj.results[lastIndex];
+
+            lastElem.year || lastElem.year.trim() !== ""
+                ? lastElem.year = lastElem.year.slice(0, 4) : "";
+
+            lastElem.poster || lastElem.poster.trim() !== ""
+                ? lastElem.poster = "https://image.tmdb.org/t/p/original" + lastElem.poster
+                : lastElem.poster = "https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg";
+        }
     }
     return resultObj;
 }
@@ -53,11 +66,13 @@ async function constructMovieFromAPIs(tmdbIdSearched, mediaType, userRating, use
         resultMovieItem.duration = omdbSrcMovieItem.Runtime || tmdbSrcMovieItem.runtime + " min";
         resultMovieItem.parental = omdbSrcMovieItem.Rated;
         resultMovieItem.plot = tmdbSrcMovieItem.overview || omdbSrcMovieItem.Plot;
-        resultMovieItem.poster = "https://image.tmdb.org/t/p/original" + tmdbSrcMovieItem.poster_path || omdbSrcMovieItem.Poster.replace(/_SX\d+/, "");
+        resultMovieItem.poster =
+            (tmdbSrcMovieItem.poster_path ? "https://image.tmdb.org/t/p/original" + tmdbSrcMovieItem.poster_path : "")
+            || (omdbSrcMovieItem.Poster ? omdbSrcMovieItem.Poster.replace(/_SX\d+/, "") : "");
         resultMovieItem.budget = tmdbSrcMovieItem.budget;
         resultMovieItem.boxOffice = tmdbSrcMovieItem.revenue;
 
-        resultMovieItem.year.slice(0, 4);
+        resultMovieItem.year ? resultMovieItem.year.slice(0, 4) : "";
 
         tmdbSrcMovieItem.production_countries.map((elem) => { resultMovieItem.countries.push(elem.name) });
         tmdbSrcMovieItem.spoken_languages.map((elem) => { resultMovieItem.languages.push(elem.english_name) });
@@ -128,15 +143,16 @@ async function prepareCastCrewList(personArr, isCast) {
                 if (!personData.id || !personData.imdb_id || !personData.name) {
                     console.log("Missing <tmdbID>, <imdbID> or <name> in apiManager.personData " + personData.name);
                 } else {
-                    const person = (new PersonItem()).setInstance(
-                        personData.id.toString(),
-                        personData.imdb_id,
-                        personData.name,
-                        personData.birthday,
-                        personData.place_of_birth,
-                        personData.gender,
-                        "https://image.tmdb.org/t/p/original" + personData.profile_path,
-                        personData.biography);
+                    const person = (new PersonItem({
+                        tmdbID: personData.id.toString(),
+                        imdbID: personData.imdb_id,
+                        name: personData.name,
+                        birthday: personData.birthday,
+                        placeOfBirth: personData.place_of_birth,
+                        gender: personData.gender,
+                        photo: personData.profile_path ? "https://image.tmdb.org/t/p/original" + personData.profile_path : "",
+                        biography: personData.biography
+                    }));
 
                     CAST_CREW_CACHE.set(elem.id, person);
                     personMap.set(index + 1, {

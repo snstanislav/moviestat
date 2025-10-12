@@ -37,7 +37,7 @@ const movieSchema = new mongoose.Schema({
     // userEvalDate: String,
     // userChangeEvalDate: String,
     // isFavorite: false,
-});
+}, { timestamps: true });
 
 module.exports.movieSchema = movieSchema;
 module.exports.Movie = mongoose.model("Movie", movieSchema, "movies");

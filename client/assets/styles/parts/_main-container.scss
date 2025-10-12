@@ -1,0 +1,34 @@
+@use "../decor" as decor;
+
+@mixin main-container($margin-vert, $margin-horiz, $padding-vert, $padding-horiz) {
+    .main-container {
+        background: #fff;
+        margin: $margin-vert $margin-horiz;
+        padding: $padding-vert $padding-horiz;
+        min-width: 30rem;
+        max-width: 90rem;
+
+    }
+
+    nav {
+        margin: 0 auto 2rem 0;
+        padding: 0;
+        a {
+            display: block;
+            width: fit-content;
+            box-sizing: border-box;
+            padding: 0.3rem 1rem;
+            font-size: decor.$font-size-large;
+            background: decor.$dark-7;
+            color: #fff;
+            text-decoration: none;
+            border: 2px solid transparent;
+
+            &:hover {
+                color: decor.$dark-7;
+                background: #fff;
+                border: 2px solid decor.$dark-7;
+            }
+        }
+    }
+}

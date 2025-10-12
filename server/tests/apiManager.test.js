@@ -1,7 +1,6 @@
+require("dotenv").config();
 const { constructMovieFromAPIs } = require("../api/apiManager");
 const fs = require("fs");
-
-require("dotenv").config();
 
 beforeAll(() => { process.env.MONGO_URI = "mongodb://fakehost:27017/fakedb"; });
 

@@ -1,0 +1,84 @@
+@use "../decor" as decor;
+
+@mixin rating($scale: 1) {
+  button {
+    display: block;
+    margin: 0 auto;
+    padding: 0.3rem 1.5rem 0.2rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: decor.$font-size-medium*$scale;
+    cursor: pointer;
+  }
+
+  button.rating {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 20px;
+    border: 2px solid decor.$light-5;
+    background: decor.$light-5;
+    color: decor.$dark-0;
+    font-weight: bold;
+    font-size: decor.$font-size-large*$scale;
+
+    &:hover {
+      border: 2px solid decor.$light-5;
+      background: decor.$dark-0;
+      color: decor.$light-5;
+      cursor: pointer;
+    }
+  }
+
+  .change-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.5rem;
+    margin: 10px 5px 0 10px;
+    justify-content: right;
+    border: 2px dashed decor.$dark-2;
+    border-radius: 7px;
+    background: decor.$dark-9;
+
+    select {
+      padding: 0.1rem 2rem;
+      margin: 0 auto;
+      border-radius: 5px;
+      font-size: decor.$font-size-large*$scale;
+      font-weight: bold;
+      text-align: center;
+      background: #fff;
+      color: #000;
+    }
+
+    button.change-eval {
+      padding: 0.4rem 1rem;
+      box-shadow: none;
+      border: 2px solid decor.$light-0;
+      background: decor.$dark-5;
+      color: decor.$light-0;
+
+      &:hover {
+        border: 2px solid decor.$dark-5;
+        background: decor.$light-0;
+        color: decor.$dark-5;
+      }
+    }
+
+    button.remove {
+      margin-top: 1rem;
+      padding: 0.2rem 1rem;
+      border: 2px solid decor.$light-0;
+      background: decor.$dark-4;
+      color: decor.$light-0;
+
+      &:hover {
+        border: 2px solid decor.$dark-4;
+        background: decor.$light-0;
+        color: decor.$dark-4;
+      }
+    }
+  }
+}

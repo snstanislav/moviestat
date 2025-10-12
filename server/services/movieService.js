@@ -1,5 +1,5 @@
 const { getMovieSearchResult } = require("../api/apiManager");
-const { MovieItem } = require("../domain/MovieItem");
+const MovieItem = require("../domain/MovieItem");
 const { Movie } = require("../models/Movie");
 const { addNewPerson } = require("./personService");
 
@@ -10,7 +10,7 @@ require("dotenv").config();
 
 const SEARCH_RESULT_CACHE = new Map();
 
-async function findMovie(query, page) {
+async function performMovieSearch(query, page) {
     let cacheKey = query.trim() + "#" + page;
     if (SEARCH_RESULT_CACHE.has(cacheKey)) {
         return SEARCH_RESULT_CACHE.get(cacheKey)
@@ -21,7 +21,7 @@ async function findMovie(query, page) {
     }
 }
 /*(async ()=>{
-    var qwe = await findMovie("x files", 1)
+    var qwe = await performMovieSearch("x files", 1)
     console.log(qwe)
 })()*/
 
@@ -64,7 +64,7 @@ async function unloadAllPersonsFromMovie(existingMovie) {
 
 async function addNewMovie(newMovie) {
     try {
-        let existing = await Movie.findOne({ imdbID: newMovie.imdbID });
+        let existing = await Movie.findOne({ tmdbID: newMovie.tmdbID });
         if (existing) {
             console.log(`>> ${existing.type} <${existing.imdbID}: ${existing.name}(${existing.year})> already exists in DB.`);
             return existing;
@@ -81,7 +81,7 @@ async function addNewMovie(newMovie) {
 }
 
 module.exports = {
-    findMovie,
+    performMovieSearch,
     unloadAllPersonsFromMovie,
     addNewMovie
 }

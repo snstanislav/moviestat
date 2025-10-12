@@ -1,3 +1,4 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 const fs = require("fs");
 const { connect, disconnect, clearDB } = require("./setupTestDB");
@@ -6,8 +7,6 @@ const { addNewUser } = require("../services/userService");
 const { evaluateMovie, changeEvaluation, changeIsFavorite } = require("../services/evaluationService");
 const { User } = require("../models/User");
 const { Movie } = require("../models/Movie");
-
-require("dotenv").config();
 
 beforeAll(async () => {
     process.env.MONGO_URI = "mongodb://fakehost:27017/fakedb";

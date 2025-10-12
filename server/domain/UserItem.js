@@ -1,12 +1,12 @@
 class UserItem {
-    constructor() {
-        this._id = undefined;
-        this.email = "";
-        this.login = "";
-        this.password = "";
-        this.fullName = "";
-        this.role = "";
-        this.evals = [];
+    constructor(data = {}) {
+        this._id = data._id || undefined;
+        this.email = data.email || "";
+        this.login = data.login || "";
+        this.password = data.password || "";
+        this.fullName = data.fullName || "";
+        this.role = data.role || "user";
+        this.evals = data.evals || [];
     }
 }
-module.exports.UserItem = UserItem;
+module.exports = UserItem;

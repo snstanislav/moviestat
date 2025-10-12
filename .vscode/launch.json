@@ -4,7 +4,34 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug Program",
+            "name": "Launch Server",
+            "program": "${workspaceFolder}/server/app.js",
+            "cwd": "${workspaceFolder}/server",
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "console": "integratedTerminal",
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Vue Client",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/client",
+            "breakOnLoad": true,
+            "sourceMaps": true,
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Tests",
             "program": "${workspaceFolder}/server/node_modules/jest/bin/jest.js",
             "args": [
                 "--runInBand"
@@ -15,13 +42,12 @@
             "skipFiles": [
                 "<node_internals>/**"
             ]
-        },
+        }
+    ],
+    "compounds": [
         {
-            "type": "node-terminal",
-            "name": "Run Script: debug (server)",
-            "request": "launch",
-            "command": "node models/evaluation.js",
-            "cwd": "${workspaceFolder}\\server"
+            "name": "DEBUG Client + Server",
+            "configurations": ["Launch Server", "Launch Vue Client"]
         }
     ]
 }

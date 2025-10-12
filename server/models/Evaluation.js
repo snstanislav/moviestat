@@ -7,6 +7,6 @@ const evaluationSchema = new mongoose.Schema({
     userEvalDate: String,
     userChangeEvalDate: String,
     isFavorite: Boolean
-});
+}, { _id: false });
 
 module.exports.evaluationSchema = evaluationSchema;

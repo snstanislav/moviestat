@@ -1,27 +1,14 @@
 class PersonItem {
-    constructor() {
-        this._id = undefined;
-        this.tmdbID = "";
-        this.imdbID = "";
-        this.name = "";
-        this.birthday = "";
-        this.placeOfBirth = "";
-        this.gender = "";
-        this.photo = "";
-        this.biography = "";
-    }
-
-    setInstance(tmdbID, imdbID, name, birthday, placeOfBirth, gender, photo, biography) {
-        this._id = undefined;
-        this.tmdbID = tmdbID;
-        this.imdbID = imdbID;
-        this.name = name;
-        this.birthday = birthday;
-        this.placeOfBirth = placeOfBirth;
-        this.gender = gender;
-        this.photo = photo;
-        this.biography = biography;
-        return this;
+    constructor(data = {}) {
+        this._id = data._id || undefined;
+        this.tmdbID = data.tmdbID || "";
+        this.imdbID = data.imdbID || "";
+        this.name = data.name || "";
+        this.birthday = data.birthday || "";
+        this.placeOfBirth = data.placeOfBirth || "";
+        this.gender = data.gender || -1;
+        this.photo = data.photo || "";
+        this.biography = data.biography || "";
     }
 }
-module.exports.PersonItem = PersonItem;
+module.exports = PersonItem;

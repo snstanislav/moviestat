@@ -1,14 +1,25 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 const { connect, disconnect } = require("./db/connection");
+const indexRoutes = require("./routes/indexRoutes");
+const authRoutes = require("./routes/authRoutes");
+const evalRoutes = require("./routes/evalRoutes");
+const mediaRoutes = require("./routes/mediaRoutes");
+const cookieParser = require("cookie-parser");
 
-require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-    res.json("TEST");
-});
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:3000", credentials: true }));
+
+app.use("/", indexRoutes);
+app.use("/auth", authRoutes);
+app.use("/eval", evalRoutes);
+app.use("/media", mediaRoutes);
 
 (async () => {
     try {
@@ -28,8 +39,8 @@ app.get("/", (req, res) => {
 })();
 
 process.on("SIGINT", async () => {
-    console.log("\nShutting down...")
+    console.log("\nShutting down...");
     await disconnect();
-    console.log("Disconnected from MongoDB.")
+    console.log("Disconnected from MongoDB.");
     process.exit(0);
 });

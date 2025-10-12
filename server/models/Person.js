@@ -9,7 +9,7 @@ const personSchema = new mongoose.Schema({
     gender: Number,
     photo: String,
     biography: String
-});
+}, { timestamps: true });
 
 module.exports.personSchema = personSchema;
 module.exports.Person = mongoose.model("Person", personSchema, "persons");

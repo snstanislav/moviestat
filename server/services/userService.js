@@ -1,10 +1,9 @@
-const { UserItem } = require("../domain/UserItem");
+const UserItem = require("../domain/UserItem");
 const { User } = require("../models/User");
 
 /// temp
 const mongoose = require("mongoose");
 const { connect, disconnect } = require("../db/connection");
-
 require("dotenv").config();
 
 //var EXISTING_LOGGED_USER;
@@ -16,7 +15,7 @@ async function addNewUser(newUser) {
             console.log(`>> User <${existing.login}> already exists in DB.`);
             return existing;
         }
-        if (newUser instanceof UserItem) {
+        if (newUser instanceof UserItem || typeof newUser === "object") {
             console.log(`Inserting new user: <${newUser.login}>`);
             return await User.create(newUser);
         }
@@ -26,16 +25,16 @@ async function addNewUser(newUser) {
 }
 /*(async () => {
     const newTestUser = new UserItem();
-    newTestUser.email = `test_1@domain.com`;
-    newTestUser.login = `testUser_1`;
-    newTestUser.password = "123456789";
-    newTestUser.fullName = "John Doe";
-    newTestUser.role = "admin";
+    newTestUser.email = `user1@domain.com`;
+    newTestUser.login = `user1`;
+    newTestUser.password = "111";
+    newTestUser.fullName = "Jane Doe";
+    newTestUser.role = "user";
     newTestUser.evals = [];
     await connect()
     await addNewUser(newTestUser)
     await disconnect();
-})*/
+})()*/
 
 module.exports = {
     addNewUser

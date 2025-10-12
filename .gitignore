@@ -15,9 +15,6 @@ server/node_modules/
 # ───────────────────────────────
 # Build Outputs
 # ───────────────────────────────
-build/
-dist/
-client/
 server/build/
 server/dist/
 
@@ -31,7 +28,7 @@ server/dist/
 # ───────────────────────────────
 **/.env
 **/.env.local
-**/.env.*.local
+**/.env.*
 *.pem
 
 # ───────────────────────────────
@@ -41,12 +38,14 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
 # ───────────────────────────────
 # Miscellaneous
 # ───────────────────────────────
 .DS_Store
 Thumbs.db
+*.tsbuildinfo
 
 # ───────────────────────────────
 # Jest Config & Output
@@ -58,3 +57,43 @@ server/coverage/
 # Deployment
 # ───────────────────────────────
 .vercel
+
+# ───────────────────────────────
+# Editor
+# ───────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ───────────────────────────────
+# Client
+# ───────────────────────────────
+client/logs
+client/*.log
+client/node_modules
+client/dist
+client/dist-ssr
+client/coverage
+client/*.local
+
+client/cypress/videos/
+client/cypress/screenshots/
+
+# Nuxt dev/build outputs
+client/.output
+client/.data
+client/.nuxt
+client/.nitro
+client/.cache
+
+# Misc
+client/.DS_Store
+client/.fleet
+client/.idea
+
+client/!.env.example
