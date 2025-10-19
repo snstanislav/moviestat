@@ -1,62 +1,49 @@
 @use "../decor" as decor;
 
 @mixin rating($scale: 1) {
-  button {
-    display: block;
+
+  button,
+  select {
     margin: 0 auto;
-    padding: 0.3rem 1.5rem 0.2rem;
-    border-radius: 20px;
+    width: 4.4rem*$scale;
+    height: 1.5rem*$scale;
+    border-radius: 3px;
     font-weight: bold;
     font-size: decor.$font-size-medium*$scale;
-    cursor: pointer;
   }
 
   button.rating {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    border-radius: 20px;
-    border: 2px solid decor.$light-5;
-    background: decor.$light-5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.1rem;
+    background: decor.$light-4;
     color: decor.$dark-0;
-    font-weight: bold;
-    font-size: decor.$font-size-large*$scale;
+    border: 2px solid decor.$light-4;
 
     &:hover {
-      border: 2px solid decor.$light-5;
+      border: 2px solid decor.$light-4;
       background: decor.$dark-0;
-      color: decor.$light-5;
-      cursor: pointer;
+      color: decor.$light-4;
     }
   }
 
   .change-wrap {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 0.5rem;
-    margin: 10px 5px 0 10px;
-    justify-content: right;
-    border: 2px dashed decor.$dark-2;
-    border-radius: 7px;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0.3rem 0;
+    margin: 0.3rem 0 0 0;
     background: decor.$dark-9;
 
     select {
-      padding: 0.1rem 2rem;
-      margin: 0 auto;
-      border-radius: 5px;
-      font-size: decor.$font-size-large*$scale;
-      font-weight: bold;
-      text-align: center;
-      background: #fff;
-      color: #000;
+      padding: 0 0 0 0.6rem;
+      border: 2px solid decor.$light-4;
     }
 
     button.change-eval {
-      padding: 0.4rem 1rem;
-      box-shadow: none;
-      border: 2px solid decor.$light-0;
+      border: 1px solid decor.$light-0;
       background: decor.$dark-5;
       color: decor.$light-0;
 
@@ -68,9 +55,8 @@
     }
 
     button.remove {
-      margin-top: 1rem;
-      padding: 0.2rem 1rem;
-      border: 2px solid decor.$light-0;
+      margin-top: 1.5rem;
+      border: 1px solid decor.$light-0;
       background: decor.$dark-4;
       color: decor.$light-0;
 
@@ -80,5 +66,15 @@
         color: decor.$dark-4;
       }
     }
+  }
+
+  .eval-date-text {
+    margin: 0.4rem 0 0;
+    padding: 0.2rem 0;
+    text-align: center;
+    border-top: 1px solid decor.$light-5;
+    color: decor.$light-0;
+    font-size: decor.$font-size-base*$scale;
+    font-style: italic;
   }
 }

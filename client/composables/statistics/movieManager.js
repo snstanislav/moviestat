@@ -1,83 +1,80 @@
 /**
-* 05.03.2024
+* created 05.03.2024
+* modified 10/2025
 */
 
-// modules
-const statisticsGenerator = require('./statisticsGenerator.js');
-const fs = require('fs')
-const dataProvider = require('../data/dataProvider.js');
-const MovieEntry = require('./movieItem.js').MovieEntry;
+import { FilmStatMode, SortStatMode } from "./statisticsGenerator";
+import { defaultSortRecentDate, normalizeYear, normalizeIMDBVotes } from "../utils";
 
-// enumerators
-const FilmStatMode = statisticsGenerator.FilmStatMode;
-const SortStatMode = statisticsGenerator.SortStatMode;
+export function getMovieStat(db, sortMode, filterMode, filterValue) {
+  //return filterMovieStat(sortMovieStat(db, sortMode), filterMode, filterValue);
+  return sortMovieStat(db, sortMode);
 
-// functions
-const composeFullStat = statisticsGenerator.composeFullStat;
-const setStatMapEntry = statisticsGenerator.setStatMapEntry;
-const calcPercentsAndRatesStat = statisticsGenerator.calcPercentsAndRatesStat;
-const sortStat = statisticsGenerator.sortStat;
-const getSingleProperty = statisticsGenerator.getSingleProperty;
-const extractIdFromLinkIMDB = statisticsGenerator.extractIdFromLinkIMDB;
-const filterMovieStat = statisticsGenerator.filterMovieStat;
-
-
-module.exports.getMovieStat = (db, sortMode, filterMode, filterValue) => {
-  return filterMovieStat(sortStat(composeFilmsRate(db), sortMode), filterMode, filterValue);
 }
-///
-module.exports.getMovie = (db, imdbId) => {
+
+// for movie table only
+function sortMovieStat(db, sortMode) {
   if (db) {
-    return db.find(elem => elem.imdbId == imdbId);
-  }
-}
-///
-module.exports.removeMovie = (imdbId, renderOk, renderErr) => {
-  dataProvider.removeUserMovieEval(imdbId, renderOk, renderErr);
-}
-///
-module.exports.changeUserEval = (item, render) => {
-  let currItem = new MovieEntry()
-  currItem.copy(item)
-  dataProvider.updateUserMovieEval(currItem, render);
-}
-///
-function composeFilmsRate(db) {
-  let filmsMap = new Map();
-  if (db) {
-    db.forEach(elem => {
-      setFilmMapEntry(filmsMap, elem);
-    });
-  }
-  return filmsMap;
-}
-module.exports.composeFilmsRate = composeFilmsRate;
+    db = defaultSortRecentDate(db);
+    switch (sortMode) {
+      case SortStatMode.EVAL_DATETIME_DESC:
+        return db;
+      case SortStatMode.EVAL_DATETIME_ASC:
+        return db.sort((a, b) => {
+          let argA = a.userChangeEvalDate ? a.userChangeEvalDate : a.userEvalDate;
+          let argB = b.userChangeEvalDate ? b.userChangeEvalDate : b.userEvalDate;
+          return new Date(argA) - new Date(argB);
+        });
 
-///
-function setFilmMapEntry(map, detailsItem) {
-  const key = detailsItem.imdbId;
+      case SortStatMode.USER_RATING_DESC:
+        return db.sort((a, b) => Number(b.userRating) - Number(a.userRating));
+      case SortStatMode.USER_RATING_ASC:
+        return db.sort((a, b) => Number(a.userRating) - Number(b.userRating));
 
-  const entry = {
-    imdbLink: detailsItem.imdbLink,
-    commTitle: detailsItem.commTitle,
-    origTitle: detailsItem.origTitle,
-    year: detailsItem.year,
-    duration: detailsItem.duration,
-    //parental: detailsItem.parental,
-    type: detailsItem.type,
-    countriesOrig: detailsItem.countriesOrig,
-    plot: detailsItem.plot,
-    imdbRating: detailsItem.imdbRating,
-    imdbRatingNum: detailsItem.imdbRatingNum,
-    sPoster: detailsItem.sPoster,
-    genres: detailsItem.genres,
-    director: detailsItem.director,
-    cast: detailsItem.cast,
-    budget: detailsItem.budget,
-    grossWW: detailsItem.grossWW,
-    pRating: detailsItem.pRating,
-    pDateTime: detailsItem.pDateTime,
-    favorite: detailsItem.favorite
+      case SortStatMode.YEAR_DESC:
+        return db.sort((a, b) => normalizeYear(b.movie.year) - normalizeYear(a.movie.year));
+      case SortStatMode.YEAR_ASC:
+        return db.sort((a, b) => normalizeYear(a.movie.year) - normalizeYear(b.movie.year));
+
+      case SortStatMode.IMDB_RATING_DESC:
+        return db.sort((a, b) =>
+          normalizeIMDBVotes(b.movie.imdbVotes) - normalizeIMDBVotes(a.movie.imdbVotes))
+          .sort((a, b) => Number(b.movie.imdbRating) - Number(a.movie.imdbRating));
+      case SortStatMode.IMDB_RATING_ASC:
+        return db.sort((a, b) =>
+          normalizeIMDBVotes(a.movie.imdbVotes) - normalizeIMDBVotes(b.movie.imdbVotes))
+          .sort((a, b) => Number(a.movie.imdbRating) - Number(b.movie.imdbRating));
+
+      case SortStatMode.IMDB_EVALNUM_DESC:
+        return db.sort((a, b) => Number(b.movie.imdbRating) - Number(a.movie.imdbRating))
+          .sort((a, b) => normalizeIMDBVotes(b.movie.imdbVotes) - normalizeIMDBVotes(a.movie.imdbVotes));
+      case SortStatMode.IMDB_EVALNUM_ASC:
+        return db.sort((a, b) => Number(a.movie.imdbRating) - Number(b.movie.imdbRating))
+          .sort((a, b) => normalizeIMDBVotes(a.movie.imdbVotes) - normalizeIMDBVotes(b.movie.imdbVotes));
+      default:
+        return db;
+    }
+  } else {
+    console.error("sortMovieStat error: data not valid...")
+    return new Map();
   }
-  map.set(key, entry)
+}
+
+export function filterMovieStat(db, filterMode, filterValue) {
+
+  if (filterMode == FilmStatMode.ACTOR || filterMode == FilmStatMode.DIRECTOR) {
+    return new Map(mapEntries.filter(entry => entry[filterMode].some(elem => elem.imdbLink.includes(filterValue))));
+  } else if (filterMode == FilmStatMode.GENRE || filterMode == FilmStatMode.COUNTRY) {
+    return new Map(mapEntries.filter(entry => entry[filterMode].includes(filterValue)));
+  } else if (filterMode == FilmStatMode.USER_RATING || filterMode == FilmStatMode.TYPE || filterMode == FilmStatMode.YEAR) {
+    return new Map(mapEntries.filter(entry => entry[filterMode] == filterValue))
+  } else if (filterMode == FilmStatMode.DECADE) {
+    const decade = filterValue.split('-')
+    return new Map(mapEntries.filter(entry => entry.year >= decade && entry.year <= decade))
+  } else if (filterMode == FilmStatMode.FAVORITE) {
+    return new Map(mapEntries.filter(entry => entry.favorite == true))
+  } else {
+    console.error("StatisticsGenerator: filter result is empty...")
+    return map;
+  }
 }

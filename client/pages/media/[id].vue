@@ -16,7 +16,7 @@
                             <span v-if="mediaItem.parental">&nbsp;|&nbsp;{{ mediaItem.parental }} </span>
                         </div><!-- /film-cert -->
                         <!-- FAVORITE -->
-                        <div @click="handleChangeFavorite" class=favor>
+                        <div @click="handleChangeFavorite" class=favor title="Favorite">
                             <span>
                                 <img :key="isFavorite" :src="isFavorite ? '/fav.png' : '/no-fav.png'"
                                     class="fav-button" />
@@ -30,9 +30,8 @@
                                 <img :alt="mediaItem.origTitle" :src="mediaItem.poster">
                             </div>
                             <div class="media-eval-wrapper">
-                                <button class="rating" @click="toogleDialog">&#8593;&nbsp;&nbsp;<span>{{ userRating
-                                }}</span>&nbsp;&nbsp;&#8595;
-                                </button>
+                                <RatingButton :userRating :toogleDialogFunc="toogleDialog" />
+
                                 <div v-if="isDialogVisible" class="change-wrap">
                                     <!-- CHANGE RATING -->
                                     <select v-model="newUserRating" name="personalRating">
@@ -54,24 +53,36 @@
                                         rating</button>
                                 </div> <!-- change-wrap -->
                                 <div class="eval-date-text">
-                                    Evaluated: {{ userEvalDate.slice(0, userEvalDate.indexOf(" GMT")) }}
-                                    <span v-if="userChangeEvalDate"> / Changed: {{ userChangeEvalDate.slice(0,
-                                        userEvalDate.indexOf(" GMT")) }}</span>
+                                    <p>
+                                        <span class="ed-label">Evaluated: </span>
+                                        {{ userEvalDate.slice(0, userEvalDate.indexOf(" GMT")) }}
+                                        <span  v-if="userChangeEvalDate" class="ed-label"> /</span>
+                                    </p>
+                                    <p v-if="userChangeEvalDate">
+                                        <span class="ed-label">Changed: </span>
+                                        {{ userChangeEvalDate.slice(0,
+                                            userEvalDate.indexOf(" GMT")) }}
+                                    </p>
                                 </div>
                             </div><!-- /eval-wrap -->
                         </div><!-- /film-img-eval-wrap -->
 
                         <div class="film-descr"><!-- right -->
                             <div class="film-comm-title">
-                                <div>{{ mediaItem.commTitle }}
+                                <div>{{ mediaItem.commTitle ? mediaItem.commTitle : mediaItem.origTitle }}
                                     <span v-if="mediaItem.year">({{ mediaItem.year }})</span>
                                 </div>
 
-                                <div v-if="mediaItem.imdbID">
-                                    <a :href="`https://www.imdb.com/title/${mediaItem.imdbID}/`" target="blank"><img
-                                            src="../../public/imdb-logo.png">
+                                <nav>
+                                    <a v-if="mediaItem.imdbID" title="TMDB profile"
+                                        :href="`https://www.themoviedb.org/${mediaItem.type}/${mediaItem.tmdbID}/`"
+                                        target="blank"><img src="../../public/tmdb-logo.png" alt="TMDB logo">
                                     </a>
-                                </div>
+                                    <a v-if="mediaItem.imdbID" title="IMDB profile"
+                                        :href="`https://www.imdb.com/title/${mediaItem.imdbID}/`" target="blank"><img
+                                            src="../../public/imdb-logo.png" alt="IMDB logo">
+                                    </a>
+                                </nav>
                             </div>
 
                             <div v-if="mediaItem.origTitle" class="descr-container film-orig-title">
@@ -203,6 +214,7 @@
 import { prettyMediaType } from "../../composables/utils";
 import useAuth from "../composables/useAuth";
 import changeRate from "../../composables/changeRate";
+import RatingButton from "~/components/statistics/partials/RatingButton.vue";
 
 const { userProfileData } = useAuth();
 const { isDialogVisible, toogleDialog, changeFavorite, changeRating, deleteRating } = changeRate();

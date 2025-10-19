@@ -1,6 +1,6 @@
 <template>
     <div v-if="genreList.length" class="stat-container">
-        <SortWorld />
+        <Sortbar />
         <div v-for="item in genreList" :key="item.key">
             <div v-if="item.value && item.value.quantity > 0" class="chart-line genre-chart">
 
@@ -36,7 +36,7 @@ const { userEvaluations } = defineProps(['userEvaluations']);
 import useStat from "../../composables/useSort";
 const { currentSortMode, collectionDimension, showData, barWidth, addData } = useStat();
 
-import SortWorld from "./sortbar/SortWorld.vue";
+import Sortbar from "./partials/Sortbar.vue";
 
 const composedMap = getGenreStat(toRaw(userEvaluations), currentSortMode.value);
 collectionDimension.value.count = userEvaluations.length;
@@ -49,11 +49,10 @@ const genreStat = ref(composedMap);
 
 const genreList = computed(() =>
     Array.from(genreStat.value.entries()).map(([key, value]) => ({ key, value }))
-)
+);
 
 watch(currentSortMode, (newMode) => {
     console.log("Sort mode changed: ", newMode)
     genreStat.value = new Map(getGenreStat(toRaw(userEvaluations), currentSortMode.value))
 });
-
 </script>

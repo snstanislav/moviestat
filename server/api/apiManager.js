@@ -63,7 +63,7 @@ async function constructMovieFromAPIs(tmdbIdSearched, mediaType, userRating, use
         resultMovieItem.commTitle = tmdbSrcMovieItem.title || omdbSrcMovieItem.Title;
         resultMovieItem.origTitle = tmdbSrcMovieItem.original_title || tmdbSrcMovieItem.original_name;
         resultMovieItem.year = omdbSrcMovieItem.Year || tmdbSrcMovieItem.release_date || tmdbSrcMovieItem.first_air_date;
-        resultMovieItem.duration = omdbSrcMovieItem.Runtime || tmdbSrcMovieItem.runtime + " min";
+        resultMovieItem.duration = omdbSrcMovieItem.Runtime || tmdbSrcMovieItem.runtime ? tmdbSrcMovieItem.runtime + " min" : "";
         resultMovieItem.parental = omdbSrcMovieItem.Rated;
         resultMovieItem.plot = tmdbSrcMovieItem.overview || omdbSrcMovieItem.Plot;
         resultMovieItem.poster =

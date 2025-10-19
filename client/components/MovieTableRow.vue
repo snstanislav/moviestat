@@ -11,7 +11,7 @@
         </div>
         <div class="row-section col-poster-dur">
             <NuxtLink :to="`/media/${item.movie._id}`" target="_blank">
-                <img :src="item.movie.poster" :alt="item.movie.origTitle">
+                <img :src="item.movie.poster" :alt="item.movie.origTitle" loading="lazy" />
             </NuxtLink>
 
             <div class="duration">
@@ -20,29 +20,28 @@
         </div>
         <div class="row-section col-title">
             <div class="row-subsection comm-title">
-                {{ item.movie.commTitle }}
+                {{ item.movie.commTitle ? item.movie.commTitle : (item.movie.origTitle ? item.movie.origTitle : "") }}
             </div>
-            <div class="row-subsection orig-title">
-                <i>Original title: <br /><b>{{ item.movie.origTitle }}</b></i>
+            <div v-if="item.movie.origTitle" class="row-subsection orig-title">
+                <i>Original title: <b>{{ item.movie.origTitle }}</b></i>
             </div>
         </div>
         <div class="row-section col-year-imdb">
-            <div class="row-subsection year">
+            <div v-if="item.movie.year" class="row-subsection year">
                 {{ item.movie.year }}
             </div>
-            <div class="row-subsection type">
+            <div v-if="item.movie.type" class="row-subsection type">
                 {{ prettyMediaType(item.movie.type) }}
             </div>
             <div class="row-subsection">
                 <span v-if="item.movie.imdbRating">IMDB:
-                {{ item.movie.imdbRating }} ({{ item.movie.imdbVotes }})</span>
+                    {{ item.movie.imdbRating }} {{ item.movie.imdbVotes ? "(" + item.movie.imdbVotes + ")" : "" }}</span>
             </div>
         </div>
         <div class="row-section col-user-rating">
             <div class="row-subsection table-eval-wrapper">
-                <button class="rating" @click="toogleDialog">&#8593;&nbsp;&nbsp;<span>{{ userRating
-                        }}</span>&nbsp;&nbsp;&#8595;
-                </button>
+                <RatingButton :userRating :toogleDialogFunc="toogleDialog" />
+                
                 <div v-if="isDialogVisible" class="change-wrap">
                     <!-- CHANGE RATING -->
                     <select v-model="newUserRating" name="personalRating">
@@ -69,9 +68,10 @@
 </template>
 
 <script setup>
-const { item, index } = defineProps(['item', 'index']);
+const { item, index } = defineProps(["item", "index"]);
 import { prettyMediaType } from "../composables/utils";
 import changeRate from "../composables/changeRate";
+import RatingButton from "./statistics/partials/RatingButton.vue";
 
 const { isDialogVisible, toogleDialog, changeFavorite, changeRating } = changeRate();
 const isReady = ref(false);

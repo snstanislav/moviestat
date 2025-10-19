@@ -21,7 +21,7 @@
         padding: 0.3rem 0.2rem;
         border-radius: 4px;
         margin: 0.2rem 0.5rem 0.5rem;
-        background: #fff;
+        background: decor.$light-0;
         font-size: decor.$font-size-base;
       }
       .mid-line {
@@ -37,14 +37,13 @@
           border-radius: 5px;
           font-size: decor.$font-size-base;
           font-weight: bold;
-          opacity: 0.8;
         }
       }
       .person-data {
         margin: auto auto 0.2rem auto;
         padding: 0.3rem auto;
         text-align: center;
-        background: #fff;
+        background: decor.$light-0;
         border-radius: 4px;
       }
     }

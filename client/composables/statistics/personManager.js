@@ -1,35 +1,121 @@
 /**
-* 04.03.2024
+* created: 04.03.2024
+* modified: 10/2025
 */
 
-// modules
-const sg = require('./statisticsGenerator.js');
-const fs = require('fs')
+import { getSingleProperty, sortStat, FilmStatMode, SortStatMode } from "./statisticsGenerator";
 
-// enumerators
-const FilmStatMode = sg.FilmStatMode;
-const SortStatMode = sg.SortStatMode;
-
-// functions
-const sortStat = sg.sortStat;
-const getSingleProperty = sg.getSingleProperty;
-const extractIdFromLinkIMDB = sg.extractIdFromLinkIMDB;
-
-
-function getActorStat(db, sortMode, thresholdQuantity = 7) {
-  return sortStat(composePersonsRate(db, thresholdQuantity, FilmStatMode.CAST), sortMode);
-}
-module.exports.getActorStat = getActorStat;
-
-function getDirectorStat(db, sortMode, thresholdQuantity = 3) {
+export function getDirectorStatistics(db, sortMode, thresholdQuantity = 1) {
   return sortStat(composePersonsRate(db, thresholdQuantity, FilmStatMode.DIRECTOR), sortMode);
 }
-module.exports.getDirectorStat = getDirectorStat;
 
-//// for short profile
-function getPerson(db, imdbId) {
+export function getWriterStatistics(db, sortMode, thresholdQuantity = 1) {
+  return sortStat(composePersonsRate(db, thresholdQuantity, FilmStatMode.WRITER), sortMode);
+}
+
+export function getProducerStatistics(db, sortMode, thresholdQuantity = 1) {
+  return sortStat(composePersonsRate(db, thresholdQuantity, FilmStatMode.PRODUCER), sortMode);
+}
+
+export function getComposerStatistics(db, sortMode, thresholdQuantity = 1) {
+  return sortStat(composePersonsRate(db, thresholdQuantity, FilmStatMode.COMPOSER), sortMode);
+}
+
+export function getActorStatistics(db, sortMode, thresholdQuantity = 5) {
+  return sortStat(composePersonsRate(db, thresholdQuantity, FilmStatMode.ACTOR), sortMode);
+}
+
+function composePersonsRate(db, numFilmLimit, personMode) {
+  let personsMap = new Map();
   if (db) {
-    const actorsColl = composePersonsRate(db, 1, FilmStatMode.CAST);
+    db.sort((a, b) => new Date(a.userEvalDate) > new Date(b.userEvalDate));
+    switch (personMode) {
+
+      case FilmStatMode.DIRECTOR:
+        db.forEach(item => {
+          return item.movie.directors.forEach(elem => {
+            setPersonMapEntry(personsMap, elem.person, item.userRating);
+          });
+        });
+        console.log(`Person manager: DIRECTORs total -- ${personsMap.size}`);
+        break;
+
+      case FilmStatMode.WRITER:
+        db.forEach(item => {
+          return item.movie.writers.forEach(elem => {
+            setPersonMapEntry(personsMap, elem.person, item.userRating);
+          });
+        });
+        console.log(`Person manager: WRITERs total -- ${personsMap.size}`);
+        break;
+
+      case FilmStatMode.PRODUCER:
+        db.forEach(item => {
+          return item.movie.producers.forEach(elem => {
+            setPersonMapEntry(personsMap, elem.person, item.userRating);
+          });
+        });
+        console.log(`Person manager: PRODUCERs total -- ${personsMap.size}`);
+        break;
+
+      case FilmStatMode.COMPOSER:
+        db.forEach(item => {
+          return item.movie.composers.forEach(elem => {
+            setPersonMapEntry(personsMap, elem.person, item.userRating);
+          });
+        });
+        console.log(`Person manager: COMPOSERs total -- ${personsMap.size}`);
+        break;
+
+      case FilmStatMode.ACTOR:
+        db.forEach(item => {
+          return item.movie.cast.forEach(elem => {
+            setPersonMapEntry(personsMap, elem.person, item.userRating);
+          });
+        });
+        console.log(`Person manager: ACTORs total -- ${personsMap.size}`);
+        break;
+
+      default:
+        console.log("Person manager: mode is not valid");
+        break;
+    }
+    personsMap.forEach(elem => {
+      elem.rating = (elem.rating / elem.quantity).toFixed(2);
+    });
+
+    return sortStat(new Map([...personsMap.entries()]
+      .filter(elem => elem[1].quantity >=
+        numFilmLimit)), SortStatMode.EVAL_DATETIME_DESC);
+  } else {
+    return new Map();
+  }
+}
+
+function setPersonMapEntry(map, detailsItem, rating) {
+  if (detailsItem && detailsItem.name) {
+    const key = detailsItem.name;
+    let currQuantity = map.get(key) == undefined ? 0 : map.get(key).quantity;
+    let currRate = map.get(key) == undefined ? 0 : map.get(key).rating;
+
+    const entry = {
+      //_id: detailsItem._id,
+      photo: detailsItem.photo,
+      quantity: currQuantity += 1,
+      rating: currRate += Number(rating),
+      imdbID: detailsItem.imdbID
+    }
+    if (detailsItem.photo)
+      entry.photo = detailsItem.photo;
+
+    map.set(key, entry);
+  }
+}
+
+// for short profile
+export function getPerson(db, imdbId) {
+  if (db) {
+    const actorsColl = composePersonsRate(db, 1, FilmStatMode.ACTOR);
     const direcsColl = composePersonsRate(db, 1, FilmStatMode.DIRECTOR);
 
     if (actorsColl.has(imdbId) || direcsColl.has(imdbId)) {
@@ -40,20 +126,20 @@ function getPerson(db, imdbId) {
         personInfo = actorsColl.get(imdbId);
 
         setProfileOccupSection(
-          profile, 
-          imdbId, 
-          personInfo, 
-          FilmStatMode.CAST, 
-          getSingleProperty(db, imdbId, FilmStatMode.CAST).filmList);
+          profile,
+          imdbId,
+          personInfo,
+          FilmStatMode.ACTOR,
+          getSingleProperty(db, imdbId, FilmStatMode.ACTOR).filmList);
       }
       if (direcsColl.has(imdbId)) {
         personInfo = direcsColl.get(imdbId);
 
         setProfileOccupSection(
-          profile, 
-          imdbId, 
-          personInfo, 
-          FilmStatMode.DIRECTOR, 
+          profile,
+          imdbId,
+          personInfo,
+          FilmStatMode.DIRECTOR,
           getSingleProperty(db, imdbId, FilmStatMode.DIRECTOR).filmList);
       }
       return profile;
@@ -63,89 +149,18 @@ function getPerson(db, imdbId) {
     }
   }
 }
-module.exports.getPerson = getPerson;
-//
+
 function setProfileOccupSection(profile, imdbId, personInfo, personMode, filmList) {
   profile.occupation.push(personMode);
   profile.imdbId = imdbId;
   profile.imdbLink = personInfo.imdbLink;
   profile.name = personInfo.name;
-  profile.sPhoto = profile.sPhoto ? profile.sPhoto: (personInfo.sPhoto ?
-    personInfo.sPhoto: "");
+  profile.photo = profile.photo ? profile.photo : (personInfo.photo ?
+    personInfo.photo : "");
 
   profile[personMode] = {
     quantity: personInfo.quantity,
     rating: personInfo.rating,
     filmList: filmList
   }
-}
-
-////
-function composePersonsRate(db, numFilmLimit, personMode) {
-  let personsMap = new Map();
-  if (db) {
-    db.sort((a, b)=>sg.formatDT(a.pDateTime)-sg.formatDT(b.pDateTime));
-    switch (personMode) {
-      case FilmStatMode.CAST:
-        db.forEach(film =>
-          film.cast.forEach(elem => {
-            setPersonMapEntry(personsMap, elem, film.pRating);
-          }));
-        console.log('Person manager: actors total - %s', personsMap.size)
-        break;
-      case FilmStatMode.DIRECTOR:
-        db.forEach(film =>
-          film.director.forEach(elem => {
-            setPersonMapEntry(personsMap, elem, film.pRating);
-          }));
-        console.log('Person manager: directors total - %s', personsMap.size)
-        break;
-      default:
-        console.log("Person manager: mode is not valid");
-        break;
-    }
-    personsMap.forEach(elem => {
-      elem.rating = (elem.rating/elem.quantity).toFixed(2);
-    });
-    
-    return sortStat(new Map([...personsMap.entries()]
-      .filter(elem => elem[1].quantity >=
-        numFilmLimit)), SortStatMode.EVAL_DATETIME_DESC);
-  } else {
-    return new Map();
-  }
-}
-///
-function setPersonMapEntry(map, detailsItem, rating) {
-
-  const key = extractIdFromLinkIMDB(detailsItem.imdbLink);
-  let currQuantity = map.get(key) == undefined ? 0: map.get(key).quantity;
-  let currRate = map.get(key) == undefined ? 0: map.get(key).rating;
-
-  const entry = {
-    name: detailsItem.name,
-    quantity: currQuantity += 1,
-    rating: currRate += Number(rating),
-    imdbLink: detailsItem.imdbLink
-  }
-  if (detailsItem.sPhoto)
-    entry.sPhoto = detailsItem.sPhoto;
-
-  map.set(key, entry);
-}
-
-/// temporary
-function printPersonsRate(personsMap) {
-  let personsList = []
-
-  console.log("actors filtered: "+personsMap.size)
-  personsMap.forEach(elem => {
-    personsList.push([elem.name,
-      elem.rating,
-      elem.quantity]);
-  });
-  const result = JSON.stringify(personsList/*.sort((a, b)=>b[2]-a[2])*/);
-  fs.writeFileSync("./listtemp1.txt",
-    result.trim().replaceAll("],[",
-      "],\n["));
 }

@@ -5,68 +5,16 @@
   flex-direction: column;
   width: 90%;
   box-sizing: border-box;
-  max-width: 60rem;
+  max-width: 63rem;
   padding: 1rem;
   margin: 1rem auto 1.5rem;
   overflow: auto;
-  border: 0;
   background: decor.$dark-9;
-  color: #fff;
-  opacity: 0.9;
-
-  h2.title-section {
-    //border: 1px solid cyan;
-    padding: 0;
-    margin: 0 2rem;
-  }
+  color: decor.$light-0;
 }
 
 @mixin manage-section($is-opened: false, $display: none) {
   @extend .section;
-
-  h2.title-section {
-    //padding: inherit;
-    //margin: auto;
-    border: 1px solid cyan;
-  }
-
-  /*.handle-section {
-    font-size: decor.$font-size-medium;
-    font-weight: bold;
-    padding: 8px 0 8px 15px;
-    margin: auto;
-    opacity: 0.9;
-    border-radius: 2px;
-    color: decor.$light-1;
-
-    @if $is-opened {
-      &:before {
-        content: "\2329 \00a0 \00a0 Collapse";
-      }
-
-      background: decor.$dark-2;
-      border: 2px solid decor.$dark-2;
-
-      &:active {
-        color: decor.$dark-2;
-        background: #fff;
-      }
-    }
-
-    @else {
-      &:before {
-        content: "\232A \00a0 \00a0 Expand";
-      }
-
-      background: decor.$dark-1;
-      border: 2px solid decor.$dark-1;
-
-      &:active {
-        color: decor.$dark-1;
-        background: #fff;
-      }
-    }
-  }*/
 
   .content-section {
     display: $display;
@@ -92,7 +40,6 @@
         font-size: decor.$font-size-medium;
         font-weight: bold;
         font-style: italic;
-        opacity: 0.7;
       }
 
       input {
@@ -100,7 +47,6 @@
         padding: 0.3rem 0.5rem;
         font-size: inherit;
         background: decor.$light-0;
-        opacity: 0.8;
         border: 0;
         border-radius: 10px;
         border-left: 2px solid decor.$dark-8;

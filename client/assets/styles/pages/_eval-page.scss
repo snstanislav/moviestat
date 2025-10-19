@@ -9,7 +9,6 @@
 
     .clear-cache-wrapper {
       margin: 0 0 -1rem 0;
-      //border: 1px solid yellow;
       text-align: right;
 
       a {
@@ -29,7 +28,7 @@
       min-width: 400px;
       font-size: decor.$font-size-base*$scale;
       background: decor.$dark-0;
-      color: #fff;
+      color: decor.$light-0;
       border: 3px solid decor.$dark-0;
       border-radius: 5px;
       box-sizing: content-box;
@@ -37,10 +36,6 @@
       &:hover {
         border: 3px solid decor.$light-5;
         color: decor.$light-5;
-      }
-
-      div {
-        // border:1px solid cyan;
       }
 
       .order {
@@ -118,16 +113,8 @@
         overflow: visible;
 
         select {
-          margin: 0;
           padding: 0.3rem 0 0.2rem;
           width: 100%;
-          text-align: center;
-          box-sizing: border-box;
-          background: #fff;
-          border-radius: 5px;
-          font-weight: bold;
-          font-size: decor.$font-size-large*$scale;
-          cursor: pointer;
         }
 
         button {

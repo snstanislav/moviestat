@@ -7,13 +7,15 @@
         </NuxtLink>
       </div>
 
-      <div v-if="userProfileData" id="user-credentials">
-        {{ userProfileData.login }} | {{ userProfileData.fullName }} | {{ userProfileData.email }}
-      </div>
+      <div id="auth-wrapper">
+        <div v-if="userProfileData" id="user-credentials">
+          {{ userProfileData.login }} ({{ userProfileData.fullName }}) <br />{{ userProfileData.email }}
+        </div>
 
-      <div v-if="userProfileData">
-        <!--<button @click="setProfileData">Profile</button>-->
-        <a @click="signout" class="signout">Sign out</a>
+        <div v-if="userProfileData">
+          <!--<button @click="setProfileData">Profile</button>-->
+          <a @click="signout" class="signout">Sign out</a>
+        </div>
       </div>
     </header>
 

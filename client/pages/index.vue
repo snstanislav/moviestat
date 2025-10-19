@@ -9,16 +9,18 @@
             <!-- MAIN CONTENT -->
             <div class="section">
                 <!-- TAB BAR -->
-                <div class="tab-bar">
+                <nav class="tab-bar">
                     <span>Category: </span>
                     <button v-for="tab in tabs" :key="tab.name" @click="activeTab = tab"
                         :class="['tab-button', activeTab.name === tab.name ? 'tab-button-selected' : '']">
                         {{ tab.label }}
                     </button>
 
-                </div>
-                <component v-if="userEvaluations && userEvaluations.length > 0" :is="activeTab.component"
-                    :userEvaluations="userEvaluations" />
+                </nav>
+                <KeepAlive>
+                    <component v-if="userEvaluations && userEvaluations.length > 0" :is="activeTab.component"
+                        :key="activeTab.name" :userEvaluations="userEvaluations" />
+                </KeepAlive>
             </div>
         </div>
 
@@ -47,16 +49,29 @@ import Genre from "../components/statistics/Genre.vue";
 import Language from "../components/statistics/Language.vue";
 import Country from "../components/statistics/Country.vue";
 
+import Director from "../components/statistics/Director.vue";
+import Writer from "../components/statistics/Writer.vue";
+import Producer from "../components/statistics/Producer.vue";
+import Composer from "../components/statistics/Composer.vue";
+import Actor from "../components/statistics/Actor.vue";
+
+
 const currentSearch = ref(""); // filler
 const isReady = ref(false);
 
 const tabs = [
     { name: "MovieTable", component: MovieTable, label: "Movie rate table" },
-    { name: "Year", component: Year, label: "Year" },
-    { name: "Decade", component: Decade, label: "Decade" },
     { name: "Genre", component: Genre, label: "Genre" },
+    { name: "Country", component: Country, label: "Country" },
     { name: "Language", component: Language, label: "Language" },
-    { name: "Country", component: Country, label: "Country" }
+    { name: "Decade", component: Decade, label: "Decade" },
+    { name: "Year", component: Year, label: "Year" },
+
+    { name: "Director", component: Director, label: "Director" },
+    { name: "Producer", component: Producer, label: "Producer" },
+    { name: "Writer", component: Writer, label: "Writer" },
+    { name: "Composer", component: Composer, label: "Composer" },
+    { name: "Actor", component: Actor, label: "Actor / Actress" }
 ];
 
 const activeTab = shallowRef(tabs[0]);
