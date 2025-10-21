@@ -4,14 +4,10 @@
         <div v-for="item in decadeList" :key="item.key">
             <div v-if="item.value && item.value.quantity > 0" class="chart-line decade-chart">
 
-                <!--<NuxtLink :to="{
-                    path: '/',
-                    query: {
-                        filtermode: FilmStatMode.YEAR,
-                        filtervalue: key,
-                    },
-                    hash: '#movieSect',
-                }"> filter </NuxtLink>-->
+                <div class="filter-bar">
+                    <a @click="changeCurrentFilter(FilmStatMode.DECADE, item.key); resetTabs();"
+                        class="filter-item">filter</a>
+                </div>
 
                 <!-- Label -->
                 <span class="chart-key">
@@ -29,14 +25,12 @@
 </template>
 
 <script setup>
-import { SortStatMode, FilmStatMode } from "../../composables/statistics/statisticsGenerator";
-import { composeDecadeStat } from "../../composables/statistics/yearManager";
-const { userEvaluations } = defineProps(['userEvaluations']);
-
-import useStat from "../../composables/useSort";
-const { currentSortMode, collectionDimension, showData, barWidth, addData } = useStat();
-
 import Sortbar from "./partials/Sortbar.vue";
+import { FilmStatMode } from "../../composables/statistics/statisticsGenerator";
+import { composeDecadeStat } from "../../composables/statistics/yearManager";
+import useSortAndFilter from "../../composables/useSortAndFilter";
+const { changeCurrentFilter, currentSortMode, collectionDimension, showData, barWidth, addData } = useSortAndFilter();
+const { userEvaluations } = defineProps(['userEvaluations']);
 
 const composedMap = composeDecadeStat(toRaw(userEvaluations), currentSortMode.value);
 collectionDimension.value.count = userEvaluations.length;
@@ -45,17 +39,14 @@ composedMap.forEach((value, key) => {
         collectionDimension.value.maxQuantity = value.quantity;
     }
 });
-console.log("COMPOSED")
-console.log(composedMap)
 const decadeStat = ref(composedMap);
 
 const decadeList = computed(() =>
     Array.from(decadeStat.value.entries()).map(([key, value]) => ({ key, value }))
-)
+);
 
 watch(currentSortMode, (newMode) => {
     console.log("Sort mode changed: ", newMode)
     decadeStat.value = new Map(composeDecadeStat(toRaw(userEvaluations), currentSortMode.value));
 });
-
 </script>

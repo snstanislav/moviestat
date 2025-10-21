@@ -35,13 +35,14 @@
             </div>
             <div class="row-subsection">
                 <span v-if="item.movie.imdbRating">IMDB:
-                    {{ item.movie.imdbRating }} {{ item.movie.imdbVotes ? "(" + item.movie.imdbVotes + ")" : "" }}</span>
+                    {{ item.movie.imdbRating }} {{ item.movie.imdbVotes ? "(" + item.movie.imdbVotes + ")" : ""
+                    }}</span>
             </div>
         </div>
         <div class="row-section col-user-rating">
             <div class="row-subsection table-eval-wrapper">
                 <RatingButton :userRating :toogleDialogFunc="toogleDialog" />
-                
+
                 <div v-if="isDialogVisible" class="change-wrap">
                     <!-- CHANGE RATING -->
                     <select v-model="newUserRating" name="personalRating">
@@ -68,14 +69,17 @@
 </template>
 
 <script setup>
-const { item, index } = defineProps(["item", "index"]);
 import { prettyMediaType } from "../composables/utils";
 import changeRate from "../composables/changeRate";
 import RatingButton from "./statistics/partials/RatingButton.vue";
+import loadData from "../composables/loadData";
+const { setEvaluations } = loadData();
+
+const { item, index } = defineProps(["item", "index"]);
 
 const { isDialogVisible, toogleDialog, changeFavorite, changeRating } = changeRate();
-const isReady = ref(false);
 
+const isReady = ref(false);
 const mediaItem = ref(item.movie);
 const userRating = ref(item.userRating);
 const userEvalDate = ref(item.userEvalDate);
@@ -92,6 +96,8 @@ async function handleChangeFavorite() {
     if (confirm(question)) {
         const newValue = await changeFavorite(mediaItem.value._id, isFavorite.value);
         isFavorite.value = newValue;
+
+        await setEvaluations();
     }
 }
 
@@ -101,8 +107,9 @@ async function handleChangeRating() {
         if (confirm(question)) {
             await changeRating(mediaItem.value._id, newUserRating.value);
             userRating.value = newUserRating.value;
+
+            await setEvaluations();
         }
     }
 }
-
 </script>

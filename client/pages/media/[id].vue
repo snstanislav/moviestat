@@ -1,5 +1,7 @@
 <template>
-    <div v-if="!isReady">Loading...</div>
+    <div v-if="!isReady" class="loader-wrapper">
+        <span class="loader"></span>
+    </div>
     <div v-else>
         <div v-if="userProfileData">
             <div class="section">
@@ -56,7 +58,7 @@
                                     <p>
                                         <span class="ed-label">Evaluated: </span>
                                         {{ userEvalDate.slice(0, userEvalDate.indexOf(" GMT")) }}
-                                        <span  v-if="userChangeEvalDate" class="ed-label"> /</span>
+                                        <span v-if="userChangeEvalDate" class="ed-label"> /</span>
                                     </p>
                                     <p v-if="userChangeEvalDate">
                                         <span class="ed-label">Changed: </span>
@@ -115,13 +117,15 @@
                     <div v-if="mediaItem.directors && mediaItem.directors.length > 0" class="crew-wrapper">
                         <h3>Director:&nbsp;</h3>
                         <div class="film-crew">
-                            <span v-for="item in mediaItem.directors">
-                                <a v-if="item.person.imdbID" :href="`https://www.imdb.com/name/${item.person.imdbID}/`"
-                                    target="blank">
-                                    {{ item.person.name }}
-                                </a>
-                                <span v-else>
-                                    {{ item.person.name }}
+                            <span v-for="item in mediaItem.directors" class="crew-single-person">
+                                <span v-if="item.person">
+                                    <a v-if="item.person.imdbID"
+                                        :href="`https://www.imdb.com/name/${item.person.imdbID}/`" target="blank">
+                                        {{ item.person.name }}
+                                    </a>
+                                    <span v-else>
+                                        {{ item.person.name }}
+                                    </span>
                                 </span>
                             </span>
                         </div>
@@ -130,13 +134,15 @@
                     <div v-if="mediaItem.writers && mediaItem.writers.length > 0" class="crew-wrapper">
                         <h3>Writer / Screenplay:&nbsp;</h3>
                         <div class="film-crew">
-                            <span v-for="item in mediaItem.writers">
-                                <a v-if="item.person.imdbID" :href="`https://www.imdb.com/name/${item.person.imdbID}/`"
-                                    target="blank">
-                                    {{ item.person.name }}
-                                </a>
-                                <span v-else>
-                                    {{ item.person.name }}
+                            <span v-for="item in mediaItem.writers" class="crew-single-person">
+                                <span v-if="item.person">
+                                    <a v-if="item.person.imdbID"
+                                        :href="`https://www.imdb.com/name/${item.person.imdbID}/`" target="blank">
+                                        {{ item.person.name }}
+                                    </a>
+                                    <span v-else>
+                                        {{ item.person.name }}
+                                    </span>
                                 </span>
                             </span>
                         </div>
@@ -145,13 +151,14 @@
                     <div v-if="mediaItem.producers && mediaItem.producers.length > 0" class="crew-wrapper">
                         <h3>Producers:&nbsp;</h3>
                         <div class="film-crew">
-                            <span v-for="item in mediaItem.producers">
-                                <a v-if="item.person.imdbID" :href="`https://www.imdb.com/name/${item.person.imdbID}/`"
-                                    target="blank">
-                                    {{ item.person.name }}
-                                </a>
-                                <span v-else>
-                                    {{ item.person.name }}
+                            <span v-for="item in mediaItem.producers" class="crew-single-person">
+                                <span v-if="item.person"><a v-if="item.person.imdbID"
+                                        :href="`https://www.imdb.com/name/${item.person.imdbID}/`" target="blank">
+                                        {{ item.person.name }}
+                                    </a>
+                                    <span v-else>
+                                        {{ item.person.name }}
+                                    </span>
                                 </span>
                             </span>
                         </div>
@@ -160,13 +167,15 @@
                     <div v-if="mediaItem.composers && mediaItem.composers.length > 0" class="crew-wrapper">
                         <h3>Composer:&nbsp;</h3>
                         <div class="film-crew">
-                            <span v-for="item in mediaItem.composers">
-                                <a v-if="item.person.imdbID" :href="`https://www.imdb.com/name/${item.person.imdbID}/`"
-                                    target="blank">
-                                    {{ item.person.name }}
-                                </a>
-                                <span v-else>
-                                    {{ item.person.name }}
+                            <span v-for="item in mediaItem.composers" class="crew-single-person">
+                                <span v-if="item.person">
+                                    <a v-if="item.person.imdbID"
+                                        :href="`https://www.imdb.com/name/${item.person.imdbID}/`" target="blank">
+                                        {{ item.person.name }}
+                                    </a>
+                                    <span v-else>
+                                        {{ item.person.name }}
+                                    </span>
                                 </span>
                             </span>
                         </div>
@@ -175,9 +184,8 @@
                     <div v-if="mediaItem.cast && mediaItem.cast.length > 0" class="crew-wrapper">
                         <h3>Cast:&nbsp;</h3>
                         <div class="film-cast">
-                            <div v-for="item in mediaItem.cast" class="role-item">
-
-                                <div class="photo-wrapper">
+                            <div v-for="item in mediaItem.cast" :class="item.person ? 'role-item' : 'blank-space'">
+                                <div v-if="item.person" class="photo-wrapper">
                                     <a v-if="item.person.imdbID"
                                         :href="`https://www.imdb.com/name/${item.person.imdbID}/`" target="blank">
                                         <img v-if="item.person.photo" :src="item.person.photo" :alt="item.person.name">
@@ -188,7 +196,7 @@
                                         <img class="disabled" :src="item.person.photo" :alt="item.person.name">
                                     </span>
                                 </div>
-                                <div class="cast-name">
+                                <div v-if="item.person" class="cast-name">
                                     {{ item.person.name }}
                                     <div class="cast-character">
                                         {{ item.character }}
@@ -198,19 +206,20 @@
                         </div>
                     </div>
                 </div>
-                <div v-else>
-                    <h2>Movie doesn't exist...</h2>
+                <div v-else :class="msgNotExist ? 'empty-result' : ''">
+                    {{ msgNotExist }}
                 </div>
             </div>
         </div>
 
         <div v-else>
-            <Login />
+            <component :is="loginComponent" :key="'media'" />
         </div>
     </div>
 </template>
 
 <script setup>
+import Login from "~/components/Login.vue";
 import { prettyMediaType } from "../../composables/utils";
 import useAuth from "../composables/useAuth";
 import changeRate from "../../composables/changeRate";
@@ -220,6 +229,8 @@ const { userProfileData } = useAuth();
 const { isDialogVisible, toogleDialog, changeFavorite, changeRating, deleteRating } = changeRate();
 const route = useRoute();
 const isReady = ref(false);
+const msgNotExist = ref("");
+const loginComponent = shallowRef(null);
 
 const mediaItem = ref(null);
 const userRating = ref(0);
@@ -227,17 +238,62 @@ const userEvalDate = ref("");
 const userChangeEvalDate = ref("");
 const isFavorite = ref(false);
 const newUserRating = ref(10);
+let evaluatedSingleMedia = null;
 
 onMounted(async () => {
     isReady.value = true;
-    const evaluatedSingleMedia = await loadCurrMovie(route.params.id);
 
-    mediaItem.value = evaluatedSingleMedia.evals?.[0]?.movie;
-    userRating.value = evaluatedSingleMedia.evals?.[0]?.userRating;
-    userEvalDate.value = evaluatedSingleMedia.evals?.[0]?.userEvalDate;
-    userChangeEvalDate.value = evaluatedSingleMedia.evals?.[0]?.userChangeEvalDate;
-    isFavorite.value = evaluatedSingleMedia.evals?.[0]?.isFavorite;
+    try {
+        evaluatedSingleMedia = await loadCurrMovie(route.params.id);
+
+        if (userProfileData.value && !evaluatedSingleMedia.movie) {
+            msgNotExist.value = "Movie doesn't exist...";
+        }
+        if (evaluatedSingleMedia) {
+            clearInvalids(evaluatedSingleMedia.movie)
+
+            mediaItem.value = evaluatedSingleMedia.movie;
+            userRating.value = evaluatedSingleMedia.userRating;
+            userEvalDate.value = evaluatedSingleMedia.userEvalDate;
+            userChangeEvalDate.value = evaluatedSingleMedia.userChangeEvalDate;
+            isFavorite.value = evaluatedSingleMedia.isFavorite;
+        }
+    } catch (err) {
+        msgNotExist.value = "Movie doesn't exist...";
+    }
+
+    if (!userProfileData.value) {
+        loginComponent.value = Login;
+    }
 });
+
+watch(userProfileData, async () => {
+    evaluatedSingleMedia = await loadCurrMovie(route.params.id);
+
+    if (evaluatedSingleMedia && evaluatedSingleMedia.movie) {
+        clearInvalids(evaluatedSingleMedia.movie)
+
+        mediaItem.value = evaluatedSingleMedia.movie;
+        userRating.value = evaluatedSingleMedia.userRating;
+        userEvalDate.value = evaluatedSingleMedia.userEvalDate;
+        userChangeEvalDate.value = evaluatedSingleMedia.userChangeEvalDate;
+        isFavorite.value = evaluatedSingleMedia.isFavorite;
+    } else {
+        msgNotExist.value = "Movie doesn't exist...";
+
+        if (!userProfileData.value) {
+            loginComponent.value = Login;
+        }
+    }
+});
+
+function clearInvalids(movie) {
+    movie.directors = movie.directors.filter(elem => elem.person);
+    movie.writers = movie.writers.filter(elem => elem.person);
+    movie.producers = movie.producers.filter(elem => elem.person);
+    movie.composers = movie.composers.filter(elem => elem.person);
+    movie.cast = movie.cast.filter(elem => elem.person);
+}
 
 async function loadCurrMovie(mediaID) {
     const res = await fetch(`http://localhost:3001/media/${mediaID}`, {
@@ -245,7 +301,7 @@ async function loadCurrMovie(mediaID) {
         credentials: "include"
     });
     const resJson = await res.json();
-    if (res.ok && resJson.success) return resJson.data;
+    if (res.ok && resJson.success) return resJson.data.evals?.[0];
 }
 
 async function handleChangeFavorite() {
@@ -269,17 +325,18 @@ async function handleChangeRating() {
 async function handleDeleteRating() {
     let question = "\nYou're trying to DELETE the rating and the movie from your profile. Are you sure?\n";
     if (confirm(question)) {
-
         try {
-            console.log("BEFORE DELETING")
             await deleteRating(mediaItem.value._id);
-
             navigateTo("/");
-            console.log("AFTER DELETING")
         } catch (err) {
             console.error(err);
-
         }
     }
 }
 </script>
+
+<style>
+.blank-space {
+    display: none;
+}
+</style>

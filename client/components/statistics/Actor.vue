@@ -11,5 +11,5 @@ import { getActorStatistics } from "../../composables/statistics/personManager";
 import Person from "./partials/Person.vue";
 const { userEvaluations } = defineProps(['userEvaluations']);
 const label = "Actors / Actresses";
-const threshold = 5;
+const threshold = 3;
 </script>

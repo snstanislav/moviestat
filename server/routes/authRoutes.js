@@ -33,13 +33,13 @@ router.post("/signin", async (req, res) => {
     }
 });
 
-router.post("signup", async (req, res) => {
+router.post("/signup", async (req, res) => {
     try {
-        const { email, login, fullName, password } = req.body;
+        const { login, fullName, email, password } = req.body;
         const newUser = new UserItem({ email, login, password, fullName });
         const result = await addNewUser(newUser);
-        if (!result) return res.status(400).json({ success: false, message: "Registration failed" });
-        res.status(201).json({ success: true, message: "User registered" });
+        if (!result) return res.status(400).json({ success: result.success, message: result.message });
+        res.status(201).json({ success: result.success, message: result.message });
     } catch (err) {
         res.status(500).json({ success: false, message: "Signup error: " + err.message });
     }

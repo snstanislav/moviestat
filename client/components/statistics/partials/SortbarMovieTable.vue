@@ -1,6 +1,6 @@
 <template>
     <nav class="sort-bar">
-        <span class="sort-label">Sort by: </span>
+        <span class="nav-bar-label">Sort by: </span>
         <span v-for="(sortOpt, index) in sortOptions">
             <a :key="sortOpt.key" @click="changeCurrentMovieTableSortMode(sortOpt.key); activeMTSortMode = sortOpt"
                 :class="['sort-item', sortOpt.key === activeMTSortMode.key ? 'sort-item-selected' : '']">
@@ -11,7 +11,7 @@
 
 <script setup>
 import { SortStatMode } from "../../../composables/statistics/statisticsGenerator";
-const { changeCurrentMovieTableSortMode } = useSort();
+const { changeCurrentMovieTableSortMode } = useSortAndFilter();
 
 const sortOptions = [
     { key: SortStatMode.EVAL_DATETIME_DESC, label: "Recently rated" },

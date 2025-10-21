@@ -221,14 +221,14 @@
       .film-crew {
         display: flex;
         flex-flow: wrap;
-        gap: 1rem;
-        padding: 0.7rem;
+        gap: 0.7rem*$scale;
+        padding: 0.7rem*$scale;
         background: decor.$medium-2;
         border-radius: 7px;
         font-size: decor.$font-size-base*$scale;
         font-weight: bold;
 
-        span {
+        .crew-single-person {
           display: inline-block;
           background: decor.$light-0;
           box-shadow: 5px 5px 7px decor.$medium-3;

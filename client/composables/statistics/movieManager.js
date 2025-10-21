@@ -7,9 +7,7 @@ import { FilmStatMode, SortStatMode } from "./statisticsGenerator";
 import { defaultSortRecentDate, normalizeYear, normalizeIMDBVotes } from "../utils";
 
 export function getMovieStat(db, sortMode, filterMode, filterValue) {
-  //return filterMovieStat(sortMovieStat(db, sortMode), filterMode, filterValue);
-  return sortMovieStat(db, sortMode);
-
+  return filterMovieTable(sortMovieStat(db, sortMode), filterMode, filterValue);
 }
 
 // for movie table only
@@ -56,25 +54,42 @@ function sortMovieStat(db, sortMode) {
     }
   } else {
     console.error("sortMovieStat error: data not valid...")
-    return new Map();
+    return db;
   }
 }
 
-export function filterMovieStat(db, filterMode, filterValue) {
+export function filterMovieTable(db, filterMode, filterValue) {
+  if (filterMode && filterValue) {
 
-  if (filterMode == FilmStatMode.ACTOR || filterMode == FilmStatMode.DIRECTOR) {
-    return new Map(mapEntries.filter(entry => entry[filterMode].some(elem => elem.imdbLink.includes(filterValue))));
-  } else if (filterMode == FilmStatMode.GENRE || filterMode == FilmStatMode.COUNTRY) {
-    return new Map(mapEntries.filter(entry => entry[filterMode].includes(filterValue)));
-  } else if (filterMode == FilmStatMode.USER_RATING || filterMode == FilmStatMode.TYPE || filterMode == FilmStatMode.YEAR) {
-    return new Map(mapEntries.filter(entry => entry[filterMode] == filterValue))
-  } else if (filterMode == FilmStatMode.DECADE) {
-    const decade = filterValue.split('-')
-    return new Map(mapEntries.filter(entry => entry.year >= decade && entry.year <= decade))
-  } else if (filterMode == FilmStatMode.FAVORITE) {
-    return new Map(mapEntries.filter(entry => entry.favorite == true))
+    if (filterMode === FilmStatMode.USER_RATING) {
+      return db.filter(entry => entry.userRating == filterValue);
+    } else if (filterMode == FilmStatMode.FAVORITE) {
+      return db.filter(entry => entry.isFavorite === true);
+    } else if (filterMode === FilmStatMode.GENRE
+      || filterMode === FilmStatMode.COUNTRY
+      || filterMode === FilmStatMode.LANGUAGE) {
+      return db.filter(entry => entry.movie[filterMode].includes(filterValue));
+    } else if (filterMode === FilmStatMode.YEAR) {
+      return filterValue ? db.filter(entry => entry.movie.year.substring(0, 4) === filterValue) : db;
+    } else if (filterMode == FilmStatMode.TYPE) {
+      return db.filter(entry => entry.movie.type === filterValue);
+    } else if (filterMode === FilmStatMode.DECADE) {
+      const decade = filterValue.split('-');
+      return db.filter(entry => entry.movie.year >= decade[0] && entry.movie.year <= decade[1]);
+    } else if (filterMode === FilmStatMode.DIRECTOR
+      || filterMode === FilmStatMode.PRODUCER
+      || filterMode === FilmStatMode.WRITER
+      || filterMode === FilmStatMode.COMPOSER
+      || filterMode === FilmStatMode.ACTOR) {
+      return db.filter(entry => entry.movie[filterMode].some(elem => {
+        if (elem.person) return elem.person.name.includes(filterValue)
+      }));
+    } else {
+      console.error("Filter params are invalid.")
+      return db;
+    }
   } else {
-    console.error("StatisticsGenerator: filter result is empty...")
-    return map;
+    console.log("Filter params are empty.")
+    return db;
   }
 }

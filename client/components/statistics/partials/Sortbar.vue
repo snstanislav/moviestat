@@ -1,6 +1,6 @@
 <template>
     <nav class="sort-bar">
-        <span class="sort-label">Sort by: </span>
+        <span class="nav-bar-label">Sort by: </span>
         <span v-for="(sortOpt, index) in sortOptions">
             <a :key="sortOpt.key" @click="changeCurrentSortMode(sortOpt.key); activeSortMode = sortOpt"
                 :class="['sort-item', sortOpt.key === activeSortMode.key ? 'sort-item-selected' : '']">
@@ -11,8 +11,8 @@
 
 <script setup>
 import { SortStatMode } from "../../../composables/statistics/statisticsGenerator";
-import useSort from "../../../composables/useSort";
-const { changeCurrentSortMode } = useSort();
+import useSortAndFilter from "../../../composables/useSortAndFilter";
+const { changeCurrentSortMode } = useSortAndFilter();
 
 const sortOptions = [
     { key: SortStatMode.QUANTITY_DESC, label: "Quantity down" },

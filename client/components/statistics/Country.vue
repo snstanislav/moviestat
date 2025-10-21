@@ -4,14 +4,10 @@
         <div v-for="item in countryList" :key="item.key">
             <div v-if="item.value && item.value.quantity > 0" class="chart-line country-chart">
 
-                <!--<NuxtLink :to="{
-                    path: '/',
-                    query: {
-                        filtermode: FilmStatMode.GENRE,
-                        filtervalue: key,
-                    },
-                    hash: '#movieSect',
-                }"> filter </NuxtLink>-->
+                <div class="filter-bar">
+                    <a @click="changeCurrentFilter(FilmStatMode.COUNTRY, item.key)"
+                        class="filter-item">filter</a>
+                </div>
 
                 <!-- Label -->
                 <span class="chart-key">
@@ -29,14 +25,12 @@
 </template>
 
 <script setup>
+import Sortbar from "./partials/Sortbar.vue";
 import { FilmStatMode } from "../../composables/statistics/statisticsGenerator";
 import { getCountryStat } from "../../composables/statistics/countryManager";
+import useSortAndFilter from "../../composables/useSortAndFilter";
+const { changeCurrentFilter, currentSortMode, collectionDimension, showData, barWidth, addData } = useSortAndFilter();
 const { userEvaluations } = defineProps(['userEvaluations']);
-
-import useStat from "../../composables/useSort";
-const { currentSortMode, collectionDimension, showData, barWidth, addData } = useStat();
-
-import Sortbar from "./partials/Sortbar.vue";
 
 const composedMap = getCountryStat(toRaw(userEvaluations), currentSortMode.value);
 collectionDimension.value.count = userEvaluations.length;
@@ -49,11 +43,10 @@ const countryStat = ref(composedMap);
 
 const countryList = computed(() =>
     Array.from(countryStat.value.entries()).map(([key, value]) => ({ key, value }))
-)
+);
 
 watch(currentSortMode, (newMode) => {
     console.log("Sort mode changed: ", newMode)
     countryStat.value = new Map(getCountryStat(toRaw(userEvaluations), currentSortMode.value))
 });
-
 </script>

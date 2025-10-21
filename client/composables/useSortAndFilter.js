@@ -1,10 +1,29 @@
-import { SortStatMode } from "../composables/statistics/statisticsGenerator";
+import { SortStatMode } from "./statistics/statisticsGenerator";
+import useTabs from "../composables/useTabs";
 
-export default function useSort() {
+export default function useSortAndFilter() {
+    const { resetTabs } = useTabs();
+    
+    const currentFilter = useState("currentFilter", () => ({
+        filterMode: "", filterValue: ""
+    }));
+
     const currentMovieTableSortMode = useState("currentMovieTableSortMode", () => SortStatMode.EVAL_DATETIME_DESC);
-
     const currentSortMode = useState("currentSortMode", () => SortStatMode.QUANTITY_DESC);
     const collectionDimension = ref({ count: 0, maxQuantity: 0 });
+
+    function changeCurrentFilter(filterMode, filterValue) {
+        console.log("changeCurrentFilter: %s = %s", filterMode, filterValue)
+        currentFilter.value.filterMode = filterMode;
+        currentFilter.value.filterValue = filterValue;
+
+        resetTabs();
+    }
+
+    function clearFilter() {
+        currentFilter.value.filterMode = "";
+        currentFilter.value.filterValue = "";
+    }
 
     function changeCurrentMovieTableSortMode(sortMode) {
         currentMovieTableSortMode.value = sortMode;
@@ -38,11 +57,15 @@ export default function useSort() {
     }
 
     return {
+        currentFilter,
         currentMovieTableSortMode,
         currentSortMode,
+        collectionDimension,
+
+        changeCurrentFilter,
+        clearFilter,
         changeCurrentMovieTableSortMode,
         changeCurrentSortMode,
-        collectionDimension,
         showData,
         barWidth,
         addData

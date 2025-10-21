@@ -7,6 +7,11 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 
 export default defineNuxtConfig({
   css: [join(currentDir, './assets/styles/main.css')],
+  vite: {
+    build: {
+      cssCodeSplit: false
+    }
+  },
   runtimeConfig: {
     apiSecret: "",
     public: {

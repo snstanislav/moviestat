@@ -4,14 +4,9 @@
         <div v-for="item in genreList" :key="item.key">
             <div v-if="item.value && item.value.quantity > 0" class="chart-line genre-chart">
 
-                <!--<NuxtLink :to="{
-                    path: '/',
-                    query: {
-                        filtermode: FilmStatMode.GENRE,
-                        filtervalue: key,
-                    },
-                    hash: '#movieSect',
-                }"> filter </NuxtLink>-->
+                <div class="filter-bar">
+                    <a @click="changeCurrentFilter(FilmStatMode.GENRE, item.key)" class="filter-item">filter</a>
+                </div>
 
                 <!-- Label -->
                 <span class="chart-key">
@@ -29,14 +24,12 @@
 </template>
 
 <script setup>
+import Sortbar from "./partials/Sortbar.vue";
 import { FilmStatMode } from "../../composables/statistics/statisticsGenerator";
 import { getGenreStat } from "../../composables/statistics/genreManager";
+import useSortAndFilter from "../../composables/useSortAndFilter";
+const { changeCurrentFilter, currentSortMode, collectionDimension, showData, barWidth, addData } = useSortAndFilter();
 const { userEvaluations } = defineProps(['userEvaluations']);
-
-import useStat from "../../composables/useSort";
-const { currentSortMode, collectionDimension, showData, barWidth, addData } = useStat();
-
-import Sortbar from "./partials/Sortbar.vue";
 
 const composedMap = getGenreStat(toRaw(userEvaluations), currentSortMode.value);
 collectionDimension.value.count = userEvaluations.length;

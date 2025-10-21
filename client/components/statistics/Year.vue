@@ -4,14 +4,9 @@
         <div v-for="item in yearList" :key="item.key">
             <div v-if="item.value && item.value.quantity > 0" class="chart-line year-chart">
 
-                <!--<NuxtLink :to="{
-                    path: '/',
-                    query: {
-                        filtermode: FilmStatMode.YEAR,
-                        filtervalue: key,
-                    },
-                    hash: '#movieSect',
-                }"> filter </NuxtLink>-->
+                <div class="filter-bar">
+                    <a @click="changeCurrentFilter(FilmStatMode.YEAR, item.key)" class="filter-item">filter</a>
+                </div>
 
                 <!-- Label -->
                 <span class="chart-key">
@@ -29,14 +24,12 @@
 </template>
 
 <script setup>
-import { SortStatMode, FilmStatMode } from "../../composables/statistics/statisticsGenerator";
-import { getYearStat } from "../../composables/statistics/yearManager";
-const { userEvaluations } = defineProps(['userEvaluations']);
-
-import useStat from "../../composables/useSort";
-const { currentSortMode, collectionDimension, showData, barWidth, addData } = useStat();
-
 import Sortbar from "./partials/Sortbar.vue";
+import { FilmStatMode } from "../../composables/statistics/statisticsGenerator";
+import { getYearStat } from "../../composables/statistics/yearManager";
+import useSortAndFilter from "../../composables/useSortAndFilter";
+const { changeCurrentFilter, currentSortMode, collectionDimension, showData, barWidth, addData } = useSortAndFilter();
+const { userEvaluations } = defineProps(['userEvaluations']);
 
 const composedMap = getYearStat(toRaw(userEvaluations), currentSortMode.value);
 collectionDimension.value.count = userEvaluations.length;
@@ -49,11 +42,10 @@ const yearStat = ref(composedMap);
 
 const yearList = computed(() =>
     Array.from(yearStat.value.entries()).map(([key, value]) => ({ key, value }))
-)
+);
 
 watch(currentSortMode, (newMode) => {
     console.log("Sort mode changed: ", newMode)
     yearStat.value = new Map(getYearStat(toRaw(userEvaluations), currentSortMode.value))
 });
-
 </script>

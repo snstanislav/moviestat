@@ -13,14 +13,27 @@ async function addNewUser(newUser) {
         let existing = await User.findOne({ login: newUser.login });
         if (existing) {
             console.log(`>> User <${existing.login}> already exists in DB.`);
-            return existing;
+            return {
+                success: false,
+                message: `User <${existing.login}> already exists in DB.`,
+                data: existing
+            };
         }
         if (newUser instanceof UserItem || typeof newUser === "object") {
             console.log(`Inserting new user: <${newUser.login}>`);
-            return await User.create(newUser);
+            const created = await User.create(newUser);
+            return {
+                success: true,
+                message: `User <${created.login}> successfully created.`,
+                data: created
+            };
         }
     } catch (err) {
         console.error("Error in addNewUser:", err);
+        return {
+            success: false,
+            message: `Error: new user creating failed.`
+        };
     }
 }
 /*(async () => {

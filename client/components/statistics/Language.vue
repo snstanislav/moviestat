@@ -4,14 +4,10 @@
         <div v-for="item in languageList" :key="item.key">
             <div v-if="item.value && item.value.quantity > 0" class="chart-line language-chart">
 
-                <!--<NuxtLink :to="{
-                    path: '/',
-                    query: {
-                        filtermode: FilmStatMode.GENRE,
-                        filtervalue: key,
-                    },
-                    hash: '#movieSect',
-                }"> filter </NuxtLink>-->
+                <div class="filter-bar">
+                    <a @click="changeCurrentFilter(FilmStatMode.LANGUAGE, item.key)"
+                        class="filter-item">filter</a>
+                </div>
 
                 <!-- Label -->
                 <span class="chart-key">
@@ -29,14 +25,12 @@
 </template>
 
 <script setup>
+import Sortbar from "./partials/Sortbar.vue";
 import { FilmStatMode } from "../../composables/statistics/statisticsGenerator";
 import { getLanguageStat } from "../../composables/statistics/languageManager";
+import useSortAndFilter from "../../composables/useSortAndFilter";
+const { changeCurrentFilter, currentSortMode, collectionDimension, showData, barWidth, addData } = useSortAndFilter();
 const { userEvaluations } = defineProps(['userEvaluations']);
-
-import useStat from "../../composables/useSort";
-const { currentSortMode, collectionDimension, showData, barWidth, addData } = useStat();
-
-import Sortbar from "./partials/Sortbar.vue";
 
 const composedMap = getLanguageStat(toRaw(userEvaluations), currentSortMode.value);
 collectionDimension.value.count = userEvaluations.length;
@@ -49,11 +43,10 @@ const languageStat = ref(composedMap);
 
 const languageList = computed(() =>
     Array.from(languageStat.value.entries()).map(([key, value]) => ({ key, value }))
-)
+);
 
 watch(currentSortMode, (newMode) => {
     console.log("Sort mode changed: ", newMode)
     languageStat.value = new Map(getLanguageStat(toRaw(userEvaluations), currentSortMode.value))
 });
-
 </script>

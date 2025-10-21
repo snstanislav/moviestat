@@ -7,6 +7,10 @@
             <input v-model="password" type="password" width="10" placeholder="Password" required></input>
             <button @click="handleSignin">Sign in</button>
             <p class="message">{{ message }}</p>
+
+            <div>
+                <a href="/signup">Have no account yet? Sign up</a>
+            </div>
         </div>
     </div>
 </template>

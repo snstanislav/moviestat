@@ -14,21 +14,19 @@ export const FilmStatMode = {
   WRITER: "writers",
   PRODUCER: "producers",
   COMPOSER: "composers",
-  ACTOR: "actor",
+  ACTOR: "cast",
   USER_RATING: "userRating",
   FAVORITE: "isFavorite"
 };
 
 export const SortStatMode = {
+  // universal
   KEY_ASC: "key-asc",
   KEY_DESC: "key-desc",
   QUANTITY_ASC: "quantity-asc",
   QUANTITY_DESC: "quantity-desc",
   RATING_ASC: "rating-asc",
   RATING_DESC: "rating-desc",
-  // for persons
-  NAME_ASC: "name-asc",
-  NAME_DESC: "name-desc",
   // for films
   YEAR_ASC: "year-asc",
   YEAR_DESC: "year-desc",
@@ -189,7 +187,7 @@ export function getSingleProperty(db, value, filmProperty) {
             amount += Number(film.userRating);
             //filmList.push([film.commTitle, film.year, film.userRating]);
             //filmList.push(film.commTitle);
-            filmList.push(film)
+            filmList.push(film);
           }
         });
       }
@@ -205,7 +203,6 @@ export function getSingleProperty(db, value, filmProperty) {
   }
 }
 
-///
 export function extractIdFromLinkIMDB(link) {
   if (link.includes("/name/") || link.includes("/title/")) {
     let category = link.includes("/name/") ? "/name/" : (link.includes("/title/") ?
@@ -217,7 +214,7 @@ export function extractIdFromLinkIMDB(link) {
     return undefined;
   }
 }
-//
+
 function formatNum(numStr) {
   const mark = numStr.includes('K') ? 'K' : (numStr.includes('M') ? 'M' : '');
   const multiplier = numStr.includes('K') ? 1000 : (numStr.includes('M') ?

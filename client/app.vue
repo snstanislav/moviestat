@@ -7,15 +7,23 @@
         </NuxtLink>
       </div>
 
-      <div id="auth-wrapper">
-        <div v-if="userProfileData" id="user-credentials">
-          {{ userProfileData.login }} ({{ userProfileData.fullName }}) <br />{{ userProfileData.email }}
-        </div>
+      <div v-if="userProfileData" id="auth-wrapper">
+        <details id="user-profile">
 
-        <div v-if="userProfileData">
-          <!--<button @click="setProfileData">Profile</button>-->
-          <a @click="signout" class="signout">Sign out</a>
-        </div>
+          <summary title="Your profile">
+            <img src="/person-blank.png" alt="Profile toogle" width="50" height="50">
+          </summary>
+
+          <div id="user-credentials">
+            <span v-if="userProfileData.login">Login: <span class="user-data">{{ userProfileData.login }}</span></span>
+            <span v-if="userProfileData.fullName">Name: <span class="user-data">{{ userProfileData.fullName }}</span></span>
+            <span v-if="userProfileData.email" class="user-data">{{ userProfileData.email }}</span>
+
+            <div class="signout-wrapper">
+              <a @click="signout" class="signout">Sign out</a>
+            </div>
+          </div>
+        </details>
       </div>
     </header>
 

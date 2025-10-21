@@ -2,7 +2,7 @@
     <div v-if="personList" class="stat-container">
         <Sortbar />
         <div class="person-stat-settings">
-            <h2>{{ label }}</h2>
+            <h2 class="category">{{ label }} ({{ personList.length }})</h2>
             <div class="threshold-wrapper"><span>Quantity threshold: </span>
                 <select v-model="currentThreshold" @change="selectThreshold" name="threshold">
                     <option class="standart-options" value="10">10</option>
@@ -30,14 +30,8 @@
             <div v-for="(item, index) in personList" :key="item.key" class="person-stat-card">
                 <div v-if="item.value && item.value.quantity > 0">
                     <div class="filter-bar">
-                        <NuxtLink :to="{
-                            path: '/',
-                            query: {
-                                filtermode: filtermode,
-                                filtervalue: key,
-                            },
-                            hash: '#movieSect',
-                        }"> filter </NuxtLink>
+                        <a @click="changeCurrentFilter(filtermode, item.key)"
+                            class="filter-item">filter</a>
                     </div>
 
                     <div class="ord">
@@ -68,15 +62,16 @@
 </template>
 
 <script setup>
-import { SortStatMode } from "../../../composables/statistics/statisticsGenerator";
 import Sortbar from "./Sortbar.vue";
-
+import { SortStatMode } from "../../../composables/statistics/statisticsGenerator";
+import useSortAndFilter from "../../../composables/useSortAndFilter";
+const { changeCurrentFilter } = useSortAndFilter();
 const { userEvaluations, personStatFunc, filtermode, label, threshold } = defineProps(['userEvaluations', 'personStatFunc', 'filtermode', 'label', 'threshold']);
 
 const LIST_MODE = { TILES: "tiles", TABLE: "table" };
 
 const currentSortMode = useState("currentSortMode", () => SortStatMode.QUANTITY_DESC);
-const personListMode = useState("personListMode", () => LIST_MODE.TILES);
+const personListMode = useState("personListMode", () => LIST_MODE.TABLE);
 const currentThreshold = ref(threshold);
 
 const personComposedMap = ref(personStatFunc(toRaw(userEvaluations), currentSortMode.value, currentThreshold.value));
