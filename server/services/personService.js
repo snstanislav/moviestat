@@ -4,7 +4,7 @@ async function addNewPerson(newPerson) {
     try {
         let existing = await Person.findOne({ imdbID: newPerson.imdbID });
         if (existing) {
-            console.log(`>> Person <${existing.imdbID}: ${existing.name}> already exists in DB.`);
+            console.log(`>> Person <${existing.imdbID}: ${existing.name}> already exists.`);
             return existing;
         } else {
             const res = await Person.create(newPerson);

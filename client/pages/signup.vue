@@ -4,27 +4,27 @@
     </div>
     <div v-else>
         <div v-if="userProfileData" class="section">
-
             <div class="empty-result">
                 You are already logged in.
             </div>
         </div>
         <div v-else>
-            <div class="login-wrapper">
+            <form class="auth-wrapper" @submit.prevent="handleSignup">
                 <h2>Create An Account</h2>
-                <input v-model="login" type="text" width="10" placeholder="Login" required></input>
-                <input v-model="fullName" type="text" width="10" placeholder="Full name"></input>
-                <input v-model="email" type="text" width="10" placeholder="Email"></input>
-                <input v-model="password" type="password" width="10" placeholder="Password" required></input>
-                <button @click="handleSignup">Sign in</button>
+                <input v-model="login" type="text" width="10" placeholder="Login*" required />
+                <input v-model="fullName" type="text" width="10" placeholder="Full name" />
+                <input v-model="email" type="text" width="10" placeholder="Email*" required />
+                <input v-model="password" type="password" width="10" placeholder="Password*" required />
+                <button type="submit">Sign in</button>
                 <p class="message">{{ message }}</p>
-            </div>
+            </form>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { useToast } from "vue-toastification";
+const toast = useToast();
 import useAuth from "../composables/useAuth";
 const { signup, userProfileData, message } = useAuth();
 
@@ -39,19 +39,38 @@ onMounted(async () => {
 });
 
 async function handleSignup() {
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+
+    if (!emailPattern.test(email.value)) {
+        message.value = "Invalid email format.";
+        return;
+    }
+
     if (!login.value || !email.value || !password.value) {
         message.value = "Login, E-mail and Password required"
     } else {
         const result = await signup(login.value, fullName.value, email.value, password.value);
-        console.log(result)
+
         if (result && result.success) {
             console.log("SignUp client page: " + result.message);
-            message.value = "";
+
             navigateTo("/");
+            toast.success(result.message);
+            resetForm();
         } else {
             message.value = result.message;
+            toast.error("Registration failed");
         }
     }
+}
+
+function resetForm() {
+    message.value = "";
+
+    login.value = "";
+    fullName.value = "";
+    email.value = "";
+    password.value = "";
 }
 </script>
 

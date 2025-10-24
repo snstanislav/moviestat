@@ -225,6 +225,9 @@ import useAuth from "../composables/useAuth";
 import changeRate from "../../composables/changeRate";
 import RatingButton from "~/components/statistics/partials/RatingButton.vue";
 
+import { useToast } from "vue-toastification";
+const toast = useToast();
+
 const { userProfileData } = useAuth();
 const { isDialogVisible, toogleDialog, changeFavorite, changeRating, deleteRating } = changeRate();
 const route = useRoute();
@@ -250,13 +253,7 @@ onMounted(async () => {
             msgNotExist.value = "Movie doesn't exist...";
         }
         if (evaluatedSingleMedia) {
-            clearInvalids(evaluatedSingleMedia.movie)
-
-            mediaItem.value = evaluatedSingleMedia.movie;
-            userRating.value = evaluatedSingleMedia.userRating;
-            userEvalDate.value = evaluatedSingleMedia.userEvalDate;
-            userChangeEvalDate.value = evaluatedSingleMedia.userChangeEvalDate;
-            isFavorite.value = evaluatedSingleMedia.isFavorite;
+            refreshCurrentState();
         }
     } catch (err) {
         msgNotExist.value = "Movie doesn't exist...";
@@ -271,13 +268,7 @@ watch(userProfileData, async () => {
     evaluatedSingleMedia = await loadCurrMovie(route.params.id);
 
     if (evaluatedSingleMedia && evaluatedSingleMedia.movie) {
-        clearInvalids(evaluatedSingleMedia.movie)
-
-        mediaItem.value = evaluatedSingleMedia.movie;
-        userRating.value = evaluatedSingleMedia.userRating;
-        userEvalDate.value = evaluatedSingleMedia.userEvalDate;
-        userChangeEvalDate.value = evaluatedSingleMedia.userChangeEvalDate;
-        isFavorite.value = evaluatedSingleMedia.isFavorite;
+        refreshCurrentState();
     } else {
         msgNotExist.value = "Movie doesn't exist...";
 
@@ -286,6 +277,16 @@ watch(userProfileData, async () => {
         }
     }
 });
+
+function refreshCurrentState() {
+    clearInvalids(evaluatedSingleMedia.movie)
+
+    mediaItem.value = evaluatedSingleMedia.movie;
+    userRating.value = evaluatedSingleMedia.userRating;
+    userEvalDate.value = evaluatedSingleMedia.userEvalDate;
+    userChangeEvalDate.value = evaluatedSingleMedia.userChangeEvalDate;
+    isFavorite.value = evaluatedSingleMedia.isFavorite;
+}
 
 function clearInvalids(movie) {
     movie.directors = movie.directors.filter(elem => elem.person);
@@ -309,6 +310,8 @@ async function handleChangeFavorite() {
     if (confirm(question)) {
         const newValue = await changeFavorite(mediaItem.value._id, isFavorite.value);
         isFavorite.value = newValue;
+
+        toast.success(isFavorite.value ? "Added to favorites" : "Not favorite any more");
     }
 }
 
@@ -316,8 +319,12 @@ async function handleChangeRating() {
     if (userRating.value.toString() !== newUserRating.value.toString()) {
         let question = `\nDo you really want to change the rating?\n`;
         if (confirm(question)) {
-            await changeRating(mediaItem.value._id, newUserRating.value);
+            const newEvalDate = (new Date()).toString();
+            await changeRating(mediaItem.value._id, newUserRating.value, newEvalDate);
+            toast.success(`Rating was changed from ${userRating.value} to ${newUserRating.value}`);
+
             userRating.value = newUserRating.value;
+            userChangeEvalDate.value = newEvalDate;
         }
     }
 }
@@ -326,10 +333,13 @@ async function handleDeleteRating() {
     let question = "\nYou're trying to DELETE the rating and the movie from your profile. Are you sure?\n";
     if (confirm(question)) {
         try {
+            var delItemName = `"${mediaItem.value.commTitle ? mediaItem.value.commTitle : mediaItem.value.origTitle}" ${mediaItem.value.year ? '(' + mediaItem.value.year + ')' : ''}`;
             await deleteRating(mediaItem.value._id);
             navigateTo("/");
+            toast.success(`Rating for ${delItemName} deleted`);
         } catch (err) {
             console.error(err);
+            toast.error(`Rating removing failed`);
         }
     }
 }

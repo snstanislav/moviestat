@@ -5,8 +5,8 @@
   flex-direction: column;
   width: 90%;
   box-sizing: border-box;
-  max-width: 63rem;
-  padding: 1rem;
+  max-width: 70rem;
+  padding: 1rem 3rem;
   margin: 1rem auto 1.5rem;
   overflow: auto;
   background: decor.$dark-9;
@@ -15,68 +15,4 @@
 
 @mixin manage-section($is-opened: false, $display: none) {
   @extend .section;
-
-  .content-section {
-    display: $display;
-    background: transparent;
-    margin: 20px 0 10px 0;
-    padding: 0.2rem;
-
-    // Quick search
-    #tableSarchBar {
-      display: flex;
-      flex-direction: row;
-      gap: 1rem;
-      font-size: decor.$font-size-base;
-      justify-content: center;
-      align-items: bottom;
-      padding: 1rem 0 0;
-      margin: 0 auto;
-      width: 60%;
-
-      label {
-        display: inline-block;
-        padding: 0.3rem 0rem;
-        font-size: decor.$font-size-medium;
-        font-weight: bold;
-        font-style: italic;
-      }
-
-      input {
-        display: inline-block;
-        padding: 0.3rem 0.5rem;
-        font-size: inherit;
-        background: decor.$light-0;
-        border: 0;
-        border-radius: 10px;
-        border-left: 2px solid decor.$dark-8;
-        border-top: 2px solid decor.$dark-8;
-        box-sizing: border-box;
-        outline: none;
-        width: 60%;
-
-        &:focus {
-          border: 3px solid decor.$active;
-          border-radius: 10px;
-        }
-      }
-    }
-  }
-
-  @media screen and (max-width: 660px) {
-    #tableSarchBar {
-      width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
-  }
-}
-
-.section-closed {
-  @include manage-section(false, block);
-}
-
-.section-opened {
-  @include manage-section(true, block);
 }

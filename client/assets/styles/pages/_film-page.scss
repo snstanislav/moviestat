@@ -8,7 +8,7 @@
     flex-flow: column;
     margin: 0 auto;
     padding: 1rem;
-    max-width: 60rem;
+    max-width: 65rem;
 
     .film-headline {
       display: flex;
@@ -55,10 +55,11 @@
       .film-img-eval-wrap {
         display: flex;
         flex-direction: column;
+        min-width: 22rem;
         width: fit-content;
         height: fit-content;
         margin: 0 0 0 0;
-        padding: 0 2rem 1rem;
+        padding: 0 3rem 1rem;
         background: decor.$dark-10;
         color: decor.$light-0;
         box-sizing: border-box;
@@ -208,7 +209,7 @@
 
     div.crew-wrapper {
       background: decor.$dark-10;
-      padding: 0.5rem 1rem 1rem;
+      padding: 0.5rem 2rem 1.5rem;
       margin: 1rem 0 0;
 
       h3 {
@@ -222,7 +223,7 @@
         display: flex;
         flex-flow: wrap;
         gap: 0.7rem*$scale;
-        padding: 0.7rem*$scale;
+        padding: 0.7rem*$scale 1rem*$scale;
         background: decor.$medium-2;
         border-radius: 7px;
         font-size: decor.$font-size-base*$scale;
@@ -234,6 +235,32 @@
           box-shadow: 5px 5px 7px decor.$medium-3;
           border-radius: 7px;
           padding: 0.3rem 1rem;
+
+          a {
+            color: decor.$dark-link;
+            background: transparent;
+            text-decoration: none;
+
+            &:hover {
+              color: decor.$hover;
+              text-decoration: underline;
+            }
+
+            &:focus {
+              color: decor.$hover;
+            }
+
+            &:active {
+              color: decor.$active;
+              text-decoration: underline;
+            }
+
+            &:visited {
+              color: decor.$visited;
+              background: transparent;
+            }
+          }
+
         }
       }
 
@@ -242,7 +269,7 @@
         flex-flow: wrap;
         gap: 1rem;
         justify-content: center;
-        padding: 1rem;
+        padding: 1rem 0.5rem;
         border-radius: 7px;
         background: decor.$medium-2;
 
@@ -292,8 +319,7 @@
     }
   }
 
-
-  @media screen and (max-width: 660px) {
+  @media screen and (max-width: 800px) {
     .film-wrapper {
       .film-headline {
         display: flex;

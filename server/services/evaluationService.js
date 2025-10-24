@@ -5,10 +5,6 @@ const { User } = require("../models/User");
 const { Movie } = require("../models/Movie");
 const { unloadAllPersonsFromMovie, addNewMovie } = require("./movieService");
 
-//// temp
-const { connect, disconnect } = require("../db/connection");
-require("dotenv").config();
-
 var EXISTING_LOGGED_USER;
 
 async function getSingleEvaluatedMovie(currLoggedUserID, movieID) {
@@ -33,14 +29,6 @@ async function getSingleEvaluatedMovie(currLoggedUserID, movieID) {
         console.error("Error in getEvaluatedMoviesList:", err);
     }
 }
-(async () => {
-    await connect();
-    var doc = await await getSingleEvaluatedMovie(new mongoose.Types.ObjectId("68c44133232b7031c0397e15"), new mongoose.Types.ObjectId("68c444b2499e3569048ac1f3"))
-    // doc = doc.evals.filter((elem)=> elem.userRating > 8)
-    console.log(JSON.stringify(doc, "", 2))
-    //console.log(doc)
-    await disconnect();
-}) // TEST
 
 async function getEvaluatedMoviesList(currLoggedUserID) {
     try {
@@ -63,14 +51,6 @@ async function getEvaluatedMoviesList(currLoggedUserID) {
         console.error("Error in getEvaluatedMoviesList:", err);
     }
 }
-(async () => {
-    await connect();
-    var doc = await await getEvaluatedMoviesList(new mongoose.Types.ObjectId("68c44133232b7031c0397e15"))
-    // doc = doc.evals.filter((elem)=> elem.userRating > 8)
-    console.log(JSON.stringify(doc, "", 2))
-    //console.log(doc)
-    await disconnect();
-}) // TEST
 
 async function evaluateMovie(currLoggedUserID, tmdbIDSearched, mediaType, userRating, userEvalDate) {
     try {
@@ -122,18 +102,12 @@ async function evaluateMovie(currLoggedUserID, tmdbIDSearched, mediaType, userRa
         console.error("Error in evaluateMovie:", err);
     }
 }
-(async () => {
-    var tmdb1 = "273481", tmdb2 = "105", tmdb3 = "49047", tmdb4 = "4087"
-    await connect();
-    await evaluateMovie(new mongoose.Types.ObjectId("68c44133232b7031c0397e15"), tmdb4, "tv", 8, (new Date()).toString())
-    await disconnect();
-})
 
 async function appendEvaluationToUser(evalItem) {
     try {
         EXISTING_LOGGED_USER.evals.push(evalItem);
-        return await EXISTING_LOGGED_USER.save();
         console.log("+++ Evaluated movie successfully added to current User's enrty!");
+        return await EXISTING_LOGGED_USER.save();
     } catch (err) {
         console.error("Error in appendEvaluationToUser:", err);
     }
@@ -148,9 +122,7 @@ async function changeIsFavorite(currLoggedUserID, movieID, isFavorite) {
         isFavorite: isFavorite
     });
     return await performEvaluationChanging(currLoggedUserID, evalItem);
-}/*(new mongoose.Types.ObjectId("68b474d735c92a36b4d573de"),
-    new mongoose.Types.ObjectId("68c094dcce47c58a89a1476b"), true)
-*/
+}
 
 async function changeEvaluation(currLoggedUserID, movieID, newUserRating, userChangeEvalDate) {
     const evalItem = new EvaluationItem({

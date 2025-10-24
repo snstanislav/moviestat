@@ -1,178 +1,14 @@
-.section, .section-opened, .section-closed {
+.section {
   display: flex;
   flex-direction: column;
   width: 90%;
   box-sizing: border-box;
-  max-width: 63rem;
-  padding: 1rem;
+  max-width: 70rem;
+  padding: 1rem 3rem;
   margin: 1rem auto 1.5rem;
   overflow: auto;
   background: #444;
   color: #fff;
-}
-
-.section-closed .content-section {
-  display: block;
-  background: transparent;
-  margin: 20px 0 10px 0;
-  padding: 0.2rem;
-}
-.section-closed .content-section #tableSarchBar {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  font-size: 10pt;
-  justify-content: center;
-  align-items: bottom;
-  padding: 1rem 0 0;
-  margin: 0 auto;
-  width: 60%;
-}
-.section-closed .content-section #tableSarchBar label {
-  display: inline-block;
-  padding: 0.3rem 0rem;
-  font-size: 12pt;
-  font-weight: bold;
-  font-style: italic;
-}
-.section-closed .content-section #tableSarchBar input {
-  display: inline-block;
-  padding: 0.3rem 0.5rem;
-  font-size: inherit;
-  background: #fff;
-  border: 0;
-  border-radius: 10px;
-  border-left: 2px solid #222;
-  border-top: 2px solid #222;
-  box-sizing: border-box;
-  outline: none;
-  width: 60%;
-}
-.section-closed .content-section #tableSarchBar input:focus {
-  border: 3px solid #249;
-  border-radius: 10px;
-}
-@media screen and (max-width: 660px) {
-  .section-closed #tableSarchBar {
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-}
-
-.section-opened .content-section {
-  display: block;
-  background: transparent;
-  margin: 20px 0 10px 0;
-  padding: 0.2rem;
-}
-.section-opened .content-section #tableSarchBar {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  font-size: 10pt;
-  justify-content: center;
-  align-items: bottom;
-  padding: 1rem 0 0;
-  margin: 0 auto;
-  width: 60%;
-}
-.section-opened .content-section #tableSarchBar label {
-  display: inline-block;
-  padding: 0.3rem 0rem;
-  font-size: 12pt;
-  font-weight: bold;
-  font-style: italic;
-}
-.section-opened .content-section #tableSarchBar input {
-  display: inline-block;
-  padding: 0.3rem 0.5rem;
-  font-size: inherit;
-  background: #fff;
-  border: 0;
-  border-radius: 10px;
-  border-left: 2px solid #222;
-  border-top: 2px solid #222;
-  box-sizing: border-box;
-  outline: none;
-  width: 60%;
-}
-.section-opened .content-section #tableSarchBar input:focus {
-  border: 3px solid #249;
-  border-radius: 10px;
-}
-@media screen and (max-width: 660px) {
-  .section-opened #tableSarchBar {
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-}
-
-.error-wrapper {
-  margin: 5rem auto;
-  padding: 3rem;
-  width: 45rem;
-  height: fit-content;
-  background: #ff0000;
-  text-align: center;
-  align-items: center;
-}
-.error-wrapper div {
-  padding: 3rem;
-  border: 10px solid #fff;
-  color: #fff;
-}
-.error-wrapper div h1 {
-  font-size: 15pt;
-  margin: 0;
-  padding: 0rem;
-}
-.error-wrapper div p {
-  font-size: 10pt;
-  font-weight: 500;
-}
-.error-wrapper div a {
-  font-size: 10pt;
-  font-weight: 500;
-  color: #fff;
-  border-bottom: 4px solid;
-}
-
-.success-wrapper {
-  margin: 5rem auto;
-  padding: 3rem;
-  width: 45rem;
-  height: fit-content;
-  background: #226633;
-  text-align: center;
-  align-items: center;
-}
-.success-wrapper div {
-  padding: 3rem;
-  border: 10px solid #fff;
-  color: #fff;
-}
-.success-wrapper div h1 {
-  font-size: 15pt;
-  margin: 0;
-  padding: 0rem;
-}
-.success-wrapper div p {
-  font-size: 10pt;
-  font-weight: 500;
-}
-.success-wrapper div a {
-  font-size: 10pt;
-  font-weight: 500;
-  color: #fff;
-  border-bottom: 4px solid;
-}
-
-.external-mark {
-  display: inline-block;
-  margin-top: -1rem;
-  font-size: 0.8rem;
 }
 
 @media screen and (min-width: 100px) {
@@ -305,26 +141,6 @@
     text-align: center;
     cursor: pointer;
   }
-  a {
-    color: #0df;
-    background: transparent;
-    text-decoration: none;
-  }
-  a:hover {
-    color: #37d;
-    text-decoration: underline;
-  }
-  a:focus {
-    color: #37d;
-  }
-  a:active {
-    color: #249;
-    text-decoration: underline;
-  }
-  a:visited {
-    color: #30f;
-    background: transparent;
-  }
   h2.category {
     color: #ffdc2f;
   }
@@ -437,7 +253,7 @@
   .loader-wrapper-inner .loader::after {
     border-color: #0df transparent;
   }
-  .login-wrapper {
+  .auth-wrapper {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -451,18 +267,18 @@
     border-radius: 10px;
     font-size: 14pt;
   }
-  .login-wrapper a {
+  .auth-wrapper a {
     padding: 0 0 0.3rem;
     color: #0df;
     font-weight: 500;
   }
-  .login-wrapper h2 {
+  .auth-wrapper h2 {
     margin: 0;
     padding: 0;
     color: #ffdc2f;
     font-variant: small-caps;
   }
-  .login-wrapper input {
+  .auth-wrapper input {
     display: block;
     padding: 8px 20px;
     margin: 0;
@@ -472,7 +288,7 @@
     font-family: inherit;
     font-size: inherit;
   }
-  .login-wrapper button {
+  .auth-wrapper button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -487,7 +303,7 @@
     font-size: 10.8pt;
     font-weight: bold;
   }
-  .login-wrapper button:hover {
+  .auth-wrapper button:hover {
     background: #ffdc2f;
     color: #222;
   }
@@ -582,7 +398,7 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 350px;
-    padding: 1.5rem;
+    padding: 1.5rem 2rem;
     background: #111;
     font-size: 9pt;
   }
@@ -672,17 +488,20 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    height: 1.35rem;
     align-items: center;
     margin: 0;
     box-sizing: border-box;
   }
   .stat-container .chart-line .chart-key {
-    font-size: 10.8pt;
     display: inline-block;
-    min-width: fit-content;
+    padding: 0 0.5rem;
+    width: 7.2rem;
+    min-width: 7.2rem;
+    text-align: right;
     box-sizing: border-box;
     line-height: 0.9;
-    padding: 0 0.5rem;
+    font-size: 10.8pt;
   }
   .stat-container .chart-line .chart-bar {
     display: inline-block;
@@ -697,53 +516,37 @@
   }
   .stat-container .chart-line .chart-addition {
     display: inline-block;
-    min-width: auto;
     font-style: italic;
     font-size: 9pt;
     margin: 0;
     padding: 0 0.5rem;
-    min-width: 2.7rem;
-    text-align: left;
     box-sizing: border-box;
-  }
-  .stat-container .year-chart .chart-key {
-    padding: 0 1.5rem;
-  }
-  .stat-container .year-chart .chart-bar {
-    background: #f44;
-  }
-  .stat-container .decade-chart .chart-key {
-    min-width: 5.4rem;
-    width: 5.4rem;
-    text-align: center;
-  }
-  .stat-container .decade-chart .chart-bar {
-    background: #e62;
-  }
-  .stat-container .genre-chart .chart-key {
-    min-width: 8.1rem;
-    width: 8.1rem;
-    text-align: right;
   }
   .stat-container .genre-chart .chart-bar {
     background: #b4b;
   }
-  .stat-container .language-chart .chart-key {
-    min-width: 8.1rem;
-    width: 8.1rem;
-    text-align: right;
+  .stat-container .country-chart .chart-bar {
+    background: #4b4;
   }
   .stat-container .language-chart .chart-bar {
     background: #ed0;
     color: #222;
   }
-  .stat-container .country-chart .chart-key {
-    min-width: 8.1rem;
-    width: 8.1rem;
-    text-align: right;
+  .stat-container .decade-chart .chart-key {
+    width: 5.85rem;
+    min-width: 5.85rem;
+    text-align: center;
   }
-  .stat-container .country-chart .chart-bar {
-    background: #4b4;
+  .stat-container .decade-chart .chart-bar {
+    background: #e62;
+  }
+  .stat-container .year-chart .chart-key {
+    width: 4.5rem;
+    min-width: 4.5rem;
+    text-align: center;
+  }
+  .stat-container .year-chart .chart-bar {
+    background: #f44;
   }
   .stat-container .person-stat-list-table {
     display: flex;
@@ -959,13 +762,6 @@
   }
 }
 @media screen and (min-width: 100px) {
-  .main-container {
-    background: #fff;
-    margin: 1rem auto;
-    padding: 1rem 0.4rem;
-    min-width: 30rem;
-    max-width: 90rem;
-  }
   .table-container {
     display: flex;
     flex-direction: column;
@@ -1146,57 +942,12 @@
     font-size: 9pt;
     font-style: italic;
   }
-  .actor-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-flow: wrap;
-    gap: 1.35rem;
-    margin: 0;
-    padding: -0.1;
-  }
-  .actor-wrapper .actor-item {
-    display: flex;
-    flex-direction: column;
-    background: #ff0;
-    box-shadow: 8px 10px 14px #e62;
-    text-align: center;
-    min-width: 7rem;
-    width: 7rem;
-    padding: 0.3rem 0.2rem;
-  }
-  .actor-wrapper .actor-item .top-line {
-    padding: 0.3rem 0.2rem;
-    border-radius: 4px;
-    margin: 0.2rem 0.5rem 0.5rem;
-    background: #fff;
-    font-size: 10pt;
-  }
-  .actor-wrapper .actor-item .mid-line img {
-    display: block;
-    border-radius: 4px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-  }
-  .actor-wrapper .actor-item .mid-line div {
-    margin: 0.4rem 0.2rem 0.5rem;
-    border-radius: 5px;
-    font-size: 10pt;
-    font-weight: bold;
-  }
-  .actor-wrapper .actor-item .person-data {
-    margin: auto auto 0.2rem auto;
-    padding: 0.3rem auto;
-    text-align: center;
-    background: #fff;
-    border-radius: 4px;
-  }
   .film-wrapper {
     display: flex;
     flex-flow: column;
     margin: 0 auto;
     padding: 1rem;
-    max-width: 60rem;
+    max-width: 65rem;
   }
   .film-wrapper .film-headline {
     display: flex;
@@ -1238,10 +989,11 @@
   .film-wrapper .film-basic-info .film-img-eval-wrap {
     display: flex;
     flex-direction: column;
+    min-width: 22rem;
     width: fit-content;
     height: fit-content;
     margin: 0 0 0 0;
-    padding: 0 2rem 1rem;
+    padding: 0 3rem 1rem;
     background: #111;
     color: #fff;
     box-sizing: border-box;
@@ -1429,7 +1181,7 @@
   }
   .film-wrapper div.crew-wrapper {
     background: #111;
-    padding: 0.5rem 1rem 1rem;
+    padding: 0.5rem 2rem 1.5rem;
     margin: 1rem 0 0;
   }
   .film-wrapper div.crew-wrapper h3 {
@@ -1442,7 +1194,7 @@
     display: flex;
     flex-flow: wrap;
     gap: 0.63rem;
-    padding: 0.63rem;
+    padding: 0.63rem 0.9rem;
     background: #aaa;
     border-radius: 7px;
     font-size: 9pt;
@@ -1455,12 +1207,32 @@
     border-radius: 7px;
     padding: 0.3rem 1rem;
   }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a {
+    color: #249;
+    background: transparent;
+    text-decoration: none;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:hover {
+    color: #37d;
+    text-decoration: underline;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:focus {
+    color: #37d;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:active {
+    color: #249;
+    text-decoration: underline;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:visited {
+    color: #30f;
+    background: transparent;
+  }
   .film-wrapper div.crew-wrapper .film-cast {
     display: flex;
     flex-flow: wrap;
     gap: 1rem;
     justify-content: center;
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     border-radius: 7px;
     background: #aaa;
   }
@@ -1503,7 +1275,7 @@
     font-weight: bold;
   }
 }
-@media screen and (min-width: 100px) and (max-width: 660px) {
+@media screen and (min-width: 100px) and (max-width: 800px) {
   .film-wrapper .film-headline {
     display: flex;
     width: 100%;
@@ -1783,26 +1555,6 @@
     text-align: center;
     cursor: pointer;
   }
-  a {
-    color: #0df;
-    background: transparent;
-    text-decoration: none;
-  }
-  a:hover {
-    color: #37d;
-    text-decoration: underline;
-  }
-  a:focus {
-    color: #37d;
-  }
-  a:active {
-    color: #249;
-    text-decoration: underline;
-  }
-  a:visited {
-    color: #30f;
-    background: transparent;
-  }
   h2.category {
     color: #ffdc2f;
   }
@@ -1915,7 +1667,7 @@
   .loader-wrapper-inner .loader::after {
     border-color: #0df transparent;
   }
-  .login-wrapper {
+  .auth-wrapper {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -1929,18 +1681,18 @@
     border-radius: 10px;
     font-size: 14pt;
   }
-  .login-wrapper a {
+  .auth-wrapper a {
     padding: 0 0 0.3rem;
     color: #0df;
     font-weight: 500;
   }
-  .login-wrapper h2 {
+  .auth-wrapper h2 {
     margin: 0;
     padding: 0;
     color: #ffdc2f;
     font-variant: small-caps;
   }
-  .login-wrapper input {
+  .auth-wrapper input {
     display: block;
     padding: 8px 20px;
     margin: 0;
@@ -1950,7 +1702,7 @@
     font-family: inherit;
     font-size: inherit;
   }
-  .login-wrapper button {
+  .auth-wrapper button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1965,7 +1717,7 @@
     font-size: 12pt;
     font-weight: bold;
   }
-  .login-wrapper button:hover {
+  .auth-wrapper button:hover {
     background: #ffdc2f;
     color: #222;
   }
@@ -2060,7 +1812,7 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 350px;
-    padding: 1.5rem;
+    padding: 1.5rem 2rem;
     background: #111;
     font-size: 10pt;
   }
@@ -2150,17 +1902,20 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    height: 1.5rem;
     align-items: center;
     margin: 0;
     box-sizing: border-box;
   }
   .stat-container .chart-line .chart-key {
-    font-size: 12pt;
     display: inline-block;
-    min-width: fit-content;
+    padding: 0 0.5rem;
+    width: 8rem;
+    min-width: 8rem;
+    text-align: right;
     box-sizing: border-box;
     line-height: 0.9;
-    padding: 0 0.5rem;
+    font-size: 12pt;
   }
   .stat-container .chart-line .chart-bar {
     display: inline-block;
@@ -2175,53 +1930,37 @@
   }
   .stat-container .chart-line .chart-addition {
     display: inline-block;
-    min-width: auto;
     font-style: italic;
     font-size: 10pt;
     margin: 0;
     padding: 0 0.5rem;
-    min-width: 3rem;
-    text-align: left;
     box-sizing: border-box;
-  }
-  .stat-container .year-chart .chart-key {
-    padding: 0 1.5rem;
-  }
-  .stat-container .year-chart .chart-bar {
-    background: #f44;
-  }
-  .stat-container .decade-chart .chart-key {
-    min-width: 6rem;
-    width: 6rem;
-    text-align: center;
-  }
-  .stat-container .decade-chart .chart-bar {
-    background: #e62;
-  }
-  .stat-container .genre-chart .chart-key {
-    min-width: 9rem;
-    width: 9rem;
-    text-align: right;
   }
   .stat-container .genre-chart .chart-bar {
     background: #b4b;
   }
-  .stat-container .language-chart .chart-key {
-    min-width: 9rem;
-    width: 9rem;
-    text-align: right;
+  .stat-container .country-chart .chart-bar {
+    background: #4b4;
   }
   .stat-container .language-chart .chart-bar {
     background: #ed0;
     color: #222;
   }
-  .stat-container .country-chart .chart-key {
-    min-width: 9rem;
-    width: 9rem;
-    text-align: right;
+  .stat-container .decade-chart .chart-key {
+    width: 6.5rem;
+    min-width: 6.5rem;
+    text-align: center;
   }
-  .stat-container .country-chart .chart-bar {
-    background: #4b4;
+  .stat-container .decade-chart .chart-bar {
+    background: #e62;
+  }
+  .stat-container .year-chart .chart-key {
+    width: 5rem;
+    min-width: 5rem;
+    text-align: center;
+  }
+  .stat-container .year-chart .chart-bar {
+    background: #f44;
   }
   .stat-container .person-stat-list-table {
     display: flex;
@@ -2437,13 +2176,6 @@
   }
 }
 @media screen and (min-width: 660px) {
-  .main-container {
-    background: #fff;
-    margin: 1.2rem auto;
-    padding: 1.4rem 0.6rem;
-    min-width: 30rem;
-    max-width: 90rem;
-  }
   .table-container {
     display: flex;
     flex-direction: column;
@@ -2624,57 +2356,12 @@
     font-size: 10pt;
     font-style: italic;
   }
-  .actor-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-flow: wrap;
-    gap: 1.5rem;
-    margin: 0;
-    padding: 0;
-  }
-  .actor-wrapper .actor-item {
-    display: flex;
-    flex-direction: column;
-    background: #ff0;
-    box-shadow: 8px 10px 14px #e62;
-    text-align: center;
-    min-width: 7rem;
-    width: 7rem;
-    padding: 0.3rem 0.2rem;
-  }
-  .actor-wrapper .actor-item .top-line {
-    padding: 0.3rem 0.2rem;
-    border-radius: 4px;
-    margin: 0.2rem 0.5rem 0.5rem;
-    background: #fff;
-    font-size: 10pt;
-  }
-  .actor-wrapper .actor-item .mid-line img {
-    display: block;
-    border-radius: 4px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-  }
-  .actor-wrapper .actor-item .mid-line div {
-    margin: 0.4rem 0.2rem 0.5rem;
-    border-radius: 5px;
-    font-size: 10pt;
-    font-weight: bold;
-  }
-  .actor-wrapper .actor-item .person-data {
-    margin: auto auto 0.2rem auto;
-    padding: 0.3rem auto;
-    text-align: center;
-    background: #fff;
-    border-radius: 4px;
-  }
   .film-wrapper {
     display: flex;
     flex-flow: column;
     margin: 0 auto;
     padding: 1rem;
-    max-width: 60rem;
+    max-width: 65rem;
   }
   .film-wrapper .film-headline {
     display: flex;
@@ -2716,10 +2403,11 @@
   .film-wrapper .film-basic-info .film-img-eval-wrap {
     display: flex;
     flex-direction: column;
+    min-width: 22rem;
     width: fit-content;
     height: fit-content;
     margin: 0 0 0 0;
-    padding: 0 2rem 1rem;
+    padding: 0 3rem 1rem;
     background: #111;
     color: #fff;
     box-sizing: border-box;
@@ -2907,7 +2595,7 @@
   }
   .film-wrapper div.crew-wrapper {
     background: #111;
-    padding: 0.5rem 1rem 1rem;
+    padding: 0.5rem 2rem 1.5rem;
     margin: 1rem 0 0;
   }
   .film-wrapper div.crew-wrapper h3 {
@@ -2920,7 +2608,7 @@
     display: flex;
     flex-flow: wrap;
     gap: 0.7rem;
-    padding: 0.7rem;
+    padding: 0.7rem 1rem;
     background: #aaa;
     border-radius: 7px;
     font-size: 10pt;
@@ -2933,12 +2621,32 @@
     border-radius: 7px;
     padding: 0.3rem 1rem;
   }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a {
+    color: #249;
+    background: transparent;
+    text-decoration: none;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:hover {
+    color: #37d;
+    text-decoration: underline;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:focus {
+    color: #37d;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:active {
+    color: #249;
+    text-decoration: underline;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:visited {
+    color: #30f;
+    background: transparent;
+  }
   .film-wrapper div.crew-wrapper .film-cast {
     display: flex;
     flex-flow: wrap;
     gap: 1rem;
     justify-content: center;
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     border-radius: 7px;
     background: #aaa;
   }
@@ -2981,7 +2689,7 @@
     font-weight: bold;
   }
 }
-@media screen and (min-width: 660px) and (max-width: 660px) {
+@media screen and (min-width: 660px) and (max-width: 800px) {
   .film-wrapper .film-headline {
     display: flex;
     width: 100%;
@@ -3261,26 +2969,6 @@
     text-align: center;
     cursor: pointer;
   }
-  a {
-    color: #0df;
-    background: transparent;
-    text-decoration: none;
-  }
-  a:hover {
-    color: #37d;
-    text-decoration: underline;
-  }
-  a:focus {
-    color: #37d;
-  }
-  a:active {
-    color: #249;
-    text-decoration: underline;
-  }
-  a:visited {
-    color: #30f;
-    background: transparent;
-  }
   h2.category {
     color: #ffdc2f;
   }
@@ -3393,7 +3081,7 @@
   .loader-wrapper-inner .loader::after {
     border-color: #0df transparent;
   }
-  .login-wrapper {
+  .auth-wrapper {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -3407,18 +3095,18 @@
     border-radius: 10px;
     font-size: 14pt;
   }
-  .login-wrapper a {
+  .auth-wrapper a {
     padding: 0 0 0.3rem;
     color: #0df;
     font-weight: 500;
   }
-  .login-wrapper h2 {
+  .auth-wrapper h2 {
     margin: 0;
     padding: 0;
     color: #ffdc2f;
     font-variant: small-caps;
   }
-  .login-wrapper input {
+  .auth-wrapper input {
     display: block;
     padding: 8px 20px;
     margin: 0;
@@ -3428,7 +3116,7 @@
     font-family: inherit;
     font-size: inherit;
   }
-  .login-wrapper button {
+  .auth-wrapper button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -3443,7 +3131,7 @@
     font-size: 13.2pt;
     font-weight: bold;
   }
-  .login-wrapper button:hover {
+  .auth-wrapper button:hover {
     background: #ffdc2f;
     color: #222;
   }
@@ -3538,7 +3226,7 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 350px;
-    padding: 1.5rem;
+    padding: 1.5rem 2rem;
     background: #111;
     font-size: 11pt;
   }
@@ -3628,17 +3316,20 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    height: 1.65rem;
     align-items: center;
     margin: 0;
     box-sizing: border-box;
   }
   .stat-container .chart-line .chart-key {
-    font-size: 13.2pt;
     display: inline-block;
-    min-width: fit-content;
+    padding: 0 0.5rem;
+    width: 8.8rem;
+    min-width: 8.8rem;
+    text-align: right;
     box-sizing: border-box;
     line-height: 0.9;
-    padding: 0 0.5rem;
+    font-size: 13.2pt;
   }
   .stat-container .chart-line .chart-bar {
     display: inline-block;
@@ -3653,53 +3344,37 @@
   }
   .stat-container .chart-line .chart-addition {
     display: inline-block;
-    min-width: auto;
     font-style: italic;
     font-size: 11pt;
     margin: 0;
     padding: 0 0.5rem;
-    min-width: 3.3rem;
-    text-align: left;
     box-sizing: border-box;
-  }
-  .stat-container .year-chart .chart-key {
-    padding: 0 1.5rem;
-  }
-  .stat-container .year-chart .chart-bar {
-    background: #f44;
-  }
-  .stat-container .decade-chart .chart-key {
-    min-width: 6.6rem;
-    width: 6.6rem;
-    text-align: center;
-  }
-  .stat-container .decade-chart .chart-bar {
-    background: #e62;
-  }
-  .stat-container .genre-chart .chart-key {
-    min-width: 9.9rem;
-    width: 9.9rem;
-    text-align: right;
   }
   .stat-container .genre-chart .chart-bar {
     background: #b4b;
   }
-  .stat-container .language-chart .chart-key {
-    min-width: 9.9rem;
-    width: 9.9rem;
-    text-align: right;
+  .stat-container .country-chart .chart-bar {
+    background: #4b4;
   }
   .stat-container .language-chart .chart-bar {
     background: #ed0;
     color: #222;
   }
-  .stat-container .country-chart .chart-key {
-    min-width: 9.9rem;
-    width: 9.9rem;
-    text-align: right;
+  .stat-container .decade-chart .chart-key {
+    width: 7.15rem;
+    min-width: 7.15rem;
+    text-align: center;
   }
-  .stat-container .country-chart .chart-bar {
-    background: #4b4;
+  .stat-container .decade-chart .chart-bar {
+    background: #e62;
+  }
+  .stat-container .year-chart .chart-key {
+    width: 5.5rem;
+    min-width: 5.5rem;
+    text-align: center;
+  }
+  .stat-container .year-chart .chart-bar {
+    background: #f44;
   }
   .stat-container .person-stat-list-table {
     display: flex;
@@ -3915,13 +3590,6 @@
   }
 }
 @media screen and (min-width: 1080px) {
-  .main-container {
-    background: #fff;
-    margin: 1.4rem auto;
-    padding: 1.6rem 0.8rem;
-    min-width: 30rem;
-    max-width: 90rem;
-  }
   .table-container {
     display: flex;
     flex-direction: column;
@@ -4102,57 +3770,12 @@
     font-size: 11pt;
     font-style: italic;
   }
-  .actor-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-flow: wrap;
-    gap: 1.65rem;
-    margin: 0;
-    padding: 0.1;
-  }
-  .actor-wrapper .actor-item {
-    display: flex;
-    flex-direction: column;
-    background: #ff0;
-    box-shadow: 8px 10px 14px #e62;
-    text-align: center;
-    min-width: 7rem;
-    width: 7rem;
-    padding: 0.3rem 0.2rem;
-  }
-  .actor-wrapper .actor-item .top-line {
-    padding: 0.3rem 0.2rem;
-    border-radius: 4px;
-    margin: 0.2rem 0.5rem 0.5rem;
-    background: #fff;
-    font-size: 10pt;
-  }
-  .actor-wrapper .actor-item .mid-line img {
-    display: block;
-    border-radius: 4px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-  }
-  .actor-wrapper .actor-item .mid-line div {
-    margin: 0.4rem 0.2rem 0.5rem;
-    border-radius: 5px;
-    font-size: 10pt;
-    font-weight: bold;
-  }
-  .actor-wrapper .actor-item .person-data {
-    margin: auto auto 0.2rem auto;
-    padding: 0.3rem auto;
-    text-align: center;
-    background: #fff;
-    border-radius: 4px;
-  }
   .film-wrapper {
     display: flex;
     flex-flow: column;
     margin: 0 auto;
     padding: 1rem;
-    max-width: 60rem;
+    max-width: 65rem;
   }
   .film-wrapper .film-headline {
     display: flex;
@@ -4194,10 +3817,11 @@
   .film-wrapper .film-basic-info .film-img-eval-wrap {
     display: flex;
     flex-direction: column;
+    min-width: 22rem;
     width: fit-content;
     height: fit-content;
     margin: 0 0 0 0;
-    padding: 0 2rem 1rem;
+    padding: 0 3rem 1rem;
     background: #111;
     color: #fff;
     box-sizing: border-box;
@@ -4385,7 +4009,7 @@
   }
   .film-wrapper div.crew-wrapper {
     background: #111;
-    padding: 0.5rem 1rem 1rem;
+    padding: 0.5rem 2rem 1.5rem;
     margin: 1rem 0 0;
   }
   .film-wrapper div.crew-wrapper h3 {
@@ -4398,7 +4022,7 @@
     display: flex;
     flex-flow: wrap;
     gap: 0.77rem;
-    padding: 0.77rem;
+    padding: 0.77rem 1.1rem;
     background: #aaa;
     border-radius: 7px;
     font-size: 11pt;
@@ -4411,12 +4035,32 @@
     border-radius: 7px;
     padding: 0.3rem 1rem;
   }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a {
+    color: #249;
+    background: transparent;
+    text-decoration: none;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:hover {
+    color: #37d;
+    text-decoration: underline;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:focus {
+    color: #37d;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:active {
+    color: #249;
+    text-decoration: underline;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:visited {
+    color: #30f;
+    background: transparent;
+  }
   .film-wrapper div.crew-wrapper .film-cast {
     display: flex;
     flex-flow: wrap;
     gap: 1rem;
     justify-content: center;
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     border-radius: 7px;
     background: #aaa;
   }
@@ -4459,7 +4103,7 @@
     font-weight: bold;
   }
 }
-@media screen and (min-width: 1080px) and (max-width: 660px) {
+@media screen and (min-width: 1080px) and (max-width: 800px) {
   .film-wrapper .film-headline {
     display: flex;
     width: 100%;
@@ -4739,26 +4383,6 @@
     text-align: center;
     cursor: pointer;
   }
-  a {
-    color: #0df;
-    background: transparent;
-    text-decoration: none;
-  }
-  a:hover {
-    color: #37d;
-    text-decoration: underline;
-  }
-  a:focus {
-    color: #37d;
-  }
-  a:active {
-    color: #249;
-    text-decoration: underline;
-  }
-  a:visited {
-    color: #30f;
-    background: transparent;
-  }
   h2.category {
     color: #ffdc2f;
   }
@@ -4871,7 +4495,7 @@
   .loader-wrapper-inner .loader::after {
     border-color: #0df transparent;
   }
-  .login-wrapper {
+  .auth-wrapper {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -4885,18 +4509,18 @@
     border-radius: 10px;
     font-size: 14pt;
   }
-  .login-wrapper a {
+  .auth-wrapper a {
     padding: 0 0 0.3rem;
     color: #0df;
     font-weight: 500;
   }
-  .login-wrapper h2 {
+  .auth-wrapper h2 {
     margin: 0;
     padding: 0;
     color: #ffdc2f;
     font-variant: small-caps;
   }
-  .login-wrapper input {
+  .auth-wrapper input {
     display: block;
     padding: 8px 20px;
     margin: 0;
@@ -4906,7 +4530,7 @@
     font-family: inherit;
     font-size: inherit;
   }
-  .login-wrapper button {
+  .auth-wrapper button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -4921,7 +4545,7 @@
     font-size: 14.4pt;
     font-weight: bold;
   }
-  .login-wrapper button:hover {
+  .auth-wrapper button:hover {
     background: #ffdc2f;
     color: #222;
   }
@@ -5016,7 +4640,7 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 350px;
-    padding: 1.5rem;
+    padding: 1.5rem 2rem;
     background: #111;
     font-size: 12pt;
   }
@@ -5106,17 +4730,20 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    height: 1.8rem;
     align-items: center;
     margin: 0;
     box-sizing: border-box;
   }
   .stat-container .chart-line .chart-key {
-    font-size: 14.4pt;
     display: inline-block;
-    min-width: fit-content;
+    padding: 0 0.5rem;
+    width: 9.6rem;
+    min-width: 9.6rem;
+    text-align: right;
     box-sizing: border-box;
     line-height: 0.9;
-    padding: 0 0.5rem;
+    font-size: 14.4pt;
   }
   .stat-container .chart-line .chart-bar {
     display: inline-block;
@@ -5131,53 +4758,37 @@
   }
   .stat-container .chart-line .chart-addition {
     display: inline-block;
-    min-width: auto;
     font-style: italic;
     font-size: 12pt;
     margin: 0;
     padding: 0 0.5rem;
-    min-width: 3.6rem;
-    text-align: left;
     box-sizing: border-box;
-  }
-  .stat-container .year-chart .chart-key {
-    padding: 0 1.5rem;
-  }
-  .stat-container .year-chart .chart-bar {
-    background: #f44;
-  }
-  .stat-container .decade-chart .chart-key {
-    min-width: 7.2rem;
-    width: 7.2rem;
-    text-align: center;
-  }
-  .stat-container .decade-chart .chart-bar {
-    background: #e62;
-  }
-  .stat-container .genre-chart .chart-key {
-    min-width: 10.8rem;
-    width: 10.8rem;
-    text-align: right;
   }
   .stat-container .genre-chart .chart-bar {
     background: #b4b;
   }
-  .stat-container .language-chart .chart-key {
-    min-width: 10.8rem;
-    width: 10.8rem;
-    text-align: right;
+  .stat-container .country-chart .chart-bar {
+    background: #4b4;
   }
   .stat-container .language-chart .chart-bar {
     background: #ed0;
     color: #222;
   }
-  .stat-container .country-chart .chart-key {
-    min-width: 10.8rem;
-    width: 10.8rem;
-    text-align: right;
+  .stat-container .decade-chart .chart-key {
+    width: 7.8rem;
+    min-width: 7.8rem;
+    text-align: center;
   }
-  .stat-container .country-chart .chart-bar {
-    background: #4b4;
+  .stat-container .decade-chart .chart-bar {
+    background: #e62;
+  }
+  .stat-container .year-chart .chart-key {
+    width: 6rem;
+    min-width: 6rem;
+    text-align: center;
+  }
+  .stat-container .year-chart .chart-bar {
+    background: #f44;
   }
   .stat-container .person-stat-list-table {
     display: flex;
@@ -5393,13 +5004,6 @@
   }
 }
 @media screen and (min-width: 2400px) {
-  .main-container {
-    background: #fff;
-    margin: 1.6rem auto;
-    padding: 1.8rem 1rem;
-    min-width: 30rem;
-    max-width: 90rem;
-  }
   .table-container {
     display: flex;
     flex-direction: column;
@@ -5580,57 +5184,12 @@
     font-size: 12pt;
     font-style: italic;
   }
-  .actor-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-flow: wrap;
-    gap: 1.8rem;
-    margin: 0;
-    padding: 0.2;
-  }
-  .actor-wrapper .actor-item {
-    display: flex;
-    flex-direction: column;
-    background: #ff0;
-    box-shadow: 8px 10px 14px #e62;
-    text-align: center;
-    min-width: 7rem;
-    width: 7rem;
-    padding: 0.3rem 0.2rem;
-  }
-  .actor-wrapper .actor-item .top-line {
-    padding: 0.3rem 0.2rem;
-    border-radius: 4px;
-    margin: 0.2rem 0.5rem 0.5rem;
-    background: #fff;
-    font-size: 10pt;
-  }
-  .actor-wrapper .actor-item .mid-line img {
-    display: block;
-    border-radius: 4px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-  }
-  .actor-wrapper .actor-item .mid-line div {
-    margin: 0.4rem 0.2rem 0.5rem;
-    border-radius: 5px;
-    font-size: 10pt;
-    font-weight: bold;
-  }
-  .actor-wrapper .actor-item .person-data {
-    margin: auto auto 0.2rem auto;
-    padding: 0.3rem auto;
-    text-align: center;
-    background: #fff;
-    border-radius: 4px;
-  }
   .film-wrapper {
     display: flex;
     flex-flow: column;
     margin: 0 auto;
     padding: 1rem;
-    max-width: 60rem;
+    max-width: 65rem;
   }
   .film-wrapper .film-headline {
     display: flex;
@@ -5672,10 +5231,11 @@
   .film-wrapper .film-basic-info .film-img-eval-wrap {
     display: flex;
     flex-direction: column;
+    min-width: 22rem;
     width: fit-content;
     height: fit-content;
     margin: 0 0 0 0;
-    padding: 0 2rem 1rem;
+    padding: 0 3rem 1rem;
     background: #111;
     color: #fff;
     box-sizing: border-box;
@@ -5863,7 +5423,7 @@
   }
   .film-wrapper div.crew-wrapper {
     background: #111;
-    padding: 0.5rem 1rem 1rem;
+    padding: 0.5rem 2rem 1.5rem;
     margin: 1rem 0 0;
   }
   .film-wrapper div.crew-wrapper h3 {
@@ -5876,7 +5436,7 @@
     display: flex;
     flex-flow: wrap;
     gap: 0.84rem;
-    padding: 0.84rem;
+    padding: 0.84rem 1.2rem;
     background: #aaa;
     border-radius: 7px;
     font-size: 12pt;
@@ -5889,12 +5449,32 @@
     border-radius: 7px;
     padding: 0.3rem 1rem;
   }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a {
+    color: #249;
+    background: transparent;
+    text-decoration: none;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:hover {
+    color: #37d;
+    text-decoration: underline;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:focus {
+    color: #37d;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:active {
+    color: #249;
+    text-decoration: underline;
+  }
+  .film-wrapper div.crew-wrapper .film-crew .crew-single-person a:visited {
+    color: #30f;
+    background: transparent;
+  }
   .film-wrapper div.crew-wrapper .film-cast {
     display: flex;
     flex-flow: wrap;
     gap: 1rem;
     justify-content: center;
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     border-radius: 7px;
     background: #aaa;
   }
@@ -5937,7 +5517,7 @@
     font-weight: bold;
   }
 }
-@media screen and (min-width: 2400px) and (max-width: 660px) {
+@media screen and (min-width: 2400px) and (max-width: 800px) {
   .film-wrapper .film-headline {
     display: flex;
     width: 100%;

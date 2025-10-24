@@ -24,14 +24,14 @@ export default function changeRate() {
         }
     }
 
-    async function changeRating(mediaID, newUserRating) {
+    async function changeRating(mediaID, newUserRating, userChangeEvalDate) {
         const res = await fetch(`http://localhost:3001/media/change`, {
             method: "POST", headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify({
                 mediaID,
                 newUserRating,
-                userChangeEvalDate: (new Date()).toString()
+                userChangeEvalDate
             })
         });
         const resJson = await res.json();

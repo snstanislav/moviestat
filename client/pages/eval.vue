@@ -52,6 +52,9 @@
 </template>
 
 <script setup>
+import { useToast } from "vue-toastification";
+const toast = useToast();
+
 import { prettyMediaType } from "../composables/utils"
 import useAuth from "../composables/useAuth";
 const { userProfileData } = useAuth();
@@ -150,7 +153,6 @@ async function performEvaluation(item) {
                 console.log("Evaluation failed: " + resJson.message);
 
             } else {
-                console.log(resJson)
                 console.log(resJson.data)
 
                 if (resJson.data.isJustInserted) {
@@ -158,12 +160,14 @@ async function performEvaluation(item) {
                 } else {
                     console.log("performEvaluation :: The movie already exists in DB :: " + resJson.data.movieID);
                 }
-               // navigateTo(`/media/${resJson.data.movieID}`);
-                 window.open(`/media/${resJson.data.movieID}`, '_blank');
+                // window.open(`/media/${resJson.data.movieID}`, '_blank');
+                navigateTo(`/media/${resJson.data.movieID}`);
+                toast.success(resJson.message);
             }
         } catch (err) {
             localStorage.clear();
             console.error("Error: performEvaluation", err);
+            toast.success("Something went wrong. Please try again");
         }
     }
 }

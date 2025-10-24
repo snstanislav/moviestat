@@ -20,7 +20,7 @@
 
                 </nav>
                 <KeepAlive>
-                    <component v-if="userEvaluations" :is="activeTab.component"
+                    <component v-if="userEvaluations && userEvaluations.length > 0" :is="activeTab.component"
                         :key="activeTab.name" :userEvaluations="userEvaluations" />
                     <div v-else class="loader-wrapper loader-wrapper-inner">
                         <span class="loader"></span>

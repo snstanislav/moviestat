@@ -1,15 +1,13 @@
 <template>
-    <div class="content-section">
-        <div class="stat-container">
-            <SortbarMovieTable />
-            <Filterbar />
+    <div class="stat-container">
+        <SortbarMovieTable />
+        <Filterbar />
 
-            <h2 class="category">Your rated movies ({{ movieList.length }})</h2>
-            <div v-if="movieList && movieList.length > 0" class="table-container">
-                <MovieTableRow v-for="(item, index) in movieList" :key="item.movie._id" :index="index" :item="item" />
-            </div>
-            <div v-else class="empty-result">The list is empty...</div>
+        <h2 class="category">Your rated movies ({{ movieList.length }})</h2>
+        <div v-if="movieList && movieList.length > 0" class="table-container">
+            <MovieTableRow v-for="(item, index) in movieList" :key="item.movie._id" :index="index" :item="item" />
         </div>
+        <div v-else class="empty-result">The list is empty...</div>
     </div>
 </template>
 

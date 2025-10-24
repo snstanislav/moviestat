@@ -3,11 +3,6 @@ const MovieItem = require("../domain/MovieItem");
 const { Movie } = require("../models/Movie");
 const { addNewPerson } = require("./personService");
 
-//// temp
-const mongoose = require("mongoose");
-const { connect, disconnect } = require("../db/connection");
-require("dotenv").config();
-
 const SEARCH_RESULT_CACHE = new Map();
 
 async function performMovieSearch(query, page) {
@@ -20,10 +15,6 @@ async function performMovieSearch(query, page) {
         return result;
     }
 }
-/*(async ()=>{
-    var qwe = await performMovieSearch("x files", 1)
-    console.log(qwe)
-})()*/
 
 async function unloadAllPersonsFromMovie(existingMovie) {
     try {
@@ -66,7 +57,7 @@ async function addNewMovie(newMovie) {
     try {
         let existing = await Movie.findOne({ tmdbID: newMovie.tmdbID });
         if (existing) {
-            console.log(`>> ${existing.type} <${existing.imdbID}: ${existing.name}(${existing.year})> already exists in DB.`);
+            console.log(`>> ${existing.type} <${existing.imdbID}: ${existing.name}(${existing.year})> already exists.`);
             return existing;
         }
         if (newMovie instanceof MovieItem) {

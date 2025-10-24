@@ -2,60 +2,10 @@
 @use 'sass:math';
 @use "components";
 
-@mixin result-msg-page($bg-color: #555) {
-  margin: 5rem auto;
-  padding: 3rem;
-  width: 45rem;
-  height: fit-content;
-  background: $bg-color;
-  text-align: center;
-  align-items: center;
-
-  div {
-    padding: 3rem;
-    border: 10px solid decor.$light-0;
-    color: decor.$light-0;
-
-    h1 {
-      font-size: components.$font-size-large;
-      margin: 0;
-      padding: 0rem;
-    }
-
-    p {
-      font-size: components.$font-size-base;
-      font-weight: 500;
-    }
-
-    a {
-      font-size: components.$font-size-base;
-      font-weight: 500;
-      color: decor.$light-0;
-      border-bottom: 4px solid;
-    }
-  }
-}
-
-.error-wrapper {
-  @include result-msg-page(components.$error);
-}
-
-.success-wrapper {
-  @include result-msg-page(components.$success);
-}
-
-.external-mark {
-  display: inline-block;
-  margin-top: -1rem;
-  font-size: 0.8rem;
-}
-
 @media screen and (min-width: 100px) {
   $scale: 0.9;
   @include components.general-page-parts(decor.$light-0, $scale);
-  @include components.main-container(1rem, auto, 1rem, 0.4rem);
   @include components.table-container($scale);
-  @include components.actor-wrapper($scale);
   @include components.film-page($scale);
   @include components.eval-page($scale);
 }
@@ -63,9 +13,7 @@
 @media screen and (min-width: 660px) {
   $scale: 1;
   @include components.general-page-parts(decor.$light-0, $scale);
-  @include components.main-container(1.2rem, auto, 1.4rem, 0.6rem);
   @include components.table-container($scale);
-  @include components.actor-wrapper($scale);
   @include components.film-page($scale);
   @include components.eval-page($scale);
 }
@@ -73,9 +21,7 @@
 @media screen and (min-width: 1080px) {
   $scale: 1.1;
   @include components.general-page-parts(components.$dark-7, $scale);
-  @include components.main-container(1.4rem, auto, 1.6rem, 0.8rem);
   @include components.table-container($scale);
-  @include components.actor-wrapper($scale);
   @include components.film-page($scale);
   @include components.eval-page($scale);
 }
@@ -83,9 +29,7 @@
 @media screen and (min-width: 2400px) {
   $scale: 1.2;
   @include components.general-page-parts(components.$dark-7, $scale);
-  @include components.main-container(1.6rem, auto, 1.8rem, 1rem);
   @include components.table-container($scale);
-  @include components.actor-wrapper($scale);
   @include components.film-page($scale);
   @include components.eval-page($scale);
 }

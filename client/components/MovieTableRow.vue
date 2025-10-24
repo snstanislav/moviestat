@@ -69,6 +69,9 @@
 </template>
 
 <script setup>
+import { useToast } from "vue-toastification";
+const toast = useToast();
+
 import { prettyMediaType } from "../composables/utils";
 import changeRate from "../composables/changeRate";
 import RatingButton from "./statistics/partials/RatingButton.vue";
@@ -94,10 +97,13 @@ onMounted(async () => {
 async function handleChangeFavorite() {
     let question = isFavorite.value ? "\nNot favorite anymore?\n" : "\nWant to add to favorites?\n";
     if (confirm(question)) {
+        var favItemName = `"${mediaItem.value.commTitle ? mediaItem.value.commTitle : mediaItem.value.origTitle}" ${mediaItem.value.year ? '(' + mediaItem.value.year + ')' : ''}`;
+
         const newValue = await changeFavorite(mediaItem.value._id, isFavorite.value);
         isFavorite.value = newValue;
 
         await setEvaluations();
+        toast.success(isFavorite.value ? `${favItemName} was added to favorites` : `${favItemName} is not favorite any more`);
     }
 }
 
@@ -105,10 +111,16 @@ async function handleChangeRating() {
     if (userRating.value.toString() !== newUserRating.value.toString()) {
         let question = `\nDo you really want to change the rating?\n`;
         if (confirm(question)) {
-            await changeRating(mediaItem.value._id, newUserRating.value);
-            userRating.value = newUserRating.value;
+            var changeItemName = `"${mediaItem.value.commTitle ? mediaItem.value.commTitle : mediaItem.value.origTitle}" ${mediaItem.value.year ? '(' + mediaItem.value.year + ')' : ''}`;
+            const newEvalDate = (new Date()).toString();
+
+            await changeRating(mediaItem.value._id, newUserRating.value, newEvalDate);
 
             await setEvaluations();
+            toast.success(`Rating for ${changeItemName} was changed from ${userRating.value} to ${newUserRating.value}`);
+
+            userRating.value = newUserRating.value;
+            userChangeEvalDate.value = newEvalDate;
         }
     }
 }

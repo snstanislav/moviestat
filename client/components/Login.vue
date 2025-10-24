@@ -1,22 +1,20 @@
 <template>
     <div v-if="!isReady">Loading...</div>
     <div v-else>
-        <div v-if="!userProfileData" class="login-wrapper">
+        <form v-if="!userProfileData" @submit.prevent="handleSignin" class="auth-wrapper">
             <h2>Sign in to continue</h2>
-            <input v-model="login" type="text" width="10" placeholder="Login" required></input>
-            <input v-model="password" type="password" width="10" placeholder="Password" required></input>
-            <button @click="handleSignin">Sign in</button>
+            <input v-model="login" type="text" width="10" placeholder="Login*" required></input>
+            <input v-model="password" type="password" width="10" placeholder="Password*" required></input>
+            <button type="submit">Sign in</button>
             <p class="message">{{ message }}</p>
-
             <div>
                 <a href="/signup">Have no account yet? Sign up</a>
             </div>
-        </div>
+        </form>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import useAuth from "../composables/useAuth";
 const { signin, userProfileData, message } = useAuth();
 
@@ -30,7 +28,5 @@ onMounted(async () => {
 
 async function handleSignin() {
     await signin(login.value, password.value);
-    console.log("userProfileData")
-    console.log(userProfileData.value)
 }
 </script>

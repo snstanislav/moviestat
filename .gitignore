@@ -80,6 +80,7 @@ client/dist
 client/dist-ssr
 client/coverage
 client/*.local
+client/scripts
 
 client/cypress/videos/
 client/cypress/screenshots/
