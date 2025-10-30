@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiSecret: "",
     public: {
-      apiBase: "http://localhost:3001/"
+      apiBase: "https://moviestat.vercel.app"
     }
   },
   compatibilityDate: '2025-07-15',

@@ -7,6 +7,8 @@
  * @module composables/changeRate
  */
 
+const config = useRuntimeConfig();
+
 export default function changeRate() {
     /** @type {import('vue').Ref<boolean|null>} - Controls visibility of the rating dialog */
     const isDialogVisible = ref(null);
@@ -28,7 +30,7 @@ export default function changeRate() {
      */
     async function changeFavorite(mediaID, isFavorite) {
         const newState = !isFavorite;
-        const res = await fetch(`http://localhost:3001/media/favorite`, {
+        const res = await fetch(`${config.public.apiBase}/media/favorite`, {
             method: "POST", headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify({
@@ -51,7 +53,7 @@ export default function changeRate() {
      * @param {string} userChangeEvalDate - Date of evaluation change
      */
     async function changeRating(mediaID, newUserRating, userChangeEvalDate) {
-        const res = await fetch(`http://localhost:3001/media/change`, {
+        const res = await fetch(`${config.public.apiBase}/media/change`, {
             method: "POST", headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify({
@@ -74,7 +76,7 @@ export default function changeRate() {
      * @returns {Promise<Object|undefined>} Returns server response if successful
      */
     async function deleteRating(mediaID) {
-        const res = await fetch(`http://localhost:3001/media/delete`, {
+        const res = await fetch(`${config.public.apiBase}/media/delete`, {
             method: "POST", headers: { "Content-Type": "application/json" },
             credentials: "include",
             body: JSON.stringify({ mediaID })

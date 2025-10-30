@@ -225,6 +225,7 @@ import useAuth from "../composables/useAuth";
 import changeRate from "../../composables/changeRate";
 import RatingButton from "~/components/statistics/partials/RatingButton.vue";
 
+const config = useRuntimeConfig();
 const toast = await useSafeToast();
 
 const { userProfileData } = useAuth();
@@ -296,7 +297,7 @@ function clearInvalids(movie) {
 }
 
 async function loadCurrMovie(mediaID) {
-    const res = await fetch(`http://localhost:3001/media/${mediaID}`, {
+    const res = await fetch(`${config.public.apiBase}/media/${mediaID}`, {
         method: "GET",
         credentials: "include"
     });

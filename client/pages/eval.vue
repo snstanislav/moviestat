@@ -55,6 +55,8 @@
 import { prettyMediaType } from "../composables/utils"
 import useAuth from "../composables/useAuth";
 const { userProfileData } = useAuth();
+
+const config = useRuntimeConfig();
 const toast = await useSafeToast();
 const isReady = ref(false);
 
@@ -97,7 +99,7 @@ async function performSearch(query) {
         } else {
             console.log("Loaded from API / query: " + query)
 
-            const res = await fetch(`http://localhost:3001/eval?search=${query}`, {
+            const res = await fetch(`${config.public.apiBase}/eval?search=${query}`, {
                 method: "GET", headers: { "Content-Type": "application/json" },
                 credentials: "include"
             });
@@ -135,7 +137,7 @@ async function performEvaluation(item) {
     let question = `\nYou're trying to rate ${item.title} (${item.year})\n`;
     if (confirm(question)) {
         try {
-            const res = await fetch(`http://localhost:3001/eval/rate`, {
+            const res = await fetch(`${config.public.apiBase}/eval/rate`, {
                 method: "POST", headers: { "Content-Type": "application/json" },
                 credentials: "include",
                 body: JSON.stringify({

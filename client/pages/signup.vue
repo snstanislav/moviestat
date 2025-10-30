@@ -15,7 +15,7 @@
                 <input v-model="fullName" type="text" width="10" placeholder="Full name" />
                 <input v-model="email" type="text" width="10" placeholder="Email*" required />
                 <input v-model="password" type="password" width="10" placeholder="Password*" required />
-                <button type="submit">Sign in</button>
+                <button type="submit">Sign up</button>
                 <p class="message">{{ message }}</p>
             </form>
         </div>

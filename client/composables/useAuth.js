@@ -7,6 +7,8 @@
  * @module composables/useAuth
  */
 
+const config = useRuntimeConfig();
+
 export default function useAuth() {
     /**
     * Reactive state holding the current user's profile data
@@ -29,7 +31,7 @@ export default function useAuth() {
     async function signin(login, password) {
         try {
             if (login && password) {
-                const res = await fetch("http://localhost:3001/auth/signin", {
+                const res = await fetch(`${config.public.apiBase}/auth/signin`, {
                     method: "POST", headers: { "Content-Type": "application/json" },
                     credentials: "include",
                     body: JSON.stringify({ login, password })
@@ -56,7 +58,7 @@ export default function useAuth() {
     * @async
     */
     async function signout() {
-        await fetch("http://localhost:3001/auth/signout", {
+        await fetch(`${config.public.apiBase}/auth/signout`, {
             method: "POST",
             credentials: "include"
         });
@@ -77,7 +79,7 @@ export default function useAuth() {
     async function signup(login, fullName, email, password) {
         try {
             if (login && password) {
-                const res = await fetch("http://localhost:3001/auth/signup", {
+                const res = await fetch(`${config.public.apiBase}/auth/signup`, {
                     method: "POST", headers: { "Content-Type": "application/json" },
                     credentials: "include",
                     body: JSON.stringify({ login, fullName, email, password })
@@ -103,7 +105,7 @@ export default function useAuth() {
     * @returns {Promise<Object|undefined>} User profile JSON if successful
     */
     async function loadProfile() {
-        const res = await fetch("http://localhost:3001/auth/profile", {
+        const res = await fetch(`${config.public.apiBase}/auth/profile`, {
             method: "GET",
             credentials: "include"
         });

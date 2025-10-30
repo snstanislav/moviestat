@@ -7,6 +7,8 @@
  * @module composables/loadData
  */
 
+const config = useRuntimeConfig();
+
 export default function loadData() {
     /**
      * Reactive state holding the user's evaluations
@@ -20,7 +22,7 @@ export default function loadData() {
      * @returns {Promise<Array<Object>|undefined>} Array of evaluation objects, or undefined on failure
      */
     async function loadEvaluations() {
-        const res = await fetch("http://localhost:3001/", {
+        const res = await fetch(`${config.public.apiBase}/`, {
             method: "GET",
             credentials: "include"
         });
