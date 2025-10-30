@@ -1,7 +1,7 @@
 <template>
     <div v-if="personList" class="stat-container">
         <Sortbar />
-        <div class="person-stat-settings">
+        <div class="stat-settings-bar">
             <h2 class="category">{{ label }} ({{ personList.length }})</h2>
             <div class="threshold-wrapper"><span>Quantity threshold: </span>
                 <select v-model="currentThreshold" @change="selectThreshold" name="threshold">

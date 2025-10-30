@@ -1,8 +1,31 @@
-export default function useAuth() {
+/**
+ * @file useAuth.js
+ * @description Vue 3 composable for managing user authentication on the client side.
+ * Provides signin, signup, signout, and user profile state management.
+ * @author Stanislav Snisar
+ * @version 1.0.0
+ * @module composables/useAuth
+ */
 
+export default function useAuth() {
+    /**
+    * Reactive state holding the current user's profile data
+    * @type {import('vue').Ref<Object|null>}
+    */
     const userProfileData = useState("userProfileData", () => null);
+
+    /**
+     * Reactive state holding messages for login/signup errors
+     * @type {import('vue').Ref<string>}
+     */
     const message = useState("message", () => "");
 
+    /**
+     * Performs user signin
+     * @async
+     * @param {string} login - User login
+     * @param {string} password - User password
+     */
     async function signin(login, password) {
         try {
             if (login && password) {
@@ -28,6 +51,10 @@ export default function useAuth() {
         }
     }
 
+    /**
+    * Signs out the current user and clears profile data
+    * @async
+    */
     async function signout() {
         await fetch("http://localhost:3001/auth/signout", {
             method: "POST",
@@ -38,7 +65,15 @@ export default function useAuth() {
         //localStorage.clear()
     }
 
-
+    /**
+    * Performs user signup
+    * @async
+    * @param {string} login - Desired login
+    * @param {string} fullName - Full name of the user
+    * @param {string} email - User email
+    * @param {string} password - User password
+    * @returns {Promise<Object|undefined>} Response JSON from the server
+    */
     async function signup(login, fullName, email, password) {
         try {
             if (login && password) {
@@ -62,7 +97,11 @@ export default function useAuth() {
         }
     }
 
-
+    /**
+    * Loads the authenticated user's profile from the backend
+    * @async
+    * @returns {Promise<Object|undefined>} User profile JSON if successful
+    */
     async function loadProfile() {
         const res = await fetch("http://localhost:3001/auth/profile", {
             method: "GET",
@@ -72,6 +111,10 @@ export default function useAuth() {
         if (res.ok && resJson.success) return resJson;
     }
 
+    /**
+    * Sets the reactive `userProfileData` state using data fetched from the backend
+    * @async
+    */
     async function setProfileData() {
         const profile = await loadProfile();
         console.log(profile)

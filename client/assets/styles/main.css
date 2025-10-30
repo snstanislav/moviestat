@@ -1,12 +1,12 @@
 .section {
   display: flex;
   flex-direction: column;
-  width: 90%;
   box-sizing: border-box;
-  max-width: 70rem;
-  padding: 1rem 3rem;
+  max-width: 65rem;
+  width: auto;
+  padding: 1rem 2rem;
   margin: 1rem auto 1.5rem;
-  overflow: auto;
+  overflow: visible;
   background: #444;
   color: #fff;
 }
@@ -398,6 +398,8 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 350px;
+    width: 90%;
+    margin: 0 auto;
     padding: 1.5rem 2rem;
     background: #111;
     font-size: 9pt;
@@ -405,7 +407,7 @@
   .stat-container h2.category {
     margin: 0 0 0.45rem 0;
   }
-  .stat-container .person-stat-settings {
+  .stat-container .stat-settings-bar {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -414,13 +416,13 @@
     height: fit-content;
     margin-top: -1rem;
   }
-  .stat-container .person-stat-settings .threshold-wrapper {
+  .stat-container .stat-settings-bar .threshold-wrapper {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     font-style: italic;
   }
-  .stat-container .person-stat-settings .threshold-wrapper span {
+  .stat-container .stat-settings-bar .threshold-wrapper span {
     display: inline-block;
     flex-wrap: wrap;
     text-align: right;
@@ -428,7 +430,7 @@
     color: #0df;
     line-height: 0.9rem;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select {
+  .stat-container .stat-settings-bar .threshold-wrapper select {
     margin: 0;
     padding: 0.1rem 0.3rem;
     height: fit-content;
@@ -439,14 +441,14 @@
     font-size: 10.8pt;
     font-weight: 500;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select option {
+  .stat-container .stat-settings-bar .threshold-wrapper select option {
     background: #222;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select option.standart-options {
+  .stat-container .stat-settings-bar .threshold-wrapper select option.standart-options {
     color: #f44;
     font-weight: 800;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper {
     display: flex;
     flex-direction: row;
     gap: 0.3rem;
@@ -454,7 +456,7 @@
     align-self: center;
     padding: 0.2rem 0.2rem;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button {
     display: block;
     width: 1.08rem;
     height: 1.08rem;
@@ -466,22 +468,22 @@
     align-items: center;
     box-sizing: border-box;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode {
     background-image: url("../../public/view-list-tiles.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode:hover {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode:hover {
     background-image: url("../../public/view-list-tiles-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode-active {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode-active {
     background-image: url("../../public/view-list-tiles-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode {
     background-image: url("../../public/view-list-table.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode:hover {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode:hover {
     background-image: url("../../public/view-list-table-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode-active {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode-active {
     background-image: url("../../public/view-list-table-hover.png");
   }
   .stat-container .chart-line {
@@ -1812,6 +1814,8 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 350px;
+    width: 90%;
+    margin: 0 auto;
     padding: 1.5rem 2rem;
     background: #111;
     font-size: 10pt;
@@ -1819,7 +1823,7 @@
   .stat-container h2.category {
     margin: 0 0 0.5rem 0;
   }
-  .stat-container .person-stat-settings {
+  .stat-container .stat-settings-bar {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -1828,13 +1832,13 @@
     height: fit-content;
     margin-top: -1rem;
   }
-  .stat-container .person-stat-settings .threshold-wrapper {
+  .stat-container .stat-settings-bar .threshold-wrapper {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     font-style: italic;
   }
-  .stat-container .person-stat-settings .threshold-wrapper span {
+  .stat-container .stat-settings-bar .threshold-wrapper span {
     display: inline-block;
     flex-wrap: wrap;
     text-align: right;
@@ -1842,7 +1846,7 @@
     color: #0df;
     line-height: 0.9rem;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select {
+  .stat-container .stat-settings-bar .threshold-wrapper select {
     margin: 0;
     padding: 0.1rem 0.3rem;
     height: fit-content;
@@ -1853,14 +1857,14 @@
     font-size: 12pt;
     font-weight: 500;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select option {
+  .stat-container .stat-settings-bar .threshold-wrapper select option {
     background: #222;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select option.standart-options {
+  .stat-container .stat-settings-bar .threshold-wrapper select option.standart-options {
     color: #f44;
     font-weight: 800;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper {
     display: flex;
     flex-direction: row;
     gap: 0.3rem;
@@ -1868,7 +1872,7 @@
     align-self: center;
     padding: 0.2rem 0.2rem;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button {
     display: block;
     width: 1.2rem;
     height: 1.2rem;
@@ -1880,22 +1884,22 @@
     align-items: center;
     box-sizing: border-box;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode {
     background-image: url("../../public/view-list-tiles.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode:hover {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode:hover {
     background-image: url("../../public/view-list-tiles-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode-active {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode-active {
     background-image: url("../../public/view-list-tiles-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode {
     background-image: url("../../public/view-list-table.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode:hover {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode:hover {
     background-image: url("../../public/view-list-table-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode-active {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode-active {
     background-image: url("../../public/view-list-table-hover.png");
   }
   .stat-container .chart-line {
@@ -3226,6 +3230,8 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 350px;
+    width: 90%;
+    margin: 0 auto;
     padding: 1.5rem 2rem;
     background: #111;
     font-size: 11pt;
@@ -3233,7 +3239,7 @@
   .stat-container h2.category {
     margin: 0 0 0.55rem 0;
   }
-  .stat-container .person-stat-settings {
+  .stat-container .stat-settings-bar {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -3242,13 +3248,13 @@
     height: fit-content;
     margin-top: -1rem;
   }
-  .stat-container .person-stat-settings .threshold-wrapper {
+  .stat-container .stat-settings-bar .threshold-wrapper {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     font-style: italic;
   }
-  .stat-container .person-stat-settings .threshold-wrapper span {
+  .stat-container .stat-settings-bar .threshold-wrapper span {
     display: inline-block;
     flex-wrap: wrap;
     text-align: right;
@@ -3256,7 +3262,7 @@
     color: #0df;
     line-height: 0.9rem;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select {
+  .stat-container .stat-settings-bar .threshold-wrapper select {
     margin: 0;
     padding: 0.1rem 0.3rem;
     height: fit-content;
@@ -3267,14 +3273,14 @@
     font-size: 13.2pt;
     font-weight: 500;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select option {
+  .stat-container .stat-settings-bar .threshold-wrapper select option {
     background: #222;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select option.standart-options {
+  .stat-container .stat-settings-bar .threshold-wrapper select option.standart-options {
     color: #f44;
     font-weight: 800;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper {
     display: flex;
     flex-direction: row;
     gap: 0.3rem;
@@ -3282,7 +3288,7 @@
     align-self: center;
     padding: 0.2rem 0.2rem;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button {
     display: block;
     width: 1.32rem;
     height: 1.32rem;
@@ -3294,22 +3300,22 @@
     align-items: center;
     box-sizing: border-box;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode {
     background-image: url("../../public/view-list-tiles.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode:hover {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode:hover {
     background-image: url("../../public/view-list-tiles-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode-active {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode-active {
     background-image: url("../../public/view-list-tiles-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode {
     background-image: url("../../public/view-list-table.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode:hover {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode:hover {
     background-image: url("../../public/view-list-table-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode-active {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode-active {
     background-image: url("../../public/view-list-table-hover.png");
   }
   .stat-container .chart-line {
@@ -4640,6 +4646,8 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 350px;
+    width: 90%;
+    margin: 0 auto;
     padding: 1.5rem 2rem;
     background: #111;
     font-size: 12pt;
@@ -4647,7 +4655,7 @@
   .stat-container h2.category {
     margin: 0 0 0.6rem 0;
   }
-  .stat-container .person-stat-settings {
+  .stat-container .stat-settings-bar {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -4656,13 +4664,13 @@
     height: fit-content;
     margin-top: -1rem;
   }
-  .stat-container .person-stat-settings .threshold-wrapper {
+  .stat-container .stat-settings-bar .threshold-wrapper {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     font-style: italic;
   }
-  .stat-container .person-stat-settings .threshold-wrapper span {
+  .stat-container .stat-settings-bar .threshold-wrapper span {
     display: inline-block;
     flex-wrap: wrap;
     text-align: right;
@@ -4670,7 +4678,7 @@
     color: #0df;
     line-height: 0.9rem;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select {
+  .stat-container .stat-settings-bar .threshold-wrapper select {
     margin: 0;
     padding: 0.1rem 0.3rem;
     height: fit-content;
@@ -4681,14 +4689,14 @@
     font-size: 14.4pt;
     font-weight: 500;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select option {
+  .stat-container .stat-settings-bar .threshold-wrapper select option {
     background: #222;
   }
-  .stat-container .person-stat-settings .threshold-wrapper select option.standart-options {
+  .stat-container .stat-settings-bar .threshold-wrapper select option.standart-options {
     color: #f44;
     font-weight: 800;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper {
     display: flex;
     flex-direction: row;
     gap: 0.3rem;
@@ -4696,7 +4704,7 @@
     align-self: center;
     padding: 0.2rem 0.2rem;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button {
     display: block;
     width: 1.44rem;
     height: 1.44rem;
@@ -4708,22 +4716,22 @@
     align-items: center;
     box-sizing: border-box;
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode {
     background-image: url("../../public/view-list-tiles.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode:hover {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode:hover {
     background-image: url("../../public/view-list-tiles-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.tiles-view-mode-active {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode-active {
     background-image: url("../../public/view-list-tiles-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode {
     background-image: url("../../public/view-list-table.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode:hover {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode:hover {
     background-image: url("../../public/view-list-table-hover.png");
   }
-  .stat-container .person-stat-settings .view-list-mode-wrapper button.table-view-mode-active {
+  .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode-active {
     background-image: url("../../public/view-list-table-hover.png");
   }
   .stat-container .chart-line {

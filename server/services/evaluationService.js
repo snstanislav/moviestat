@@ -1,4 +1,17 @@
-const mongoose = require("mongoose");
+/**
+ * @file evaluationService.js
+ * @description Handling user movie evaluations and associated movie data.
+ * @author Stanislav Snisar
+ * @version 1.0.0
+ * @module services/evaluationService
+ *
+ * @requires module:api/apiManager - Provides API methods for constructing movies from external sources.
+ * @requires module:domain/EvaluationItem - Domain model representing a user's movie evaluation.
+ * @requires module:models/User - Mongoose model for user documents.
+ * @requires module:models/Movie - Mongoose model for movie documents.
+ * @requires module:services/movieService - Provides helpers for movie insertion and person linking.
+ */
+
 const { constructMovieFromAPIs } = require("../api/apiManager");
 const EvaluationItem = require("../domain/EvaluationItem");
 const { User } = require("../models/User");
@@ -7,6 +20,16 @@ const { unloadAllPersonsFromMovie, addNewMovie } = require("./movieService");
 
 var EXISTING_LOGGED_USER;
 
+/**
+ * Retrieves a single evaluated movie entry for a specific user.
+ * Populates the movie reference and its related persons (directors, writers, etc.).
+ *
+ * @async
+ * @function getSingleEvaluatedMovie
+ * @param {string} currLoggedUserID - The logged-in user's MongoDB ID.
+ * @param {string} movieID - The movie's MongoDB ID.
+ * @returns {Promise<Object|null>} The populated evaluation document or `null` if not found.
+ */
 async function getSingleEvaluatedMovie(currLoggedUserID, movieID) {
     try {
         let movieDoc = null;
@@ -27,9 +50,18 @@ async function getSingleEvaluatedMovie(currLoggedUserID, movieID) {
         return movieDoc;
     } catch (err) {
         console.error("Error in getEvaluatedMoviesList:", err);
+        return null;
     }
 }
 
+/**
+ * Retrieves all evaluated movies for a given user, including nested person references.
+ *
+ * @async
+ * @function getEvaluatedMoviesList
+ * @param {string} currLoggedUserID - The logged-in user's MongoDB ID.
+ * @returns {Promise<Object|null>} The user document containing populated `evals` array, or `null` if not found.
+ */
 async function getEvaluatedMoviesList(currLoggedUserID) {
     try {
         let userDoc = null;
@@ -49,9 +81,27 @@ async function getEvaluatedMoviesList(currLoggedUserID) {
         return userDoc;
     } catch (err) {
         console.error("Error in getEvaluatedMoviesList:", err);
+        return null;
     }
 }
 
+/**
+ * Evaluates a movie for a specific user.  
+ * If the movie doesn’t exist in the database, it is created using data fetched from external APIs.
+ *
+ * @async
+ * @function evaluateMovie
+ * @param {string} currLoggedUserID - The logged-in user's ID.
+ * @param {string} tmdbIDSearched - TMDB ID of the movie being evaluated.
+ * @param {string} mediaType - The media type (`"movie"` or `"tv"`).
+ * @param {number} userRating - The user's rating (typically 1–10).
+ * @param {string} userEvalDate - The date the user evaluated the movie.
+ * @returns {Promise<Object|undefined>} Object describing insertion status and movie ID.
+ *
+ * @example
+ * const result = await evaluateMovie(userId, "27205", "movie", 7, "2024-10-01");
+ * console.log(result.isJustInserted); // true if new evaluation added
+ */
 async function evaluateMovie(currLoggedUserID, tmdbIDSearched, mediaType, userRating, userEvalDate) {
     try {
         if (currLoggedUserID) {
@@ -103,6 +153,16 @@ async function evaluateMovie(currLoggedUserID, tmdbIDSearched, mediaType, userRa
     }
 }
 
+/**
+ * Appends a new evaluation item to the currently loaded user document and saves it.
+ *
+ * @async
+ * @function appendEvaluationToUser
+ * @param {EvaluationItem} evalItem - The evaluation item to add.
+ * @returns {Promise<Object|undefined>} The updated user document after saving.
+ * 
+ * @see {@link module:domain/EvaluationItem|EvaluationItem}
+ */
 async function appendEvaluationToUser(evalItem) {
     try {
         EXISTING_LOGGED_USER.evals.push(evalItem);
@@ -113,6 +173,16 @@ async function appendEvaluationToUser(evalItem) {
     }
 }
 
+/**
+ * Toggles or sets the `isFavorite` property of a user's movie evaluation.
+ *
+ * @async
+ * @function changeIsFavorite
+ * @param {string} currLoggedUserID - The user's ID.
+ * @param {string} movieID - The movie's ID.
+ * @param {boolean} isFavorite - Whether the movie is marked as favorite.
+ * @returns {Promise<boolean|undefined>} True if the update was successful.
+ */
 async function changeIsFavorite(currLoggedUserID, movieID, isFavorite) {
     const evalItem = new EvaluationItem({
         movie: movieID,
@@ -124,6 +194,17 @@ async function changeIsFavorite(currLoggedUserID, movieID, isFavorite) {
     return await performEvaluationChanging(currLoggedUserID, evalItem);
 }
 
+/**
+ * Updates the user’s rating for a specific movie.
+ *
+ * @async
+ * @function changeEvaluation
+ * @param {string} currLoggedUserID - The user's ID.
+ * @param {string} movieID - The movie's ID.
+ * @param {number} newUserRating - The updated rating value.
+ * @param {string} userChangeEvalDate - The timestamp for when the rating was changed.
+ * @returns {Promise<boolean|undefined>} True if the update was performed, otherwise false or undefined.
+ */
 async function changeEvaluation(currLoggedUserID, movieID, newUserRating, userChangeEvalDate) {
     const evalItem = new EvaluationItem({
         movie: movieID,
@@ -135,6 +216,17 @@ async function changeEvaluation(currLoggedUserID, movieID, newUserRating, userCh
     return await performEvaluationChanging(currLoggedUserID, evalItem);
 }
 
+/**
+ * Performs a generic evaluation modification (rating or favorite flag).
+ *
+ * @async
+ * @function performEvaluationChanging
+ * @param {string} currLoggedUserID - The user's ID.
+ * @param {EvaluationItem} evalItem - The updated evaluation item.
+ * @returns {Promise<boolean|undefined>} True if the database was updated successfully.
+ * 
+ * @see {@link module:domain/EvaluationItem|EvaluationItem}
+ */
 async function performEvaluationChanging(currLoggedUserID, evalItem) {
     try {
         if (!EXISTING_LOGGED_USER || !EXISTING_LOGGED_USER._id.equals(currLoggedUserID)) {
@@ -166,6 +258,15 @@ async function performEvaluationChanging(currLoggedUserID, evalItem) {
     }
 }
 
+/**
+ * Deletes a user's evaluation for a specific movie.
+ *
+ * @async
+ * @function deleteEvaluation
+ * @param {string} currLoggedUserID - The user's ID.
+ * @param {string} movieID - The movie's ID to remove from evaluations.
+ * @returns {Promise<boolean|undefined>} True if the evaluation was successfully removed, otherwise false.
+ */
 async function deleteEvaluation(currLoggedUserID, movieID) {
     try {
         let userDoc = null;

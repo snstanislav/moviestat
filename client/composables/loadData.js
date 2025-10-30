@@ -1,6 +1,24 @@
+/**
+ * @file loadData.js
+ * @description Vue 3 composable for fetching and storing the current user's evaluated movies.
+ * Provides reactive state and a method to load evaluations from the backend.
+ * @author Stanislav Snisar
+ * @version 1.0.0
+ * @module composables/loadData
+ */
+
 export default function loadData() {
+    /**
+     * Reactive state holding the user's evaluations
+     * @type {import('vue').Ref<Array<Object>>}
+     */
     const userEvaluations = useState("userEvaluations", () => []);
 
+    /**
+     * Fetches the list of evaluated movies for the logged-in user from the backend
+     * @async
+     * @returns {Promise<Array<Object>|undefined>} Array of evaluation objects, or undefined on failure
+     */
     async function loadEvaluations() {
         const res = await fetch("http://localhost:3001/", {
             method: "GET",
@@ -10,6 +28,10 @@ export default function loadData() {
         if (res.ok && resJson.success) return resJson.data.evals;
     }
 
+    /**
+     * Loads evaluations and updates the reactive `userEvaluations` state
+     * @async
+     */
     async function setEvaluations() {
         try {
             const evals = await loadEvaluations();

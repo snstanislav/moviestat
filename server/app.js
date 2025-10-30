@@ -1,6 +1,15 @@
+/**
+ * @file app.js
+ * @description Main entry point for the Movie Evaluation API server.
+ * Sets up Express, connects to MongoDB, mounts routes, handles CORS and cookies,
+ * and gracefully shuts down on process termination.
+ * @author Stanislav Snisar
+ * @version 1.0.0
+ * @module app
+ */
+
 require("dotenv").config();
 const express = require("express");
-const path = require("path");
 const cors = require("cors");
 const { connect, disconnect } = require("./db/connection");
 const indexRoutes = require("./routes/indexRoutes");

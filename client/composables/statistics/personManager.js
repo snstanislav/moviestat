@@ -1,30 +1,48 @@
 /**
-* created: 04.03.2024
-* modified: 10/2025
-*/
+ * @file personManager.js
+ * @description Statistics for film contributors (cast & crew)
+ * @author Stanislav Snisar
+ * @version 1.1.0
+ * @created 04.03.2024
+ * @modified 10/2025
+ * @module composables/statistics/personManager
+ */
 
 import { getSingleProperty, sortStat, FilmStatMode, SortStatMode } from "./statisticsGenerator";
 
+/** Directors */
 export function getDirectorStatistics(db, sortMode, thresholdQuantity = 1) {
   return sortStat(composePersonsRate(db, thresholdQuantity, FilmStatMode.DIRECTOR), sortMode);
 }
 
+/** Writers */
 export function getWriterStatistics(db, sortMode, thresholdQuantity = 1) {
   return sortStat(composePersonsRate(db, thresholdQuantity, FilmStatMode.WRITER), sortMode);
 }
 
+/** Producers */
 export function getProducerStatistics(db, sortMode, thresholdQuantity = 1) {
   return sortStat(composePersonsRate(db, thresholdQuantity, FilmStatMode.PRODUCER), sortMode);
 }
 
+/** Composers */
 export function getComposerStatistics(db, sortMode, thresholdQuantity = 1) {
   return sortStat(composePersonsRate(db, thresholdQuantity, FilmStatMode.COMPOSER), sortMode);
 }
 
-export function getActorStatistics(db, sortMode, thresholdQuantity = 5) {
+/** Actors (higher cutoff by default due to volume) */
+export function getActorStatistics(db, sortMode, thresholdQuantity = 3) {
   return sortStat(composePersonsRate(db, thresholdQuantity, FilmStatMode.ACTOR), sortMode);
 }
 
+/**
+ * Build rating/quantity stats for people
+ *
+ * @param {Array<Object>} db - Array of film evaluation objects
+ * @param {number} numFilmLimit - Min films required to include person
+ * @param {FilmStatMode} personMode
+ * @returns {Map<string,{photo?,quantity, rating, imdbID}>} Sorted contributor stats
+ */
 function composePersonsRate(db, numFilmLimit, personMode) {
   let personsMap = new Map();
   if (db) {
@@ -92,6 +110,9 @@ function composePersonsRate(db, numFilmLimit, personMode) {
   }
 }
 
+/**
+ * Aggregate rating & count for a contributor
+ */
 function setPersonMapEntry(map, detailsItem, rating) {
   if (detailsItem && detailsItem.name) {
     const key = detailsItem.name;
@@ -112,7 +133,9 @@ function setPersonMapEntry(map, detailsItem, rating) {
   }
 }
 
-// for short profile
+/**
+ * Get one person's profile + their films in each role
+ */
 export function getPerson(db, imdbId) {
   if (db) {
     const actorsColl = composePersonsRate(db, 1, FilmStatMode.ACTOR);
@@ -150,6 +173,9 @@ export function getPerson(db, imdbId) {
   }
 }
 
+/**
+ * Populate profile object details for one occupation
+ */
 function setProfileOccupSection(profile, imdbId, personInfo, personMode, filmList) {
   profile.occupation.push(personMode);
   profile.imdbId = imdbId;

@@ -1,16 +1,37 @@
 /**
-* created 05.03.2024
-* modified 10/2025
-*/
+ * @file movieManager.js
+ * @description Sorting and filtering logic for the Movie table view.
+ * @author Stanislav Snisar
+ * @version 1.1.0
+ * @created 05.03.2024
+ * @modified 10.2025
+ * @module composables/statistics/movieManager
+ */
 
 import { FilmStatMode, SortStatMode } from "./statisticsGenerator";
 import { defaultSortRecentDate, normalizeYear, normalizeIMDBVotes } from "../utils";
 
+/**
+ * Main entry to retrieve sorted & filtered movie stats for the UI.
+ *
+ * @param {Array<Object>} db - Array of film evaluation objects
+ * @param {string} sortMode - Sort mode from SortStatMode.
+ * @param {string} filterMode - Filter mode from FilmStatMode.
+ * @param {string} filterValue - Value applied to filter.
+ * @returns {Array<Object>} Processed movie dataset.
+ */
 export function getMovieStat(db, sortMode, filterMode, filterValue) {
   return filterMovieTable(sortMovieStat(db, sortMode), filterMode, filterValue);
 }
 
-// for movie table only
+/**
+ * Sort movie table data by the requested sort mode.
+ * Caller should pass copies if immutability is required.
+ *
+ * @param {Array<Object>} db - Movie dataset
+ * @param {string} sortMode - Sorting key from SortStatMode
+ * @returns {Array<Object>} Sorted movies
+ */
 function sortMovieStat(db, sortMode) {
   if (db) {
     db = defaultSortRecentDate(db);
@@ -58,6 +79,14 @@ function sortMovieStat(db, sortMode) {
   }
 }
 
+/**
+ * Filter movie dataset by selected filter mode and value.
+ *
+ * @param {Array<Object>} db - Movie dataset
+ * @param {string} filterMode - Filter type from FilmStatMode
+ * @param {string} filterValue - Filter value
+ * @returns {Array<Object>} Filtered movie dataset
+ */
 export function filterMovieTable(db, filterMode, filterValue) {
   if (filterMode && filterValue) {
 
