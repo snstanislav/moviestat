@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     apiSecret: "",
     public: {
       apiBase: "https://moviestat-0sul.onrender.com"
-      // http://localhost:3001/
+      // "http://localhost:3001/"
     }
   },
   compatibilityDate: '2025-07-15',

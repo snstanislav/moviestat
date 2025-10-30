@@ -9,6 +9,7 @@
 
 export default function loadData() {
     const config = useRuntimeConfig();
+    const pending = ref(true);
 
     /**
      * Reactive state holding the user's evaluations
@@ -38,6 +39,7 @@ export default function loadData() {
             const evals = await loadEvaluations();
             if (evals) {
                 userEvaluations.value = evals;
+                pending.value = false;
             }
         } catch (err) {
             console.error("Evaluations loading into table failed\n", err)
@@ -45,6 +47,7 @@ export default function loadData() {
     }
 
     return {
+        pending,
         userEvaluations,
         setEvaluations
     }

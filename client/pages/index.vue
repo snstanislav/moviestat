@@ -20,11 +20,11 @@
 
                 </nav>
                 <KeepAlive>
-                    <component v-if="userEvaluations && userEvaluations.length > 0" :is="activeTab.component"
-                        :key="activeTab.name" :userEvaluations="userEvaluations" />
-                    <div v-else class="loader-wrapper loader-wrapper-inner">
+                    <div v-if="pending" class="loader-wrapper loader-wrapper-inner">
                         <span class="loader"></span>
                     </div>
+                    <component v-else-if="userEvaluations" :is="activeTab.component" :key="activeTab.name"
+                        :userEvaluations="userEvaluations" />
                 </KeepAlive>
             </div>
         </div>
@@ -43,7 +43,7 @@ import useAuth from "../composables/useAuth";
 const { userProfileData } = useAuth();
 
 import loadData from "../composables/loadData";
-const { userEvaluations, setEvaluations } = loadData();
+const { pending, userEvaluations, setEvaluations } = loadData();
 
 import useTabs from "../composables/useTabs";
 const { tabs, activeTabName, activeTab } = useTabs();
