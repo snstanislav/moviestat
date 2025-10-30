@@ -15,8 +15,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiSecret: "",
     public: {
-      apiBase: "http://localhost:3001"
-      //"https://moviestat-0sul.onrender.com"
+      apiBase: "https://moviestat-0sul.onrender.com"
       // http://localhost:3001/
     }
   },
