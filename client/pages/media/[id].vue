@@ -225,8 +225,7 @@ import useAuth from "../composables/useAuth";
 import changeRate from "../../composables/changeRate";
 import RatingButton from "~/components/statistics/partials/RatingButton.vue";
 
-import { useToast } from "vue-toastification";
-const toast = useToast();
+const toast = await useSafeToast();
 
 const { userProfileData } = useAuth();
 const { isDialogVisible, toogleDialog, changeFavorite, changeRating, deleteRating } = changeRate();

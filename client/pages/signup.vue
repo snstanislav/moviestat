@@ -23,10 +23,9 @@
 </template>
 
 <script setup>
-import { useToast } from "vue-toastification";
-const toast = useToast();
 import useAuth from "../composables/useAuth";
 const { signup, userProfileData, message } = useAuth();
+const toast = await useSafeToast();
 
 const login = ref("");
 const fullName = ref("");

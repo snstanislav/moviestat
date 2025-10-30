@@ -92,3 +92,20 @@ export function formatNum(numStr) {
     numStr.indexOf(mark) : numStr.length)) * multiplier;
   return result ? result : 0;
 }
+
+/**
+ * Safely initializes the `useToast` composable from `vue-toastification` in a client-only context.
+ * This function ensures that toast notifications are only used in the browser, avoiding SSR-related errors.
+ *
+ * @async
+ * @function useSafeToast
+ * @returns {Promise<Function|null>} Resolves to the `useToast` function if on client, otherwise `null`.
+ * @example
+ * const toast = await useSafeToast();
+ * if (toast) toast.success('Operation completed!');
+ */
+export async function useSafeToast() {
+  if (!import.meta.client) return null;
+  const { useToast } = await import("vue-toastification");
+  return useToast();
+}

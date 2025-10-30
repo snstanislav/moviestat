@@ -69,17 +69,14 @@
 </template>
 
 <script setup>
-import { useToast } from "vue-toastification";
-const toast = useToast();
-
 import { prettyMediaType } from "../composables/utils";
 import changeRate from "../composables/changeRate";
 import RatingButton from "./statistics/partials/RatingButton.vue";
 import loadData from "../composables/loadData";
 const { setEvaluations } = loadData();
 
+const toast = await useSafeToast();
 const { item, index } = defineProps(["item", "index"]);
-
 const { isDialogVisible, toogleDialog, changeFavorite, changeRating } = changeRate();
 
 const isReady = ref(false);
@@ -103,7 +100,7 @@ async function handleChangeFavorite() {
         isFavorite.value = newValue;
 
         await setEvaluations();
-        toast.success(isFavorite.value ? `${favItemName} was added to favorites` : `${favItemName} is not favorite any more`);
+        toast?.success(isFavorite.value ? `${favItemName} was added to favorites` : `${favItemName} is not favorite any more`);
     }
 }
 
@@ -117,7 +114,7 @@ async function handleChangeRating() {
             await changeRating(mediaItem.value._id, newUserRating.value, newEvalDate);
 
             await setEvaluations();
-            toast.success(`Rating for ${changeItemName} was changed from ${userRating.value} to ${newUserRating.value}`);
+            toast?.success(`Rating for ${changeItemName} was changed from ${userRating.value} to ${newUserRating.value}`);
 
             userRating.value = newUserRating.value;
             userChangeEvalDate.value = newEvalDate;

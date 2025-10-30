@@ -52,12 +52,10 @@
 </template>
 
 <script setup>
-import { useToast } from "vue-toastification";
-const toast = useToast();
-
 import { prettyMediaType } from "../composables/utils"
 import useAuth from "../composables/useAuth";
 const { userProfileData } = useAuth();
+const toast = await useSafeToast();
 const isReady = ref(false);
 
 const route = useRoute();
