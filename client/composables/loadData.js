@@ -7,12 +7,11 @@
  * @module composables/loadData
  */
 
-const config = useRuntimeConfig();
-
 export default function loadData() {
+    const config = useRuntimeConfig();
+
     /**
      * Reactive state holding the user's evaluations
-     * @type {import('vue').Ref<Array<Object>>}
      */
     const userEvaluations = useState("userEvaluations", () => []);
 
@@ -46,7 +45,7 @@ export default function loadData() {
     }
 
     return {
-        userEvaluations, 
+        userEvaluations,
         setEvaluations
     }
 }

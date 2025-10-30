@@ -7,18 +7,16 @@
  * @module composables/useAuth
  */
 
-const config = useRuntimeConfig();
-
 export default function useAuth() {
+    const config = useRuntimeConfig();
+
     /**
     * Reactive state holding the current user's profile data
-    * @type {import('vue').Ref<Object|null>}
     */
     const userProfileData = useState("userProfileData", () => null);
 
     /**
      * Reactive state holding messages for login/signup errors
-     * @type {import('vue').Ref<string>}
      */
     const message = useState("message", () => "");
 

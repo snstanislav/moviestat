@@ -36,8 +36,6 @@
 </template>
 
 <script setup>
-//const config = useRuntimeConfig();
-//const { data, error, pending } = await useFetch(`${config.public.apiBase}`);
 import Login from "~/components/Login.vue";
 
 import EvalSearchForm from "../components/EvalSearchForm.vue";

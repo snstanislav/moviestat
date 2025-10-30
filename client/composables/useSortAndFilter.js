@@ -15,7 +15,6 @@ export default function useSortAndFilter() {
 
     /**
      * Reactive state holding the current filter
-     * @type {import('vue').Ref<{filterMode: string, filterValue: string}>}
      */
     const currentFilter = useState("currentFilter", () => ({
         filterMode: "", filterValue: ""
@@ -23,20 +22,17 @@ export default function useSortAndFilter() {
 
     /**
      * Reactive state holding current movie table sort mode
-     * @type {import('vue').Ref<string>}
      */
     const currentMovieTableSortMode = useState("currentMovieTableSortMode", () => SortStatMode.EVAL_DATETIME_DESC);
 
     /**
      * Reactive state holding current sort mode for other statistics
-     * @type {import('vue').Ref<string>}
      */
     const currentSortMode = useState("currentSortMode", () => SortStatMode.QUANTITY_DESC);
 
     /**
      * Reactive state holding collection dimensions for chart calculations
      * (genres, countries, langs, decades, years)
-     * @type {import('vue').Ref<{count: number, maxQuantity: number}>}
      */
     const collectionDimension = ref({ count: 0, maxQuantity: 0 });
 

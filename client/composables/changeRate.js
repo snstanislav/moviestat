@@ -7,10 +7,10 @@
  * @module composables/changeRate
  */
 
-const config = useRuntimeConfig();
-
 export default function changeRate() {
-    /** @type {import('vue').Ref<boolean|null>} - Controls visibility of the rating dialog */
+    const config = useRuntimeConfig();
+
+    /** Controls visibility of the rating dialog */
     const isDialogVisible = ref(null);
 
     /**
