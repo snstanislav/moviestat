@@ -1301,9 +1301,9 @@
   }
   .film-wrapper .film-descr {
     display: flex;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 1rem 0;
   }
 }
 @media screen and (min-width: 100px) {
@@ -2721,9 +2721,9 @@
   }
   .film-wrapper .film-descr {
     display: flex;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 1rem 0;
   }
 }
 @media screen and (min-width: 660px) {
@@ -4141,9 +4141,9 @@
   }
   .film-wrapper .film-descr {
     display: flex;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 1rem 0;
   }
 }
 @media screen and (min-width: 1080px) {
@@ -5561,9 +5561,9 @@
   }
   .film-wrapper .film-descr {
     display: flex;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 1rem 0;
   }
 }
 @media screen and (min-width: 2400px) {
