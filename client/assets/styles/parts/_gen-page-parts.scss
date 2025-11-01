@@ -75,7 +75,7 @@
           background: decor.$dark-0;
           color: decor.$light-0;
           letter-spacing: 1.5px;
-          box-shadow: 3px 3px 10px decor.$dark-9;
+          box-shadow: 5px 5px 10px decor.$dark-8;
 
           .user-data {
             color: decor.$light-5;
@@ -250,7 +250,7 @@
     .loader {
       width: 80px;
       height: 80px;
-      border: 10px solid decor.$dark-9;
+      border: 10px solid decor.$dark-8;
       border-radius: 50%;
       display: inline-block;
       position: relative;
@@ -285,7 +285,7 @@
 
   .loader-wrapper-inner {
     .loader {
-      border: 10px solid decor.$light-0;
+      border: 10px solid decor.$dark-4;
     }
 
     .loader::after {

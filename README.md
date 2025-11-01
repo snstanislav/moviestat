@@ -13,7 +13,6 @@ The web platform allows users to rate movies and TV series. Based on user rating
 - Sorting and filtering for stats and ratings
 - Interactive details page for each rated title
 
----
 
 ## Infographics Sections
 
@@ -34,7 +33,6 @@ The web platform allows users to rate movies and TV series. Based on user rating
 - Composers
 - Actors / Actresses
 
----
 
 ## Infographics Data & Settings
 
@@ -45,7 +43,6 @@ The web platform allows users to rate movies and TV series. Based on user rating
 - Minimum appearance threshold (for personalities)
 - Table or tile view (for personalities)
 
----
 
 ## Sort Options
 
@@ -61,7 +58,6 @@ The web platform allows users to rate movies and TV series. Based on user rating
 - Rating (ascending / descending)
 - Alphabetical: A–Z (0–9) / Z–A (9–0)
 
----
 
 ## Filter Options
 
