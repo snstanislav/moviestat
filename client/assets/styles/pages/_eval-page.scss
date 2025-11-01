@@ -32,6 +32,7 @@
       border: 3px solid decor.$dark-0;
       border-radius: 5px;
       box-sizing: content-box;
+      cursor: pointer;
 
       &:hover {
         border: 3px solid decor.$light-5;
@@ -88,16 +89,16 @@
         }
       }
 
-      &:hover .text {
-        width: 70%;
+      /* &:hover .text {
+        width: 65%;
       }
 
       &:hover #evalBar {
         display: flex;
-        width: 10%;
-      }
+        width: 15%;
+      }*/
 
-      #evalBar {
+      .evalBar {
         box-sizing: border-box;
         display: none;
         flex-direction: column;
@@ -140,5 +141,16 @@
       }
 
     }
+    
+      .selected-eval-item {
+        .text {
+          width: 65%;
+        }
+
+        .evalBar {
+          display: flex;
+          width: 15%;
+        }
+      }
   }
 }

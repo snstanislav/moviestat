@@ -117,8 +117,9 @@
     font-variant: small-caps;
   }
   .tab-bar button.tab-button {
-    display: inline-block;
-    align-content: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     padding: 0 0.7rem 0.1rem;
     height: 1.8rem;
     border: 0;
@@ -1338,6 +1339,7 @@
     border: 3px solid #000;
     border-radius: 5px;
     box-sizing: content-box;
+    cursor: pointer;
   }
   .eval-container .eval-film-item:hover {
     border: 3px solid #ffdc2f;
@@ -1387,14 +1389,17 @@
   .eval-container .eval-film-item .text p {
     font-style: italic;
   }
-  .eval-container .eval-film-item:hover .text {
-    width: 70%;
+  .eval-container .eval-film-item {
+    /* &:hover .text {
+      width: 65%;
+    }
+
+    &:hover #evalBar {
+      display: flex;
+      width: 15%;
+    }*/
   }
-  .eval-container .eval-film-item:hover #evalBar {
-    display: flex;
-    width: 10%;
-  }
-  .eval-container .eval-film-item #evalBar {
+  .eval-container .eval-film-item .evalBar {
     box-sizing: border-box;
     display: none;
     flex-direction: column;
@@ -1409,14 +1414,14 @@
     align-items: center;
     overflow: visible;
   }
-  .eval-container .eval-film-item #evalBar select {
+  .eval-container .eval-film-item .evalBar select {
     padding: 0.3rem 0 0.2rem;
     width: 100%;
     border-radius: 5px;
     font-size: 13.5pt;
     font-weight: bold;
   }
-  .eval-container .eval-film-item #evalBar button {
+  .eval-container .eval-film-item .evalBar button {
     margin: 0;
     padding: 0.4rem 0.1rem;
     width: 100%;
@@ -1429,8 +1434,15 @@
     font-weight: bold;
     cursor: pointer;
   }
-  .eval-container .eval-film-item #evalBar button:hover {
+  .eval-container .eval-film-item .evalBar button:hover {
     background: #e62;
+  }
+  .eval-container .selected-eval-item .text {
+    width: 65%;
+  }
+  .eval-container .selected-eval-item .evalBar {
+    display: flex;
+    width: 15%;
   }
 }
 @media screen and (min-width: 660px) {
@@ -1540,8 +1552,9 @@
     font-variant: small-caps;
   }
   .tab-bar button.tab-button {
-    display: inline-block;
-    align-content: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     padding: 0 0.7rem 0.1rem;
     height: 2rem;
     border: 0;
@@ -2761,6 +2774,7 @@
     border: 3px solid #000;
     border-radius: 5px;
     box-sizing: content-box;
+    cursor: pointer;
   }
   .eval-container .eval-film-item:hover {
     border: 3px solid #ffdc2f;
@@ -2810,14 +2824,17 @@
   .eval-container .eval-film-item .text p {
     font-style: italic;
   }
-  .eval-container .eval-film-item:hover .text {
-    width: 70%;
+  .eval-container .eval-film-item {
+    /* &:hover .text {
+      width: 65%;
+    }
+
+    &:hover #evalBar {
+      display: flex;
+      width: 15%;
+    }*/
   }
-  .eval-container .eval-film-item:hover #evalBar {
-    display: flex;
-    width: 10%;
-  }
-  .eval-container .eval-film-item #evalBar {
+  .eval-container .eval-film-item .evalBar {
     box-sizing: border-box;
     display: none;
     flex-direction: column;
@@ -2832,14 +2849,14 @@
     align-items: center;
     overflow: visible;
   }
-  .eval-container .eval-film-item #evalBar select {
+  .eval-container .eval-film-item .evalBar select {
     padding: 0.3rem 0 0.2rem;
     width: 100%;
     border-radius: 5px;
     font-size: 15pt;
     font-weight: bold;
   }
-  .eval-container .eval-film-item #evalBar button {
+  .eval-container .eval-film-item .evalBar button {
     margin: 0;
     padding: 0.4rem 0.1rem;
     width: 100%;
@@ -2852,8 +2869,15 @@
     font-weight: bold;
     cursor: pointer;
   }
-  .eval-container .eval-film-item #evalBar button:hover {
+  .eval-container .eval-film-item .evalBar button:hover {
     background: #e62;
+  }
+  .eval-container .selected-eval-item .text {
+    width: 65%;
+  }
+  .eval-container .selected-eval-item .evalBar {
+    display: flex;
+    width: 15%;
   }
 }
 @media screen and (min-width: 1080px) {
@@ -2963,8 +2987,9 @@
     font-variant: small-caps;
   }
   .tab-bar button.tab-button {
-    display: inline-block;
-    align-content: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     padding: 0 0.7rem 0.1rem;
     height: 2.2rem;
     border: 0;
@@ -4184,6 +4209,7 @@
     border: 3px solid #000;
     border-radius: 5px;
     box-sizing: content-box;
+    cursor: pointer;
   }
   .eval-container .eval-film-item:hover {
     border: 3px solid #ffdc2f;
@@ -4233,14 +4259,17 @@
   .eval-container .eval-film-item .text p {
     font-style: italic;
   }
-  .eval-container .eval-film-item:hover .text {
-    width: 70%;
+  .eval-container .eval-film-item {
+    /* &:hover .text {
+      width: 65%;
+    }
+
+    &:hover #evalBar {
+      display: flex;
+      width: 15%;
+    }*/
   }
-  .eval-container .eval-film-item:hover #evalBar {
-    display: flex;
-    width: 10%;
-  }
-  .eval-container .eval-film-item #evalBar {
+  .eval-container .eval-film-item .evalBar {
     box-sizing: border-box;
     display: none;
     flex-direction: column;
@@ -4255,14 +4284,14 @@
     align-items: center;
     overflow: visible;
   }
-  .eval-container .eval-film-item #evalBar select {
+  .eval-container .eval-film-item .evalBar select {
     padding: 0.3rem 0 0.2rem;
     width: 100%;
     border-radius: 5px;
     font-size: 16.5pt;
     font-weight: bold;
   }
-  .eval-container .eval-film-item #evalBar button {
+  .eval-container .eval-film-item .evalBar button {
     margin: 0;
     padding: 0.4rem 0.1rem;
     width: 100%;
@@ -4275,8 +4304,15 @@
     font-weight: bold;
     cursor: pointer;
   }
-  .eval-container .eval-film-item #evalBar button:hover {
+  .eval-container .eval-film-item .evalBar button:hover {
     background: #e62;
+  }
+  .eval-container .selected-eval-item .text {
+    width: 65%;
+  }
+  .eval-container .selected-eval-item .evalBar {
+    display: flex;
+    width: 15%;
   }
 }
 @media screen and (min-width: 2400px) {
@@ -4386,8 +4422,9 @@
     font-variant: small-caps;
   }
   .tab-bar button.tab-button {
-    display: inline-block;
-    align-content: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     padding: 0 0.7rem 0.1rem;
     height: 2.4rem;
     border: 0;
@@ -5607,6 +5644,7 @@
     border: 3px solid #000;
     border-radius: 5px;
     box-sizing: content-box;
+    cursor: pointer;
   }
   .eval-container .eval-film-item:hover {
     border: 3px solid #ffdc2f;
@@ -5656,14 +5694,17 @@
   .eval-container .eval-film-item .text p {
     font-style: italic;
   }
-  .eval-container .eval-film-item:hover .text {
-    width: 70%;
+  .eval-container .eval-film-item {
+    /* &:hover .text {
+      width: 65%;
+    }
+
+    &:hover #evalBar {
+      display: flex;
+      width: 15%;
+    }*/
   }
-  .eval-container .eval-film-item:hover #evalBar {
-    display: flex;
-    width: 10%;
-  }
-  .eval-container .eval-film-item #evalBar {
+  .eval-container .eval-film-item .evalBar {
     box-sizing: border-box;
     display: none;
     flex-direction: column;
@@ -5678,14 +5719,14 @@
     align-items: center;
     overflow: visible;
   }
-  .eval-container .eval-film-item #evalBar select {
+  .eval-container .eval-film-item .evalBar select {
     padding: 0.3rem 0 0.2rem;
     width: 100%;
     border-radius: 5px;
     font-size: 18pt;
     font-weight: bold;
   }
-  .eval-container .eval-film-item #evalBar button {
+  .eval-container .eval-film-item .evalBar button {
     margin: 0;
     padding: 0.4rem 0.1rem;
     width: 100%;
@@ -5698,8 +5739,15 @@
     font-weight: bold;
     cursor: pointer;
   }
-  .eval-container .eval-film-item #evalBar button:hover {
+  .eval-container .eval-film-item .evalBar button:hover {
     background: #e62;
+  }
+  .eval-container .selected-eval-item .text {
+    width: 65%;
+  }
+  .eval-container .selected-eval-item .evalBar {
+    display: flex;
+    width: 15%;
   }
 }
 

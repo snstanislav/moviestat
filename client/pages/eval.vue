@@ -16,16 +16,18 @@
                     <h3><i>No search results</i></h3>
                 </div>
                 <div v-if="searchResult">
-                    <div v-for="(item, index) in resultsArr" class="eval-film-item" @click="selectResult(item)">
+                    <div v-for="(item, index) in resultsArr"
+                        :class="['eval-film-item', selectedItem === item ? 'selected-eval-item' : '']" @click="selectResult(item, index)">
+
                         <div class="order"><span>{{ index + 1 }}</span></div>
                         <div class="poster"><img :src="item.poster" alt="Poster"></div>
                         <div class="text">
                             <h2>{{ item.title }} {{ item.year ? `(${item.year})` : "" }} — {{ prettyMediaType(item.type)
-                                }}</h2>
+                            }}</h2>
                             <p>{{ item.overview }}</p>
                         </div>
 
-                        <div id="evalBar">
+                        <div class="evalBar">
                             <select v-model="newUserRating" name="personalRating">
                                 <option value="10">10</option>
                                 <option value="9">9</option>
@@ -65,19 +67,12 @@ const searchQuery = ref(route.query.search);
 const searchResult = ref(null);
 const isSearchChached = ref(false);
 
+const selectedItem = ref(false);
+
 const resultsArr = ref(null);
 const total = ref(0);
 
 const newUserRating = ref(10);
-
-watch(() => route.query.search, async (newQuery) => {
-    if (newQuery) {
-        console.log("PERFORM WATCH / newQuery: " + newQuery)
-
-        searchQuery.value = newQuery;
-        await performSearch(newQuery);
-    }
-});
 
 onMounted(async () => {
     isReady.value = true;
@@ -88,6 +83,19 @@ onMounted(async () => {
         await performSearch(route.query.search);
     }
 });
+
+watch(() => route.query.search, async (newQuery) => {
+    if (newQuery) {
+        console.log("PERFORM WATCH / newQuery: " + newQuery)
+
+        searchQuery.value = newQuery;
+        await performSearch(newQuery);
+    }
+});
+
+function selectResult(item) {
+    if (selectedItem.value !== item) selectedItem.value = item;
+}
 
 async function performSearch(query) {
     try {
@@ -126,11 +134,6 @@ async function performSearch(query) {
         localStorage.clear();
         console.error("Error: performSearch", err);
     }
-}
-
-function selectResult(item) {
-    console.log("SEARCH ITEM CLICKED")
-    console.log(item)
 }
 
 async function performEvaluation(item) {

@@ -16,7 +16,8 @@
 
           <div id="user-credentials">
             <span v-if="userProfileData.login">Login: <span class="user-data">{{ userProfileData.login }}</span></span>
-            <span v-if="userProfileData.fullName">Name: <span class="user-data">{{ userProfileData.fullName }}</span></span>
+            <span v-if="userProfileData.fullName">Name: <span class="user-data">{{ userProfileData.fullName
+                }}</span></span>
             <span v-if="userProfileData.email" class="user-data">{{ userProfileData.email }}</span>
 
             <div class="signout-wrapper">
@@ -27,7 +28,10 @@
       </div>
     </header>
 
-    <main id="page-content">
+    <div v-if="pending" class="loader-wrapper loader-wrapper-inner">
+      <span class="loader"></span>
+    </div>
+    <main v-else id="page-content">
       <NuxtPage />
     </main>
 
@@ -43,7 +47,10 @@
 import useAuth from "./composables/useAuth";
 const { signout, setProfileData, userProfileData } = useAuth();
 
+const pending = ref(true);
+
 onMounted(async () => {
   await setProfileData();
+  pending.value = false;
 });
 </script>

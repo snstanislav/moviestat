@@ -124,8 +124,9 @@
     }
 
     button.tab-button {
-      display: inline-block;
-      align-content: center;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
       padding: 0 0.7rem 0.1rem;
       height: 2rem*$scale;
       border: 0;
