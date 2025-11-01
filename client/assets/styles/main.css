@@ -51,20 +51,20 @@
     padding: 0;
     height: 2.3rem;
   }
-  #main-header div#auth-wrapper #user-profile {
+  #main-header div#profile-wrapper #user-profile {
     position: relative;
   }
-  #main-header div#auth-wrapper #user-profile summary {
+  #main-header div#profile-wrapper #user-profile summary {
     list-style: none;
     cursor: pointer;
   }
-  #main-header div#auth-wrapper #user-profile summary img {
+  #main-header div#profile-wrapper #user-profile summary img {
     display: block;
     border-radius: 50%;
     width: 1.8rem;
     height: 1.8rem;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials {
+  #main-header div#profile-wrapper #user-profile div#user-credentials {
     position: absolute;
     top: 10;
     right: 0;
@@ -77,22 +77,23 @@
     background: #000;
     color: #fff;
     letter-spacing: 1.5px;
+    box-shadow: 3px 3px 10px #444;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .user-data {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .user-data {
     color: #ffdc2f;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper {
     margin-top: 0.5rem;
     padding-top: 0.5rem;
     border-top: 1px solid #888;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper .signout {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper .signout {
     display: block;
     text-align: left;
     color: #0df;
     font-weight: 500;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper .signout:hover {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper .signout:hover {
     text-decoration: underline;
   }
   .tab-bar {
@@ -265,17 +266,12 @@
     text-align: center;
     gap: 1rem;
     padding: 1.5rem 2rem 1rem;
-    margin: 1rem auto;
+    margin: 3rem auto;
     width: 15rem;
     background: #444;
     opacity: 0.9;
     border-radius: 10px;
-    font-size: 14pt;
-  }
-  .auth-wrapper a {
-    padding: 0 0 0.3rem;
-    color: #0df;
-    font-weight: 500;
+    font-size: 12pt;
   }
   .auth-wrapper h2 {
     margin: 0;
@@ -311,6 +307,11 @@
   .auth-wrapper button:hover {
     background: #ffdc2f;
     color: #222;
+  }
+  .auth-wrapper a {
+    padding: 0 0 0.3rem;
+    color: #0df;
+    font-weight: 500;
   }
   .search-form-wrapper {
     margin-bottom: -2rem;
@@ -476,22 +477,22 @@
     box-sizing: border-box;
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode {
-    background-image: url("../../public/view-list-tiles.png");
+    background-image: url("/view-list-tiles.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode:hover {
-    background-image: url("../../public/view-list-tiles-hover.png");
+    background-image: url("/view-list-tiles-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode-active {
-    background-image: url("../../public/view-list-tiles-hover.png");
+    background-image: url("/view-list-tiles-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode {
-    background-image: url("../../public/view-list-table.png");
+    background-image: url("/view-list-table.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode:hover {
-    background-image: url("../../public/view-list-table-hover.png");
+    background-image: url("/view-list-table-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode-active {
-    background-image: url("../../public/view-list-table-hover.png");
+    background-image: url("/view-list-table-hover.png");
   }
   .stat-container .chart-line {
     display: flex;
@@ -727,7 +728,9 @@
   }
   .stat-container .fitler-table-wrapper a {
     display: inline-block;
-    padding: 0 0.6rem 0.1rem;
+    align-content: center;
+    height: 1.5rem;
+    padding: 0 0.7rem;
     font-weight: 600;
     font-size: 10.8pt;
   }
@@ -1389,16 +1392,6 @@
   .eval-container .eval-film-item .text p {
     font-style: italic;
   }
-  .eval-container .eval-film-item {
-    /* &:hover .text {
-      width: 65%;
-    }
-
-    &:hover #evalBar {
-      display: flex;
-      width: 15%;
-    }*/
-  }
   .eval-container .eval-film-item .evalBar {
     box-sizing: border-box;
     display: none;
@@ -1486,20 +1479,20 @@
     padding: 0;
     height: 2.3rem;
   }
-  #main-header div#auth-wrapper #user-profile {
+  #main-header div#profile-wrapper #user-profile {
     position: relative;
   }
-  #main-header div#auth-wrapper #user-profile summary {
+  #main-header div#profile-wrapper #user-profile summary {
     list-style: none;
     cursor: pointer;
   }
-  #main-header div#auth-wrapper #user-profile summary img {
+  #main-header div#profile-wrapper #user-profile summary img {
     display: block;
     border-radius: 50%;
     width: 2rem;
     height: 2rem;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials {
+  #main-header div#profile-wrapper #user-profile div#user-credentials {
     position: absolute;
     top: 10;
     right: 0;
@@ -1512,22 +1505,23 @@
     background: #000;
     color: #fff;
     letter-spacing: 1.5px;
+    box-shadow: 3px 3px 10px #444;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .user-data {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .user-data {
     color: #ffdc2f;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper {
     margin-top: 0.5rem;
     padding-top: 0.5rem;
     border-top: 1px solid #888;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper .signout {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper .signout {
     display: block;
     text-align: left;
     color: #0df;
     font-weight: 500;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper .signout:hover {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper .signout:hover {
     text-decoration: underline;
   }
   .tab-bar {
@@ -1700,17 +1694,12 @@
     text-align: center;
     gap: 1rem;
     padding: 1.5rem 2rem 1rem;
-    margin: 1rem auto;
+    margin: 3rem auto;
     width: 15rem;
     background: #444;
     opacity: 0.9;
     border-radius: 10px;
-    font-size: 14pt;
-  }
-  .auth-wrapper a {
-    padding: 0 0 0.3rem;
-    color: #0df;
-    font-weight: 500;
+    font-size: 12pt;
   }
   .auth-wrapper h2 {
     margin: 0;
@@ -1746,6 +1735,11 @@
   .auth-wrapper button:hover {
     background: #ffdc2f;
     color: #222;
+  }
+  .auth-wrapper a {
+    padding: 0 0 0.3rem;
+    color: #0df;
+    font-weight: 500;
   }
   .search-form-wrapper {
     margin-bottom: -2rem;
@@ -1911,22 +1905,22 @@
     box-sizing: border-box;
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode {
-    background-image: url("../../public/view-list-tiles.png");
+    background-image: url("/view-list-tiles.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode:hover {
-    background-image: url("../../public/view-list-tiles-hover.png");
+    background-image: url("/view-list-tiles-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode-active {
-    background-image: url("../../public/view-list-tiles-hover.png");
+    background-image: url("/view-list-tiles-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode {
-    background-image: url("../../public/view-list-table.png");
+    background-image: url("/view-list-table.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode:hover {
-    background-image: url("../../public/view-list-table-hover.png");
+    background-image: url("/view-list-table-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode-active {
-    background-image: url("../../public/view-list-table-hover.png");
+    background-image: url("/view-list-table-hover.png");
   }
   .stat-container .chart-line {
     display: flex;
@@ -2162,7 +2156,9 @@
   }
   .stat-container .fitler-table-wrapper a {
     display: inline-block;
-    padding: 0 0.6rem 0.1rem;
+    align-content: center;
+    height: 1.5rem;
+    padding: 0 0.7rem;
     font-weight: 600;
     font-size: 12pt;
   }
@@ -2824,16 +2820,6 @@
   .eval-container .eval-film-item .text p {
     font-style: italic;
   }
-  .eval-container .eval-film-item {
-    /* &:hover .text {
-      width: 65%;
-    }
-
-    &:hover #evalBar {
-      display: flex;
-      width: 15%;
-    }*/
-  }
   .eval-container .eval-film-item .evalBar {
     box-sizing: border-box;
     display: none;
@@ -2921,20 +2907,20 @@
     padding: 0;
     height: 2.3rem;
   }
-  #main-header div#auth-wrapper #user-profile {
+  #main-header div#profile-wrapper #user-profile {
     position: relative;
   }
-  #main-header div#auth-wrapper #user-profile summary {
+  #main-header div#profile-wrapper #user-profile summary {
     list-style: none;
     cursor: pointer;
   }
-  #main-header div#auth-wrapper #user-profile summary img {
+  #main-header div#profile-wrapper #user-profile summary img {
     display: block;
     border-radius: 50%;
     width: 2.2rem;
     height: 2.2rem;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials {
+  #main-header div#profile-wrapper #user-profile div#user-credentials {
     position: absolute;
     top: 10;
     right: 0;
@@ -2947,22 +2933,23 @@
     background: #000;
     color: #fff;
     letter-spacing: 1.5px;
+    box-shadow: 3px 3px 10px #444;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .user-data {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .user-data {
     color: #ffdc2f;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper {
     margin-top: 0.5rem;
     padding-top: 0.5rem;
     border-top: 1px solid #888;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper .signout {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper .signout {
     display: block;
     text-align: left;
     color: #0df;
     font-weight: 500;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper .signout:hover {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper .signout:hover {
     text-decoration: underline;
   }
   .tab-bar {
@@ -3135,17 +3122,12 @@
     text-align: center;
     gap: 1rem;
     padding: 1.5rem 2rem 1rem;
-    margin: 1rem auto;
+    margin: 3rem auto;
     width: 15rem;
     background: #444;
     opacity: 0.9;
     border-radius: 10px;
-    font-size: 14pt;
-  }
-  .auth-wrapper a {
-    padding: 0 0 0.3rem;
-    color: #0df;
-    font-weight: 500;
+    font-size: 12pt;
   }
   .auth-wrapper h2 {
     margin: 0;
@@ -3181,6 +3163,11 @@
   .auth-wrapper button:hover {
     background: #ffdc2f;
     color: #222;
+  }
+  .auth-wrapper a {
+    padding: 0 0 0.3rem;
+    color: #0df;
+    font-weight: 500;
   }
   .search-form-wrapper {
     margin-bottom: -2rem;
@@ -3346,22 +3333,22 @@
     box-sizing: border-box;
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode {
-    background-image: url("../../public/view-list-tiles.png");
+    background-image: url("/view-list-tiles.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode:hover {
-    background-image: url("../../public/view-list-tiles-hover.png");
+    background-image: url("/view-list-tiles-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode-active {
-    background-image: url("../../public/view-list-tiles-hover.png");
+    background-image: url("/view-list-tiles-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode {
-    background-image: url("../../public/view-list-table.png");
+    background-image: url("/view-list-table.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode:hover {
-    background-image: url("../../public/view-list-table-hover.png");
+    background-image: url("/view-list-table-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode-active {
-    background-image: url("../../public/view-list-table-hover.png");
+    background-image: url("/view-list-table-hover.png");
   }
   .stat-container .chart-line {
     display: flex;
@@ -3597,7 +3584,9 @@
   }
   .stat-container .fitler-table-wrapper a {
     display: inline-block;
-    padding: 0 0.6rem 0.1rem;
+    align-content: center;
+    height: 1.5rem;
+    padding: 0 0.7rem;
     font-weight: 600;
     font-size: 13.2pt;
   }
@@ -4259,16 +4248,6 @@
   .eval-container .eval-film-item .text p {
     font-style: italic;
   }
-  .eval-container .eval-film-item {
-    /* &:hover .text {
-      width: 65%;
-    }
-
-    &:hover #evalBar {
-      display: flex;
-      width: 15%;
-    }*/
-  }
   .eval-container .eval-film-item .evalBar {
     box-sizing: border-box;
     display: none;
@@ -4356,20 +4335,20 @@
     padding: 0;
     height: 2.3rem;
   }
-  #main-header div#auth-wrapper #user-profile {
+  #main-header div#profile-wrapper #user-profile {
     position: relative;
   }
-  #main-header div#auth-wrapper #user-profile summary {
+  #main-header div#profile-wrapper #user-profile summary {
     list-style: none;
     cursor: pointer;
   }
-  #main-header div#auth-wrapper #user-profile summary img {
+  #main-header div#profile-wrapper #user-profile summary img {
     display: block;
     border-radius: 50%;
     width: 2.4rem;
     height: 2.4rem;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials {
+  #main-header div#profile-wrapper #user-profile div#user-credentials {
     position: absolute;
     top: 10;
     right: 0;
@@ -4382,22 +4361,23 @@
     background: #000;
     color: #fff;
     letter-spacing: 1.5px;
+    box-shadow: 3px 3px 10px #444;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .user-data {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .user-data {
     color: #ffdc2f;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper {
     margin-top: 0.5rem;
     padding-top: 0.5rem;
     border-top: 1px solid #888;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper .signout {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper .signout {
     display: block;
     text-align: left;
     color: #0df;
     font-weight: 500;
   }
-  #main-header div#auth-wrapper #user-profile div#user-credentials .signout-wrapper .signout:hover {
+  #main-header div#profile-wrapper #user-profile div#user-credentials .signout-wrapper .signout:hover {
     text-decoration: underline;
   }
   .tab-bar {
@@ -4570,17 +4550,12 @@
     text-align: center;
     gap: 1rem;
     padding: 1.5rem 2rem 1rem;
-    margin: 1rem auto;
+    margin: 3rem auto;
     width: 15rem;
     background: #444;
     opacity: 0.9;
     border-radius: 10px;
-    font-size: 14pt;
-  }
-  .auth-wrapper a {
-    padding: 0 0 0.3rem;
-    color: #0df;
-    font-weight: 500;
+    font-size: 12pt;
   }
   .auth-wrapper h2 {
     margin: 0;
@@ -4616,6 +4591,11 @@
   .auth-wrapper button:hover {
     background: #ffdc2f;
     color: #222;
+  }
+  .auth-wrapper a {
+    padding: 0 0 0.3rem;
+    color: #0df;
+    font-weight: 500;
   }
   .search-form-wrapper {
     margin-bottom: -2rem;
@@ -4781,22 +4761,22 @@
     box-sizing: border-box;
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode {
-    background-image: url("../../public/view-list-tiles.png");
+    background-image: url("/view-list-tiles.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode:hover {
-    background-image: url("../../public/view-list-tiles-hover.png");
+    background-image: url("/view-list-tiles-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.tiles-view-mode-active {
-    background-image: url("../../public/view-list-tiles-hover.png");
+    background-image: url("/view-list-tiles-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode {
-    background-image: url("../../public/view-list-table.png");
+    background-image: url("/view-list-table.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode:hover {
-    background-image: url("../../public/view-list-table-hover.png");
+    background-image: url("/view-list-table-hover.png");
   }
   .stat-container .stat-settings-bar .view-list-mode-wrapper button.table-view-mode-active {
-    background-image: url("../../public/view-list-table-hover.png");
+    background-image: url("/view-list-table-hover.png");
   }
   .stat-container .chart-line {
     display: flex;
@@ -5032,7 +5012,9 @@
   }
   .stat-container .fitler-table-wrapper a {
     display: inline-block;
-    padding: 0 0.6rem 0.1rem;
+    align-content: center;
+    height: 1.5rem;
+    padding: 0 0.7rem;
     font-weight: 600;
     font-size: 14.4pt;
   }
@@ -5693,16 +5675,6 @@
   }
   .eval-container .eval-film-item .text p {
     font-style: italic;
-  }
-  .eval-container .eval-film-item {
-    /* &:hover .text {
-      width: 65%;
-    }
-
-    &:hover #evalBar {
-      display: flex;
-      width: 15%;
-    }*/
   }
   .eval-container .eval-film-item .evalBar {
     box-sizing: border-box;

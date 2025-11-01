@@ -170,7 +170,7 @@ async function performEvaluation(item) {
         } catch (err) {
             localStorage.clear();
             console.error("Error: performEvaluation", err);
-            toast.success("Something went wrong. Please try again");
+            toast.error("Something went wrong. Please try again");
         }
     }
 }

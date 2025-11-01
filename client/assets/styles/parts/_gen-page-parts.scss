@@ -46,7 +46,7 @@
       }
     }
 
-    div#auth-wrapper {
+    div#profile-wrapper {
       #user-profile {
         position: relative;
 
@@ -75,6 +75,7 @@
           background: decor.$dark-0;
           color: decor.$light-0;
           letter-spacing: 1.5px;
+          box-shadow: 3px 3px 10px decor.$dark-9;
 
           .user-data {
             color: decor.$light-5;
@@ -299,18 +300,12 @@
     text-align: center;
     gap: 1rem;
     padding: 1.5rem 2rem 1rem;
-    margin: 1rem auto;
+    margin: 3rem auto;
     width: 15rem;
     background: decor.$dark-9;
     opacity: 0.9;
     border-radius: 10px;
-    font-size: 14pt;
-
-    a {
-      padding: 0 0 0.3rem;
-      color: decor.$light-4;
-      font-weight: 500;
-    }
+    font-size: decor.$font-size-medium;
 
     h2 {
       margin: 0;
@@ -349,6 +344,12 @@
         background: decor.$light-5;
         color: decor.$dark-8;
       }
+    }
+
+    a {
+      padding: 0 0 0.3rem;
+      color: decor.$light-4;
+      font-weight: 500;
     }
   }
 
@@ -536,27 +537,27 @@
         }
 
         button.tiles-view-mode {
-          background-image: url("../../public/view-list-tiles.png");
+          background-image: url("/view-list-tiles.png");
 
           &:hover {
-            background-image: url("../../public/view-list-tiles-hover.png");
+            background-image: url("/view-list-tiles-hover.png");
           }
         }
 
         button.tiles-view-mode-active {
-          background-image: url("../../public/view-list-tiles-hover.png");
+          background-image: url("/view-list-tiles-hover.png");
         }
 
         button.table-view-mode {
-          background-image: url("../../public/view-list-table.png");
+          background-image: url("/view-list-table.png");
 
           &:hover {
-            background-image: url("../../public/view-list-table-hover.png");
+            background-image: url("/view-list-table-hover.png");
           }
         }
 
         button.table-view-mode-active {
-          background-image: url("../../public/view-list-table-hover.png");
+          background-image: url("/view-list-table-hover.png");
         }
       }
     }
@@ -847,7 +848,9 @@
 
       a {
         display: inline-block;
-        padding: 0 0.6rem 0.1rem;
+        align-content: center;
+        height: 1.5rem;
+        padding: 0 0.7rem;
         font-weight: 600;
         font-size: decor.$font-size-medium*$scale;
       }

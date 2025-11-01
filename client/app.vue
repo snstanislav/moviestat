@@ -7,7 +7,7 @@
         </NuxtLink>
       </div>
 
-      <div v-if="userProfileData" id="auth-wrapper">
+      <div v-if="userProfileData" id="profile-wrapper">
         <details id="user-profile">
 
           <summary title="Your profile">
@@ -28,7 +28,7 @@
       </div>
     </header>
 
-    <div v-if="pending" class="loader-wrapper loader-wrapper-inner">
+    <div v-if="pending" class="loader-wrapper">
       <span class="loader"></span>
     </div>
     <main v-else id="page-content">

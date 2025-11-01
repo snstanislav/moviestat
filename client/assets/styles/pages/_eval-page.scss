@@ -89,15 +89,6 @@
         }
       }
 
-      /* &:hover .text {
-        width: 65%;
-      }
-
-      &:hover #evalBar {
-        display: flex;
-        width: 15%;
-      }*/
-
       .evalBar {
         box-sizing: border-box;
         display: none;
@@ -139,18 +130,17 @@
           }
         }
       }
-
     }
-    
-      .selected-eval-item {
-        .text {
-          width: 65%;
-        }
 
-        .evalBar {
-          display: flex;
-          width: 15%;
-        }
+    .selected-eval-item {
+      .text {
+        width: 65%;
       }
+
+      .evalBar {
+        display: flex;
+        width: 15%;
+      }
+    }
   }
 }

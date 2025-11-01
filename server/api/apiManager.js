@@ -189,12 +189,13 @@ async function constructMovieFromAPIs(tmdbIdSearched, mediaType, userRating, use
         resultMovieItem.tmdbID = tmdbSrcMovieItem.id.toString();
         resultMovieItem.imdbID = tmdbSrcMovieItem.imdb_id || omdbSrcMovieItem.imdbID;
         resultMovieItem.imdbRating = omdbSrcMovieItem.imdbRating;
-        resultMovieItem.imdbVotes = omdbSrcMovieItem.imdbVotes;
+        resultMovieItem.imdbVotes = !omdbSrcMovieItem.imdbVotes.includes("N/A") ? omdbSrcMovieItem.imdbVotes : "";
         resultMovieItem.commTitle = tmdbSrcMovieItem.title || omdbSrcMovieItem.Title;
         resultMovieItem.origTitle = tmdbSrcMovieItem.original_title || tmdbSrcMovieItem.original_name;
         resultMovieItem.year = omdbSrcMovieItem.Year || tmdbSrcMovieItem.release_date || tmdbSrcMovieItem.first_air_date;
-        resultMovieItem.duration = omdbSrcMovieItem.Runtime || tmdbSrcMovieItem.runtime ? tmdbSrcMovieItem.runtime + " min" : "";
-        resultMovieItem.parental = omdbSrcMovieItem.Rated;
+        resultMovieItem.duration = omdbSrcMovieItem.Runtime.includes("min") ?
+            omdbSrcMovieItem.Runtime : tmdbSrcMovieItem.runtime ? tmdbSrcMovieItem.runtime + " min" : "";
+        resultMovieItem.parental = !omdbSrcMovieItem.Rated.includes("N/A") ? omdbSrcMovieItem.Rated : "";
         resultMovieItem.plot = tmdbSrcMovieItem.overview || omdbSrcMovieItem.Plot;
         resultMovieItem.poster =
             (tmdbSrcMovieItem.poster_path ? "https://image.tmdb.org/t/p/original" + tmdbSrcMovieItem.poster_path : "")

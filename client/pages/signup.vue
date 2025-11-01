@@ -17,6 +17,9 @@
                 <input v-model="password" type="password" width="10" placeholder="Password*" required />
                 <button type="submit">Sign up</button>
                 <p class="message">{{ message }}</p>
+                <div>
+                    <a href="/">Sign in to an existing account</a>
+                </div>
             </form>
         </div>
     </div>

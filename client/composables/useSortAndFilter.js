@@ -111,7 +111,7 @@ export default function useSortAndFilter() {
     function addData(value) {
         if (currentSortMode.value.includes('rating')) return value.quantity;
         if (currentSortMode.value.includes('quantity')) return `${value.percent}%`;
-        return `(${value.rating})`;
+        return `${value.rating}`;
     }
 
     return {
