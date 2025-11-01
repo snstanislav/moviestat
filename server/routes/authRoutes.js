@@ -23,6 +23,14 @@ const { addNewUser } = require("../services/userService");
 const UserItem = require("../domain/UserItem");
 const auth = require("../middleware/auth");
 
+const cookieOpts = {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
+          maxAge: 3000 * 60 * 60,
+          path: '/',
+        };
+
 const router = express.Router();
 
 /**
@@ -55,12 +63,7 @@ router.post("/signin", async (req, res) => {
         const token = jwt.sign({ id: user._id, role: user.role },
             process.env.JWT_SECRET, { expiresIn: "3h" });
 
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
-            maxAge: 3000 * 60 * 60
-        });
+        res.cookie("token", token, cookieOpts);
         res.status(200).json({ success: true, message: "User logged in" });
     } catch (err) {
         console.log(err);
@@ -107,7 +110,7 @@ router.post("/signup", async (req, res) => {
  */
 router.post("/signout", (req, res) => {
     try {
-        res.clearCookie("token");
+        res.clearCookie("token", cookieOpts);
         res.status(200).json({ success: true, message: "Logged out" });
     } catch (err) {
         res.status(500).json({ success: false, message: "Signout error: " + err.message });
