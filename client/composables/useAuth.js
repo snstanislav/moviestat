@@ -103,6 +103,7 @@ export default function useAuth() {
     * @returns {Promise<Object|undefined>} User profile JSON if successful
     */
     async function loadProfile() {
+        console.log(`API BASE: ${config.public.apiBase}/auth/profile`)
         const res = await fetch(`${config.public.apiBase}/auth/profile`, {
             method: "GET",
             credentials: "include"

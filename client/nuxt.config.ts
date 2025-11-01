@@ -7,6 +7,7 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 
 export default defineNuxtConfig({
   css: [join(currentDir, './assets/styles/main.css')],
+  //css: ['~/assets/styles/main.scss'],
   vite: {
     build: {
       cssCodeSplit: false
@@ -15,8 +16,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     apiSecret: "",
     public: {
-      apiBase: "https://moviestat-0sul.onrender.com"
-      // "http://localhost:3001/"
+      apiBase: process.env.NODE_ENV === "production" ? "https://moviestat-0sul.onrender.com": "http://localhost:3001"
     }
   },
   compatibilityDate: '2025-07-15',

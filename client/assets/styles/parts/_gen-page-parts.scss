@@ -3,6 +3,8 @@
 
 @mixin general-page-parts($bg-color, $scale) {
   body {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     padding: 0;
     margin: 0;
@@ -11,7 +13,6 @@
     background-image: url("../../public/bg-img-1.png");
     background-repeat: repeat;
     background-size: contain;
-    align-items: center;
     box-sizing: border-box;
     opacity: 0.9;
   }
@@ -123,6 +124,7 @@
     }
 
     button.tab-button {
+      justify-content: center;
       padding: 0.3rem 0.7rem 0.5rem;
       border: 0;
       border-radius: 5px;
@@ -183,11 +185,12 @@
   #main-footer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    text-align: center;
     gap: 1rem;
     margin: auto 0 0 0;
-    padding: 1rem 3rem;
+    padding: 1rem 1rem;
     background: decor.$dark-9;
     color: decor.$light-0;
 
@@ -447,8 +450,9 @@
   .stat-container {
     display: flex;
     flex-direction: column;
+   // flex-wrap: wrap;
     gap: 0.5rem;
-    min-width: 350px;
+    min-width: fit-content;
     width: 90%;
     margin: 0 auto;
     padding: 1.5rem 2rem;
