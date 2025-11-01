@@ -19,7 +19,7 @@
     margin: 0;
     font-size: 9pt;
     font-family: "Segoe UI", Arial, sans-serif;
-    background-image: url("../../public/bg-img-1.png");
+    background-image: url("/bg-img-1.png");
     background-repeat: repeat;
     background-size: contain;
     box-sizing: border-box;
@@ -993,7 +993,6 @@
   .film-wrapper .film-basic-info .film-img-eval-wrap {
     display: flex;
     flex-direction: column;
-    min-width: 22rem;
     width: fit-content;
     height: fit-content;
     margin: 0 0 0 0;
@@ -1439,7 +1438,7 @@
     margin: 0;
     font-size: 10pt;
     font-family: "Segoe UI", Arial, sans-serif;
-    background-image: url("../../public/bg-img-1.png");
+    background-image: url("/bg-img-1.png");
     background-repeat: repeat;
     background-size: contain;
     box-sizing: border-box;
@@ -2413,7 +2412,6 @@
   .film-wrapper .film-basic-info .film-img-eval-wrap {
     display: flex;
     flex-direction: column;
-    min-width: 22rem;
     width: fit-content;
     height: fit-content;
     margin: 0 0 0 0;
@@ -2859,7 +2857,7 @@
     margin: 0;
     font-size: 11pt;
     font-family: "Segoe UI", Arial, sans-serif;
-    background-image: url("../../public/bg-img-1.png");
+    background-image: url("/bg-img-1.png");
     background-repeat: repeat;
     background-size: contain;
     box-sizing: border-box;
@@ -3833,7 +3831,6 @@
   .film-wrapper .film-basic-info .film-img-eval-wrap {
     display: flex;
     flex-direction: column;
-    min-width: 22rem;
     width: fit-content;
     height: fit-content;
     margin: 0 0 0 0;
@@ -4279,7 +4276,7 @@
     margin: 0;
     font-size: 12pt;
     font-family: "Segoe UI", Arial, sans-serif;
-    background-image: url("../../public/bg-img-1.png");
+    background-image: url("/bg-img-1.png");
     background-repeat: repeat;
     background-size: contain;
     box-sizing: border-box;
@@ -5253,7 +5250,6 @@
   .film-wrapper .film-basic-info .film-img-eval-wrap {
     display: flex;
     flex-direction: column;
-    min-width: 22rem;
     width: fit-content;
     height: fit-content;
     margin: 0 0 0 0;

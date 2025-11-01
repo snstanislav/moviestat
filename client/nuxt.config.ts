@@ -13,8 +13,8 @@ export default defineNuxtConfig({
       ]
     }
   },
-  css: [join(currentDir, './assets/styles/main.css')],
-  //css: ['~/assets/styles/main.scss'],
+  //css: [join(currentDir, './assets/styles/main.css')],
+  css: ['~/assets/styles/main.scss'],
   vite: {
     build: {
       cssCodeSplit: false
