@@ -14,7 +14,12 @@
                 <input v-model="login" type="text" width="10" placeholder="Login*" required />
                 <input v-model="fullName" type="text" width="10" placeholder="Full name" />
                 <input v-model="email" type="text" width="10" placeholder="Email*" required />
-                <input v-model="password" type="password" width="10" placeholder="Password*" required />
+                <input v-model="password" :type="showPassword ? 'text' : 'password'" width="10" placeholder="Password*"
+                    required />
+                <label>
+                    <input type="checkbox" v-model="showPassword" class="show-pass" />
+                    <span>Show password</span>
+                </label>
                 <button type="submit">Sign up</button>
                 <p class="message">{{ message }}</p>
                 <div>
@@ -29,12 +34,13 @@
 import useAuth from "../composables/useAuth";
 const { signup, userProfileData, message } = useAuth();
 const toast = await useSafeToast();
+const isReady = ref(false);
 
 const login = ref("");
 const fullName = ref("");
 const email = ref("");
 const password = ref("");
-const isReady = ref(false);
+const showPassword = ref(false);
 
 onMounted(async () => {
     isReady.value = true;

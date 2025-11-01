@@ -289,6 +289,27 @@
     font-family: inherit;
     font-size: inherit;
   }
+  .auth-wrapper label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: left;
+    margin: -0.5rem 0 0;
+    padding: 0;
+    width: 100%;
+    color: #fff;
+  }
+  .auth-wrapper label input.show-pass {
+    width: fit-content;
+    margin: 0;
+    padding: 0;
+  }
+  .auth-wrapper label span {
+    display: inline-block;
+    padding: 0;
+  }
   .auth-wrapper button {
     display: flex;
     justify-content: center;
@@ -1716,6 +1737,27 @@
     border: 0;
     font-family: inherit;
     font-size: inherit;
+  }
+  .auth-wrapper label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: left;
+    margin: -0.5rem 0 0;
+    padding: 0;
+    width: 100%;
+    color: #fff;
+  }
+  .auth-wrapper label input.show-pass {
+    width: fit-content;
+    margin: 0;
+    padding: 0;
+  }
+  .auth-wrapper label span {
+    display: inline-block;
+    padding: 0;
   }
   .auth-wrapper button {
     display: flex;
@@ -3145,6 +3187,27 @@
     font-family: inherit;
     font-size: inherit;
   }
+  .auth-wrapper label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: left;
+    margin: -0.5rem 0 0;
+    padding: 0;
+    width: 100%;
+    color: #fff;
+  }
+  .auth-wrapper label input.show-pass {
+    width: fit-content;
+    margin: 0;
+    padding: 0;
+  }
+  .auth-wrapper label span {
+    display: inline-block;
+    padding: 0;
+  }
   .auth-wrapper button {
     display: flex;
     justify-content: center;
@@ -4572,6 +4635,27 @@
     border: 0;
     font-family: inherit;
     font-size: inherit;
+  }
+  .auth-wrapper label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: left;
+    margin: -0.5rem 0 0;
+    padding: 0;
+    width: 100%;
+    color: #fff;
+  }
+  .auth-wrapper label input.show-pass {
+    width: fit-content;
+    margin: 0;
+    padding: 0;
+  }
+  .auth-wrapper label span {
+    display: inline-block;
+    padding: 0;
   }
   .auth-wrapper button {
     display: flex;
