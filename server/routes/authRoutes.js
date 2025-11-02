@@ -114,6 +114,7 @@ router.post("/signout", (req, res) => {
                 secure: true,
                 sameSite: "None",
                 path: '/',
+                domain: process.env.NODE_ENV === "production" ? "moviestat-0sul.onrender.com" : "localhost",
                 maxAge: 0,
                 expires: new Date(0),
             });
