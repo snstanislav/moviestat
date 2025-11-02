@@ -117,7 +117,7 @@ router.post("/signout", (req, res) => {
                 path: '/',
                // domain: process.env.NODE_ENV === "production" ? "moviestat-0sul.onrender.com" : "localhost",
                 maxAge: 0,
-                expires: new Date(0),
+              //  expires: new Date(0),
             });
         res.status(200).json({ success: true, message: "Logged out" });
     } catch (err) {
