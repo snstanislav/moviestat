@@ -23,14 +23,6 @@ const { addNewUser } = require("../services/userService");
 const UserItem = require("../domain/UserItem");
 const auth = require("../middleware/auth");
 
-const cookieOpts = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
-    maxAge: 3000 * 60 * 60,
-    path: '/',
-};
-
 const router = express.Router();
 
 /**
@@ -63,7 +55,13 @@ router.post("/signin", async (req, res) => {
         const token = jwt.sign({ id: user._id, role: user.role },
             process.env.JWT_SECRET, { expiresIn: "3h" });
 
-        res.cookie("token", token, cookieOpts);
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
+            maxAge: 3 * 60 * 60 * 1000,
+            path: '/',
+        });
         res.status(200).json({ success: true, message: "User logged in" });
     } catch (err) {
         console.log(err);
@@ -110,11 +108,15 @@ router.post("/signup", async (req, res) => {
  */
 router.post("/signout", (req, res) => {
     try {
-        res.clearCookie("token", {
-            ...cookieOpts,
-            expires: new Date(0),
-            maxAge: 0
-        });
+        res.clearCookie("token",
+            {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
+                path: '/',
+                maxAge: 0,
+                expires: new Date(0),
+            });
         res.status(200).json({ success: true, message: "Logged out" });
     } catch (err) {
         res.status(500).json({ success: false, message: "Signout error: " + err.message });
@@ -138,7 +140,7 @@ router.post("/signout", (req, res) => {
 router.get("/profile", auth(), async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
-        if (!user) return res.status(404).json({ success: false, message: "User not found" }).select("login email fullName role");
+        if (!user) return res.status(404).json({ success: false, message: "User not found" });
 
         res.status(200).json({
             success: true, message: "Restored user data",

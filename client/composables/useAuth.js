@@ -40,7 +40,8 @@ export default function useAuth() {
                     await setProfileData();
                     //await setEvaluations();
                 } else {
-                    message.value = "Authorization faild."
+                    message.value = "Authorization failed."
+                    console.error("Authorization error:", err);
                 }
             } else {
                 message.value = "*All fields are required!"
@@ -56,13 +57,20 @@ export default function useAuth() {
     * @async
     */
     async function signout() {
-        await fetch(`${config.public.apiBase}/auth/signout`, {
-            method: "POST",
-            credentials: "include"
-        });
-        userProfileData.value = null;
-        message.value = "";
-        //localStorage.clear()
+        try {
+            const res = await fetch(`${config.public.apiBase}/auth/signout`, {
+                method: "POST",
+                credentials: "include"
+            });
+            if (res.ok) {
+                userProfileData.value = null;
+                message.value = "";
+            } else {
+                console.warn("Logout request failed");
+            }
+        } catch (err) {
+            console.error("Signout error:", err);
+        }
     }
 
     /**
