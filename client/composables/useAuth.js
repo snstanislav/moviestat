@@ -29,6 +29,7 @@ export default function useAuth() {
     async function signin(login, password) {
         try {
             if (login && password) {
+                login = login.trim();
                 const res = await fetch(`${config.public.apiBase}/auth/signin`, {
                     method: "POST", headers: { "Content-Type": "application/json" },
                     credentials: "include",
@@ -85,6 +86,8 @@ export default function useAuth() {
     async function signup(login, fullName, email, password) {
         try {
             if (login && password) {
+                login = login.trim();
+                email = email.trim();
                 const res = await fetch(`${config.public.apiBase}/auth/signup`, {
                     method: "POST", headers: { "Content-Type": "application/json" },
                     credentials: "include",
