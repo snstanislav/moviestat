@@ -26,7 +26,7 @@ const auth = require("../middleware/auth");
 const cookieOpts = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
     maxAge: 3000 * 60 * 60,
     path: '/',
 };
@@ -112,6 +112,7 @@ router.post("/signout", (req, res) => {
     try {
         res.clearCookie("token", {
             ...cookieOpts,
+            expires: new Date(0),
             maxAge: 0
         });
         res.status(200).json({ success: true, message: "Logged out" });
