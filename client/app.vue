@@ -17,7 +17,7 @@
           <div id="user-credentials">
             <span v-if="userProfileData.login">Login: <span class="user-data">{{ userProfileData.login }}</span></span>
             <span v-if="userProfileData.fullName">Name: <span class="user-data">{{ userProfileData.fullName
-                }}</span></span>
+            }}</span></span>
             <span v-if="userProfileData.email" class="user-data">{{ userProfileData.email }}</span>
 
             <div class="signout-wrapper">
@@ -28,11 +28,11 @@
       </div>
     </header>
 
-    <div v-if="pending" class="loader-wrapper">
-      <span class="loader"></span>
-    </div>
-    <main v-else id="page-content">
+    <main id="page-content">
       <NuxtPage />
+      <div v-if="pending" class="loader-overlay">
+        <span class="loader"></span>
+      </div>
     </main>
 
     <footer id="main-footer">

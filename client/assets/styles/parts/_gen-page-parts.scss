@@ -867,13 +867,13 @@
       padding: 0;
       box-sizing: border-box;
 
-      row-gap: 0.3rem*$scale;
+      row-gap: 0.5rem*$scale;
       column-gap: 0.6rem*$scale;
 
       a {
         display: inline-block;
         align-content: center;
-        height: 1.5rem;
+        height: 1.3rem;
         padding: 0 0.7rem;
         font-weight: 600;
         font-size: decor.$font-size-medium*$scale;

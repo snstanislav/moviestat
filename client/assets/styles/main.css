@@ -744,13 +744,13 @@
     margin: -0.5rem 0 0.5rem 0;
     padding: 0;
     box-sizing: border-box;
-    row-gap: 0.27rem;
+    row-gap: 0.45rem;
     column-gap: 0.54rem;
   }
   .stat-container .fitler-table-wrapper a {
     display: inline-block;
     align-content: center;
-    height: 1.5rem;
+    height: 1.3rem;
     padding: 0 0.7rem;
     font-weight: 600;
     font-size: 10.8pt;
@@ -2200,13 +2200,13 @@
     margin: -0.5rem 0 0.5rem 0;
     padding: 0;
     box-sizing: border-box;
-    row-gap: 0.3rem;
+    row-gap: 0.5rem;
     column-gap: 0.6rem;
   }
   .stat-container .fitler-table-wrapper a {
     display: inline-block;
     align-content: center;
-    height: 1.5rem;
+    height: 1.3rem;
     padding: 0 0.7rem;
     font-weight: 600;
     font-size: 12pt;
@@ -3656,13 +3656,13 @@
     margin: -0.5rem 0 0.5rem 0;
     padding: 0;
     box-sizing: border-box;
-    row-gap: 0.33rem;
+    row-gap: 0.55rem;
     column-gap: 0.66rem;
   }
   .stat-container .fitler-table-wrapper a {
     display: inline-block;
     align-content: center;
-    height: 1.5rem;
+    height: 1.3rem;
     padding: 0 0.7rem;
     font-weight: 600;
     font-size: 13.2pt;
@@ -5112,13 +5112,13 @@
     margin: -0.5rem 0 0.5rem 0;
     padding: 0;
     box-sizing: border-box;
-    row-gap: 0.36rem;
+    row-gap: 0.6rem;
     column-gap: 0.72rem;
   }
   .stat-container .fitler-table-wrapper a {
     display: inline-block;
     align-content: center;
-    height: 1.5rem;
+    height: 1.3rem;
     padding: 0 0.7rem;
     font-weight: 600;
     font-size: 14.4pt;

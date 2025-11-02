@@ -59,7 +59,6 @@ router.post("/signin", async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
-            //domain: process.env.NODE_ENV === "production" ? "moviestat-0sul.onrender.com" : "localhost",
             maxAge: 3 * 60 * 60 * 1000,
             path: '/',
         });
@@ -112,12 +111,11 @@ router.post("/signout", (req, res) => {
         res.clearCookie("token",
             {
                 httpOnly: true,
-                secure: true,
-                sameSite: "None",
+                secure: process.env.NODE_ENV === "production",
+                sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
                 path: '/',
-               // domain: process.env.NODE_ENV === "production" ? "moviestat-0sul.onrender.com" : "localhost",
                 maxAge: 0,
-              //  expires: new Date(0),
+                expires: new Date(0),
             });
         res.status(200).json({ success: true, message: "Logged out" });
     } catch (err) {
