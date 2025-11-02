@@ -30,7 +30,7 @@ async function sendSearchQuery() {
 function validate() {
     inputText.value = inputText.value.toLowerCase().trimEnd();
 
-    let inputRGEX = /^[\p{L}\p{N}\s:.'"!?&-]+$/u;
+    let inputRGEX = /^[\p{L}\p{N}\s:.'",!?&-]+$/u;
     if (inputRGEX.test(inputText.value)) return true;
     else {
         toast.warning("Not allowed characters, check your input.");

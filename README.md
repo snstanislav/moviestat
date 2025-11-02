@@ -1,6 +1,6 @@
 # Moviestat Web App (v2.0)
 
-The web platform allows users to rate movies and TV series. Based on user ratings, personal statistics and infographics are generated and updated in real time.
+The web platform allows users to rate movies and TV series. Based on user ratings, personal statistics and infographics are generated and updated.
 
 **Live demo:** https://moviestat.vercel.app/
 

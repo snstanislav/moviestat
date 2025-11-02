@@ -97,7 +97,7 @@ export default function useSortAndFilter() {
         }
         if (currentSortMode.value.includes('quantity') || currentSortMode.value.includes('key')) {
             const step = Math.round(collectionDimension.value.count / collectionDimension.value.maxQuantity * 10) / 10;
-            for (let i = 1; i <= value.quantity; i += 1) bar += step;
+            for (let i = 1; i <= value.quantity; i += 1) bar += step*0.8;
             return bar;
         }
     }
