@@ -59,7 +59,7 @@ router.post("/signin", async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
-            domain: process.env.NODE_ENV === "production" ? "moviestat-0sul.onrender.com" : "localhost",
+            //domain: process.env.NODE_ENV === "production" ? "moviestat-0sul.onrender.com" : "localhost",
             maxAge: 3 * 60 * 60 * 1000,
             path: '/',
         });
