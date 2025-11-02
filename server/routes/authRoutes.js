@@ -24,12 +24,12 @@ const UserItem = require("../domain/UserItem");
 const auth = require("../middleware/auth");
 
 const cookieOpts = {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
-          maxAge: 3000 * 60 * 60,
-          path: '/',
-        };
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
+    maxAge: 3000 * 60 * 60,
+    path: '/',
+};
 
 const router = express.Router();
 
@@ -110,7 +110,10 @@ router.post("/signup", async (req, res) => {
  */
 router.post("/signout", (req, res) => {
     try {
-        res.clearCookie("token", cookieOpts);
+        res.clearCookie("token", {
+            ...cookieOpts,
+            maxAge: 0
+        });
         res.status(200).json({ success: true, message: "Logged out" });
     } catch (err) {
         res.status(500).json({ success: false, message: "Signout error: " + err.message });
