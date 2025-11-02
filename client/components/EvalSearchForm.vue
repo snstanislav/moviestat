@@ -9,6 +9,7 @@
 </template>
 
 <script setup>
+const toast = await useSafeToast();
 
 const { currentSearch } = defineProps({
     currentSearch: {
@@ -23,16 +24,18 @@ const inputText = ref(currentSearch);
 
 async function sendSearchQuery() {
     if (validate()) {
-        console.log("sendSearchQuery :: validated") //
         router.push({ path: "/eval", query: { search: inputText.value } });
     }
 }
 function validate() {
     inputText.value = inputText.value.toLowerCase().trimEnd();
 
-    let inputRGEX = /[a-zA-Zа-яА-Яі0-9-.\&]$/gi;
+    let inputRGEX = /^[\p{L}\p{N}\s:.'"!?&-]+$/u;
     if (inputRGEX.test(inputText.value)) return true;
-    return false;
+    else {
+        toast.warning("Not allowed characters, check your input.");
+        return false;
+    }
 }
 
 </script>

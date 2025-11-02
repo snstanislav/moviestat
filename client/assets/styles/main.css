@@ -724,7 +724,7 @@
     display: inline-block;
     justify-content: center;
     padding: 0 0.3rem 0 0.4rem;
-    border-radius: 12px;
+    border-radius: 20px;
     background: #37d;
     color: #fff;
     font-size: 9pt;
@@ -2180,7 +2180,7 @@
     display: inline-block;
     justify-content: center;
     padding: 0 0.3rem 0 0.4rem;
-    border-radius: 12px;
+    border-radius: 20px;
     background: #37d;
     color: #fff;
     font-size: 10pt;
@@ -3636,7 +3636,7 @@
     display: inline-block;
     justify-content: center;
     padding: 0 0.3rem 0 0.4rem;
-    border-radius: 12px;
+    border-radius: 20px;
     background: #37d;
     color: #fff;
     font-size: 11pt;
@@ -5092,7 +5092,7 @@
     display: inline-block;
     justify-content: center;
     padding: 0 0.3rem 0 0.4rem;
-    border-radius: 12px;
+    border-radius: 20px;
     background: #37d;
     color: #fff;
     font-size: 12pt;
